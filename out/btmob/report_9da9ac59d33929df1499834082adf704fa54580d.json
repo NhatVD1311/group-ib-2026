@@ -1,0 +1,97 @@
+{
+ "contacts": [
+  {
+   "account": "https://t.me/BLACKMARKETDEBET",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  }
+ ],
+ "countries": [],
+ "createdAt": "2022-01-21T16:22:22+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2021-11-22",
+ "dateLastSeen": "2021-11-22",
+ "datePublished": "2022-01-21",
+ "description": "<p>On November 22, 2021 the user created an account with alias BLACKMARKET on underground forum Antimigalki. Screenshot of the user's profile is shown below.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/9da9ac59d33929df1499834082adf704fa54580d/file/fd4897090f6ff23b0e18649a6b2c425b63608ebf657e8d3a5303698ee6f99042?placeholder=__IMAGE_9da9ac59d33929df1499834082adf704fa54580d:fd4897090f6ff23b0e18649a6b2c425b63608ebf657e8d3a5303698ee6f99042_IMAGE__\"  /></figure>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "A1",
+  "credibility": 100,
+  "reliability": 100,
+  "severity": "green",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "fd4897090f6ff23b0e18649a6b2c425b63608ebf657e8d3a5303698ee6f99042",
+   "mime": "image/png",
+   "name": "fd4897090f6ff23b0e18649a6b2c425b63608ebf657e8d3a5303698ee6f99042",
+   "size": 64437
+  },
+  {
+   "hash": "c7e8006756171020d5ec9f4063e845c51e114cbf0b168fb80bd651bcad95a9ed",
+   "mime": "image/png",
+   "name": "c7e8006756171020d5ec9f4063e845c51e114cbf0b168fb80bd651bcad95a9ed",
+   "size": 58271
+  }
+ ],
+ "forumsAccounts": [
+  {
+   "messageCount": 36,
+   "nickname": "BLACKMARKET",
+   "registeredAt": "2021-11-22",
+   "url": "https://antimigalki.org/members/blackmarket.6361"
+  }
+ ],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "9da9ac59d33929df1499834082adf704fa54580d",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2601-1622",
+ "sectors": [],
+ "seqPublish": null,
+ "seqUpdate": 16427736524065,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "64eb857a75cd47e3ffe877364afd9dfd3ba74ce7",
+  "isAPT": false,
+  "name": "BLACK MARKET"
+ },
+ "title": "Account registration on Antimigalki underground forum",
+ "toolList": [],
+ "type": "event",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2022-01-21T17:00:52+03:00"
+}

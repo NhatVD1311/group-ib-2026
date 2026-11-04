@@ -1,0 +1,109 @@
+{
+ "contacts": [],
+ "countries": [],
+ "createdAt": "2022-01-21T15:39:59+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2021-12-04",
+ "dateLastSeen": "2021-12-04",
+ "datePublished": "2022-01-21",
+ "description": "<p>On December 4, 2021, the attacker left a comment in the topic of another participant on the Darkmoney forum under the alias “Tinkoff Bank Russia”, in which he offered their service for selling debit cards. The original topic is in Russian. Screenshot of the translated post is shown below.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/6e4eb4df098fc563a1b613a56d19e8eb1cf8a5af/file/36b7df7dec7fcc3e3be0263617f925ccbd96c5635f03350ec810fa8546555a99?placeholder=__IMAGE_6e4eb4df098fc563a1b613a56d19e8eb1cf8a5af:36b7df7dec7fcc3e3be0263617f925ccbd96c5635f03350ec810fa8546555a99_IMAGE__\" data-mce-src=\"__IMAGE_6e4eb4df098fc563a1b613a56d19e8eb1cf8a5af:36b7df7dec7fcc3e3be0263617f925ccbd96c5635f03350ec810fa8546555a99_IMAGE__\" /></figure><p>In a comment, the author mentioned that they have topics for the sale of debit bank card on other underground forums</p><p>It should be noted that the account of the user \"Tinkoff Bank Russia\" was blocked by the forum administration for spam. In addition, the actor's profile does not contain any of their own topics about the sale of debit cards so far.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/6e4eb4df098fc563a1b613a56d19e8eb1cf8a5af/file/afaefbc9e6adfc2d4ecfd09737b7588b0a86f55208672f1f7c452f08d78c65e9?placeholder=__IMAGE_6e4eb4df098fc563a1b613a56d19e8eb1cf8a5af:afaefbc9e6adfc2d4ecfd09737b7588b0a86f55208672f1f7c452f08d78c65e9_IMAGE__\" data-mce-src=\"__IMAGE_6e4eb4df098fc563a1b613a56d19e8eb1cf8a5af:afaefbc9e6adfc2d4ecfd09737b7588b0a86f55208672f1f7c452f08d78c65e9_IMAGE__\" /></figure>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B2",
+  "credibility": 80,
+  "reliability": 80,
+  "severity": "green",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "88804a8c4b9e5defed970cc38a3cb7a68e61ea5bfe7e2b05798fdb4eda1d8551",
+   "mime": "image/png",
+   "name": "88804a8c4b9e5defed970cc38a3cb7a68e61ea5bfe7e2b05798fdb4eda1d8551",
+   "size": 117149
+  },
+  {
+   "hash": "c5c4b200a8a5a3c11feb8a2fcdea8f29f594f1b1982224a1700c0be206b92ce4",
+   "mime": "image/png",
+   "name": "c5c4b200a8a5a3c11feb8a2fcdea8f29f594f1b1982224a1700c0be206b92ce4",
+   "size": 57562
+  },
+  {
+   "hash": "36b7df7dec7fcc3e3be0263617f925ccbd96c5635f03350ec810fa8546555a99",
+   "mime": "image/png",
+   "name": "36b7df7dec7fcc3e3be0263617f925ccbd96c5635f03350ec810fa8546555a99",
+   "size": 121814
+  },
+  {
+   "hash": "afaefbc9e6adfc2d4ecfd09737b7588b0a86f55208672f1f7c452f08d78c65e9",
+   "mime": "image/png",
+   "name": "afaefbc9e6adfc2d4ecfd09737b7588b0a86f55208672f1f7c452f08d78c65e9",
+   "size": 48835
+  }
+ ],
+ "forumsAccounts": [
+  {
+   "messageCount": 5,
+   "nickname": "Tinkoff Bank Russia",
+   "registeredAt": "2021-10-15",
+   "url": "https://darkmoney.ac/members/tinkoff-bank-russia-251264/"
+  }
+ ],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "6e4eb4df098fc563a1b613a56d19e8eb1cf8a5af",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "ru",
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2601-1539",
+ "sectors": [],
+ "seqPublish": null,
+ "seqUpdate": 16427692944894,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://darkmoney.ac/1655239-post159.html",
+   "datePublished": "2023-10-29"
+  }
+ ],
+ "sources": [
+  "https://darkmoney.ac/1655239-post159.html"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "64eb857a75cd47e3ffe877364afd9dfd3ba74ce7",
+  "isAPT": false,
+  "name": "BLACK MARKET"
+ },
+ "title": "Posting a comment in a topic on the Darkmoney forum with the offer of a service for the sale of debit cards ",
+ "toolList": [],
+ "type": "event",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2022-01-21T15:48:14+03:00"
+}

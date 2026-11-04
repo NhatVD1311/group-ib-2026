@@ -1,0 +1,765 @@
+{
+ "contacts": [],
+ "countries": [
+  "RU"
+ ],
+ "createdAt": "2022-07-20T14:04:28+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2021-06-28",
+ "dateLastSeen": "2021-06-28",
+ "datePublished": "2022-07-20",
+ "description": "<p>In June 28, 2021, Group-IB Managed XDR detected a malicious spearphishing email. As you can see our solution quickly blocked the malicious email.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/2689348f01ad5a01e9353015993fb481b37410f647ffb9ce361d46420dc61069?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:2689348f01ad5a01e9353015993fb481b37410f647ffb9ce361d46420dc61069_IMAGE__\" data-mce-src=\"__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:2689348f01ad5a01e9353015993fb481b37410f647ffb9ce361d46420dc61069_IMAGE__\" /></figure><p>Inside of this email was a malicious file, which we detected and have verdict - malicious:</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/44a1403cc37e427e9fe9cc0be0ec89dadc903e77f5baa5b6a0b36052286f8646?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:44a1403cc37e427e9fe9cc0be0ec89dadc903e77f5baa5b6a0b36052286f8646_IMAGE__\" data-mce-src=\"__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:44a1403cc37e427e9fe9cc0be0ec89dadc903e77f5baa5b6a0b36052286f8646_IMAGE__\" /></figure><p>A malicious file from email attachment analysis report in our sandbox (Polygon):</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/b681f863606e601b39d066798a2ce43f6c93d09fd82177d2c6be3b60f378547b?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:b681f863606e601b39d066798a2ce43f6c93d09fd82177d2c6be3b60f378547b_IMAGE__\" data-mce-src=\"__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:b681f863606e601b39d066798a2ce43f6c93d09fd82177d2c6be3b60f378547b_IMAGE__\" /></figure><p>&nbsp;</p><h2>Initial vector</h2><p>The attacker uses mail as an initial vector of compromise. The file \"30 июня в 17.30 - очередное заседание Исполкома АДЭ.doc\" is attached to an email message.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/8587a4ace090e49b907c6edeae641f0d5f57adadb4199f4126cab9ee8a9af494?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:8587a4ace090e49b907c6edeae641f0d5f57adadb4199f4126cab9ee8a9af494_IMAGE__\"  /></figure><h2>RoyalRoad RTF</h2><p>The analyzed file \"30 июня в 17.30 - очередное заседание Исполкома АДЭ.doc\" (this file is private, it's not uploaded on VT) is a malicious RTF document which was weaponized by Royal Road RTF Weaponizer. Royal Road is commonly used by Chinese-speaking attackers.<br>The decoy is about the next meeting of the Executive Committee of the Documentary Telecommunications Association:</p><figure class=\"image image_resized\" style=\"width:385px;\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/1076d94346a1427d8d9f3bad62f263b1c97915bafb55a9fb21ca9a6b10a249e2?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:1076d94346a1427d8d9f3bad62f263b1c97915bafb55a9fb21ca9a6b10a249e2_IMAGE__\"  /></figure><p>&nbsp;</p><p>Meta-information:</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/ee28d2eb1c95879a2fcfa55c95115b9664775385800b750991cea022b466608e?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:ee28d2eb1c95879a2fcfa55c95115b9664775385800b750991cea022b466608e_IMAGE__\"  /></figure><p>The malicious encoded payload:<br>&nbsp;</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/97b95f3a16e23b85e788438654706109e346a14fbeb0d2e35ad90ae5513f7de3?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:97b95f3a16e23b85e788438654706109e346a14fbeb0d2e35ad90ae5513f7de3_IMAGE__\"  /></figure><h2>Decoded payload - Bisonal.Dropper</h2><p>The decoded payload is a malicious PE32 format DLL file which can be classified as Bisonal.Dropper. This malware is used to deploy in a victim system a Bisonal backdoor.<br>Compilation TimeDateStamp: 28.06.2021 01:44:01 UTC The Bisonal.Dropper creates a file \"%AppData%\\Roaming\\conhost.exe\" (Bisonal.DoubleT backdoor). It writes a random overlay data to \"conhost.exe\" to change the hash of a backdoor.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/ab35433efb99d0f95b41cc2c2fc6d1792cdff0f65740f12134d424c45400480d?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:ab35433efb99d0f95b41cc2c2fc6d1792cdff0f65740f12134d424c45400480d_IMAGE__\"  /></figure><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/80beda2972343a3a398d354c32b94b25bedac006657437c3a15958a65f96804b?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:80beda2972343a3a398d354c32b94b25bedac006657437c3a15958a65f96804b_IMAGE__\"  /></figure><p>The dropper also adds \"conhost.exe\" to a system startup by creating a registry key parameter:</p><pre><code class=\"language-plaintext\">[HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run] userInit = \"%AppData%\\Roaming\\conhost.exe\"</code></pre><p>The backdoor will only run after the system reboot.<br>Also it can write to the log file \"%windows%\\temp\\log.txt\" following error messages:</p><ul><li>\"[!] get pRegSetValueEx error\\n\"</li><li>\"[!] get pGetProcAddress error\\n\"</li><li>\"[!] get LoadLibraryA error\\n\"</li></ul><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/34124b8f09ca9df144f5facdd19cc5b45200781c91efc68e9776ab209a16d918?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:34124b8f09ca9df144f5facdd19cc5b45200781c91efc68e9776ab209a16d918_IMAGE__\"  /></figure><h2>Bisonal.DoubleT variant</h2><p>\"conhost.exe\" is a malicious PE32 format EXE file which can be classified as a Bisonal.DoubleT backdoor. This malware provides remote access to a compromised computer and allows an attacker to execute various commands on it.<br>Compilation TimeDateStamp: 24.06.2021 07:19:44 UTC<br>Main functionality (capabilities):</p><ul><li>collect information about compromised host: code page layout, proxy server, time since system boot, host name, account name under which the file is running, local IP address;</li><li>get a list of processes;</li><li>terminate a specified process;</li><li>get remote access to cmd.exe;</li><li>download and execute file;</li><li>get code page identifier and write file (create file on disk).</li></ul><p>The collected information about compromised host is encoded with Base32 algorithm.<br>All important strings are encrypted with following RC4 (S-box 128) algorithm:</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/a4ee24275d901d27ac6b31f344b321084b243c9eaf888306f86eb8c2e2196d81?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:a4ee24275d901d27ac6b31f344b321084b243c9eaf888306f86eb8c2e2196d81_IMAGE__\"  /></figure><p>After decryption strings looks like this:</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/db7376043e44cb710fb1faeaa3d4b34e2e961e1e/file/43a2606936e30f6938dd11a435925064acbdb793ee4196c099af877990018807?placeholder=__IMAGE_db7376043e44cb710fb1faeaa3d4b34e2e961e1e:43a2606936e30f6938dd11a435925064acbdb793ee4196c099af877990018807_IMAGE__\"  /></figure><p>The transmitted data in POST request (sending the result of the command execution) is encrypted with the same algorithm as the strings in the body of the malware.</p><h2>Additional IOCs</h2><h3>URLs</h3><ul><li>(Hello - GET request) hXXps://103[.]85[.]20[.]194/ru/order/index.php?strPageID=[ID], where ID is a decimal number (example: hXXps://103[.]85[.]20[.]194/ru/order/index.php?strPageID=0)</li><li>(Command - GET request) hXXps://103[.]85[.]20[.]194/ru/news/index.php?strPageID=[ID]&amp;newsID=[YYYY-MM-DD-mmss]</li><li>(Response- POST request) hXXps://103[.]85[.]20[.]194/xhome[.]native[.]page/datareader.php?sid=[ID]</li><li>(Download &amp; Execute - GET request) hXXps://103[.]85[.]20[.]194/siteFiles/index.php?strPageID=[ID]</li></ul><h3>Files</h3><ul><li>%AppData%\\Roaming\\conhost.exe</li><li>%Windows%\\temp\\log.txt</li></ul><h3>Registry</h3><p>[HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run] userInit =\"%AppData%\\Roaming\\conhost.exe\"</p><h3>User-Agent</h3><pre><code class=\"language-plaintext\">User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36\\r\\nAccept-Encoding: gzip, deflate\\r\\nAccept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7\\r\\nCookie: JSESSIONID=[Base32 encoded information about victim computer]</code></pre>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "A1",
+  "credibility": 100,
+  "reliability": 100,
+  "severity": "orange",
+  "tlp": "red",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "8587a4ace090e49b907c6edeae641f0d5f57adadb4199f4126cab9ee8a9af494",
+   "mime": "image/png",
+   "name": "8587a4ace090e49b907c6edeae641f0d5f57adadb4199f4126cab9ee8a9af494",
+   "size": 19155
+  },
+  {
+   "hash": "1076d94346a1427d8d9f3bad62f263b1c97915bafb55a9fb21ca9a6b10a249e2",
+   "mime": "image/png",
+   "name": "1076d94346a1427d8d9f3bad62f263b1c97915bafb55a9fb21ca9a6b10a249e2",
+   "size": 104887
+  },
+  {
+   "hash": "ee28d2eb1c95879a2fcfa55c95115b9664775385800b750991cea022b466608e",
+   "mime": "image/png",
+   "name": "ee28d2eb1c95879a2fcfa55c95115b9664775385800b750991cea022b466608e",
+   "size": 21413
+  },
+  {
+   "hash": "97b95f3a16e23b85e788438654706109e346a14fbeb0d2e35ad90ae5513f7de3",
+   "mime": "image/png",
+   "name": "97b95f3a16e23b85e788438654706109e346a14fbeb0d2e35ad90ae5513f7de3",
+   "size": 24997
+  },
+  {
+   "hash": "ab35433efb99d0f95b41cc2c2fc6d1792cdff0f65740f12134d424c45400480d",
+   "mime": "image/png",
+   "name": "ab35433efb99d0f95b41cc2c2fc6d1792cdff0f65740f12134d424c45400480d",
+   "size": 10198
+  },
+  {
+   "hash": "80beda2972343a3a398d354c32b94b25bedac006657437c3a15958a65f96804b",
+   "mime": "image/png",
+   "name": "80beda2972343a3a398d354c32b94b25bedac006657437c3a15958a65f96804b",
+   "size": 242965
+  },
+  {
+   "hash": "34124b8f09ca9df144f5facdd19cc5b45200781c91efc68e9776ab209a16d918",
+   "mime": "image/png",
+   "name": "34124b8f09ca9df144f5facdd19cc5b45200781c91efc68e9776ab209a16d918",
+   "size": 10082
+  },
+  {
+   "hash": "a4ee24275d901d27ac6b31f344b321084b243c9eaf888306f86eb8c2e2196d81",
+   "mime": "image/png",
+   "name": "a4ee24275d901d27ac6b31f344b321084b243c9eaf888306f86eb8c2e2196d81",
+   "size": 25112
+  },
+  {
+   "hash": "43a2606936e30f6938dd11a435925064acbdb793ee4196c099af877990018807",
+   "mime": "image/png",
+   "name": "43a2606936e30f6938dd11a435925064acbdb793ee4196c099af877990018807",
+   "size": 63089
+  },
+  {
+   "hash": "2689348f01ad5a01e9353015993fb481b37410f647ffb9ce361d46420dc61069",
+   "mime": "image/png",
+   "name": "2689348f01ad5a01e9353015993fb481b37410f647ffb9ce361d46420dc61069",
+   "size": 178388
+  },
+  {
+   "hash": "44a1403cc37e427e9fe9cc0be0ec89dadc903e77f5baa5b6a0b36052286f8646",
+   "mime": "image/png",
+   "name": "44a1403cc37e427e9fe9cc0be0ec89dadc903e77f5baa5b6a0b36052286f8646",
+   "size": 47803
+  },
+  {
+   "hash": "b681f863606e601b39d066798a2ce43f6c93d09fd82177d2c6be3b60f378547b",
+   "mime": "image/png",
+   "name": "b681f863606e601b39d066798a2ce43f6c93d09fd82177d2c6be3b60f378547b",
+   "size": 240783
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "db7376043e44cb710fb1faeaa3d4b34e2e961e1e",
+ "indicatorMalwareRelationships": [
+  {
+   "indicatorId": "c8f86e6ccddbb0ba3cbed85cd098e3556c019ace",
+   "malwareId": "143f2b6525874454e925b75d386879f28b8f0242"
+  },
+  {
+   "indicatorId": "798b339236c34111648e25edebbefd49fa26151a",
+   "malwareId": "41770bd2cb4e28ca478b92c6ebdfb6e7acf87524"
+  }
+ ],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-07-20",
+   "dateLastSeen": "2022-07-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "7c138c6b6f88643d7c16e741f98e0503",
+    "other": [],
+    "sha1": "c9e4390ae500fc4d9704b665f981a61bc504bf46",
+    "sha256": "bc78ba16d9495b17918d31e893a5f10d8a87d16a4a88f9bfd3ed5c735ce2ae11"
+   },
+   "id": "003ecaf351054a5e12c88e1ea673c6a04b859f1c",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "7c138c6b6f88643d7c16e741f98e0503",
+     "sha1": "c9e4390ae500fc4d9704b665f981a61bc504bf46",
+     "sha256": "bc78ba16d9495b17918d31e893a5f10d8a87d16a4a88f9bfd3ed5c735ce2ae11"
+    },
+    "name": "30 июня в 17.30 - очередное заседание Исполкома АДЭ.doc",
+    "nameList": [
+     "30 июня в 17.30 - очередное заседание Исполкома АДЭ.doc"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "30 июня в 17.30 - очередное заседание Исполкома АДЭ.doc"
+   ],
+   "seqUpdate": 16583157996080,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-07-20",
+   "dateLastSeen": "2022-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a8119c8482f02ef3e76266ff7b58aff62bf3e17b",
+   "ip": [
+    "103.85.20.194"
+   ],
+   "ipScores": [
+    {
+     "ip": "103.85.20.194",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "103.85.20.194"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16583157995708,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-07-20",
+   "dateLastSeen": "2022-07-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "40caac250ef2f2937521e4d8374477e7",
+    "other": [],
+    "sha1": "9d5daba847044ab63c926f9c740e47ee079f09d6",
+    "sha256": "1c86452b222c8e631b0434585000466814f92f71d81576e03e0a118409019842"
+   },
+   "id": "a75782092f82ed8ae2a121c36fa410e4336a2e7f",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "40caac250ef2f2937521e4d8374477e7",
+     "sha1": "9d5daba847044ab63c926f9c740e47ee079f09d6",
+     "sha256": "1c86452b222c8e631b0434585000466814f92f71d81576e03e0a118409019842"
+    },
+    "name": "40caac250ef2f2937521e4d8374477e7",
+    "nameList": [
+     "40caac250ef2f2937521e4d8374477e7"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "40caac250ef2f2937521e4d8374477e7"
+   ],
+   "seqUpdate": 16583157996601,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "d5d0a1a034dcefdb08d9ca51c7694a22",
+    "other": [],
+    "sha1": "5c22539218a08e9ec181cb2d89853b9aeb65c1bc",
+    "sha256": "64fabaf342a23f1777f6895383eddb4fc065d6c4d8608cebea51c30064b5c2a8"
+   },
+   "id": "798b339236c34111648e25edebbefd49fa26151a",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "d5d0a1a034dcefdb08d9ca51c7694a22",
+     "sha1": "5c22539218a08e9ec181cb2d89853b9aeb65c1bc",
+     "sha256": "64fabaf342a23f1777f6895383eddb4fc065d6c4d8608cebea51c30064b5c2a8"
+    },
+    "name": "8.t",
+    "nameList": [
+     "8.t"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "41770bd2cb4e28ca478b92c6ebdfb6e7acf87524"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "41770bd2cb4e28ca478b92c6ebdfb6e7acf87524",
+     "name": "RoyalRoad",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "8.t"
+   ],
+   "seqUpdate": 17809990053375,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "f53965ab81f746f5a2bf183d2a704c72",
+    "other": [],
+    "sha1": "5b01f3425b8fd053bd93b0d0aef2f04a950de7b2",
+    "sha256": "8597e6b9f5f61c68a9ef219513dd43dd36e269b738f849b1dda44b576c865d39"
+   },
+   "id": "c8f86e6ccddbb0ba3cbed85cd098e3556c019ace",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "f53965ab81f746f5a2bf183d2a704c72",
+     "sha1": "5b01f3425b8fd053bd93b0d0aef2f04a950de7b2",
+     "sha256": "8597e6b9f5f61c68a9ef219513dd43dd36e269b738f849b1dda44b576c865d39"
+    },
+    "name": "conhost.exe",
+    "nameList": [
+     "conhost.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "143f2b6525874454e925b75d386879f28b8f0242"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "143f2b6525874454e925b75d386879f28b8f0242",
+     "name": "DoubleT",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "conhost.exe"
+   ],
+   "seqUpdate": 17809989992281,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "003ecaf351054a5e12c88e1ea673c6a04b859f1c",
+  "a8119c8482f02ef3e76266ff7b58aff62bf3e17b",
+  "a75782092f82ed8ae2a121c36fa410e4336a2e7f",
+  "798b339236c34111648e25edebbefd49fa26151a",
+  "c8f86e6ccddbb0ba3cbed85cd098e3556c019ace"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "Backdoor"
+   ],
+   "class": null,
+   "id": "143f2b6525874454e925b75d386879f28b8f0242",
+   "name": "DoubleT",
+   "platform": [],
+   "threatLevel": "Medium"
+  },
+  {
+   "category": [
+    "Exploit"
+   ],
+   "class": null,
+   "id": "41770bd2cb4e28ca478b92c6ebdfb6e7acf87524",
+   "name": "RoyalRoad",
+   "platform": [],
+   "threatLevel": "Medium"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "[Phishing->Spearphishing Attachment]",
+   "attackPatternId": "attack-pattern--2e34237d-8574-43f6-aace-ae2915de8597",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1566.001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Phishing",
+   "attackPatternId": "attack-pattern--a62a8db3-f23a-4d8f-afd6-9dbc77e7813b",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1566",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[Command and Scripting Interpreter->Windows Command Shell]",
+   "attackPatternId": "attack-pattern--d1fcf083-a721-4223-aedf-bf8960798d62",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.003",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Command and Scripting Interpreter",
+   "attackPatternId": "attack-pattern--7385dfaf-6886-4229-9ecd-6fd678040830",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Exploitation for Client Execution",
+   "attackPatternId": "attack-pattern--be2dcee9-a7a7-4e38-afd6-21b31ecc3d63",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1203",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[User Execution->Malicious File]",
+   "attackPatternId": "attack-pattern--232b7f21-adf9-4b42-b936-b9d6f7df856e",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204.002",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "User Execution",
+   "attackPatternId": "attack-pattern--8c32eb4d-805f-4fc5-bf60-c4d476c131b5",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[Boot or Logon Autostart Execution->Registry Run Keys / Startup Folder]",
+   "attackPatternId": "attack-pattern--9efb1ea7-c37b-4595-9640-b7680cd84279",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547.001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[Boot or Logon Autostart Execution->Registry Run Keys / Startup Folder]",
+   "attackPatternId": "attack-pattern--9efb1ea7-c37b-4595-9640-b7680cd84279",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547.001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Boot or Logon Autostart Execution",
+   "attackPatternId": "attack-pattern--1ecb2399-e8ba-4f6b-8ba7-5c27d49405cf",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Boot or Logon Autostart Execution",
+   "attackPatternId": "attack-pattern--1ecb2399-e8ba-4f6b-8ba7-5c27d49405cf",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Deobfuscate/Decode Files or Information",
+   "attackPatternId": "attack-pattern--3ccef7ae-cb5e-48f6-8302-897105fbf55c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1140",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Masquerading",
+   "attackPatternId": "attack-pattern--42e8de7b-37b2-4258-905a-6897815e58e0",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1036",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Obfuscated Files or Information",
+   "attackPatternId": "attack-pattern--b3d682b6-98f2-4fb0-aa3b-b4df007ca70a",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1027",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Process Discovery",
+   "attackPatternId": "attack-pattern--8f4a33ec-8b1f-4b80-a2f6-642b2e479580",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1057",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Information Discovery",
+   "attackPatternId": "attack-pattern--354a7f88-63fb-41b5-a801-ce3b377b36f1",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1082",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[System Location Discovery->System Language Discovery]",
+   "attackPatternId": "attack-pattern--c1b68a96-3c48-49ea-a6c0-9b27359f9c19",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1614.001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Location Discovery",
+   "attackPatternId": "attack-pattern--c877e33f-1df6-40d6-b1e7-ce70f16f4979",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1614",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Network Configuration Discovery",
+   "attackPatternId": "attack-pattern--707399d6-ab3e-4963-9315-d9d3818cd6a0",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1016",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Owner/User Discovery",
+   "attackPatternId": "attack-pattern--03d7999c-1f4c-42cc-8373-e7690d318104",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1033",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Time Discovery",
+   "attackPatternId": "attack-pattern--f3c544dc-673c-4ef3-accb-53229f1ae077",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1124",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Application Layer Protocol",
+   "attackPatternId": "attack-pattern--355be19c-ffc9-46d5-8d50-d6a036c675b6",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Data Obfuscation",
+   "attackPatternId": "attack-pattern--ad255bfe-a9e6-4b52-a258-8d3462abe842",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[Encrypted Channel->Asymmetric Cryptography]",
+   "attackPatternId": "attack-pattern--bf176076-b789-408e-8cba-7275e81c0ada",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573.002",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Encrypted Channel",
+   "attackPatternId": "attack-pattern--b8902400-e6c5-4ba2-95aa-2d35b442b118",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Ingress Tool Transfer",
+   "attackPatternId": "attack-pattern--e6919abc-99f9-4c6c-95a5-14761e7b2add",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1105",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Exfiltration Over C2 Channel",
+   "attackPatternId": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1041",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "europe"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2607-1404",
+ "sectors": [
+  "information-technology",
+  "information-technology:cyber-security",
+  "hardware:telecommunications",
+  "government-and-military",
+  "hardware",
+  "government-and-military:government-and-military"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 16867255755139,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "CN",
+  "id": "b9f1eb449d596cf1b57aa5ea974472b7fda3dd2e",
+  "isAPT": true,
+  "name": "Tonto Team"
+ },
+ "title": "Analysis of the Tonto Team attack on Russian organizations in 2021",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2023-06-14T09:52:55+03:00"
+}

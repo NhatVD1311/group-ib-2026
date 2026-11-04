@@ -1,0 +1,1913 @@
+{
+ "contacts": [],
+ "countries": [
+  "RU"
+ ],
+ "createdAt": "2023-08-21T10:31:04+03:00",
+ "cveList": [
+  {
+   "dateModified": "2026-06-17T03:51:27+00:00",
+   "datePublished": "2021-05-11T19:11:41+00:00",
+   "evaluation": {
+    "admiraltyCode": "A1",
+    "credibility": 100,
+    "reliability": 100,
+    "severity": "red",
+    "tlp": "green",
+    "ttl": 30
+   },
+   "name": "CVE-2021-31207",
+   "products": [
+    {
+     "vendor": "microsoft",
+     "product": "exchange_server"
+    }
+   ]
+  },
+  {
+   "dateModified": "2026-08-10T19:58:52+00:00",
+   "datePublished": "2021-07-14T17:54:03+00:00",
+   "evaluation": {
+    "admiraltyCode": "A1",
+    "credibility": 100,
+    "reliability": 100,
+    "severity": "red",
+    "tlp": "green",
+    "ttl": 30
+   },
+   "name": "CVE-2021-34473",
+   "products": [
+    {
+     "vendor": "microsoft",
+     "product": "exchange_server"
+    }
+   ]
+  },
+  {
+   "dateModified": "2026-08-10T19:59:11+00:00",
+   "datePublished": "2021-07-14T17:54:38+00:00",
+   "evaluation": {
+    "admiraltyCode": "A1",
+    "credibility": 100,
+    "reliability": 100,
+    "severity": "red",
+    "tlp": "green",
+    "ttl": 30
+   },
+   "name": "CVE-2021-34523",
+   "products": [
+    {
+     "vendor": "microsoft",
+     "product": "exchange_server"
+    }
+   ]
+  }
+ ],
+ "dateFirstSeen": "2020-12-10",
+ "dateLastSeen": "2022-09-28",
+ "datePublished": "2023-08-23",
+ "description": "<h2 style=\"text-align:justify;\">ATTACK RECONSTRUCTION</h2><p>The earliest access to the infrastructure was received no later than December 10, 2020. On 3 compromised servers, the nbtscan utility, a program for scanning IP subnets to find open resources by scanning for NetBIOS Name servers, was unpacked and launched. Since network scanning as part of the attack is carried out already at the post-operational stage, it can be argued that the initial penetration into the corporate perimeter was carried out earlier than the above date.</p><p>At the initial stage, in addition to regular system utilities, the attackers used, at a minimum, pscp and plink console applications, which are clients for working with individual network protocols (for example, Telnet, SSH, SCP), presumably for tunneling and uploading individual data. All the tools they used were located in the C:\\Windows\\Temp\\ directory on the compromised servers with slightly different file names.</p><p>In the process of moving around the network, the attackers used mimikatz and secretsdump - utilities that allow you to extract user passwords in various ways, including from local accounts and cached domain accounts, as well as LSA secret keys.&nbsp;</p><p>Later, as additional tools, attackers began to use utilities such as PsExec (from the SysInternals package) for remote command execution, and portscan for network analysis, searching for network devices and their open ports. Moreover, the list of tools used regularly expanded as the attack developed. So, almost until mid-May 2021, attackers performed a similar series of actions: actively moving around the network, regularly scanning it and collecting additional authentication material.</p><p>On August 13, 2021, attempts to exploit the vulnerability CVE-2021-31207 were recorded for the first time on one of the servers, which is the final one and is applied after the successful exploitation of the first two of the chain of vulnerabilities called ProxyShell (CVE-2021-34473, CVE-2021-34523, CVE-2021- 31207).&nbsp;</p><p>These vulnerabilities allow interacting with vulnerable servers with the highest local privileges and executing arbitrary code on the server, including downloading various files, including web shells. Their placement on the OWA service allows an attacker to gain a foothold in the company's network and provide remote access to compromised hosts. &nbsp;</p><p>As part of the exploitation of the chain of listed vulnerabilities, on August 16, 2021, the privileged domain Administrator account was assigned the Mailbox Import Export role (Fig. 1) for further export of encoded web shells previously placed in user drafts to publicly accessible directories of Exchange mail servers (Fig. 2).</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/5340a9e40365d8a3ab4c419a19afa6ef50dcb607/file/f22b15ccf614a1d3eab5a2c4fedcd85413591ec401ffcc2b503e2a53bcbc47ee?placeholder=__IMAGE_5340a9e40365d8a3ab4c419a19afa6ef50dcb607:f22b15ccf614a1d3eab5a2c4fedcd85413591ec401ffcc2b503e2a53bcbc47ee_IMAGE__\"  /></figure><p>Similar actions to upload web shells were periodically performed until March 12, 2022.</p><p>As part of the next stage, on March 05, 2022, the \\Microsoft\\Windows\\CertificateServicesClient\\DnsPolicyTask task was created on the compromised attacking station with a load in the form of the C:\\Windows\\system32\\DnsPolicyTask.exe file and parameters for its execution in an obfuscated form. This file is a renamed PowerShell shell executable, and the payload is a loader of PowerShell scripts for their subsequent execution through one of the following links:</p><ul><li>hXXps://sessions[.]dns05[.]com/latest/list</li><li>hXXps://latest[.]sessions[.]linkpc[.]net/news/list</li></ul><p>Also, through the use of the PowerShell shell, the shellcode loaders were executed on March 12, 2022. Bypassing AMSI and PowerShell ScriptBlock logging, each script executed ran the contained meterpreter shellcode, which downloaded shellcode from web links with a URI containing an arbitrary character sequence like&nbsp;</p><pre><code class=\"language-plaintext\">hXXps://176[.]223[.]111[.]176/news/{RANDOMSEQUENCE} </code></pre><p>and passed control to it (an example of such an event with an obfuscated load is shown in Figure 3).</p><figure class=\"image image_resized\" style=\"width:384px;\"><img src=\"/api/v2/hi/threat/5340a9e40365d8a3ab4c419a19afa6ef50dcb607/file/a339f4aeb71f2c5125c35222d965901075f90718d8340659b2dc385666644620?placeholder=__IMAGE_5340a9e40365d8a3ab4c419a19afa6ef50dcb607:a339f4aeb71f2c5125c35222d965901075f90718d8340659b2dc385666644620_IMAGE__\"  /></figure><p>On March 24, 2022 at 12:02:30, malicious activity was detected for the first time on yet another workstation. At the specified time, the English.hlp, goopdate.dll, vm3dService.exe files were created in the C:\\ProgramData\\vm3dService directory.<br>The last executable file listed uses the goopdate.dll dynamic-link library (DLL hijacking) hijacking technique for a legitimate software file from Google Inc. vm3dService.exe (originally named GoogleUpdate.exe). Running vm3dService.exe loads goopdate.dll, which decrypts and decompresses the payload called RCSession from the English.hlp file. The payload in the form of a DLL is loaded directly into memory and injected into the %System32%\\msiexec.exe processes launched by the backdoor.<br>RCSession provides remote access to a compromised system. Control server addresses:</p><ul><li style=\"text-align:justify;\">package[.]update-pfsense[.]com:53</li><li style=\"text-align:justify;\">package[.]update-pfsense[.]com:443</li></ul><p>According to the configuration, any of the available protocols can be used to interact with the control server: TCP, UDP, HTTP/HTTPS. Depending on the user's rights, the backdoor either installs itself as a vm3dService (vm3d SVGA Helper Service) system service or registers its executable file in the autorun section of the system registry. On March 24, 2022 at 12:02:30, the specified service was installed on one of the workstations.</p><p>At the command of the control server, this backdoor can not only send information about the system and execute Windows shell commands, but also track keyboard input (perform keylogger functions), information about pressed keys, windows, and processes. The collected information is written in encrypted form to the following report file:</p><pre><code class=\"language-plaintext\">%ALLUSERSPROFILE%\\vm3dService\\{USER_NAME}.prx\nгде USER_NAME – имя пользователя.</code></pre><p>In parallel with the described events, the attackers managed to gain a foothold on other servers by creating services or scheduled tasks (Fig. 4). The programs InkForm.exe, ssMUIDLL.exe used for this also use the technique of replacing the DLL for the legitimate software file. Currently, the payload belongs to an unknown family of programs that provide remote access to a compromised system.м, предоставляющих удаленный доступ к скомпрометированной системе.</p><ul><li>C&amp;C server address (InkForm.exe): www[.]pinkykony[.]com:443</li><li>C&amp;C server address (ssMUIDLL.exe): api[.]confluenselog[.]com:80</li></ul><p>After launch, the payload is injected into the process \"%System32%\\msiexec.exe 22\" or \"C:\\Windows\\System32\\dllhost.exe\" launched by the backdoor for the first and second files, respectively. It should be noted that InkForm.exe, when interacting with the control server, uses the TLS protocol, which is implemented using the third-party TLSe library (hxxps://github[.]com/eduardsui/tlse) together with the LibTomCrypt cryptographic library, so the running msiexec.exe process will initiate a connection to this resource as well.&nbsp;</p><figure class=\"image image_resized\" style=\"width:454px;\"><img src=\"/api/v2/hi/threat/5340a9e40365d8a3ab4c419a19afa6ef50dcb607/file/8e2f6a1de070ca65438728a7b5df0ebacec374095be5bc775b548979a824b23b?placeholder=__IMAGE_5340a9e40365d8a3ab4c419a19afa6ef50dcb607:8e2f6a1de070ca65438728a7b5df0ebacec374095be5bc775b548979a824b23b_IMAGE__\"  /></figure><p>Having gained a foothold, in order to evade anti-virus protection, the attackers executed the following commands:</p><pre><code class=\"language-plaintext\">PowerShell -Command &amp; {Add-MpPreference -ExclusionPath C:\\\\Users\\\\Public\\\\Videos\\\\}\nPowerShell -Command &amp; {Add-MpPreference -ExclusionPath C:\\\\ProgramData\\\\}\nPowerShell -Command &amp; {Set-MpPreference -ScanPurgeItemsAfterDelay 1}</code></pre><p>The Add-MpPreference cmdlet allows you to make changes to the Windows Defender settings, which was done: the C:\\Users\\Public\\Videos and C:\\ProgramData directories most commonly used by attackers were regularly added to the antivirus tool exclusion list on various hosts. If you set the ScanPurgeItemsAfterDelay option, the protection log will be automatically purged daily.</p><p>On July 07, 2022 at 06:13:39, the first attackers accessed the file server using an account. The next day, the following files were uploaded to the workstation with its help:</p><ul><li>C:\\ProgramData\\Microsoft\\Search\\Searchs.exe (the service created on its basis allows you to remotely download shellcode),</li><li>C:\\ProgramData\\Microsoft\\DeviceSync\\privacy.rft,</li><li>C:\\ProgramData\\Microsoft\\DeviceSync\\DeviceSyncs.exe,</li><li>C:\\ProgramData\\Microsoft\\DeviceSync\\Data,</li><li>C:\\ProgramData\\Microsoft\\DeviceSync\\Sync.</li></ul><p>The last group of files used to create the DeviceSyncs task (Fig. 5) implements the functionality of a remote administration program that works through Yandex Cloud (cloud-api[.]yandex[.]net) using an external resource hxxps://github[ .]com/AndreyKazakovs.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/5340a9e40365d8a3ab4c419a19afa6ef50dcb607/file/be1503ba521eb47f22e8f36b5adf588b081e177aaef96e422bade9328cea0622?placeholder=__IMAGE_5340a9e40365d8a3ab4c419a19afa6ef50dcb607:be1503ba521eb47f22e8f36b5adf588b081e177aaef96e422bade9328cea0622_IMAGE__\"  /></figure><p>On July 11, 2022, using the schtasks.exe system utility and the same account, services were created with a similar load on another remote host.</p><figure class=\"image image_resized\" style=\"width:469px;\"><img src=\"/api/v2/hi/threat/5340a9e40365d8a3ab4c419a19afa6ef50dcb607/file/3f8211b1b27a16b379dfb7550d95a79a79053f7bd784bd78d6db2cf08b9966f9?placeholder=__IMAGE_5340a9e40365d8a3ab4c419a19afa6ef50dcb607:3f8211b1b27a16b379dfb7550d95a79a79053f7bd784bd78d6db2cf08b9966f9_IMAGE__\"  /></figure><p>On July 13, 2022 at 05:20:37 an RDP connection to a workstation was detected. Once connected, the attackers, using shortcuts located in C:\\Users\\Public\\Desktop, launched the following programs, presumably to detect existing saved connections:</p><figure class=\"table\" style=\"width:495.9pt;\"><table><thead><tr><th style=\"border-style:solid;padding:0cm 5.4pt;vertical-align:top;width:237.05pt;\"><p style=\"text-align:justify;\">Running executable</p></th><th style=\"border-bottom-style:solid;border-left-style:none;border-right-style:solid;border-top-style:solid;padding:0cm 5.4pt;vertical-align:top;width:258.85pt;\"><p style=\"text-align:justify;\">LNK file used to run</p></th></tr></thead><tbody><tr><td style=\"border-bottom-style:solid;border-left-style:solid;border-right-style:solid;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:237.05pt;\">%ProgramFiles%\\Cisco Systems\\Cisco Jabber\\CiscoJabber.exe</td><td style=\"border-bottom-style:solid;border-left-style:none;border-right-style:solid;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:258.85pt;\">C:\\Users\\Public\\Desktop\\Cisco Jabber.lnk</td></tr><tr><td style=\"border-bottom-style:solid;border-left-style:solid;border-right-style:solid;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:237.05pt;\">%ProgramFiles%\\VMware\\SSL VPN-Plus Client\\SVPClient.exe</td><td style=\"border-bottom-style:solid;border-left-style:none;border-right-style:solid;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:258.85pt;\">C:\\Users\\Public\\Desktop\\SSL VPN-Plus Client.lnk</td></tr><tr><td style=\"border-bottom-style:solid;border-left-style:solid;border-right-style:solid;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:237.05pt;\">%ProgramFiles%\\BraveSoftware\\Brave-Browser\\Application\\Brave.EXE</td><td style=\"border-bottom-style:solid;border-left-style:none;border-right-style:solid;border-top-style:none;padding:0cm 5.4pt;vertical-align:top;width:258.85pt;\">C:\\Users\\Public\\Desktop\\Brave.lnk</td></tr></tbody></table></figure><p>Previously installed by the attacking keylogger, at 05:44:10 in the report file, the viewing of a file containing the user's credentials for logging into a large number of different systems, including for making VPN connections, was detected.</p><p>At 05:48:21 the session was disconnected.<br>At 07:37:34 RDP connection was re-established. At 07:40:38, C:\\Windows\\System32\\winevt\\Logs\\Security_new.evtx was created on the system with a reduced number of Security.evtx syslog events. Experts believe that this file was intended to replace the original log and partially hide traces of activity. At 07:41:18 the session ended.<br>At 07:47:31 and 07:51:32 RDP connection attempts were recorded from WIN7 under a different account. There was no further suspicious activity that day.<br>Later, on this workstation, the Lazagne tool was launched - a utility that allows you to extract passwords from the most commonly used programs installed on your computer. It is important to note that this workstation recorded the storage of credentials to a variety of external systems: both in clear text format and being stored, for example, in browsers.</p><p>Subsequently, the behavioral pattern continued to be fairly uniform: moving from host to host using system utilities, attackers regularly established themselves on new hosts using one of the methods described above, leaving behind the possibility of remote connection and activity monitoring on compromised machines. PowerShell scripts were occasionally executed on already captured hosts in the form of files using commands like:</p><pre><code class=\"language-plaintext\">powershell -ep bypass -f A[.]ps1</code></pre><p>It is not possible to fully establish the purpose of all executed files due to insufficient logging. However, based on the history of commands entered (PSReadline\\ConsoleHost_history.txt) from the workstation,<br>the only script executed on it, rdpu[.]ps1, allowed viewing a list of remote machines that had previously been accessed via BOR, together with the account used to create this connection.</p><p>As mentioned earlier, the most frequently used directories by attackers were C:\\ProgramData and C:\\Users\\Public.<br>Downloading malicious files was most often done in archives, which were then unpacked into the current or explicitly specified subdirectory of the specified directories:</p><pre><code class=\"language-plaintext\">7z.exe x msedgeupdate.7z -o.</code></pre><p>To unpack, the attackers used the 7-71 archiver previously installed on the compromised machine, but sometimes they additionally downloaded its executable file to the current working directory, for example, c:\\programdata\\microsoft\\appv\\7z.exe.</p><p>After the immediate launch, tasks and services are actively used for pinning. They are created both directly on the current host and on remote machines using the following commands:</p><pre><code class=\"language-plaintext\">schtasks /create /tn Microsoft_edgeup /tr \"C:\\ProgramData\\Microsoft\\EdgeUpdate\\msedgeupdate.exe\" /sc onstart /s HOST /u Svc-OM_Action /p PASSWORD /RU SYSTEM\n\nsc \\\\HOST create \"Microsoft_edgeup\" binpath= \"C:\\ProgramData\\Microsoft\\EdgeUpdate\\msedgeupdate.exe\" start= auto displayname= \"Microsoft_edgeup update server\"</code></pre><p>Tasks are installed with NT AUTHORITY/SYSTEM rights, which allows the program to run with the highest local privileges. Interaction with previously created objects is carried out similarly through system utilities and often explicitly specified credentials, which also change over time:</p><pre><code class=\"language-plaintext\">sc start Microsoft_edgeup\nsc \\\\HOST start Microsoft_edgeup\nschtasks /run /tn MicrosoftSeting /f\nschtasks /run /tn Microsoftdsync /s HOST /u Svc-OM_Action /p PASSWORD</code></pre><p>In some cases, more sophisticated methods were used, for example, creating tasks used exclusively to start services:</p><pre><code class=\"language-plaintext\">schtasks /create /tn sslinfo /tr \"sc start 'WinDeviceSyncs'\" /sc onstart /s HOST /u Svc-OM_Action /p PASSWORD /RU SYSTEM</code></pre><p>In addition to the above, attackers regularly covered their tracks, not only by deleting previously created services, services and files, but also by terminating the processes they themselves spawned, including using WMIC, the command line interface for Windows Management Instrumentation:</p><pre><code class=\"language-plaintext\">wmic /node:HOST /user:Svc-OM_Action /password:!Q2w3e4r process call create \"cmd /c taskkill /im dllhost.exe /f\"</code></pre><p>One of the methods for obtaining credentials was to disable the protection of credentials through the appropriate registry keys (enabling Restricted Admin Mode). Initially, this mode was intended to disable the ability to store the password hash in the memory of the end device during an RDP connection, which can later enable a pass-the-hash attack:</p><pre><code class=\"language-plaintext\">REG ADD \"HKLM\\System\\CurrentControlSet\\Control\\Lsa\" /v DisableRestrictedAdmin /t REG_DWORD /d 00000000 /f</code></pre><p>Credentials were also collected on a regular basis using different builds of the mimikatz utility, including by using it to perform a dcsync attack to obtain user hashes:</p><pre><code class=\"language-plaintext\">pass_av.exe \"log\" \"sekurlsa::logonPasswords full\" exit\npass_av.exe \"lsadump::dcsync /domain:itgroup[.]local /all /csv\" exit</code></pre><p>Intelligence within the network was predominantly carried out using system utilities. Most commonly used commands:</p><pre><code class=\"language-plaintext\">ping &lt;hostname&gt; -n 3\nipconfig /all\nnet user\nnet sessions\ntasklist /svc\ntasklist /v | find \"&lt;injectedprocess&gt;\"\nwhoami</code></pre><p>Network resources were connected using explicitly specified credentials:</p><pre><code class=\"language-plaintext\">net use \\\\HOST\\C$ \"PASSWORD\" /user:Svc-OM_Action</code></pre><p>After mounting network drives, the attackers browsed various directories in search of sensitive information, then disconnected:</p><pre><code class=\"language-plaintext\">net use * /del /y</code></pre><p>As a final step, the attackers cleaned up the security logs:</p><pre><code class=\"language-plaintext\">wevtutil cl Application &amp;&amp; wevtutil cl system &amp;&amp; wevtutil cl security</code></pre><h2>Malicious file analysis</h2><h3>Remote Administration Program - RCSession</h3><p>The program uses the \"goopdate.dll\" (DLL hijacking) dynamic-link library substitution technique for the legitimate software file from \"Google Inc.\" \"vm3dService.exe\" (original name \"GoogleUpdate.exe\", digitally signed by \"Google Inc.\" dated 01/22/2015) Running \"vm3dService.exe\" loads \"goopdate.dll\", which decrypts and decompresses the RCSession payload from the file \"English.hlp\" The payload in the form of OH is loaded directly into memory.<br>RCSession provides remote access to a compromised system.</p><p>Control server addresses:</p><ul><li>package[.]update-pfsense[.]com:53</li><li>package[.]update-pfsense[.]com:443</li></ul><p>According to the configuration, any of the available protocols can be used to interact with the control server: TCP, UDP, HTTP/HTTPS. The transmitted data is compressed using the LZNT1 algorithm and encrypted.</p><h3>shellcode remote download program</h3><p>The program uses the DLL hijacking technique for the legitimate software file of Microsoft Corporation \"Search.exe\" (original name \"SYMCHK.EXE\", digital signature \"Microsoft Corporation\" dated 02/01/2010).</p><p>When \"Search.exe data.dat\" is launched, \"symbolcheck.dll\" is loaded, which executes the shellcode from the \"data.dat\" file specified on the command line. This shellcode decrypts and decompresses the payload as a DLL, which it then loads directly into memory.</p><p>The payload over HTTPS protocol downloads data from the address of the Internet network - hxxps://cl1p[.]net/.</p><p>The downloaded data between the \"gJuH\" markers contains either a Base64 encoded shell command or a shellcode download link. The loaded shellcode is injected into the process \"%System32%\\msiexec.exe\" launched by the program in one of two ways.</p><h3>Remote Administration Program (backdoor) #1</h3><p>The program uses the DLL hijacking technique for the file of legitimate software of the company \"Microsoft Corporation\" \"InkForm.exe\" (digitally signed by \"Microsoft Corporation\" 06/27/2006). When ”InkForm.exe” is launched, “FormDll.dll” is loaded, which decrypts the shellcode using “FormDl2.dll”, and then transfers control to it. This shellcode decrypts, decompresses the payload it contains, and loads it directly into memory.</p><p>The payload belongs to an unknown family of programs that provide remote access to a compromised system.</p><p>Interaction with the control server is carried out using the TLS protocol. To implement TLS in the backdoor, the TLSe library (https://github[.]com/eduardsui/tlse) is used together with the LibTomCrypt cryptographic library. Transmitted data is also encrypted using RC4.</p><h3>Remote Administration Program (backdoor) #2</h3><p>The program uses DLL hijacking technique for legitimate software files “MFs.exe” / “webpach.exe” of “Microsoft Corporation” (original name “msedgeupdate.dll”, digital signature “Microsoft Corporation” 25.04.2020) and “ssMUIDLL .exe\" by \"Samsung Electronics Co., Ltd.\" (original file name - \"RunHelp.exe\", digitally signed by \"Samsung Electronics CO., LTD.\" 09/02/2010). When \"MFs.exe\" / \"webpach.exe\" or \"ssMUIDLL.exe\" is launched, \"msedgeupdate.dll\" or \"ssMUIDLL.dll\" is loaded respectively.<br>These DLLs contain identical code, \"msedgeupdate.dll\" is additionally protected by the VMProtect protector. The specified DLLs decrypt the payload from the \"datas\" file of the current directory, search the contents of the payload for the \"w4wg7x\" marker and write the 1024-byte configuration data contained in it to the address of the found marker, after which they start the \"C:\\Windows\\System32\\\" process dllhost.exe\" and inject the payload into it.</p><p>The payload belongs to a family of programs that provide remote access to a compromised system. The backdoor code specifies its version - \"3.3a\".</p><p>Control server address:</p><ul><li>для \"msedgeupdate.dll\": api[.]itgrouptech[.]com:443</li><li>для \"ssMUIDLL.dll\": api[.]confluenselog[.]com:80</li></ul><p>The backdoor interacts with the control server using the TLS protocol implemented in the program using the wolfSSL library. Transmitted data is also encrypted using RC4.</p><p>The backdoor tracks keyboard input (keylogger) with the help of a program module contained in its body, which is injected into another process \"%System32%\\dllhost.exe\" launched by the backdoor. The keylogger writes information about the local time of the event, pressed keys and windows in encrypted form to a report file in the current directory of the backdoor executable under the name \"logdatas\" (for \"msedgeupdate.dll\") or \"logs\" (for \"ssMUIDLL.dll\").</p><p>To create one or a series of screenshots, the OI contained in the body of the backdoor is used, which is extracted upon receipt of the appropriate command from the control server, respectively, under the names \"InitializeCriticalSection.dll\" and \"ConsentUXA.dll\" into the current directory and launched using rundll32.exe as follows:</p><p>— creating one screenshot:</p><pre><code class=\"language-plaintext\">rundll32.exe \"{EXE_PATH}\\InitializeCriticalSection.dll\" ScreenCapture {N}</code></pre><p>— creating a series of desktop screenshots:</p><pre><code class=\"language-plaintext\">rundll32.exe \"{EXE_PATH}\\ConsentUXA.dll\" ScreenSpy {N}\nЕХЕ_РАТН - path to backdoor executable;\nN - number of colors in an image (1, 4, 8, 16, 24. 32).</code></pre><p>The resulting screenshots are sent by the DLL to standard output.</p><h3>emote Administration Program (backdoor) #3</h3><p>The program uses the DLL hijacking technique for legitimate software files from \"Microsoft Corporation\" \"Crypto.exe\"/\"DeviceSyncs.exe\" (original name \"rc.exe\", digital signature \"Microsoft Corporation\" dated 11.06.2008) and \"Setting. exe\" / yandex.exe (original name \"dbgsrv.exe\", digital signature \"Microsoft Corporation\" dated February 1, 2010). When \"Crypto.exe\" / \"DeviceSyncs.exe\" or \"Setting.exe\" / \"yandex.exe\" is launched, \"RcDll.dll\" and \"dbgeng.dll\" are loaded, respectively. which decrypt and decompress the payload respectively from the \"privacy.rft\" and \"Desktop.ini\" / \"appv.conf\" files.The DLL payload is loaded directly into memory.</p><p>The payload in “Desktop.ini” and “appv.conf” is encrypted with a 4-byte XOR key, which itself is encrypted with the CryptUnprotectData function. Thus, the payload can be decrypted in the session of the same user in which the XOR key was encrypted.</p><p>The payload belongs to an unknown family of programs that provide remote access to a compromised system.</p><p>The backdoor uses the infrastructure of the Yandex.Disk cloud service to interact with attackers via REST API HTTP requests (cloud-api[.]yandex[.]net/v1/). For authorization in Yandex.Disk, the backdoor uses an OAuth token downloaded from the description of AndreyKazakovs' GitHub account (https://github[.]com/AndreyKazakovs). The OAuth token is contained in encrypted form in the account description between the \"YAND\" tokens.</p><pre><code class=\"language-plaintext\">OAuth-токен: AQAAAABhgOuwAAfuy5loPUXVsUJqpaVMu03f5JM</code></pre><p>Commands and the results of their execution are stored in Yandex.Disk as encrypted files. Data encryption is performed by substitution.</p><p>User-Agent values when making HTTP requests to the Yandex.Disk REST API:</p><ul><li>privacy.rft:<br>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103[.]0[.]0[.]0 Safari/537.36<br>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0<br>Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.160 YaBrowser/22[.]5[.]2[.]612 Yowser/2.5 Safari/537.36</li><li>Desktop.ini:<br>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104[.]0[.]0[.]0 Safari/537.36<br>Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.167 YaBrowser/22[.]7[.]3[.]821 Yowser/2.5 Safari/537.36<br>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104[.]0[.]0[.]0 Safari/537.36</li><li>appv.conf:<br>Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko<br>Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36</li></ul><p>The identifier is a hexadecimal string of the format: \"%08X%08X\", formed from two 32-bit numbers that were obtained as a result of two calls to the GetTickCount API function, which returns the number of milliseconds since the OS was started. In the payload in \"privacy.rft“, the number 100 is additionally added to the first value.</p><p>Payloads inject themselves into the following processes they launch:</p><ul><li>privacy.rft:<ul><li>%System32%\\msiexec.exe</li><li>%System32%\\mspaint.exe</li></ul></li><li>Desktop.ini:<ul><li>c:\\windows\\system32\\svchost.exe</li></ul></li><li>appv.conf:<ul><li>c:\\windows\\system32\\msiexec.exe</li></ul></li></ul>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B2",
+  "credibility": 80,
+  "reliability": 80,
+  "severity": "red",
+  "tlp": "red",
+  "ttl": null
+ },
+ "expertise": [
+  "GIB origin"
+ ],
+ "files": [
+  {
+   "hash": "f22b15ccf614a1d3eab5a2c4fedcd85413591ec401ffcc2b503e2a53bcbc47ee",
+   "mime": "image/png",
+   "name": "f22b15ccf614a1d3eab5a2c4fedcd85413591ec401ffcc2b503e2a53bcbc47ee",
+   "size": 214648
+  },
+  {
+   "hash": "a339f4aeb71f2c5125c35222d965901075f90718d8340659b2dc385666644620",
+   "mime": "image/png",
+   "name": "a339f4aeb71f2c5125c35222d965901075f90718d8340659b2dc385666644620",
+   "size": 240093
+  },
+  {
+   "hash": "8e2f6a1de070ca65438728a7b5df0ebacec374095be5bc775b548979a824b23b",
+   "mime": "image/png",
+   "name": "8e2f6a1de070ca65438728a7b5df0ebacec374095be5bc775b548979a824b23b",
+   "size": 153524
+  },
+  {
+   "hash": "be1503ba521eb47f22e8f36b5adf588b081e177aaef96e422bade9328cea0622",
+   "mime": "image/png",
+   "name": "be1503ba521eb47f22e8f36b5adf588b081e177aaef96e422bade9328cea0622",
+   "size": 96172
+  },
+  {
+   "hash": "3f8211b1b27a16b379dfb7550d95a79a79053f7bd784bd78d6db2cf08b9966f9",
+   "mime": "image/png",
+   "name": "3f8211b1b27a16b379dfb7550d95a79a79053f7bd784bd78d6db2cf08b9966f9",
+   "size": 197300
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "5340a9e40365d8a3ab4c419a19afa6ef50dcb607",
+ "indicatorMalwareRelationships": [
+  {
+   "indicatorId": "eb9fd3f67abaa8c8c2eb99a69932b15f194c2e8b",
+   "malwareId": "17dc9396e9745b889bee3d84153cb8490a6732d2"
+  }
+ ],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "b7feefba84c53ceced7c081f94b94d7e",
+    "other": [],
+    "sha1": "ecc164b68d1f7bece3f81efca43fbb95afa242b7",
+    "sha256": "caafda2bca3f173fe7dd6c410dceb709961e19fc6086d027b62cd0da360b0ede"
+   },
+   "id": "dd9e5992556918cd7a0c525ca4e6e51c2faebf89",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "b7feefba84c53ceced7c081f94b94d7e",
+     "sha1": "ecc164b68d1f7bece3f81efca43fbb95afa242b7",
+     "sha256": "caafda2bca3f173fe7dd6c410dceb709961e19fc6086d027b62cd0da360b0ede"
+    },
+    "name": "msedgeupdate.dll",
+    "nameList": [
+     "msedgeupdate.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "msedgeupdate.dll"
+   ],
+   "seqUpdate": 16926896177175,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "ecdd438b766afcf7a1ba0814532fc831",
+    "other": [],
+    "sha1": "8d6787cd1d119e8027ee285eb579a52f33e5e675",
+    "sha256": "bc3cdfe56a2ee572b9bd8aa7441b436b3fdf6a5ab6a12c6fa03bc0f6d62700fc"
+   },
+   "id": "eb2425a751dc1f8c5316097309bc0b53c05da3c8",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "ecdd438b766afcf7a1ba0814532fc831",
+     "sha1": "8d6787cd1d119e8027ee285eb579a52f33e5e675",
+     "sha256": "bc3cdfe56a2ee572b9bd8aa7441b436b3fdf6a5ab6a12c6fa03bc0f6d62700fc"
+    },
+    "name": "dbgeng.dll",
+    "nameList": [
+     "dbgeng.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "dbgeng.dll"
+   ],
+   "seqUpdate": 16926947840507,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "a33347bd5ca6924a1aeb477bbf733468",
+    "other": [],
+    "sha1": "ec854b72e00f7cdeab6306035740bb3657497843",
+    "sha256": "a115e1eb5a784d84a794b173ce3d91c03335eef78e07bb184f479e2bf2f1200f"
+   },
+   "id": "0295cf2fcd6f22900b5ebbf1544d7969394d08bb",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "a33347bd5ca6924a1aeb477bbf733468",
+     "sha1": "ec854b72e00f7cdeab6306035740bb3657497843",
+     "sha256": "a115e1eb5a784d84a794b173ce3d91c03335eef78e07bb184f479e2bf2f1200f"
+    },
+    "name": "ssMUIDLL.dll",
+    "nameList": [
+     "ssMUIDLL.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "ssMUIDLL.dll"
+   ],
+   "seqUpdate": 16926896176166,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "e81d37a20921c9e4fb89ff774a796530",
+    "other": [],
+    "sha1": "8486e63ebe7dcde6cca37b5f094082f440458151",
+    "sha256": "cde9d12729693eaf9abd5d89b3fc48df7de9db26c0b77db04dd9aacd44a95881"
+   },
+   "id": "30900dd43002950193fab5e53287a6a155570b5a",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "e81d37a20921c9e4fb89ff774a796530",
+     "sha1": "8486e63ebe7dcde6cca37b5f094082f440458151",
+     "sha256": "cde9d12729693eaf9abd5d89b3fc48df7de9db26c0b77db04dd9aacd44a95881"
+    },
+    "name": "InkForm.dat",
+    "nameList": [
+     "InkForm.dat"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "InkForm.dat"
+   ],
+   "seqUpdate": 16926869645181,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "5427d86a0f5a81ff541663f3b94b7821",
+    "other": [],
+    "sha1": "c6e0c28480a681dbb95ecfab2b125386345c509c",
+    "sha256": "d800fa65068a163846ae311bc415b658adf0768b58e9dcded6c42acc2bc246fc"
+   },
+   "id": "00a1f7603fb2e90788ff7ea27b2c3e388b5b5c91",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "5427d86a0f5a81ff541663f3b94b7821",
+     "sha1": "c6e0c28480a681dbb95ecfab2b125386345c509c",
+     "sha256": "d800fa65068a163846ae311bc415b658adf0768b58e9dcded6c42acc2bc246fc"
+    },
+    "name": "MSVCR71.dll",
+    "nameList": [
+     "MSVCR71.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "MSVCR71.dll"
+   ],
+   "seqUpdate": 16926869647070,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "294ff7eab1b6c81cd725e9e52db82ef1",
+    "other": [],
+    "sha1": "726e92a9d6b3629bf34df55023bd271f3433e2a5",
+    "sha256": "52bd22ebad494e5375f8d3a6853cb063b5db6595dcc005224a7cb22d2292a618"
+   },
+   "id": "989ab21340d6bb4bf4e96cf1e68cc851f30ac62c",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "294ff7eab1b6c81cd725e9e52db82ef1",
+     "sha1": "726e92a9d6b3629bf34df55023bd271f3433e2a5",
+     "sha256": "52bd22ebad494e5375f8d3a6853cb063b5db6595dcc005224a7cb22d2292a618"
+    },
+    "name": "dbgeng.dll",
+    "nameList": [
+     "dbgeng.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "dbgeng.dll"
+   ],
+   "seqUpdate": 16926947843658,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "fa4a49e4fb04037b98a903434c04fffb",
+    "other": [],
+    "sha1": "179abf982ae864a9e70d60365578f5b9819e2249",
+    "sha256": "e527f543c1ad70e4a7be4e592e3ed6ca765556250520e919a9392dc54107aefe"
+   },
+   "id": "094938f4100386cc9b0833a1ae665be0a0c3f718",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "fa4a49e4fb04037b98a903434c04fffb",
+     "sha1": "179abf982ae864a9e70d60365578f5b9819e2249",
+     "sha256": "e527f543c1ad70e4a7be4e592e3ed6ca765556250520e919a9392dc54107aefe"
+    },
+    "name": "privacy.rft",
+    "nameList": [
+     "privacy.rft"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "privacy.rft"
+   ],
+   "seqUpdate": 16926947845830,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "7e6670abfb2adbfba6118a2032d4ae1a3b3c4719",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://latest.sessions.linkpc.net/news/lis",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926970269427,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": "https://latest.sessions.linkpc.net/news/lis"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "2de7c1a0d86ab082d688cc6ee92fd370",
+    "other": [],
+    "sha1": "6357079ba23db6507842863bdcdcfb4b5ce53bc3",
+    "sha256": "c7a05e4d78ddee65cc242df78397895d14924daca307312d6939747d93a5b72f"
+   },
+   "id": "59d11bb73d7383b836326ea1e96ad0b5729f1ba6",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "2de7c1a0d86ab082d688cc6ee92fd370",
+     "sha1": "6357079ba23db6507842863bdcdcfb4b5ce53bc3",
+     "sha256": "c7a05e4d78ddee65cc242df78397895d14924daca307312d6939747d93a5b72f"
+    },
+    "name": "symbolcheck.dll",
+    "nameList": [
+     "symbolcheck.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "symbolcheck.dll"
+   ],
+   "seqUpdate": 16926869648536,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "a383965a56e01347321170d394059eab",
+    "other": [],
+    "sha1": "717f7f0a315328807591ffd111fc45a2d7af430b",
+    "sha256": "12bb89ebc3757d72f5e06e9a7509d7ca0a96c92bef73c5dbbb1a01a96068f607"
+   },
+   "id": "6407af5ff86fc15b9efca88660a8d1dc33903b39",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "a383965a56e01347321170d394059eab",
+     "sha1": "717f7f0a315328807591ffd111fc45a2d7af430b",
+     "sha256": "12bb89ebc3757d72f5e06e9a7509d7ca0a96c92bef73c5dbbb1a01a96068f607"
+    },
+    "name": "FormDl2.dll",
+    "nameList": [
+     "FormDl2.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "FormDl2.dll"
+   ],
+   "seqUpdate": 16926869645624,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "e7c69e12b50c65726f9bdf17405d2724",
+    "other": [],
+    "sha1": "5c48ea15716becf5fbf437f7ebf2f8e3ad6fc4eb",
+    "sha256": "2c74d9afaa6976876572ccdb0dcc952916e8ab84bdda38d4eb3954286c230d01"
+   },
+   "id": "781a63bf07443b7080d534e17e83c17febcb8369",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "e7c69e12b50c65726f9bdf17405d2724",
+     "sha1": "5c48ea15716becf5fbf437f7ebf2f8e3ad6fc4eb",
+     "sha256": "2c74d9afaa6976876572ccdb0dcc952916e8ab84bdda38d4eb3954286c230d01"
+    },
+    "name": "RcDll.dll",
+    "nameList": [
+     "RcDll.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "RcDll.dll"
+   ],
+   "seqUpdate": 16926947848011,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "f018aeab065ad11b502880abab7329f1",
+    "other": [],
+    "sha1": "19cf9c11929ab87d02a1726422da5592fe9c79ce",
+    "sha256": "a363edc6fb52b064a279a40ce166b3d7b3db754670abd0121fef452ee87b80e4"
+   },
+   "id": "6f192fe17a532f95f9c58b9d461f85fbe982b3e2",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "f018aeab065ad11b502880abab7329f1",
+     "sha1": "19cf9c11929ab87d02a1726422da5592fe9c79ce",
+     "sha256": "a363edc6fb52b064a279a40ce166b3d7b3db754670abd0121fef452ee87b80e4"
+    },
+    "name": "data.dat",
+    "nameList": [
+     "data.dat"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "data.dat"
+   ],
+   "seqUpdate": 16926869647686,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "19b822c955f72c067e1a80e8c7df2790",
+    "other": [],
+    "sha1": "04b54f70866070de7e1cfbcd6c9f050bdab1ca23",
+    "sha256": "1eea7c416967dff0ef0449d4262c0ccee092ff5342ba3e03c5c3f8c787b21c79"
+   },
+   "id": "ddb4f040329bcbf2691f20ddcdcf1784e273d333",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "19b822c955f72c067e1a80e8c7df2790",
+     "sha1": "04b54f70866070de7e1cfbcd6c9f050bdab1ca23",
+     "sha256": "1eea7c416967dff0ef0449d4262c0ccee092ff5342ba3e03c5c3f8c787b21c79"
+    },
+    "name": "Desktop.ini",
+    "nameList": [
+     "Desktop.ini"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Desktop.ini"
+   ],
+   "seqUpdate": 16926947841993,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "bb350cae96801da39e01a74058efdd94",
+    "other": [],
+    "sha1": "e876cfdea7f4ee95298be2bb8ce8d3fed7e97048",
+    "sha256": "cee1a398026c9dfe283101019df94ee72e946adfddd0e2f70d2cb2b726d9b633"
+   },
+   "id": "df33358e0f750537a0bde3719937c04d31170162",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "bb350cae96801da39e01a74058efdd94",
+     "sha1": "e876cfdea7f4ee95298be2bb8ce8d3fed7e97048",
+     "sha256": "cee1a398026c9dfe283101019df94ee72e946adfddd0e2f70d2cb2b726d9b633"
+    },
+    "name": "goopdate.dll",
+    "nameList": [
+     "goopdate.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "goopdate.dll"
+   ],
+   "seqUpdate": 16926843851189,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "605db6fde35cafc4ed7c5e7ed532b19d",
+    "other": [],
+    "sha1": "10534b5bb41a49e6d635dbc9af32e737c194a7a7",
+    "sha256": "cd3ed9af36caadd4361aca271fe9b9d7ded1ce06b466ac9e3eed358be53ca9f7"
+   },
+   "id": "08107e73a5bec28116b724ea3e69b4728db337b8",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "605db6fde35cafc4ed7c5e7ed532b19d",
+     "sha1": "10534b5bb41a49e6d635dbc9af32e737c194a7a7",
+     "sha256": "cd3ed9af36caadd4361aca271fe9b9d7ded1ce06b466ac9e3eed358be53ca9f7"
+    },
+    "name": "605db6fde35cafc4ed7c5e7ed532b19d",
+    "nameList": [
+     "605db6fde35cafc4ed7c5e7ed532b19d"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "605db6fde35cafc4ed7c5e7ed532b19d"
+   ],
+   "seqUpdate": 16926951862163,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "251aea4bf6b85a134b80393e7a2f562a",
+    "other": [],
+    "sha1": "f12795c328ff1b7141e0ad1c0028cda82089a7e8",
+    "sha256": "abd9c4488c39ed1d86259972a64aef5ba0f9c2602f7091b4f8442c676f1c528d"
+   },
+   "id": "43459075a6c229c2d2ed14054785baff7e558cdf",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "251aea4bf6b85a134b80393e7a2f562a",
+     "sha1": "f12795c328ff1b7141e0ad1c0028cda82089a7e8",
+     "sha256": "abd9c4488c39ed1d86259972a64aef5ba0f9c2602f7091b4f8442c676f1c528d"
+    },
+    "name": "appv.conf",
+    "nameList": [
+     "appv.conf"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "appv.conf"
+   ],
+   "seqUpdate": 16926947838503,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "558517f66f80a4e3e95272b28cc478e9",
+    "other": [],
+    "sha1": "b6a09d4496542fc09cdc10356291c1d50018326b",
+    "sha256": "71556fc81fe5da2bdabdedc7c5e32e5cf44116413ae45b5a6dd976e1545ce969"
+   },
+   "id": "4d642dbcd9fb402c608079cff1ce1211c15d6124",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "558517f66f80a4e3e95272b28cc478e9",
+     "sha1": "b6a09d4496542fc09cdc10356291c1d50018326b",
+     "sha256": "71556fc81fe5da2bdabdedc7c5e32e5cf44116413ae45b5a6dd976e1545ce969"
+    },
+    "name": "Middle.exe",
+    "nameList": [
+     "Middle.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Middle.exe"
+   ],
+   "seqUpdate": 16926951862488,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "63cc7840a224f89ad53a6c0fd71c4f92",
+    "other": [],
+    "sha1": "da36790df1312a3c7fbd50fae2b9b712e9bb29cd",
+    "sha256": "064a158a475d275c6be6d79b86c32f33e1723837020e05e0df96bbd2767ca1ca"
+   },
+   "id": "b65a1a20b2eb1829980162911bd8190dda056cd4",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "63cc7840a224f89ad53a6c0fd71c4f92",
+     "sha1": "da36790df1312a3c7fbd50fae2b9b712e9bb29cd",
+     "sha256": "064a158a475d275c6be6d79b86c32f33e1723837020e05e0df96bbd2767ca1ca"
+    },
+    "name": "datas",
+    "nameList": [
+     "datas"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "datas"
+   ],
+   "seqUpdate": 16926896176680,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "7c1f77e074c9707d736a01561e717525",
+    "other": [],
+    "sha1": "52aa8dcb2e8b8dda439418a80edd71eecfa1c019",
+    "sha256": "a66e1710077e81c462735cd7a8aa306f7dd0dde5d6857803c0f7e47e6b023aae"
+   },
+   "id": "bd9e3eda9dc3e665933f7fc8593f1b6c56cdabaf",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "7c1f77e074c9707d736a01561e717525",
+     "sha1": "52aa8dcb2e8b8dda439418a80edd71eecfa1c019",
+     "sha256": "a66e1710077e81c462735cd7a8aa306f7dd0dde5d6857803c0f7e47e6b023aae"
+    },
+    "name": "FormDll.dll",
+    "nameList": [
+     "FormDll.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "FormDll.dll"
+   ],
+   "seqUpdate": 16926869646549,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": "package.update-pfsense.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "dbb0db1344d68c6db3d5fda1322b326f11913481",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "package.update-pfsense.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926843849860,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": "www.pinkykony.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "fb938c064e355e063fc9054190daf70983f49fea",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "www.pinkykony.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926869644442,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ca6f5b04bf5592280425956c2e6fc618296f5c66",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://sessions.dns05.com/latest/list",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926970267109,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": "https://sessions.dns05.com/latest/list"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": "api.itgrouptech.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "aede633967737c6a26b925012017b06f7347f3b3",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "api.itgrouptech.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926896175443,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": "api.confluenselog.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4820d0447120c198e384be71ccde276ae8b71150",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "api.confluenselog.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926896174452,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "689c4ee41f92d67c627610ee97892b5e4446fed1",
+   "ip": [
+    "176.223.111.176"
+   ],
+   "ipScores": [
+    {
+     "ip": "176.223.111.176",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "https://176.223.111.176/news/YP0War74cmt063XpFscTgwrxzjQrU5L86cOXtEKAcLVrly8PBnC",
+    "domain": "",
+    "ipv4": [
+     "176.223.111.176"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926951861889,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": "https://176.223.111.176/news/YP0War74cmt063XpFscTgwrxzjQrU5L86cOXtEKAcLVrly8PBnC"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "094084c6210fe8b53e37f9e025ebc04afe9eddab",
+   "ip": [
+    "176.223.111.176"
+   ],
+   "ipScores": [
+    {
+     "ip": "176.223.111.176",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "https://176.223.111.176/news/RLJO8qD0iJJ4VnlUGnoYrA4tA-R2hsC8myK-hvti2ONSZT5zLiLJs26fQPMV1l_mZ5khXKFLLJNtdTyjifgi30vJL720k6zSocH3k-OOPKCBuGlG7Eecl",
+    "domain": "",
+    "ipv4": [
+     "176.223.111.176"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926951860463,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": "https://176.223.111.176/news/RLJO8qD0iJJ4VnlUGnoYrA4tA-R2hsC8myK-hvti2ONSZT5zLiLJs26fQPMV1l_mZ5khXKFLLJNtdTyjifgi30vJL720k6zSocH3k-OOPKCBuGlG7Eecl"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-22",
+   "dateLastSeen": "2023-08-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e6a9ab661248750696c304320e38ad3be03bd400",
+   "ip": [
+    "176.223.111.176"
+   ],
+   "ipScores": [
+    {
+     "ip": "176.223.111.176",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "https://176.223.111.176/news/FbTZj8gLMKVHbEZuJUAhdguNXJ8naPyg6pLz8cum31BjuZXnyzgxISJAx9Hr40",
+    "domain": "",
+    "ipv4": [
+     "176.223.111.176"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16926951861249,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": "https://176.223.111.176/news/FbTZj8gLMKVHbEZuJUAhdguNXJ8naPyg6pLz8cum31BjuZXnyzgxISJAx9Hr40"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "103a85ee2c9f53f86fed4abde49b43e4",
+    "other": [],
+    "sha1": "0b7034f32e1a64d9fee7fe1dce74120b3c08f0b5",
+    "sha256": "ad8095f0e79334d69d05e243dc8e06b1b2169557daa2d55e4febe8126fcdebad"
+   },
+   "id": "eb9fd3f67abaa8c8c2eb99a69932b15f194c2e8b",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "103a85ee2c9f53f86fed4abde49b43e4",
+     "sha1": "0b7034f32e1a64d9fee7fe1dce74120b3c08f0b5",
+     "sha256": "ad8095f0e79334d69d05e243dc8e06b1b2169557daa2d55e4febe8126fcdebad"
+    },
+    "name": "English.hlp",
+    "nameList": [
+     "English.hlp"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "17dc9396e9745b889bee3d84153cb8490a6732d2"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "17dc9396e9745b889bee3d84153cb8490a6732d2",
+     "name": "RCSession",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "English.hlp"
+   ],
+   "seqUpdate": 17810052859694,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "dd9e5992556918cd7a0c525ca4e6e51c2faebf89",
+  "eb2425a751dc1f8c5316097309bc0b53c05da3c8",
+  "0295cf2fcd6f22900b5ebbf1544d7969394d08bb",
+  "30900dd43002950193fab5e53287a6a155570b5a",
+  "00a1f7603fb2e90788ff7ea27b2c3e388b5b5c91",
+  "989ab21340d6bb4bf4e96cf1e68cc851f30ac62c",
+  "094938f4100386cc9b0833a1ae665be0a0c3f718",
+  "7e6670abfb2adbfba6118a2032d4ae1a3b3c4719",
+  "59d11bb73d7383b836326ea1e96ad0b5729f1ba6",
+  "6407af5ff86fc15b9efca88660a8d1dc33903b39",
+  "781a63bf07443b7080d534e17e83c17febcb8369",
+  "6f192fe17a532f95f9c58b9d461f85fbe982b3e2",
+  "ddb4f040329bcbf2691f20ddcdcf1784e273d333",
+  "df33358e0f750537a0bde3719937c04d31170162",
+  "08107e73a5bec28116b724ea3e69b4728db337b8",
+  "43459075a6c229c2d2ed14054785baff7e558cdf",
+  "4d642dbcd9fb402c608079cff1ce1211c15d6124",
+  "b65a1a20b2eb1829980162911bd8190dda056cd4",
+  "bd9e3eda9dc3e665933f7fc8593f1b6c56cdabaf",
+  "dbb0db1344d68c6db3d5fda1322b326f11913481",
+  "fb938c064e355e063fc9054190daf70983f49fea",
+  "ca6f5b04bf5592280425956c2e6fc618296f5c66",
+  "aede633967737c6a26b925012017b06f7347f3b3",
+  "4820d0447120c198e384be71ccde276ae8b71150",
+  "689c4ee41f92d67c627610ee97892b5e4446fed1",
+  "094084c6210fe8b53e37f9e025ebc04afe9eddab",
+  "e6a9ab661248750696c304320e38ad3be03bd400",
+  "eb9fd3f67abaa8c8c2eb99a69932b15f194c2e8b"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "Backdoor"
+   ],
+   "class": "",
+   "id": "17dc9396e9745b889bee3d84153cb8490a6732d2",
+   "name": "RCSession",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "High"
+  },
+  {
+   "category": [
+    "trojan"
+   ],
+   "class": "",
+   "id": "0ea57f29eb4ea529775fa26ed4714c25d620dfb4",
+   "name": "Meterpreter",
+   "platform": [],
+   "threatLevel": ""
+  },
+  {
+   "category": [
+    "infostealer"
+   ],
+   "class": "",
+   "id": "9fd35b146b8f6038c191783a78adf3acf5f57865",
+   "name": "LaZagne",
+   "platform": [
+    "Windows",
+    "Linux",
+    "macOS"
+   ],
+   "threatLevel": "Low"
+  },
+  {
+   "category": [],
+   "class": "",
+   "id": "ec9fee47877add16204fd87a3b41ace8fdbec3db",
+   "name": "Mimikatz",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "Low"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "Exploit Public-Facing Application",
+   "attackPatternId": "attack-pattern--3f886f2a-874f-4333-b794-aa6075009b1c",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1190",
+   "params": null
+  },
+  {
+   "attackName": "Windows Management Instrumentation",
+   "attackPatternId": "attack-pattern--01a5a209-b94c-450b-b7f9-946497d91055",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1047",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "wmic /node:10.147.1.200 /user:Svc-OM_Action /password:password process call create \"cmd /c taskkill /im dllhost.exe /f\""
+    ]
+   }
+  },
+  {
+   "attackName": "[Command and Scripting Interpreter->Windows Command Shell]",
+   "attackPatternId": "attack-pattern--d1fcf083-a721-4223-aedf-bf8960798d62",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.003",
+   "params": null
+  },
+  {
+   "attackName": "[Command and Scripting Interpreter->PowerShell]",
+   "attackPatternId": "attack-pattern--970a3432-3237-47ad-bcca-7d8cbb217736",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "powershell -ep bypass -f A.ps1"
+    ]
+   }
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "\\Microsoft\\Windows\\CertificateServicesClient\\DnsPolicyTask",
+     "ProgramData\\Microsoft\\DeviceSync",
+     "schtasks /create /tn Microsoft_edgeup /tr \"C:\\ProgramData\\Microsoft\\EdgeUpdate\\msedgeupdate.exe\" /sc onstart /s HOST /u Svc-OM_Action /p PASSWORD /RU SYSTEM",
+     "schtasks /create /tn sslinfo /tr \"sc start 'WinDeviceSyncs'\" /sc onstart /s HOST /u Svc-OM_Action /p PASSWORD /RU SYSTEM"
+    ]
+   }
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "\\Microsoft\\Windows\\CertificateServicesClient\\DnsPolicyTask",
+     "ProgramData\\Microsoft\\DeviceSync",
+     "schtasks /create /tn Microsoft_edgeup /tr \"C:\\ProgramData\\Microsoft\\EdgeUpdate\\msedgeupdate.exe\" /sc onstart /s HOST /u Svc-OM_Action /p PASSWORD /RU SYSTEM",
+     "schtasks /create /tn sslinfo /tr \"sc start 'WinDeviceSyncs'\" /sc onstart /s HOST /u Svc-OM_Action /p PASSWORD /RU SYSTEM"
+    ]
+   }
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "\\Microsoft\\Windows\\CertificateServicesClient\\DnsPolicyTask",
+     "ProgramData\\Microsoft\\DeviceSync",
+     "schtasks /create /tn Microsoft_edgeup /tr \"C:\\ProgramData\\Microsoft\\EdgeUpdate\\msedgeupdate.exe\" /sc onstart /s HOST /u Svc-OM_Action /p PASSWORD /RU SYSTEM",
+     "schtasks /create /tn sslinfo /tr \"sc start 'WinDeviceSyncs'\" /sc onstart /s HOST /u Svc-OM_Action /p PASSWORD /RU SYSTEM"
+    ]
+   }
+  },
+  {
+   "attackName": "[Create or Modify System Process->Windows Service]",
+   "attackPatternId": "attack-pattern--2959d63f-73fd-46a1-abd2-109d7dcede32",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1543.003",
+   "params": null
+  },
+  {
+   "attackName": "[Create or Modify System Process->Windows Service]",
+   "attackPatternId": "attack-pattern--2959d63f-73fd-46a1-abd2-109d7dcede32",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1543.003",
+   "params": null
+  },
+  {
+   "attackName": "[Boot or Logon Autostart Execution->Registry Run Keys / Startup Folder]",
+   "attackPatternId": "attack-pattern--9efb1ea7-c37b-4595-9640-b7680cd84279",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547.001",
+   "params": null
+  },
+  {
+   "attackName": "[Boot or Logon Autostart Execution->Registry Run Keys / Startup Folder]",
+   "attackPatternId": "attack-pattern--9efb1ea7-c37b-4595-9640-b7680cd84279",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547.001",
+   "params": null
+  },
+  {
+   "attackName": "[Process Injection->Dynamic-link Library Injection]",
+   "attackPatternId": "attack-pattern--f4599aa0-4f85-4a32-80ea-fc39dc965945",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1055.001",
+   "params": null
+  },
+  {
+   "attackName": "[Process Injection->Dynamic-link Library Injection]",
+   "attackPatternId": "attack-pattern--f4599aa0-4f85-4a32-80ea-fc39dc965945",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1055.001",
+   "params": null
+  },
+  {
+   "attackName": "Masquerading",
+   "attackPatternId": "attack-pattern--42e8de7b-37b2-4258-905a-6897815e58e0",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1036",
+   "params": null
+  },
+  {
+   "attackName": "Deobfuscate/Decode Files or Information",
+   "attackPatternId": "attack-pattern--3ccef7ae-cb5e-48f6-8302-897105fbf55c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1140",
+   "params": null
+  },
+  {
+   "attackName": "Obfuscated Files or Information",
+   "attackPatternId": "attack-pattern--b3d682b6-98f2-4fb0-aa3b-b4df007ca70a",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1027",
+   "params": null
+  },
+  {
+   "attackName": "[Impair Defenses->Disable or Modify Tools]",
+   "attackPatternId": "attack-pattern--ac08589e-ee59-4935-8667-d845e38fe579",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1562.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "PowerShell -Command &amp; {Add-MpPreference -ExclusionPath C:\\\\Users\\\\ Public\\\\Videos\\\\}",
+     "PowerShell -Command &amp; {Add-MpPreference -ExclusionPath C:\\\\Program Data\\\\}",
+     "PowerShell -Command & {Set-MpPreference -ScanPurgeItemsAfterDelay 1}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Indicator Removal->Clear Windows Event Logs]",
+   "attackPatternId": "attack-pattern--6495ae23-3ab4-43c5-a94f-5638a2c31fd2",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1070.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "wevtutil cl Application && wevtutil cl system && wevtutil cl security"
+    ]
+   }
+  },
+  {
+   "attackName": "[Indicator Removal->File Deletion]",
+   "attackPatternId": "attack-pattern--d63a3fb8-9452-4e9d-a60a-54be68d5998c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1070.004",
+   "params": null
+  },
+  {
+   "attackName": "[Indicator Removal->Network Share Connection Removal]",
+   "attackPatternId": "attack-pattern--a750a9f6-0bde-4bb3-9aae-1e2786e9780c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1070.005",
+   "params": null
+  },
+  {
+   "attackName": "Modify Registry",
+   "attackPatternId": "attack-pattern--57340c81-c025-4189-8fa0-fc7ede51bae4",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1112",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "REG ADD \"HKLM\\System\\CurrentControlSet\\Control\\Lsa\" /v DisableRestrictedAdmin /t REG_DWORD /d 00000000 /f"
+    ]
+   }
+  },
+  {
+   "attackName": "Modify Registry",
+   "attackPatternId": "attack-pattern--57340c81-c025-4189-8fa0-fc7ede51bae4",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1112",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "REG ADD \"HKLM\\System\\CurrentControlSet\\Control\\Lsa\" /v DisableRestrictedAdmin /t REG_DWORD /d 00000000 /f"
+    ]
+   }
+  },
+  {
+   "attackName": "[OS Credential Dumping->LSASS Memory]",
+   "attackPatternId": "attack-pattern--65f2d882-3f41-4d48-8a06-29af77ec9f90",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003.001",
+   "params": null
+  },
+  {
+   "attackName": "[OS Credential Dumping->Security Account Manager]",
+   "attackPatternId": "attack-pattern--1644e709-12d2-41e5-a60f-3470991f5011",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003.002",
+   "params": null
+  },
+  {
+   "attackName": "[OS Credential Dumping->LSA Secrets]",
+   "attackPatternId": "attack-pattern--1ecfdab8-7d59-4c98-95d4-dc41970f57fc",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "pass_av.exe \"lsadump::dcsync /domain:itgroup.local /all /csv\" exit",
+     "pass_av.exe \"log\" \"sekurlsa::logonPasswords full\" exit"
+    ]
+   }
+  },
+  {
+   "attackName": "[OS Credential Dumping->Cached Domain Credentials]",
+   "attackPatternId": "attack-pattern--6add2ab5-2711-4e9d-87c8-7a0be8531530",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003.005",
+   "params": null
+  },
+  {
+   "attackName": "[OS Credential Dumping->DCSync]",
+   "attackPatternId": "attack-pattern--f303a39a-6255-4b89-aecc-18c4d8ca7163",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003.006",
+   "params": null
+  },
+  {
+   "attackName": "[Credentials from Password Stores->Credentials from Web Browsers]",
+   "attackPatternId": "attack-pattern--58a3e6aa-4453-4cc8-a51f-4befe80b31a8",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1555.003",
+   "params": null
+  },
+  {
+   "attackName": "[Unsecured Credentials->Credentials In Files]",
+   "attackPatternId": "attack-pattern--837f9164-50af-4ac0-8219-379d8a74cefc",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1552.001",
+   "params": null
+  },
+  {
+   "attackName": "[Unsecured Credentials->Credentials in Registry]",
+   "attackPatternId": "attack-pattern--341e222a-a6e3-4f6f-b69c-831d792b1580",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1552.002",
+   "params": null
+  },
+  {
+   "attackName": "System Information Discovery",
+   "attackPatternId": "attack-pattern--354a7f88-63fb-41b5-a801-ce3b377b36f1",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1082",
+   "params": null
+  },
+  {
+   "attackName": "Network Share Discovery",
+   "attackPatternId": "attack-pattern--3489cfc5-640f-4bb3-a103-9137b97de79f",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1135",
+   "params": null
+  },
+  {
+   "attackName": "File and Directory Discovery",
+   "attackPatternId": "attack-pattern--7bc57495-ea59-4380-be31-a64af124ef18",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1083",
+   "params": null
+  },
+  {
+   "attackName": "[Account Discovery->Local Account]",
+   "attackPatternId": "attack-pattern--25659dd6-ea12-45c4-97e6-381e3e4b593e",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1087.001",
+   "params": null
+  },
+  {
+   "attackName": "[Account Discovery->Domain Account]",
+   "attackPatternId": "attack-pattern--21875073-b0ee-49e3-9077-1e2a885359af",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1087.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "AdFind, AdExplorer, sharphound"
+    ]
+   }
+  },
+  {
+   "attackName": "[Account Discovery->Email Account]",
+   "attackPatternId": "attack-pattern--4bc31b94-045b-4752-8920-aebaebdb6470",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1087.003",
+   "params": null
+  },
+  {
+   "attackName": "Lateral Tool Transfer",
+   "attackPatternId": "attack-pattern--bf90d72c-c00b-45e3-b3aa-68560560d4c5",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1570",
+   "params": null
+  },
+  {
+   "attackName": "[Remote Services->Remote Desktop Protocol]",
+   "attackPatternId": "attack-pattern--eb062747-2193-45de-8fa2-e62549c37ddf",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1021.001",
+   "params": null
+  },
+  {
+   "attackName": "[Remote Services->SMB/Windows Admin Shares]",
+   "attackPatternId": "attack-pattern--4f9ca633-15c5-463c-9724-bdcd54fde541",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1021.002",
+   "params": null
+  },
+  {
+   "attackName": "Data from Local System",
+   "attackPatternId": "attack-pattern--3c4a2599-71ee-4405-ba1e-0e28414b4bc5",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1005",
+   "params": null
+  },
+  {
+   "attackName": "Non-Application Layer Protocol",
+   "attackPatternId": "attack-pattern--c21d5a77-d422-4a69-acd7-2c53c1faa34b",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1095",
+   "params": null
+  },
+  {
+   "attackName": "[Data Encoding->Standard Encoding]",
+   "attackPatternId": "attack-pattern--04fd5427-79c7-44ea-ae13-11b24778ff1c",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1132.001",
+   "params": null
+  },
+  {
+   "attackName": "[Data Encoding->Non-Standard Encoding]",
+   "attackPatternId": "attack-pattern--d467bc38-284b-4a00-96ac-125f447799fc",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1132.002",
+   "params": null
+  },
+  {
+   "attackName": "Web Service",
+   "attackPatternId": "attack-pattern--830c9528-df21-472c-8c14-a036bf17d665",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1102",
+   "params": null
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": null
+  },
+  {
+   "attackName": "Automated Exfiltration",
+   "attackPatternId": "attack-pattern--774a3188-6ba9-4dc4-879d-d54ee48a5ce9",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1020",
+   "params": null
+  },
+  {
+   "attackName": "Exfiltration Over C2 Channel",
+   "attackPatternId": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1041",
+   "params": null
+  },
+  {
+   "attackName": "Process Discovery",
+   "attackPatternId": "attack-pattern--8f4a33ec-8b1f-4b80-a2f6-642b2e479580",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1057",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "tasklist /svc",
+     "tasklist /v | find \"<injectedprocess>\""
+    ]
+   }
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "europe"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2708-1031",
+ "sectors": [
+  "information-technology:data-integration",
+  "information-technology"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 17012830193210,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "CN",
+  "id": "ad8ae7ebfe7b40df4c92a7f89f2c028fdd64cff2",
+  "isAPT": true,
+  "name": "APT31"
+ },
+ "title": "APT31: A typical hacker attack on the example of an incident response",
+ "toolList": [
+  {
+   "id": "39d276191cf93d7ddc3e2676668c43bb8a0af4b0",
+   "name": "Psexec"
+  },
+  {
+   "id": "1f21cb2fdd76159d7e5b387c8541181e009fbf35",
+   "name": "AdFind"
+  },
+  {
+   "id": "8ebfc94cee3866226a836504b9573ff90cc8e926",
+   "name": "NBTScan"
+  }
+ ],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2023-11-29T21:36:59+03:00"
+}

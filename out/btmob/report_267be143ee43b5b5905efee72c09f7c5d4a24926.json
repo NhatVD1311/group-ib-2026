@@ -1,0 +1,493 @@
+{
+ "contacts": [],
+ "countries": [
+  "KR"
+ ],
+ "createdAt": "2023-05-03T14:47:10+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2022-11-01",
+ "dateLastSeen": "2023-04-13",
+ "datePublished": "2023-05-03",
+ "description": "<p>AhnLab Security Emergency response Center (ASEC) has been tracking the Tonto Team’s attacks on Korean education, construction, diplomatic, and political institutions. Recent cases have revealed that the group is using a file related to anti-malware products to ultimately execute their malicious attacks.</p><figure class=\"image image_resized\" style=\"width:418px;\"><img src=\"/api/v2/hi/threat/267be143ee43b5b5905efee72c09f7c5d4a24926/file/45add4b376da5a336c1f09889cf4adad09e6bc6e9e375c0ecb01572533808a68?placeholder=__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:45add4b376da5a336c1f09889cf4adad09e6bc6e9e375c0ecb01572533808a68_IMAGE__\" data-mce-src=\"__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:45add4b376da5a336c1f09889cf4adad09e6bc6e9e375c0ecb01572533808a68_IMAGE__\" /></figure><figure class=\"image image_resized\" style=\"width:388px;\"><img src=\"/api/v2/hi/threat/267be143ee43b5b5905efee72c09f7c5d4a24926/file/8d26c2fe3d286c8382a56faeb0b2b2c2f032b356555514ea7283cfac64accabe?placeholder=__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:8d26c2fe3d286c8382a56faeb0b2b2c2f032b356555514ea7283cfac64accabe_IMAGE__\" data-mce-src=\"__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:8d26c2fe3d286c8382a56faeb0b2b2c2f032b356555514ea7283cfac64accabe_IMAGE__\" /></figure><p>Figure 2 shows the malicious script that operates when the CHM is executed. The process of decompiling the CHM file is identical to the previous processes, but a difference is the fact that the normal program (PresentationSettings.exe) created after the decompiling is registered to the RUN key. The normal program registered to the RUN key is executed when the PC is restarted. Once it is executed, it loads the malicious DLL (slc.dll) created simultaneously through the DLL Side Loading (T1574.002) method.</p><figure class=\"table\" style=\"width:877.5px;\"><table style=\"border-style:solid;border-width:1px;\"><tbody><tr><th style=\"border:1px solid rgb(230, 230, 230);padding:10px 13.3333px;text-align:center;\">Filename used in distribution</th><td style=\"border:1px solid rgb(230, 230, 230);padding:10px 13.3333px;text-align:center;\">Ministry of Unification Economic Cooperation Corporation Contacts_Ver2.1.chm</td></tr><tr><th style=\"border:1px solid rgb(230, 230, 230);padding:10px 13.3333px;text-align:center;\">Name of normal program</th><td style=\"border:1px solid rgb(230, 230, 230);padding:10px 13.3333px;text-align:center;\">PresentationSettings.exe</td></tr><tr><th style=\"border:1px solid rgb(230, 230, 230);padding:10px 13.3333px;text-align:center;\">Name of malicious DLL (DLL Side Loading)</th><td style=\"border:1px solid rgb(230, 230, 230);padding:10px 13.3333px;text-align:center;\">slc.dll</td></tr></tbody></table></figure><p>The loaded malicious DLL creates and executes a VBE file in the %TEMP% folder. The decoded VBE is the ReVBShell. The C2 of this ReVBShell is shown below and it performs various malicious behaviors according to the threat actor’s orders.</p><h2>C&amp;C</h2><figure class=\"image\"><img src=\"/api/v2/hi/threat/267be143ee43b5b5905efee72c09f7c5d4a24926/file/833032e2cb5e54f6fccb9395ff902633574af8d20491fccddf34e3db93671e14?placeholder=__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:833032e2cb5e54f6fccb9395ff902633574af8d20491fccddf34e3db93671e14_IMAGE__\" data-mce-src=\"__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:833032e2cb5e54f6fccb9395ff902633574af8d20491fccddf34e3db93671e14_IMAGE__\" /></figure><p>Figure 3 is an additional log that was confirmed in April 2022.</p><p>Figure 4 shows an additional log that was generated on a PC infected with the recently circulating CHM malware, making it clear that it has the same download URL format as the April 2022 log since their download paths both lead to the same %SystemRoot%\\Task\\ folder. This download behavior is believed to be performed through ReVBShell under the command of the threat actor.</p><ul><li><strong>Download URL</strong><br>hxxps://92[.]38[.]135[.]212/fuat/HimTraylcon.exe (April 2022)<br>hxxp://45[.]133[.]194[.]135:8080/fuat/KCaseAgent64.exe (April 2023)</li></ul><p>The file downloaded in April 2022 was a backdoor, and the file downloaded this time was confirmed to be a normal Avast Software configuration file (wsc_proxy.exe).</p><figure class=\"image image_resized\" style=\"width:280px;\"><img src=\"/api/v2/hi/threat/267be143ee43b5b5905efee72c09f7c5d4a24926/file/48485199a0a3134856336000c8f30d62e41d0820c18a81ad92c49fefd5c11646?placeholder=__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:48485199a0a3134856336000c8f30d62e41d0820c18a81ad92c49fefd5c11646_IMAGE__\" data-mce-src=\"__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:48485199a0a3134856336000c8f30d62e41d0820c18a81ad92c49fefd5c11646_IMAGE__\" /></figure><p>The entirety of wsc_proxy.exe’s features are shown in Figure 5, and it executes the “_run@4” function after loading wsc.dll. It is assumed that the threat actor uses this feature to load a malicious DLL using the DLL Side Loading method.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/267be143ee43b5b5905efee72c09f7c5d4a24926/file/4673774d5281549afeb6e44927a4fdc06669b33c574832a9db3b50e6090683e4?placeholder=__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:4673774d5281549afeb6e44927a4fdc06669b33c574832a9db3b50e6090683e4_IMAGE__\" data-mce-src=\"__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:4673774d5281549afeb6e44927a4fdc06669b33c574832a9db3b50e6090683e4_IMAGE__\" /></figure><p>Additionally, a detection log was confirmed through our ASD infrastructure of a file named “wsc.dll” being created in the same path (%SystemRoot%\\Task\\) within an infected PC, as shown in Figure 6. Considering that normal Avast Software files are generally created in the “%ProgramFiles%\\Avast Software\\” path, it is highly likely that a malicious DLL that was modified by the threat actor was created. Ultimately, the malicious DLL (wsc.dll) is loaded through the normal file (wsc_proxy.exe), enabling additional malicious behavior to be performed.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/267be143ee43b5b5905efee72c09f7c5d4a24926/file/63994900aa640257ef4a6bc973e617f05945d924f821e4c26828be47cd85f15a?placeholder=__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:63994900aa640257ef4a6bc973e617f05945d924f821e4c26828be47cd85f15a_IMAGE__\" data-mce-src=\"__IMAGE_267be143ee43b5b5905efee72c09f7c5d4a24926:63994900aa640257ef4a6bc973e617f05945d924f821e4c26828be47cd85f15a_IMAGE__\" /></figure><p>As shown in Figure 7, Bisonal malware was detected in the CHM malware that was distributed in November 2022. It is assumed that this type of CHM malware is being distributed by the Tonto Team.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B2",
+  "credibility": 80,
+  "reliability": 80,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "45add4b376da5a336c1f09889cf4adad09e6bc6e9e375c0ecb01572533808a68",
+   "mime": "image/png",
+   "name": "45add4b376da5a336c1f09889cf4adad09e6bc6e9e375c0ecb01572533808a68",
+   "size": 48977
+  },
+  {
+   "hash": "8d26c2fe3d286c8382a56faeb0b2b2c2f032b356555514ea7283cfac64accabe",
+   "mime": "image/png",
+   "name": "8d26c2fe3d286c8382a56faeb0b2b2c2f032b356555514ea7283cfac64accabe",
+   "size": 185911
+  },
+  {
+   "hash": "833032e2cb5e54f6fccb9395ff902633574af8d20491fccddf34e3db93671e14",
+   "mime": "image/png",
+   "name": "833032e2cb5e54f6fccb9395ff902633574af8d20491fccddf34e3db93671e14",
+   "size": 99005
+  },
+  {
+   "hash": "48485199a0a3134856336000c8f30d62e41d0820c18a81ad92c49fefd5c11646",
+   "mime": "image/png",
+   "name": "48485199a0a3134856336000c8f30d62e41d0820c18a81ad92c49fefd5c11646",
+   "size": 29126
+  },
+  {
+   "hash": "4673774d5281549afeb6e44927a4fdc06669b33c574832a9db3b50e6090683e4",
+   "mime": "image/png",
+   "name": "4673774d5281549afeb6e44927a4fdc06669b33c574832a9db3b50e6090683e4",
+   "size": 31089
+  },
+  {
+   "hash": "63994900aa640257ef4a6bc973e617f05945d924f821e4c26828be47cd85f15a",
+   "mime": "image/png",
+   "name": "63994900aa640257ef4a6bc973e617f05945d924f821e4c26828be47cd85f15a",
+   "size": 184821
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "267be143ee43b5b5905efee72c09f7c5d4a24926",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-05-03",
+   "dateLastSeen": "2023-05-03",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "d5e6dc253a5584b178ae3c758120da4d",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4979637801792fa7e2e7749239fedf6f68428041",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "d5e6dc253a5584b178ae3c758120da4d",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "d5e6dc253a5584b178ae3c758120da4d",
+    "nameList": [
+     "d5e6dc253a5584b178ae3c758120da4d"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "d5e6dc253a5584b178ae3c758120da4d"
+   ],
+   "seqUpdate": 16831148215693,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-05-03",
+   "dateLastSeen": "2023-05-03",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e1eda9916c22512c73928812cf3a9243a3e103d8",
+   "ip": [
+    "45.133.194.135"
+   ],
+   "ipScores": [
+    {
+     "ip": "45.133.194.135",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "http://45.133.194.135:8080/fuat/KCaseAgent64.exe",
+    "domain": "",
+    "ipv4": [
+     "45.133.194.135"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16831148214940,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": "http://45.133.194.135:8080/fuat/KCaseAgent64.exe"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-05-03",
+   "dateLastSeen": "2023-05-03",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "59f7a3fe0453ca6d27ba3abe78930fdf",
+    "other": [],
+    "sha1": "7a29e8b959994183296d12603a54f5e117b4ff4c",
+    "sha256": "b3a8ea3b501b9b721f6e371dd57025dc14d117c29ce8ee955b240d4a17bc2127"
+   },
+   "id": "2413482535a6fdfdbc53e254d80cb742eb1d1ee8",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "59f7a3fe0453ca6d27ba3abe78930fdf",
+     "sha1": "7a29e8b959994183296d12603a54f5e117b4ff4c",
+     "sha256": "b3a8ea3b501b9b721f6e371dd57025dc14d117c29ce8ee955b240d4a17bc2127"
+    },
+    "name": "59f7a3fe0453ca6d27ba3abe78930fdf",
+    "nameList": [
+     "59f7a3fe0453ca6d27ba3abe78930fdf"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "59f7a3fe0453ca6d27ba3abe78930fdf"
+   ],
+   "seqUpdate": 16831148215309,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-05-03",
+   "dateLastSeen": "2023-05-03",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "fe1161885005ac85f89accf703ce27bb",
+    "other": [],
+    "sha1": "1bc18fc26b65fce0e85553e602c42af20e878ab6",
+    "sha256": "c643598b4ee0e9b3b70dae19437bbec01e881a1ad3b2ec1f6f5c335e552e5d6e"
+   },
+   "id": "84275bae1ac42b5411437957a0aa5be3cce81e94",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "fe1161885005ac85f89accf703ce27bb",
+     "sha1": "1bc18fc26b65fce0e85553e602c42af20e878ab6",
+     "sha256": "c643598b4ee0e9b3b70dae19437bbec01e881a1ad3b2ec1f6f5c335e552e5d6e"
+    },
+    "name": "fe1161885005ac85f89accf703ce27bb",
+    "nameList": [
+     "fe1161885005ac85f89accf703ce27bb"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "fe1161885005ac85f89accf703ce27bb"
+   ],
+   "seqUpdate": 16831148215984,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-28",
+   "dateLastSeen": "2023-09-28",
+   "domain": "hairouni.serveblog.net",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "22706592009f43fa98c5cd5d9c431f48d907ca2a",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "hairouni.serveblog.net",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16958868982810,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "4979637801792fa7e2e7749239fedf6f68428041",
+  "e1eda9916c22512c73928812cf3a9243a3e103d8",
+  "2413482535a6fdfdbc53e254d80cb742eb1d1ee8",
+  "84275bae1ac42b5411437957a0aa5be3cce81e94",
+  "22706592009f43fa98c5cd5d9c431f48d907ca2a"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "remote access trojan"
+   ],
+   "class": "",
+   "id": "6dbc1d2d15755000529ca3091c9d1477f9eff00d",
+   "name": "Bisonal",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "High"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "[Hijack Execution Flow->DLL]",
+   "attackPatternId": "attack-pattern--2fee9321-3e71-4cf4-af24-d4d40d355b34",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574.001",
+   "params": null
+  },
+  {
+   "attackName": "[Hijack Execution Flow->DLL]",
+   "attackPatternId": "attack-pattern--2fee9321-3e71-4cf4-af24-d4d40d355b34",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574.001",
+   "params": null
+  },
+  {
+   "attackName": "[Hijack Execution Flow->DLL]",
+   "attackPatternId": "attack-pattern--2fee9321-3e71-4cf4-af24-d4d40d355b34",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574.001",
+   "params": null
+  },
+  {
+   "attackName": "Hijack Execution Flow",
+   "attackPatternId": "attack-pattern--aedfca76-3b30-4866-b2aa-0f1d7fd1e4b6",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Hijack Execution Flow",
+   "attackPatternId": "attack-pattern--aedfca76-3b30-4866-b2aa-0f1d7fd1e4b6",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Hijack Execution Flow",
+   "attackPatternId": "attack-pattern--aedfca76-3b30-4866-b2aa-0f1d7fd1e4b6",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Ingress Tool Transfer",
+   "attackPatternId": "attack-pattern--e6919abc-99f9-4c6c-95a5-14761e7b2add",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1105",
+   "params": null
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": null
+  },
+  {
+   "attackName": "Application Layer Protocol",
+   "attackPatternId": "attack-pattern--355be19c-ffc9-46d5-8d50-d6a036c675b6",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Masquerading",
+   "attackPatternId": "attack-pattern--42e8de7b-37b2-4258-905a-6897815e58e0",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1036",
+   "params": null
+  },
+  {
+   "attackName": "[Boot or Logon Autostart Execution->Registry Run Keys / Startup Folder]",
+   "attackPatternId": "attack-pattern--9efb1ea7-c37b-4595-9640-b7680cd84279",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547.001",
+   "params": null
+  },
+  {
+   "attackName": "[Boot or Logon Autostart Execution->Registry Run Keys / Startup Folder]",
+   "attackPatternId": "attack-pattern--9efb1ea7-c37b-4595-9640-b7680cd84279",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547.001",
+   "params": null
+  },
+  {
+   "attackName": "Boot or Logon Autostart Execution",
+   "attackPatternId": "attack-pattern--1ecb2399-e8ba-4f6b-8ba7-5c27d49405cf",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Boot or Logon Autostart Execution",
+   "attackPatternId": "attack-pattern--1ecb2399-e8ba-4f6b-8ba7-5c27d49405cf",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "asia"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2705-1447",
+ "sectors": [
+  "education",
+  "real-estate:construction",
+  "government-and-military",
+  "real-estate",
+  "education:education",
+  "government-and-military:government-and-military"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 16866410780991,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://asec.ahnlab.com/en/51746",
+   "datePublished": "2023-10-29"
+  }
+ ],
+ "sources": [
+  "https://asec.ahnlab.com/en/51746"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "CN",
+  "id": "b9f1eb449d596cf1b57aa5ea974472b7fda3dd2e",
+  "isAPT": true,
+  "name": "Tonto Team"
+ },
+ "title": "Tonto Team Using Anti-Malware Related Files for DLL Side-Loading",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2023-06-13T10:24:38+03:00"
+}

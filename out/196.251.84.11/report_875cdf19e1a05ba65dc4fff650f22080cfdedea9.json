@@ -1,0 +1,430 @@
+{
+ "contacts": [],
+ "countries": [
+  "MX"
+ ],
+ "createdAt": "2026-06-16T22:58:11+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2026-02-11",
+ "dateLastSeen": "2026-06-16",
+ "datePublished": "2026-06-16",
+ "description": "<h1 style=\"text-align: justify;\"><strong>CallFlow Project - AI Vishing Module</strong></h1><p>&nbsp;</p><p style=\"text-align: justify;\"><strong>Date of Analysis:&nbsp;</strong>2026-05-26</p><p>&nbsp;</p><p style=\"text-align: justify;\"><strong>Documentation Reviewed:</strong></p><ul><li><p><strong>index-FreePBX-Balonx.html</strong> (241 KB): Represents the FreePBX User Control Panel (UCP) authentication interface.</p></li><li><p><strong>index-CallBalonx.js</strong> (1.2 MB): Comprises the frontend logic for the AI-enabled Call Center management panel.</p></li></ul><p style=\"text-align: justify;\"><strong>Executive Finding:&nbsp;</strong>The Balonx Sistema has expanded its operational capabilities beyond traditional Phishing-as-a-Service (PhaaS) models, such as web-based phishing and malicious APKs. It now includes a parallel, automated vishing service utilizing generative AI technologies, including synthetic voice generation, conversational Large Language Models (LLMs), and Whisper-based Automatic Speech Recognition (ASR). This module serves as an independent product offering for affiliates, coexisting with existing infrastructure.</p><p style=\"text-align: justify;\">&nbsp;</p><h2 style=\"text-align: justify;\">Overview</h2><p style=\"text-align: justify;\">hxxps://docs[.]google[.]com/document/d/14QFPBhv4teTwA-J0n5b3Py_XiM_x2wR49B2UleFvqaY/edit?tab=t.0#heading=h.gukmut53fpg</p><p style=\"text-align: justify;\">Technical investigations led to the identification of the domain&nbsp;<strong><em>callbalonx[.]info</em></strong>, which is integrated into the broader Balonx Sistema infrastructure. The domain hosts a login interface for a service designated as&nbsp;<strong><em>“CallFlow.”</em></strong> Current evidence indicates that the threat actor is providing a sophisticated PhaaS platform that leverages Artificial Intelligence as its core operational component.</p><p>&nbsp;</p><p style=\"text-align: justify;\">Furthermore, the discovery of a related GitHub repository has provided comprehensive insight into the underlying infrastructure. This finding corroborates the attribution of this advanced PhaaS module to the Balonx product suite.</p><p style=\"text-align: justify;\">&nbsp;</p><h2 style=\"text-align: justify;\"><strong>VAIaaS (Vishing-AI-as-a-Service) Specifications</strong></h2><table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Attribute</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Technical Details</strong></p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Probable Internal Designation</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">panelbalonxfs</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Service Classification</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Automated vishing utilizing synthetic voice and real-time LLM integration.</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Underlying PBX Framework</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">FreePBX versions 17[.]0[.]4[.]31 / 17.0.28.</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Operational Methodology</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Execution of large-scale outbound telephony campaigns via conversational bots impersonating financial institution representatives.</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Administrative Roles</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Admin, manager, and executive roles, maintaining consistency with the primary PhaaS platform.</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Technical Specifications</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Provision for 30 concurrent SIP channels by default, supporting multi-trunk and multi-campaign configurations.</p></td></tr></tbody></table><h2 style=\"text-align: justify;\"><strong>New C2 Infrastructure&nbsp;</strong></h2><table style=\"min-width: 75px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Tipo</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Valor</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Función</strong></p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>C2 Domain (new)</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">panelbalonxfs[.]xyz</p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">AI Call Center Backend</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Endpoint GraphQL</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">https://panelbalonxfs[.]xyz/admin/api/api/gql</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Main API (GraphQL)</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Endpoint REST</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">https://panelbalonxfs[.]xyz/admin/api/api/rest</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Parallel REST API</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Endpoint Token</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">https://panelbalonxfs[.]xyz/admin/api/api/token</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Authentication token issuance</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>SIP Server IP</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">85[.]31[.]235[.]109</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Proprietary SIP Server (not VoIP Leaders)</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>SIP Port</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">5160/TCP</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Hardcoded; internal note: \"el puerto 5060 no está disponible\"</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Default Codecs</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">ulaw,alaw</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Standard telephony audio</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>PBX Software</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">FreePBX v17[.]0[.]4[.]31 / 17.0.28</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Producto de Sangoma Technologies abusado</p></td></tr></tbody></table><h2 style=\"text-align: justify;\">&nbsp;</h2><h2 style=\"text-align: justify;\"><strong>Identified Generative AI Stack</strong></h2><p>&nbsp;</p><p style=\"text-align: justify;\">The bundle exposes multiple integrations with commercial AI providers, the \"bank executive\", calling the victim is no longer human, it is an LLM speaking with a synthetic voice.</p><p>&nbsp;</p><table style=\"min-width: 75px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Componente</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Proveedor / Modelo</strong></p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Función</strong></p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Conversational LLM</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">GPT-4o-mini (OpenAI)</p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Generates dialogue in real-time during the call</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Primary Text-to-Speech (TTS)</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">ElevenLabs</p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">High-quality synthetic voice (named voices: carolina)</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Secondary TTS</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">OpenAI Voice (voz echo)</p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Fallback / alternative</p><p>&nbsp;</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\"><strong>Automatic Speech Recognition (ASR)</strong></p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">OpenAI Whisper</p><p>&nbsp;</p></td><td colspan=\"1\" rowspan=\"1\"><p style=\"text-align: justify;\">Transcribes what the victim says in real-time</p><p>&nbsp;</p></td></tr></tbody></table><h2 style=\"text-align: justify;\"><strong>Confirmed Operational Capabilities</strong></h2><ul><li><p><strong>Real-time voice generation:</strong> ElevenLabs/OpenAI TTS with custom voices.</p></li><li><p><strong>LLM Conversation:</strong> GPT-4o-mini generates contextualized responses.</p></li><li><p><strong>Live Espionage (spy-call):</strong> Managers can listen covertly to active calls (Asterisk ChanSpy).</p></li></ul><p>&nbsp;</p><img src=\"/api/v2/hi/threat/875cdf19e1a05ba65dc4fff650f22080cfdedea9/file/8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb?placeholder=__IMAGE_875cdf19e1a05ba65dc4fff650f22080cfdedea9:8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb_IMAGE__\" width=\"507\" /><h3 style=\"text-align: center;\"><strong><em>Figure 1.&nbsp;</em></strong><em>Landing authentication panel - callbalonx[.]info</em></h3><p>&nbsp;</p><img src=\"/api/v2/hi/threat/875cdf19e1a05ba65dc4fff650f22080cfdedea9/file/f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37?placeholder=__IMAGE_875cdf19e1a05ba65dc4fff650f22080cfdedea9:f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37_IMAGE__\" width=\"624\" /><h3 style=\"text-align: center;\"><strong><em>Figure 2.&nbsp;</em></strong><em>FreePBX service connected to callbalonx[.]info - balonxpanelfs[.]xyz</em></h3><p>&nbsp;</p><img src=\"/api/v2/hi/threat/875cdf19e1a05ba65dc4fff650f22080cfdedea9/file/dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276?placeholder=__IMAGE_875cdf19e1a05ba65dc4fff650f22080cfdedea9:dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276_IMAGE__\" width=\"624\" /><h3 style=\"text-align: center;\"><strong><em>Figure 3.&nbsp;</em></strong><em>Authentication Panel of the UCP section - balonxpanelfs[.]xyz/ucp/</em></h3><h1 style=\"text-align: justify;\">GitHub Repository</h1><p style=\"text-align: justify;\">In the investigation of this phishing/scam campaign we found the repository of the principal phishing campaigns that have been used to deploy the project, along with that campaign we found the repository that’s been used to deploy the new project on Balonx “<strong><em>CallFlow”&nbsp;</em></strong><em>(hXXps://github[.]com/ferzamorafs19/callflowtets).</em><br><br>In the analysis, we confirmed that the project has been made almost all of it with IA coding and that the main feature of the project is the automated process of the phishing and scam campaign. This repo was the most important finding in the investigation, because thanks to a flaw in the creation of the repository, an information leakage gave us access to hardcode credentials that are being used to the default access of the admin.</p><p>&nbsp;</p><p style=\"text-align: justify;\"></p><img src=\"/api/v2/hi/threat/875cdf19e1a05ba65dc4fff650f22080cfdedea9/file/4b9c57ff45f8317dc2f140a3e76604af47036a8c05f812c5feaf65339bd30889?placeholder=__IMAGE_875cdf19e1a05ba65dc4fff650f22080cfdedea9:4b9c57ff45f8317dc2f140a3e76604af47036a8c05f812c5feaf65339bd30889_IMAGE__\" width=\"624\" /><h3 style=\"text-align: center;\"><strong><em>Figure 4.&nbsp;</em></strong><em>Information Leakage of the default credentials</em><strong><em>.</em></strong></h3><h2 style=\"text-align: justify;\">Access to the Administration Panel</h2><p style=\"text-align: justify;\">As of the time of drafting this report, investigators have identified a single domain associated with this nascent fraudulent operation:&nbsp;<strong><em>callbalonx[.]info</em></strong>. The authentication interface for this domain is illustrated in&nbsp;2. Utilizing the default credentials discovered during the technical analysis, the access was successfully established to the administrative management panel.</p><p>&nbsp;</p><p style=\"text-align: justify;\"></p><img src=\"/api/v2/hi/threat/875cdf19e1a05ba65dc4fff650f22080cfdedea9/file/e59408e7fa37a710db17801ab780b0bfaefd127864d7df9949528d1ce44fa8c9?placeholder=__IMAGE_875cdf19e1a05ba65dc4fff650f22080cfdedea9:e59408e7fa37a710db17801ab780b0bfaefd127864d7df9949528d1ce44fa8c9_IMAGE__\" width=\"624\" /><h3 style=\"text-align: center;\"><strong><em>Figure 5</em></strong><em>. Landing panel of CallFlow.</em></h3><p>&nbsp;</p><p style=\"text-align: justify;\">The landing dashboard provides a comprehensive overview of operational data, including active calls, daily call volume, success rates, and calls currently in queue. Furthermore, the interface displays active campaigns, the total number of phone records within the associated database, and the average duration of telephonic engagements.</p><p>&nbsp;</p><p style=\"text-align: justify;\">Technical examination of additional repositories associated with the identified GitHub account revealed a dataset comprising telephone numbers specifically related to BANAMEX. Preliminary analysis suggests this database serves as a primary data source for the automated Scam system and the Phishing system.</p><p style=\"text-align: justify;\">&nbsp;</p><p style=\"text-align: justify;\"></p><img src=\"/api/v2/hi/threat/875cdf19e1a05ba65dc4fff650f22080cfdedea9/file/1c8cd81db6010cbd519998119cf35ca33fbbde4eccb27d85b10540d3e0e03591?placeholder=__IMAGE_875cdf19e1a05ba65dc4fff650f22080cfdedea9:1c8cd81db6010cbd519998119cf35ca33fbbde4eccb27d85b10540d3e0e03591_IMAGE__\" width=\"605\" /><h3 style=\"text-align: center;\"><strong><em>Figure 6.&nbsp;</em></strong><em>Possible database numbers.</em></h3><p>&nbsp;</p><p style=\"text-align: justify;\">Through a comprehensive examination of all panel sections, several names and financial institutions targeted by this campaign were successfully identified.</p><p>&nbsp;</p><p style=\"text-align: justify;\"></p><img src=\"/api/v2/hi/threat/875cdf19e1a05ba65dc4fff650f22080cfdedea9/file/c4ca17aa542165285d1c839f4a1c623c7401c005020f748abb54305c5a1f5f77?placeholder=__IMAGE_875cdf19e1a05ba65dc4fff650f22080cfdedea9:c4ca17aa542165285d1c839f4a1c623c7401c005020f748abb54305c5a1f5f77_IMAGE__\" width=\"624\" /><h3 style=\"text-align: center;\"><strong><em>Figure 7.&nbsp;</em></strong><em>Managers section of the panel.</em></h3><p>&nbsp;</p><p style=\"text-align: justify;\">The administrative interface contains usernames and associated Telegram contact numbers for the operators. Furthermore, a specific campaign targeting Banorte was identified. Within the \"Flujos\" (Flows) section, additional fraudulent campaigns affecting Coppel, BANAMEX, and INVEX were also observed.</p><p style=\"text-align: justify;\">&nbsp;</p><h2 style=\"text-align: justify;\">Conclusion</h2><p style=\"text-align: justify;\">In conclusion, while the analyzed platform is in an early stage of development, it represents a threat with the potential for significant impact. The evolving threat landscape has transcended traditional server attack vectors, migrating toward automated fraud models that integrate generative artificial intelligence to scale their operational capabilities and increase their productive efficiency. However, this reliance on automation in tool development carries an inherent vulnerability. These flaws in project construction, or technological \"crumbs\", leave critical traces that act as strategic advantages for our teams, allowing us to identify security gaps, as demonstrated by the detected credential leak, and strengthening our response and mitigation capabilities against these types of emerging threats.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Phishing",
+  "Unique_data"
+ ],
+ "files": [
+  {
+   "hash": "8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb",
+   "mime": "image/png",
+   "name": "8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb",
+   "size": 307727
+  },
+  {
+   "hash": "f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37",
+   "mime": "image/png",
+   "name": "f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37",
+   "size": 89749
+  },
+  {
+   "hash": "dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276",
+   "mime": "image/png",
+   "name": "dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276",
+   "size": 109091
+  },
+  {
+   "hash": "4b9c57ff45f8317dc2f140a3e76604af47036a8c05f812c5feaf65339bd30889",
+   "mime": "image/png",
+   "name": "4b9c57ff45f8317dc2f140a3e76604af47036a8c05f812c5feaf65339bd30889",
+   "size": 355030
+  },
+  {
+   "hash": "e59408e7fa37a710db17801ab780b0bfaefd127864d7df9949528d1ce44fa8c9",
+   "mime": "image/png",
+   "name": "e59408e7fa37a710db17801ab780b0bfaefd127864d7df9949528d1ce44fa8c9",
+   "size": 3088605
+  },
+  {
+   "hash": "1c8cd81db6010cbd519998119cf35ca33fbbde4eccb27d85b10540d3e0e03591",
+   "mime": "image/png",
+   "name": "1c8cd81db6010cbd519998119cf35ca33fbbde4eccb27d85b10540d3e0e03591",
+   "size": 200297
+  },
+  {
+   "hash": "c4ca17aa542165285d1c839f4a1c623c7401c005020f748abb54305c5a1f5f77",
+   "mime": "image/png",
+   "name": "c4ca17aa542165285d1c839f4a1c623c7401c005020f748abb54305c5a1f5f77",
+   "size": 1404543
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "875cdf19e1a05ba65dc4fff650f22080cfdedea9",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": "aclaracion-banamex.xyz",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "9a3b78c5adf97c6c94e6471ececffba38ec747db",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "aclaracion-banamex.xyz",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528610854,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "df9ea0eaff5d3a03006d63bf0745bd407eb9fa31",
+   "ip": [
+    "196.251.84.11"
+   ],
+   "ipScores": [
+    {
+     "ip": "196.251.84.11",
+     "score": 85
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "196.251.84.11"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528611161,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": "panelbalonx.vip",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "1751a940e1fc29b3ac7b54628c8cfe08d9f4c00e",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "panelbalonx.vip",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528611457,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": "panelbalonxfs.xyz",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8b78d52f8c9e02b5ca0672d8e1324bcaf5728379",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "panelbalonxfs.xyz",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528611755,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "b24f131a7db57536decf8785f28ba3c4bc15649e",
+   "ip": [
+    "85.31.235.109"
+   ],
+   "ipScores": [
+    {
+     "ip": "85.31.235.109",
+     "score": 85
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "85.31.235.109"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528612189,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": "callbalonx.info",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e23832219a2ae6e2d494e9c8b44a0bd0a0ecad1e",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "callbalonx.info",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528612485,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "9a3b78c5adf97c6c94e6471ececffba38ec747db",
+  "df9ea0eaff5d3a03006d63bf0745bd407eb9fa31",
+  "1751a940e1fc29b3ac7b54628c8cfe08d9f4c00e",
+  "8b78d52f8c9e02b5ca0672d8e1324bcaf5728379",
+  "b24f131a7db57536decf8785f28ba3c4bc15649e",
+  "e23832219a2ae6e2d494e9c8b44a0bd0a0ecad1e"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [
+  "america:central_america"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3006-2258",
+ "sectors": [
+  "financial-services",
+  "financial-services:financial-services",
+  "financial-services:accounting",
+  "financial-services:angel-investment",
+  "financial-services:asset-management",
+  "financial-services:auto-insurance",
+  "financial-services:banking",
+  "financial-services:bitcoin",
+  "financial-services:commercial-insurance",
+  "financial-services:commercial-lending",
+  "financial-services:consumer-lending",
+  "financial-services:credit",
+  "financial-services:credit-bureau",
+  "financial-services:credit-cards",
+  "financial-services:crowdfunding",
+  "financial-services:cryptocurrency",
+  "financial-services:debit-cards",
+  "financial-services:debt-collections",
+  "financial-services:finance",
+  "financial-services:financial-exchanges",
+  "financial-services:fintech",
+  "financial-services:fraud-detection",
+  "financial-services:funding-platform",
+  "financial-services:gift-card",
+  "financial-services:health-insurance",
+  "financial-services:hedge-funds",
+  "financial-services:impact-investing",
+  "financial-services:incubators",
+  "financial-services:insurance",
+  "financial-services:insurtech",
+  "financial-services:leasing",
+  "financial-services:lending",
+  "financial-services:life-insurance",
+  "financial-services:micro-lending",
+  "financial-services:mobile-payments",
+  "financial-services:payments",
+  "financial-services:personal-finance",
+  "financial-services:prediction-markets",
+  "financial-services:property-insurance",
+  "financial-services:real-estate-investment",
+  "financial-services:stock-exchanges",
+  "financial-services:trading-platform",
+  "financial-services:transaction-processing",
+  "financial-services:venture-capital",
+  "financial-services:virtual-currency",
+  "financial-services:wealth-management"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 17936528623673,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [
+  "PlataCard",
+  "Banorte",
+  "BanCoppel",
+  "Banregio",
+  "American Express",
+  "Banco Azteca",
+  "Mifel",
+  "Scotiabank",
+  "Falabella"
+ ],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "MX",
+  "id": "2530a2b46223154e3bc70a245138aa3c4eb75446",
+  "isAPT": false,
+  "name": "BalonxSistema"
+ },
+ "title": "CallFlow Project - AI Vishing Module",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-11-02T23:54:22+03:00"
+}

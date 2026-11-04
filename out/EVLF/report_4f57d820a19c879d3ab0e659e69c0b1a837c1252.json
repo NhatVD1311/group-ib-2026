@@ -1,0 +1,682 @@
+{
+ "contacts": [
+  {
+   "account": "chenlun.me@gmail.com",
+   "flag": null,
+   "service": null,
+   "type": "email"
+  },
+  {
+   "account": "@chenlun",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@heitao888999",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@bailiworking",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@shiqi0205",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@waterworking001",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@sinkintojl",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@adc88adc",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@yy0205",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@FHER777",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@Fxcash7",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@jf_jf",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "fangzhangBot",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@OutsiderCodeBot",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@outsiderserverbot",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@sinkintopd",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@zhuoyue_logs",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@Zhyuebot",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  }
+ ],
+ "countries": [
+  "RS"
+ ],
+ "createdAt": "2026-09-23T17:58:38+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2025-09-08",
+ "dateLastSeen": "2026-09-22",
+ "datePublished": "2026-09-23",
+ "description": "<p>In June 2026 Google filed a lawsuit targeting \"Outsider Enterprise,\" a Phishing-as-a-Service (PhaaS) platform based in China, developed by the threat actor known as Chenlun, also known as Sinkinto (better known under the Telegram handles @chenlun and @sinkinto01). The lawsuit resulted in the FBI seizing several domains of main admin servers, as well as a Shopify e-commerce storefront and account used to test the phishing service; approximately $100K USDT from Outsider payment wallets; thousands of phishing domains from U.S. providers, rerouting them to an FBI splash page; and leveraged an Outsider Telegram bot to obtain information on Outsider customers.</p><p></p><p>According to public reporting, Outsider was responsible for at least an estimated 3.8 million stolen credit cards corresponding to an estimated $1.9B in losses.</p><p></p><p>Unfortunately, similar to other PhaaS platforms recently disrupted by law enforcement — such as Tycoon 2FA — the threat persists and continues to actively target organizations worldwide. Group-IB’s <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.group-ib.com/products/threat-intelligence/\">Threat Intelligence</a> team has identified over 700 new phishing pages created within just one month after the civil lawsuit, indicating that affiliates continue to actively utilize the Outsider kit.</p><p></p><p>Among the more than 260 templates available in Outsider, two target Serbia — a country that has been targeted in the past as well, according to internal telemetry and analysis of the phishing kit's available templates, which mimicked the Serbian branch of Banca Intesa, and the national postal service, Pošta Srbije, under the following template names:</p><table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><td colspan=\"1\" rowspan=\"1\"><p>Template Name</p></td><td colspan=\"1\" rowspan=\"1\"><p>Translation</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>积分类-塞尔维亚-BancaIntesa</p></td><td colspan=\"1\" rowspan=\"1\"><p>RS-Points-BancaIntesa</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>包裹类-塞尔维亚-posta</p></td><td colspan=\"1\" rowspan=\"1\"><p>RS-POST-posta</p></td></tr></tbody></table><p>The Croatian national postal service also had its own template.</p><p></p><img src=\"/api/v2/hi/threat/4f57d820a19c879d3ab0e659e69c0b1a837c1252/file/84349257cdba5589ff564db1340cb4533a7307929babf643e11837f784259ae2?placeholder=__IMAGE_4f57d820a19c879d3ab0e659e69c0b1a837c1252:84349257cdba5589ff564db1340cb4533a7307929babf643e11837f784259ae2_IMAGE__\"  /><img src=\"/api/v2/hi/threat/4f57d820a19c879d3ab0e659e69c0b1a837c1252/file/bf083a3d17993fe365631a43d1230c928fbf6dbd86b32736e2909fe47e842d79?placeholder=__IMAGE_4f57d820a19c879d3ab0e659e69c0b1a837c1252:bf083a3d17993fe365631a43d1230c928fbf6dbd86b32736e2909fe47e842d79_IMAGE__\"  /><p>In addition, a year ago, in September 2025, a custom template was observed targeting Serbian individuals and mimicking a company dubbed serbiatravelservice[.]com. Fraudsters created a domain under “icu” gTLD (serbiatravelservice[.]icu) and targeted Serbian individuals:</p><img src=\"/api/v2/hi/threat/4f57d820a19c879d3ab0e659e69c0b1a837c1252/file/158326b59a1d40b79a8b22f73230df499bfd1c3ba8022eb0de25919ccb64f008?placeholder=__IMAGE_4f57d820a19c879d3ab0e659e69c0b1a837c1252:158326b59a1d40b79a8b22f73230df499bfd1c3ba8022eb0de25919ccb64f008_IMAGE__\"  /><p></p><p>Moj mts, operated by Telekom Srbija was also observed being impersonated by Oursider PhaaS:</p><img src=\"/api/v2/hi/threat/4f57d820a19c879d3ab0e659e69c0b1a837c1252/file/1fb57792cd75136dc782aefdcbc17b37644eca770cc37c93dea0e1453576e924?placeholder=__IMAGE_4f57d820a19c879d3ab0e659e69c0b1a837c1252:1fb57792cd75136dc782aefdcbc17b37644eca770cc37c93dea0e1453576e924_IMAGE__\"  /><p>The Outsider PhaaS has already been technically detailed in two reports recently published by Group-IB:</p><ul><li><p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.group-ib.com/blog/chenlun-outsider-phaas-kit/\">Chenlun's Outsider PhaaS Kit</a></p></li><li><p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.group-ib.com/blog/smishing-triad-outsider-jwr/\">Smishing Triad &amp; Outsider JWR</a></p></li></ul><p>This report aims to complement those publications by providing additional analysis and context not previously disclosed. Readers seeking further technical detail are encouraged to consult the blogs referenced above, which will also be briefly cited throughout</p><h1>Final Goal: Payment Details</h1><p>The goal of Outsider PhaaS is to steal payment details or gain access to payment or credit card details and financial platforms such as PayPal, Brokerage firms or bank portals. The stolen information is not limited to credit card numbers, expiry dates, and security codes (CVV), but also includes other details necessary to make that payment information actionable — such as data used to bypass MFA (3DS), authorize the addition of a payment method to a mobile device, or complete a purchase directly on behalf of the fraudster.</p><p>As described in the blog, Outsider PhaaS has the capability to capture the following fields from the victims:</p><ul><li><p>Credit Card Data: Card number, holder name, expiration date, CVV, and PIN.</p></li><li><p>Account Logins: Website login accounts/passwords, bank portal credentials, and PayPal login strings.</p></li><li><p>Personal Identity: First/last name, phone number, physical address, email addresses, Date of Birth, and Social Security Numbers (SSN).</p></li><li><p>Security Bypass Elements: Fields to catch SMS verification codes, 2FA prompt characters, and custom validation errors.</p></li></ul><h1>Attack Flow</h1><p>The attack flow is well described in Group-IB’s blog. Victims are targeted with an SMS although iMessage has also been observed being leveraged by threat actors behind this fraud scheme.</p><p></p><p>Attackers use different lures. Taking into account the wide variety of already created templates Outsider has, in addition to the customization capabilities offered by the PhaaS make the potential schemes infinite. Google has confirmed threat actors behind Outsider have been observed using Gemini to create templates.</p><p></p><p>From fake delivery lures mimicking USPS and similar companies, to fake gift redemption pages from big corporations reward programs to directly impersonating targeted victim’s bank in regards to restoring an account access.</p><p>Once the login or payment details are captured, the operator then dynamically serves contextual 2FA challenges, including SMS verification, email verification, PIN entry, or app-based authentication, based on the institution’s expected authentication requirements. Operators are observed to retain the capability to redirect victims back to the payment page to solicit additional card details, enabling multi-card harvesting from a single victim.</p><p></p><img src=\"/api/v2/hi/threat/4f57d820a19c879d3ab0e659e69c0b1a837c1252/file/35b2c5cb63c27ba580e68fed34147cf58e472f3287acd6a3255e44f1feccbe46?placeholder=__IMAGE_4f57d820a19c879d3ab0e659e69c0b1a837c1252:35b2c5cb63c27ba580e68fed34147cf58e472f3287acd6a3255e44f1feccbe46_IMAGE__\"  /><p>Example of operator ability to redirect victims to solve MFA challenge</p><h1>Criminal Structure</h1><p>Outsider’s business model is a subscription model. They serve the PhaaS and the subscribers pay a fee. The Outsider platform provides cyber criminals infrastructure hosting phishing website files and resources via “phishing kits”.</p><p></p><p>However, how do Outsider customers, phishing operators, monetize their activities? There is a whole cybercriminal structure that allows all involved parties to run their criminal business successfully.</p><p>On November 15, 2025 Chenlun created an exclusive, members only group for affiliates that purchased the phishing kit. As of April 2026 there were 220 members. The criminal structure behind Outsider can be divided in different groups.</p><h2>Developer Group — builds and maintains Outsider</h2><ul><li><p>Designs software/architecture/UI, writes and tests code, ships templates and updates, hardens the kit against detection by law enforcement, industry, <em>and</em> rival criminals attempting to pirate the code.</p></li><li><p><strong>Key actor:</strong> Telegram <strong>@sinkinto01</strong> — believed linked to historical account <strong>@chenlun</strong> (deactivated after 2023 researcher exposure). Re-emerged May 2025 announcing a comeback; shipped current Outsider version July 2025. Primary voice on the \"development diary\" channel @sinkintopd (175+ messages, 13 tutorial videos as of complaint filing), including the Gemini-assisted template tutorials (first noted 2025-08-02).</p></li></ul><h2>Data Broker Group — supplies victim targeting data</h2><ul><li><p>Aggregates bulk contact lists from public records, social media, and breach data; supplies targeting data to other groups.</p></li><li><p><strong>Key actor:</strong> alias <strong>\"Nan'an Overseas Data\"</strong>, Telegram <strong>@heitao888999</strong> — supplies global victim contact data.</p></li></ul><h2>Spammer Group — bulk lure delivery infrastructure</h2><ul><li><p>Provides phone banks, SIM farms, modems, and call-center-style infrastructure to blast \"bait\" messages via SMS, RCS, iMessage, and Google Chat at scale; also does caller/sender-ID spoofing engineering.</p></li><li><p><strong>Key actors:</strong> Telegram <strong>@bailiworking</strong> and <strong>@adc88adc</strong> — arrange bulk send operations; @bailiworking also runs sender-ID spoofing services and administers a recruiting/advertising channel <strong>@waterworking001</strong>.</p></li></ul><h2>Theft Group — monetization and laundering</h2><ul><li><p>Uses harvested credentials to access bank/email/brokerage accounts, load stolen cards to digital wallets (incl. Google Wallet), resell card data, and launder proceeds.</p></li><li><p><strong>Key actors:</strong></p><ul><li><p><strong>@yy0205</strong> — sells stolen credit cards (observed listings 2025-10-14); also brokers point-of-sale terminals used to launder stolen-card funds through dummy merchant accounts (observed offer 2025-10-17); admin of @sinkintojl and linked channel @shiqi0205.</p></li><li><p><strong>@FHER777</strong> — sells verified stolen account credentials (markets referenced: Walmart, Uber, Uber Eats, DoorDash); operates <strong>@zhuoyue_logs</strong> (stolen-account access marketplace) and <strong>@Zhyuebot</strong> (crypto↔USDT swap service supporting license purchases); admin of @sinkintojl.</p></li></ul></li></ul><h2>Telegram Group — community, recruitment, licensing</h2><ul><li><p>Operates the recruitment/coordination infrastructure that ties all other groups together and onboards technically unsophisticated members.</p></li><li><p><strong>Channels:</strong></p><ul><li><p><strong>@OutsiderCodeBot</strong> — self-service license storefront; also cross-promotes/links members to Spammer Group contacts and the @outsiderserverbot hosting-assistance channel.</p></li><li><p><strong>@sinkintopd</strong> — \"development diary\": updates, tutorials (run by @sinkinto01, whose secondary account is @sinkinto02).</p></li><li><p><strong>@sinkintojl</strong> — general community/discussion; marketplace for SMS data, card data, stolen Gmail credentials, ID documents; admins: @sinkinto01, @bailiworking, @yy0205, @FHER777.</p></li><li><p><strong>\"Outsiders Member Group\"</strong> — invite-only, 160+ members incl. @sinkinto01, @bailiworking, @FHER777; tactical coordination and Q&amp;A.</p></li></ul></li></ul><p>Additional channels:</p><ul><li><p>Chenlun maintains a telegram channel (t[.]me/GreyWatch_ChenLun)to inform affiliates of scammers within the community. However the latest update shared by Chenlun was in July 2025.&nbsp;</p></li></ul><h3>Actor/Infrastructure Index (Telegram handles cited in complaint)</h3><table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><th colspan=\"1\" rowspan=\"1\"><p><strong>Handle</strong></p></th><th colspan=\"1\" rowspan=\"1\"><p><strong>Role</strong></p></th></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@sinkinto01</p></td><td colspan=\"1\" rowspan=\"1\"><p>Developer Group lead; likely same operator as @chenlun (pre-2023 kit)</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@sinkinto02</p></td><td colspan=\"1\" rowspan=\"1\"><p>Secondary account of @sinkinto01</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@chenlun</p></td><td colspan=\"1\" rowspan=\"1\"><p>Historical/predecessor account, deactivated ~fall 2023</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@heitao888999 (\"Nan'an Overseas Data\")</p></td><td colspan=\"1\" rowspan=\"1\"><p>Data Broker</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@bailiworking</p></td><td colspan=\"1\" rowspan=\"1\"><p>Spammer Group; sender-ID spoofing; @shiqi0205 &amp; @waterworking001 &amp; <strong>@sinkintojl admin</strong></p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@adc88adc</p></td><td colspan=\"1\" rowspan=\"1\"><p>Spammer Group; bulk messaging</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@yy0205</p></td><td colspan=\"1\" rowspan=\"1\"><p>Theft Group; stolen-card sales; POS/laundering broker; <strong>@sinkintojl admin</strong></p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@FHER777 (former @Fxcash7 and @jf_jf)</p></td><td colspan=\"1\" rowspan=\"1\"><p>Theft Group; stolen-credential sales; <strong>@sinkintojl admin</strong></p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>fangzhangBot (ID: 1641060872)</p></td><td colspan=\"1\" rowspan=\"1\"><p>The bot is used for group management purposes<br><strong>@sinkintojl admin</strong></p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@OutsiderCodeBot</p></td><td colspan=\"1\" rowspan=\"1\"><p>License storefront</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@outsiderserverbot</p></td><td colspan=\"1\" rowspan=\"1\"><p>Google Cloud hosting assistance</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@sinkintopd</p></td><td colspan=\"1\" rowspan=\"1\"><p>Dev updates/tutorials channel</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@sinkintojl</p></td><td colspan=\"1\" rowspan=\"1\"><p>Community/marketplace channel</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@waterworking001</p></td><td colspan=\"1\" rowspan=\"1\"><p>Recruitment/advertising (linked from @bailiworking bio). Here, @bailinworking showcases the spam services</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@shiqi0205</p></td><td colspan=\"1\" rowspan=\"1\"><p>Recruitment/discussion (linked from @yy0205 bio)</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@zhuoyue_logs</p></td><td colspan=\"1\" rowspan=\"1\"><p>Stolen-account marketplace (@FHER777)</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>@Zhyuebot</p></td><td colspan=\"1\" rowspan=\"1\"><p>Crypto→USDT swap bot (@FHER777)</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>\"Outsiders Member Group\"</p></td><td colspan=\"1\" rowspan=\"1\"><p>Invite-only operator community (160+ members)</p></td></tr></tbody></table><h1>Outsider’s Infrastructure</h1><p>Prior to law enforcement seizure, it was estimated half of the infrastructure was behind Cloudflare. There was a clear pattern of certain TLD usage prior to the law enforcement action.</p><p></p><p>These statistics are based on 15998 domains and subdomains used by Outsider we analyzed prior to law enforcement operation.</p><table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><td colspan=\"1\" rowspan=\"1\"><p>TLD</p></td><td colspan=\"1\" rowspan=\"1\"><p>% of usage over the observed domains</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>icu</p></td><td colspan=\"1\" rowspan=\"1\"><p>30.3</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>cc</p></td><td colspan=\"1\" rowspan=\"1\"><p>30.2</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>top</p></td><td colspan=\"1\" rowspan=\"1\"><p>12.9</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>com</p></td><td colspan=\"1\" rowspan=\"1\"><p>11.2</p></td></tr></tbody></table><p>Regarding the ASNs the operators are using, the group had — prior to the FBI takedown — a Telegram bot that provided cloud services from Alibaba Cloud, Tencent Cloud, AWS, and Google Cloud. This was consistent with origin servers observed hosting kits associated with Outsider, although as mentioned above, it is estimated that half of the infrastructure was behind Cloudflare.</p><p></p><p>After the FBI seizure, the ASN distribution remains quite similar, with most of the infrastructure being hidden behind Cloudflare (AS13335) (68%) and Alibaba (AS45102) (27.4%) and Tencent (AS132203) (2.72%) hosting the the origin servers.</p><p></p><table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><td colspan=\"1\" rowspan=\"1\"><p>ASN (after June 2026)</p></td><td colspan=\"1\" rowspan=\"1\"><p>% of usage</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>Cloudflare (AS13335)</p></td><td colspan=\"1\" rowspan=\"1\"><p>68</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>Alibaba (AS45102)</p></td><td colspan=\"1\" rowspan=\"1\"><p>27.4</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>Tencent (AS132203)</p></td><td colspan=\"1\" rowspan=\"1\"><p>2.72</p></td></tr></tbody></table><p></p><p>Based on this distribution and known prior infrastructure, it is highly likely that the origin servers behind Cloudflare are also hosted in these ASNs.</p><p></p><p>This is also evidenced by the fact that most of the domains—90%—created after law enforcement actions were registered through the Dominet (HK) Limited registrar, which is the registrar used by Alibaba Cloud.&nbsp;</p><p>The \".top\" TLD is by far the most used one, with 76% of the new domains associated with Outsider using this TLD, followed by \".shop\" with 12% and \".com\" with 3.53%.</p><table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><td colspan=\"1\" rowspan=\"1\"><p>TLD (after June 2026)</p></td><td colspan=\"1\" rowspan=\"1\"><p>% of usage over the observed domains</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>top</p></td><td colspan=\"1\" rowspan=\"1\"><p>76</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>shop</p></td><td colspan=\"1\" rowspan=\"1\"><p>12</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>com</p></td><td colspan=\"1\" rowspan=\"1\"><p>3.53</p></td></tr></tbody></table><p>In addition, the usage of OpenResty as webserver has been observed consistent across the analyzed infrastructure before and after June 2026.</p><h1>Recommendations</h1><h2>1. Customer-facing anti-fraud controls</h2><ul><li><p>Kill \"OTP as sole friction.\" Outsider dynamically relays whatever 2FA challenge the bank serves (SMS, app push, PIN) in real time to the victim. Push to app-based, out-of-band authentication with transaction-binding (amount/merchant shown in the approval prompt) rather than a numeric code that can be phished and replayed.</p></li><li><p>Step up friction on \"add card to wallet\" events. The Theft Group's monetization path explicitly includes loading stolen cards to digital wallets (Google Wallet named). Recommend the bank tighten card-provisioning risk scoring (device binding, velocity checks, out-of-band confirmation call/push) specifically for wallet-add attempts, not just for payments.</p></li><li><p>Rate-limit and flag repeat card entry in one session. The kit redirects victims back to the payment page to harvest multiple cards — a customer submitting several distinct PANs in a short window post-\"login\" is itself a signal worth correlating against fraud systems, even outside the phishing context.</p></li></ul><h2>2. Detection &amp; monitoring (brand/domain protection)</h2><ul><li><p>Operationalize the TLD/ASN pattern, not just exact-match brand monitoring. Post-seizure infra clusters on Cloudflare (AS13335, fronting) with Alibaba (AS45102)/Tencent (AS132203) origins, .top/.shop/.icu/.cc TLDs, and Dominet (HK) as registrar. Feed these into your domain-monitoring/typosquat detection rules (weighted scoring, not blocklist) since new Outsider infrastructure will keep following this fingerprint even as domains rotate.</p></li><li><p>Monitor for Serbian-language template reuse — the templates are pre-built and traded among Outsider's 220+ affiliates, so expect recurrence/variants, not a one-off campaign.</p></li><li><p>Watch for AI-generated lure variety. Google confirmed Gemini-assisted template creation — expect faster iteration and more convincing localized lures than typical smishing kits. Static content-matching detection (fixed strings/screenshots) will degrade faster than usual; favor structural/behavioral detection.</p></li><li><p>Track new pages utilizing the unique file name signatures to initiate takedown of phishing sites</p></li><li><p>Integrate our <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.group-ib.com/products/threat-intelligence/\">Threat Intelligence</a> solution to identify emerging phishing kits early</p></li><li><p>Implement continuous monitoring for SMS-linked brand abuse with a comprehensive <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.group-ib.com/products/digital-risk-protection/\">Digital Risk Protection</a> solution.</p></li></ul><h2>3. SOC / threat intel actions</h2><ul><li><p>Ingest the IOCs as pivots, use attacker-side infrastructure fingerprints (used for their own ad/traffic ops) — useful for correlating future campaigns even after domains rotate. Send these to your threat intel/OSINT pivoting workflow.</p></li><li><p>Track the exfil field schema for detection engineering: the kit specifically targets PAN/CVV/PIN, bank/PayPal credentials, SSN/DOB, and MFA codes together. Any customer-reported phishing site collecting that exact combination should be triaged as Outsider-linked and prioritized for fast takedown given the 2FA-relay capability (time-sensitive — this isn't a static credential harvester).</p></li><li><p>Coordinate takedown requests targeting the hosting layer, not just the domain, given the heavy Cloudflare fronting — domain takedown alone won't kill the origin; escalate to Alibaba/Tencent abuse teams in parallel.</p></li></ul><p></p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "A2",
+  "credibility": 80,
+  "reliability": 100,
+  "severity": "green",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Unique_data",
+  "GIB origin"
+ ],
+ "files": [
+  {
+   "hash": "84349257cdba5589ff564db1340cb4533a7307929babf643e11837f784259ae2",
+   "mime": "image/png",
+   "name": "84349257cdba5589ff564db1340cb4533a7307929babf643e11837f784259ae2",
+   "size": 267657
+  },
+  {
+   "hash": "bf083a3d17993fe365631a43d1230c928fbf6dbd86b32736e2909fe47e842d79",
+   "mime": "image/png",
+   "name": "bf083a3d17993fe365631a43d1230c928fbf6dbd86b32736e2909fe47e842d79",
+   "size": 307774
+  },
+  {
+   "hash": "1fb57792cd75136dc782aefdcbc17b37644eca770cc37c93dea0e1453576e924",
+   "mime": "image/png",
+   "name": "1fb57792cd75136dc782aefdcbc17b37644eca770cc37c93dea0e1453576e924",
+   "size": 82877
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "4f57d820a19c879d3ab0e659e69c0b1a837c1252",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-23",
+   "dateLastSeen": "2026-09-23",
+   "domain": "posta.rest",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "93445009cf85c64b0ab11e8c560474d4fecad802",
+   "ip": [
+    "43.160.247.80"
+   ],
+   "ipScores": [
+    {
+     "ip": "43.160.247.80",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "https://posta.rest/",
+    "domain": "posta.rest",
+    "ipv4": [
+     "43.160.247.80"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17924889906769,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "8b7f98947e4b0f71dc736126f52d075d17482360"
+   ],
+   "type": "network",
+   "url": "https://posta.rest/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-23",
+   "dateLastSeen": "2026-09-23",
+   "domain": "www.posta.rest",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "acb2c4b742fb13a2f5ac137eca22f0cc0e4f45c0",
+   "ip": [
+    "43.160.247.80"
+   ],
+   "ipScores": [
+    {
+     "ip": "43.160.247.80",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "https://www.posta.rest",
+    "domain": "www.posta.rest",
+    "ipv4": [
+     "43.160.247.80"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17924889907690,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "8b7f98947e4b0f71dc736126f52d075d17482360"
+   ],
+   "type": "network",
+   "url": "https://www.posta.rest"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-23",
+   "dateLastSeen": "2026-09-23",
+   "domain": "www.mts.boats",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8c7b3effa13ef2c87c5c5031c8b5832dba9b8229",
+   "ip": [
+    "43.160.247.80"
+   ],
+   "ipScores": [
+    {
+     "ip": "43.160.247.80",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "https://www.mts.boats/rs/",
+    "domain": "www.mts.boats",
+    "ipv4": [
+     "43.160.247.80"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17924889908129,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "8b7f98947e4b0f71dc736126f52d075d17482360"
+   ],
+   "type": "network",
+   "url": "https://www.mts.boats/rs/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-23",
+   "dateLastSeen": "2026-09-23",
+   "domain": "www.bancaintesa.shop",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f6aec8a1ce1b11ac4a1d4a9040323f1f875330d1",
+   "ip": [
+    "43.160.247.80"
+   ],
+   "ipScores": [
+    {
+     "ip": "43.160.247.80",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "https://www.bancaintesa.shop/",
+    "domain": "www.bancaintesa.shop",
+    "ipv4": [
+     "43.160.247.80"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17924889908654,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "8b7f98947e4b0f71dc736126f52d075d17482360"
+   ],
+   "type": "network",
+   "url": "https://www.bancaintesa.shop/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-23",
+   "dateLastSeen": "2026-09-23",
+   "domain": "serbiatravelservice.icu",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "7a26b3e849c90976e950ab7386ab01f08339d292",
+   "ip": [
+    "43.160.247.80"
+   ],
+   "ipScores": [
+    {
+     "ip": "43.160.247.80",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "https://serbiatravelservice.icu",
+    "domain": "serbiatravelservice.icu",
+    "ipv4": [
+     "43.160.247.80"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17924889909092,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "8b7f98947e4b0f71dc736126f52d075d17482360"
+   ],
+   "type": "network",
+   "url": "https://serbiatravelservice.icu"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-23",
+   "dateLastSeen": "2026-09-23",
+   "domain": "www.bancaintesa.top",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "da43436a26706e41141e22f26345fdad1a7be42c",
+   "ip": [
+    "43.160.247.80"
+   ],
+   "ipScores": [
+    {
+     "ip": "43.160.247.80",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "https://www.bancaintesa.top/",
+    "domain": "www.bancaintesa.top",
+    "ipv4": [
+     "43.160.247.80"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17924889909536,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "8b7f98947e4b0f71dc736126f52d075d17482360"
+   ],
+   "type": "network",
+   "url": "https://www.bancaintesa.top/"
+  }
+ ],
+ "indicatorsIds": [
+  "93445009cf85c64b0ab11e8c560474d4fecad802",
+  "acb2c4b742fb13a2f5ac137eca22f0cc0e4f45c0",
+  "8c7b3effa13ef2c87c5c5031c8b5832dba9b8229",
+  "f6aec8a1ce1b11ac4a1d4a9040323f1f875330d1",
+  "7a26b3e849c90976e950ab7386ab01f08339d292",
+  "da43436a26706e41141e22f26345fdad1a7be42c"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "Phishing Kit",
+    "Phishing"
+   ],
+   "class": null,
+   "id": "3ab3bbcc3ff2b54ff06b015fd081a5704145e038",
+   "name": "Outsider Phishing Kit",
+   "platform": [
+    "Windows",
+    "Android",
+    "iOS"
+   ],
+   "threatLevel": "Medium"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "[Phishing for Information->Spearphishing Link]",
+   "attackPatternId": "attack-pattern--2d3f5b3c-54ca-4f4d-bb1f-849346d31230",
+   "attackTactic": "reconnaissance",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1598.003",
+   "params": null
+  },
+  {
+   "attackName": "[User Execution->Malicious Link]",
+   "attackPatternId": "attack-pattern--ef67e13e-5598-4adc-bdb2-998225874fa9",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204.001",
+   "params": null
+  },
+  {
+   "attackName": "Obfuscated Files or Information",
+   "attackPatternId": "attack-pattern--b3d682b6-98f2-4fb0-aa3b-b4df007ca70a",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1027",
+   "params": null
+  },
+  {
+   "attackName": "[Obfuscated Files or Information->Encrypted/Encoded File]",
+   "attackPatternId": "attack-pattern--0d91b3c0-5e50-47c3-949a-2a796f04d144",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1027.013",
+   "params": null
+  },
+  {
+   "attackName": "Deobfuscate/Decode Files or Information",
+   "attackPatternId": "attack-pattern--3ccef7ae-cb5e-48f6-8302-897105fbf55c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1140",
+   "params": null
+  },
+  {
+   "attackName": "Debugger Evasion",
+   "attackPatternId": "attack-pattern--e4dc8c01-417f-458d-9ee0-bb0617c1b391",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1622",
+   "params": null
+  },
+  {
+   "attackName": "Debugger Evasion",
+   "attackPatternId": "attack-pattern--e4dc8c01-417f-458d-9ee0-bb0617c1b391",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1622",
+   "params": null
+  },
+  {
+   "attackName": "Virtualization/Sandbox Evasion",
+   "attackPatternId": "attack-pattern--82caa33e-d11a-433a-94ea-9b5a5fbef81d",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1497",
+   "params": null
+  },
+  {
+   "attackName": "Virtualization/Sandbox Evasion",
+   "attackPatternId": "attack-pattern--82caa33e-d11a-433a-94ea-9b5a5fbef81d",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1497",
+   "params": null
+  },
+  {
+   "attackName": "Browser Information Discovery",
+   "attackPatternId": "attack-pattern--5e4a2073-9643-44cb-a0b5-e7f4048446c7",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1217",
+   "params": null
+  },
+  {
+   "attackName": "System Location Discovery",
+   "attackPatternId": "attack-pattern--c877e33f-1df6-40d6-b1e7-ce70f16f4979",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1614",
+   "params": null
+  },
+  {
+   "attackName": "[Input Capture->Web Portal Capture]",
+   "attackPatternId": "attack-pattern--69e5226d-05dc-4f15-95d7-44f5ed78d06e",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1056.003",
+   "params": null
+  },
+  {
+   "attackName": "[Input Capture->Web Portal Capture]",
+   "attackPatternId": "attack-pattern--69e5226d-05dc-4f15-95d7-44f5ed78d06e",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1056.003",
+   "params": null
+  },
+  {
+   "attackName": "Automated Collection",
+   "attackPatternId": "attack-pattern--30208d3e-0d6b-43c8-883e-44462a514619",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1119",
+   "params": null
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": null
+  },
+  {
+   "attackName": "Non-Application Layer Protocol",
+   "attackPatternId": "attack-pattern--c21d5a77-d422-4a69-acd7-2c53c1faa34b",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1095",
+   "params": null
+  },
+  {
+   "attackName": "[Encrypted Channel->Symmetric Cryptography]",
+   "attackPatternId": "attack-pattern--24bfaeba-cb0d-4525-b3dc-507c77ecec41",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573.001",
+   "params": null
+  },
+  {
+   "attackName": "Non-Standard Port",
+   "attackPatternId": "attack-pattern--b18eae87-b469-4e14-b454-b171b416bc18",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1571",
+   "params": null
+  },
+  {
+   "attackName": "Exfiltration Over C2 Channel",
+   "attackPatternId": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1041",
+   "params": null
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "europe"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3009-1758",
+ "sectors": [],
+ "seqPublish": null,
+ "seqUpdate": 17924889923063,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "CN",
+  "id": "8b7f98947e4b0f71dc736126f52d075d17482360",
+  "isAPT": false,
+  "name": "Chen Lun"
+ },
+ "title": "Outsider PhaaS Hitting Serbia",
+ "toolList": [],
+ "type": "event",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-10-20T12:36:32+03:00"
+}

@@ -1,0 +1,317 @@
+{
+ "addedToThreatLandscapeFor": null,
+ "aliases": [
+  "ChenLun",
+  "Outsider"
+ ],
+ "country": "CN",
+ "createdAt": "2026-04-24T17:15:53+08:00",
+ "description": "<p>Chenlun (沉沦) is identified as the developer and owner of the Outsider Phishing Kit, a sophisticated Adversary-in-the-Middle (AiTM) smishing as a service toolkit. He was first observed promoting the kit through Telegram channels in October 2022. Additionally, Chenlun &nbsp;has been linked to advertisements for the toolkit on underground forums such as CVV-Goods and Cosmileonnly in the past.</p><p>&nbsp;</p><p></p><p>&nbsp;</p><p></p><p>&nbsp;</p><p></p><p>&nbsp;</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "files": [
+  {
+   "hash": "6c20c86fad04c9a9d6da2bb0b4529fa3c3846ea8248f4f5feaff3f0d584b5dd6",
+   "mime": "image/png",
+   "name": "6c20c86fad04c9a9d6da2bb0b4529fa3c3846ea8248f4f5feaff3f0d584b5dd6",
+   "size": 338125
+  },
+  {
+   "hash": "c1d14b8209b67c41a04aab505f739b26ad11ea4bdeb0ec1697431e59c5ac5190",
+   "mime": "image/png",
+   "name": "c1d14b8209b67c41a04aab505f739b26ad11ea4bdeb0ec1697431e59c5ac5190",
+   "size": 476771
+  },
+  {
+   "hash": "d57c92372d3ef200b45a24f762a943120359a6873bd184c67090ad1763bdc7dc",
+   "mime": "image/png",
+   "name": "d57c92372d3ef200b45a24f762a943120359a6873bd184c67090ad1763bdc7dc",
+   "size": 247247
+  },
+  {
+   "hash": "5ffd580a56f7c49b22c426d1be5d3c7efc5afc8d076e1b04cebd6c833b13e020",
+   "mime": "image/png",
+   "name": "5ffd580a56f7c49b22c426d1be5d3c7efc5afc8d076e1b04cebd6c833b13e020",
+   "size": 123933
+  },
+  {
+   "hash": "142cfa1f599d1a7cca2031c177f77f7ea204804090266a64f4e01c0f9ba39cd9",
+   "mime": "image/png",
+   "name": "142cfa1f599d1a7cca2031c177f77f7ea204804090266a64f4e01c0f9ba39cd9",
+   "size": 1017125
+  },
+  {
+   "hash": "9ca5fa91058dc03e3d5059f0f5c8e4469ee2c06efeba7cb59bfb006bd5f7c83f",
+   "mime": "image/png",
+   "name": "9ca5fa91058dc03e3d5059f0f5c8e4469ee2c06efeba7cb59bfb006bd5f7c83f",
+   "size": 389394
+  },
+  {
+   "hash": "024acad76f23044ed274818e739ea5c21bc59443443ea38d788c4cc6dfbb5053",
+   "mime": "image/png",
+   "name": "024acad76f23044ed274818e739ea5c21bc59443443ea38d788c4cc6dfbb5053",
+   "size": 187574
+  },
+  {
+   "hash": "3b23e5e69844f7733bcb5abfbf3e294affa8eddb062ff753d1fc399244e46b17",
+   "mime": "image/png",
+   "name": "3b23e5e69844f7733bcb5abfbf3e294affa8eddb062ff753d1fc399244e46b17",
+   "size": 150747
+  },
+  {
+   "hash": "7106f367dd688a784fbb055839291a5240f6c38e1b793a584d6f0cc18d5e5c71",
+   "mime": "image/png",
+   "name": "7106f367dd688a784fbb055839291a5240f6c38e1b793a584d6f0cc18d5e5c71",
+   "size": 115748
+  },
+  {
+   "hash": "595c57dddcb3996951bdb3fbae6e4fd234602c30e26afd77969b7bc36fe2b3b0",
+   "mime": "image/png",
+   "name": "595c57dddcb3996951bdb3fbae6e4fd234602c30e26afd77969b7bc36fe2b3b0",
+   "size": 163170
+  },
+  {
+   "hash": "bc661657a2ed45c1baa52070ee266aadac30ab22c27322cfae74ea6bed06a6e8",
+   "mime": "image/png",
+   "name": "bc661657a2ed45c1baa52070ee266aadac30ab22c27322cfae74ea6bed06a6e8",
+   "size": 86593
+  },
+  {
+   "hash": "e0f0302bf96d8d4aab0631ff36e2d0f27d02e6b1c2b160331a1ecf9ffef3239e",
+   "mime": "image/png",
+   "name": "e0f0302bf96d8d4aab0631ff36e2d0f27d02e6b1c2b160331a1ecf9ffef3239e",
+   "size": 65226
+  }
+ ],
+ "goals": [],
+ "hasIocs": true,
+ "id": "8b7f98947e4b0f71dc736126f52d075d17482360",
+ "isAPT": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "linkedAttackPatterns": null,
+ "name": "Chen Lun",
+ "oldId": null,
+ "roles": [],
+ "seqUpdate": 17924889946159,
+ "spokenOnLangs": [
+  "zh"
+ ],
+ "stat": {
+  "allIndicatorsCount": 18037,
+  "allReportsCount": 7,
+  "contactsCount": 27,
+  "countries": [
+   "AE",
+   "RS",
+   "AR",
+   "AT",
+   "AU",
+   "BE",
+   "BG",
+   "BR",
+   "BY",
+   "CA",
+   "CH",
+   "CL",
+   "DE",
+   "DK",
+   "DO",
+   "EC",
+   "EE",
+   "ES",
+   "FI",
+   "FR",
+   "GB",
+   "GR",
+   "GT",
+   "HN",
+   "HR",
+   "HU",
+   "IE",
+   "IN",
+   "IS",
+   "IT",
+   "JP",
+   "LT",
+   "LV",
+   "MA",
+   "MX",
+   "NI",
+   "NL",
+   "NO",
+   "NZ",
+   "PE",
+   "PH",
+   "PL",
+   "PR",
+   "PT",
+   "RO",
+   "SE",
+   "SG",
+   "SK",
+   "SV",
+   "TR",
+   "UA",
+   "US",
+   "UY",
+   "ZA"
+  ],
+  "cve": [],
+  "dateFirstSeen": "2025-06-01",
+  "dateLastSeen": "2026-09-24",
+  "expertise": [
+   "Phishing",
+   "Unique_data",
+   "GIB origin",
+   "Scam"
+  ],
+  "forumsAccountsCount": 0,
+  "malware": [
+   "Outsider Phishing Kit"
+  ],
+  "regions": [
+   "europe",
+   "middle_east",
+   "africa:northern_africa",
+   "africa:southern_africa",
+   "america:central_america",
+   "america:northern_america",
+   "america:south_america",
+   "america:the_caribbean",
+   "asia",
+   "europe:european_union",
+   "oceania"
+  ],
+  "relatedThreatActorsCount": 0,
+  "reports": [
+   {
+    "companyId": [],
+    "datePublished": "2026-09-24",
+    "id": "472c3f9f3d4977d16564466f3aa523db3cdaf561",
+    "name": {
+     "en": "Template mechanism and search queries"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2026-09-23",
+    "id": "4f57d820a19c879d3ab0e659e69c0b1a837c1252",
+    "name": {
+     "en": "Outsider PhaaS Hitting Serbia"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2026-09-03",
+    "id": "cb61c6b24ea0b3f6f039604fc6293f8d27b12a5e",
+    "name": {
+     "en": "The Outsider Phishing Kit: A Resilient Threat in the Face of Law Enforcement Action"
+    }
+   }
+  ],
+  "sectors": [
+   "financial-services",
+   "government-and-military",
+   "transportation",
+   "administrative-services",
+   "administrative-services:courier-service",
+   "administrative-services:delivery",
+   "financial-services:finance",
+   "government-and-military:government",
+   "government-and-military:law-enforcement",
+   "hardware",
+   "hardware:telecommunications",
+   "transportation:shipping",
+   "transportation:transportation"
+  ],
+  "targetDomain": [
+   "https://darb.qmobility.ae/"
+  ],
+  "targetedCompany": [],
+  "targetedPartnersAndClients": [
+   "ANZ Bank",
+   "AT&T",
+   "Agencia Nacional de Tránsito",
+   "An Post",
+   "Australia Post",
+   "BANCO BILBAO VIZCAYA ARGENTARIA, S.A.",
+   "BG post",
+   "Banco de Oro (BDO)",
+   "Bank of the Philippine Islands (BPI)",
+   "Bankwest",
+   "Bendigo Bank",
+   "Bpost",
+   "CIBC (Canadian Imperial Bank of Commerce) (Canada)",
+   "Canada Post",
+   "Charles Schwab",
+   "ChileXpress",
+   "Commonwealth Bank",
+   "Correos de Chile",
+   "Curve",
+   "DHL Group",
+   "DPD",
+   "DSV",
+   "Elta Courier",
+   "Emirates Post",
+   "Etrade",
+   "Fan Courier",
+   "Fidelity Investments",
+   "HSBC",
+   "ING (Australia)",
+   "India Post",
+   "Inposdom",
+   "Inpost",
+   "Intelcom",
+   "Interactive Brokers",
+   "La Poste",
+   "Latvijas Pasts",
+   "Macquarie Group Ltd",
+   "Mastercard",
+   "NAB (National Australia Bank)",
+   "NL Post",
+   "Nova Poshta",
+   "Omniva (Estonia)",
+   "PostNL",
+   "PostNord",
+   "Posten",
+   "Raiffeisen Bank (Austria)",
+   "Robinhood",
+   "Royal Mail",
+   "SerPost",
+   "Suncorp Bank",
+   "T-Mobile",
+   "Tigo",
+   "UBS Group AG",
+   "UPS",
+   "USPS",
+   "Verizon",
+   "Webull",
+   "Westpac"
+  ]
+ },
+ "techSeqUpdate": null,
+ "threatLandscapeOptions": [
+  {
+   "label": "company",
+   "value": "company"
+  },
+  {
+   "label": "partner",
+   "value": "partner"
+  },
+  {
+   "label": "industry",
+   "value": "industry"
+  },
+  {
+   "label": "other",
+   "value": "other"
+  }
+ ],
+ "updatedAt": "2026-10-20T12:36:34+03:00"
+}

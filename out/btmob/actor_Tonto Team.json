@@ -1,0 +1,127 @@
+{
+ "addedToThreatLandscapeFor": null,
+ "aliases": [
+  "HeartBeat",
+  "Karma Panda",
+  "CactusPete",
+  "Bronze Huntley"
+ ],
+ "country": "CN",
+ "createdAt": "2022-06-22T11:16:23+03:00",
+ "description": "<p>Tonto Team is a suspected Chinese state-sponsored cyber espionage threat group that has primarily targeted South Korea, Japan, Taiwan, and the United States since at least 2009; by 2020 they expanded operations to include other Asian as well as Eastern European countries. Tonto Team has targeted government, military, energy, mining, financial, education, healthcare, and technology organizations.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "files": [],
+ "goals": [],
+ "hasIocs": true,
+ "id": "b9f1eb449d596cf1b57aa5ea974472b7fda3dd2e",
+ "isAPT": true,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "linkedAttackPatterns": null,
+ "name": "Tonto Team",
+ "oldId": null,
+ "roles": [],
+ "seqUpdate": 17065217772763,
+ "spokenOnLangs": [
+  "zh"
+ ],
+ "stat": {
+  "allIndicatorsCount": 29,
+  "allReportsCount": 5,
+  "contactsCount": 0,
+  "countries": [
+   "RU",
+   "KR"
+  ],
+  "cve": [],
+  "dateFirstSeen": "2021-06-28",
+  "dateLastSeen": "2023-04-13",
+  "expertise": [],
+  "forumsAccountsCount": 0,
+  "malware": [
+   "RoyalRoad",
+   "DoubleT",
+   "TontoTeam.Downloader",
+   "Bisonal"
+  ],
+  "regions": [
+   "europe",
+   "asia"
+  ],
+  "relatedThreatActorsCount": 0,
+  "reports": [
+   {
+    "companyId": [],
+    "datePublished": "2023-05-03",
+    "id": "267be143ee43b5b5905efee72c09f7c5d4a24926",
+    "name": {
+     "ru": "Tonto использует файлы, связанные с защитой от вредоносных программ, для боковой загрузки DLL",
+     "en": "Tonto Team Using Anti-Malware Related Files for DLL Side-Loading"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2022-07-20",
+    "id": "db7376043e44cb710fb1faeaa3d4b34e2e961e1e",
+    "name": {
+     "ru": "Анализ атаки Tonto Team на российские организации в 2021 году",
+     "en": "Analysis of the Tonto Team attack on Russian organizations in 2021"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2022-06-27",
+    "id": "d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9",
+    "name": {
+     "ru": "Новый вредоносный документ группы Tonto Team",
+     "en": "New malicious document of Tonto Team"
+    }
+   }
+  ],
+  "sectors": [
+   "government-and-military:government",
+   "hardware:telecommunications",
+   "information-technology",
+   "information-technology:cyber-security",
+   "government-and-military:military",
+   "government-and-military",
+   "education",
+   "real-estate:construction"
+  ],
+  "targetDomain": [],
+  "targetedCompany": [
+   "Group-IB",
+   "МТС",
+   "ООО “Яндекс”",
+   "ПАО \"Ростелеком\"",
+   "ПАО «МегаФон»"
+  ],
+  "targetedPartnersAndClients": []
+ },
+ "techSeqUpdate": null,
+ "threatLandscapeOptions": [
+  {
+   "label": "company",
+   "value": "company"
+  },
+  {
+   "label": "partner",
+   "value": "partner"
+  },
+  {
+   "label": "industry",
+   "value": "industry"
+  },
+  {
+   "label": "other",
+   "value": "other"
+  }
+ ],
+ "updatedAt": "2024-01-29T12:49:37+03:00"
+}

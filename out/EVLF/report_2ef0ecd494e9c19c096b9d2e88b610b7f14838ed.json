@@ -1,0 +1,92 @@
+{
+ "contacts": [],
+ "countries": [],
+ "createdAt": "2026-11-01T21:38:11+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2026-10-31",
+ "dateLastSeen": "2026-10-31",
+ "datePublished": "2026-11-01",
+ "description": "<p>The Group-IB Threat Intelligence team identified an actor on darkforums[.]me offering offensive tooling — CraxsRAT v31.10.</p><p>The threat actor <b>Argfilox</b> posted a thread on <b>darkforums[.]me</b> on <b>2026-10-31</b>:</p><p><pre><code class=\"language-plaintext\">Hidden Content\nALL DATA:\nhxxps://pasted[.]pw/view.php?id=123575T</code></pre></p><p>This message can also be viewed in the <a target=\"_blank\" href=\"https://tap.group-ib.com/ta/darkweb?id=143111f8fd8720514be9788b5be6ff9b\">Darkweb section</a>.</p><h3>General information</h3><p>Cracking-tools offerings put offensive capability into more hands: paid commercial tooling with its licensing defeated (cracked Cobalt Strike, nulled admin panels), services that crack a named program on order (keygens, patched license checks, deobfuscation), credential-stuffing checkers and their configs (OpenBullet, SilverBullet), and brute/scan tools aimed at network and shop panels. A cracked copy of a commercial offensive framework strips away the vendor&#x27;s licensing controls and export discipline, so each such listing widens the population of actors running it; a checker or brute config names the exact login surfaces its buyers will hammer. For the vendor of the cracked product this is licence abuse that feeds real intrusions; for the services a checker targets it is advance notice of credential-stuffing traffic.</p><h3>Recommendations</h3><h4>Preparation</h4><ul><li>For login surfaces named in checker/brute listings: enforce rate limits and bot detection on authentication endpoints, require MFA, and alert on credential-stuffing patterns (many accounts, few passwords, rotating proxies).</li><li>Monitor the underground for your product or panels in cracked-tool and checker listings; Group-IB Threat Intelligence tracks these markets and flags listings that name your software or service.</li><li>For software vendors: build licence checks that phone home, and watch for your product&#x27;s cracked builds — their C2 and watermark defaults often identify the leaked licence.</li></ul><h4>Response</h4><ul><li>If your product is listed cracked, identify the leaked build or licence, revoke it, and notify customers whose watermarked copies match.</li><li>If your service is named as a checker target, review authentication logs for stuffing bursts and tighten the named endpoint&#x27;s controls for the exposure window.</li><li>Request takedown of download links and report the hosting to its abuse contact.</li></ul><h4>Post-incident</h4><ul><li>Audit which accounts were accessed through credential stuffing and force resets on the affected population.</li><li>For vendors: fix the licensing weakness the crack exploits and re-key affected customers.</li><li>Keep monitoring for re-uploads of the same build; Group-IB can help via the Service Desk.</li></ul><h3>Disclaimer</h3><ul><li><em>Please note that the information in this report is based on statements made by alleged threat actors and should be independently verified.</em></li><li><em>This report was generated using artificial intelligence and may contain inaccuracies; it is advisable to double-check the provided information.</em></li><li><em>The recommendations above, like this notification as a whole, are generated automatically and are general in nature. Each incident is unique and should be analyzed by specialists with the appropriate experience and skills. If you would like Group-IB&#x27;s specialists to review the incident and provide a more detailed description or a tailored list of recommendations, please submit a request in https://tap.group-ib.com/service_desk — our specialists will be happy to assist you.</em></li></ul>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "AutoReport",
+  "Cracking Tools"
+ ],
+ "files": [],
+ "forumsAccounts": [
+  {
+   "messageCount": null,
+   "nickname": "Argfilox",
+   "registeredAt": null,
+   "url": "https://darkforums.as/User-Argfilox"
+  }
+ ],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "2ef0ecd494e9c19c096b9d2e88b610b7f14838ed",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [
+  {
+   "attackName": "[Obtain Capabilities->Tool]",
+   "attackPatternId": "attack-pattern--a2fdce72-04b2-409a-ac10-cc1695f4fce0",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1588.002",
+   "params": null
+  }
+ ],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3011-2138",
+ "sectors": [],
+ "seqPublish": "01a19867-a315-76d7-90cd-76b6c118b16d",
+ "seqUpdate": 17935582951768,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [
+  "https://darkforums.as/Thread-CraxsRAT-original-v31-10-original-Unpacked-EVLF-Dev-%F0%9F%8E%81%F0%9F%92%A5?pid=778011#pid778011"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "4c6675a105dbbe2ec4e05bdb8ca8679beff0137e",
+  "isAPT": false,
+  "name": "Argfilox"
+ },
+ "title": "Offensive tooling (CraxsRAT v31.10) offered for sale",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-11-01T21:38:15+03:00"
+}

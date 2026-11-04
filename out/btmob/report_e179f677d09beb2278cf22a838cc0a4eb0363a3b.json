@@ -1,0 +1,98 @@
+{
+ "contacts": [],
+ "countries": [
+  "CA"
+ ],
+ "createdAt": "2022-11-15T21:55:32+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2022-11-15",
+ "dateLastSeen": "2022-11-15",
+ "datePublished": "2022-11-15",
+ "description": "<p>2022-11-15 Quantum ransomware posted new data related to <b>Capital Power </b>capitalpower[.]com.</p>  <figure class=\"image\"><img src=\"/api/v2/hi/threat/e179f677d09beb2278cf22a838cc0a4eb0363a3b/file/8dc37c2f1554bedffbe8a8fb1b26052ad91d4bb3171c96c713043414d993bb1b?placeholder=__IMAGE_e179f677d09beb2278cf22a838cc0a4eb0363a3b:8dc37c2f1554bedffbe8a8fb1b26052ad91d4bb3171c96c713043414d993bb1b_IMAGE__\" data-mce-src=\"__IMAGE_e179f677d09beb2278cf22a838cc0a4eb0363a3b:8dc37c2f1554bedffbe8a8fb1b26052ad91d4bb3171c96c713043414d993bb1b_IMAGE__\" /></figure> <p style=\"text-align:center;\"><i>Screenshot from Quantum DLS</i></p><p>  Files list: </p> <figure class=\"table\"><table><thead><tr><th>Publication Date</th><th>URL</th></thead><tbody><tr><td>2022-11-15</td><td>hxxp://x3djueexuhivjtdj5udkjzfsm37kiaoeqy5ywluljbfsf2wsuom5yyid[.]onion/midcodegen[.]com/</td></tbody></table></figure>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "A1",
+  "credibility": 100,
+  "reliability": 100,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Leak",
+  "Ransomware",
+  "Update"
+ ],
+ "files": [
+  {
+   "hash": "8dc37c2f1554bedffbe8a8fb1b26052ad91d4bb3171c96c713043414d993bb1b",
+   "mime": "image/png",
+   "name": "8dc37c2f1554bedffbe8a8fb1b26052ad91d4bb3171c96c713043414d993bb1b",
+   "size": 60293
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "e179f677d09beb2278cf22a838cc0a4eb0363a3b",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [
+  "america:northern_america"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2611-2155",
+ "sectors": [
+  "energy",
+  "energy:energy",
+  "energy:power-grid"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 16685385440408,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "http://quantum445bh3gzuyilxdzs5xdepf3b7lkcupswvkryf3n7hgzpxebid.onion/target/capitalpower",
+   "datePublished": "2023-10-29"
+  }
+ ],
+ "sources": [
+  "http://quantum445bh3gzuyilxdzs5xdepf3b7lkcupswvkryf3n7hgzpxebid.onion/target/capitalpower"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [
+  "Capital Power"
+ ],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "3d86fa0fce495ea07d119f7e381e1c857b69de29",
+  "isAPT": false,
+  "name": "Quantum"
+ },
+ "title": "Quantum Ransomware attack on Capital Power (Update)",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2022-11-15T21:55:44+03:00"
+}

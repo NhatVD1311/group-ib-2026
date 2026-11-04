@@ -1,0 +1,179 @@
+{
+ "addedToThreatLandscapeFor": null,
+ "aliases": [
+  "balonx",
+  "brandon",
+  "Jay"
+ ],
+ "country": "MX",
+ "createdAt": "2026-04-23T01:04:26+03:00",
+ "description": "<p><strong>Balonx Sistema</strong> is a &nbsp;threath actor responsible for a highly organized Phishing-as-a-Service (PhaaS) kit that operates on a weekly subscription model to target banking users across Mexico. The kit is designed to impersonate over 20 major Mexican financial institutions, including BBVA, Citibanamex, and Banorte. It is sold to other criminals under two primary tiers: an Individual Plan (3,000 MXN/week) and an Office Plan (6,000 MXN/week), with payments handled through cryptocurrency via the Bitso API, and sales managed on Telegram via @BalonxSistema.<br><br>Technically, the kit employs aggressive anti-analysis and evasion techniques. It uses behavioral detection to score mouse movement and typing speed, blocking sessions below a 50-point human-activity threshold. It also uses geolocation spoofing to always report coordinates for Mexico City (CDMX), bypassing geographic fraud checks. The Command and Control (C2) domain is aclaracionesditales[.]com (a typosquatted domain), and the kit relies on legitimate third-party services like the Sofmex API for SMS distribution</p><figure class=\"image\"><img src=\"/api/v2/hi/threat_actor/2530a2b46223154e3bc70a245138aa3c4eb75446/file/6c038863fbabb8258d61b8090f9b3026f925afbfa3e618e78607826bb5351580?placeholder=__IMAGE_2530a2b46223154e3bc70a245138aa3c4eb75446:6c038863fbabb8258d61b8090f9b3026f925afbfa3e618e78607826bb5351580_IMAGE__\" width=\"640\" /></figure>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "files": [
+  {
+   "hash": "6c038863fbabb8258d61b8090f9b3026f925afbfa3e618e78607826bb5351580",
+   "mime": "image/jpeg",
+   "name": "6c038863fbabb8258d61b8090f9b3026f925afbfa3e618e78607826bb5351580",
+   "size": 107145
+  }
+ ],
+ "goals": [],
+ "hasIocs": true,
+ "id": "2530a2b46223154e3bc70a245138aa3c4eb75446",
+ "isAPT": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "linkedAttackPatterns": null,
+ "name": "BalonxSistema",
+ "oldId": null,
+ "roles": [],
+ "seqUpdate": 17936528640453,
+ "spokenOnLangs": [
+  "es"
+ ],
+ "stat": {
+  "allIndicatorsCount": 55,
+  "allReportsCount": 3,
+  "contactsCount": 4,
+  "countries": [
+   "MX"
+  ],
+  "cve": [],
+  "dateFirstSeen": "2025-07-24",
+  "dateLastSeen": "2026-06-16",
+  "expertise": [
+   "Phishing",
+   "Unique_data",
+   "Scam"
+  ],
+  "forumsAccountsCount": 0,
+  "malware": [],
+  "regions": [
+   "america:central_america"
+  ],
+  "relatedThreatActorsCount": 0,
+  "reports": [
+   {
+    "companyId": [],
+    "datePublished": "2026-06-16",
+    "id": "875cdf19e1a05ba65dc4fff650f22080cfdedea9",
+    "name": {
+     "en": "CallFlow Project - AI Vishing Module"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2026-06-16",
+    "id": "9451b1f419f89743a3d93decd7fe333918fe7b57",
+    "name": {
+     "en": "Balonx Sistema PhaaS Mexico"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2026-04-23",
+    "id": "6c9836e2f1abb78b4b49d07f25ba042539426233",
+    "name": {
+     "en": "Phishing Campaign Analysis — Aclaraciones Bancarias (PhaaS Mexico)"
+    }
+   }
+  ],
+  "sectors": [
+   "financial-services",
+   "financial-services:banking",
+   "financial-services:accounting",
+   "financial-services:angel-investment",
+   "financial-services:asset-management",
+   "financial-services:auto-insurance",
+   "financial-services:bitcoin",
+   "financial-services:commercial-insurance",
+   "financial-services:commercial-lending",
+   "financial-services:consumer-lending",
+   "financial-services:credit",
+   "financial-services:credit-bureau",
+   "financial-services:credit-cards",
+   "financial-services:crowdfunding",
+   "financial-services:cryptocurrency",
+   "financial-services:debit-cards",
+   "financial-services:debt-collections",
+   "financial-services:finance",
+   "financial-services:financial-exchanges",
+   "financial-services:financial-services",
+   "financial-services:fintech",
+   "financial-services:fraud-detection",
+   "financial-services:funding-platform",
+   "financial-services:gift-card",
+   "financial-services:health-insurance",
+   "financial-services:hedge-funds",
+   "financial-services:impact-investing",
+   "financial-services:incubators",
+   "financial-services:insurance",
+   "financial-services:insurtech",
+   "financial-services:leasing",
+   "financial-services:lending",
+   "financial-services:life-insurance",
+   "financial-services:micro-lending",
+   "financial-services:mobile-payments",
+   "financial-services:payments",
+   "financial-services:personal-finance",
+   "financial-services:prediction-markets",
+   "financial-services:property-insurance",
+   "financial-services:real-estate-investment",
+   "financial-services:stock-exchanges",
+   "financial-services:trading-platform",
+   "financial-services:transaction-processing",
+   "financial-services:venture-capital",
+   "financial-services:virtual-currency",
+   "financial-services:wealth-management"
+  ],
+  "targetDomain": [],
+  "targetedCompany": [
+   "American Express",
+   "BanCoppel",
+   "Banco Azteca",
+   "Falabella",
+   "Mifel",
+   "PlataCard",
+   "Scotiabank",
+   "Afirme",
+   "Banjercito",
+   "Banregio",
+   "Grupo Financiero Banorte SAB de CV",
+   "Liverpool",
+   "Banco del Bienestar",
+   "Banorte",
+   "HSBC Holdings plc"
+  ],
+  "targetedPartnersAndClients": [
+   "BanCoppel",
+   "Grupo Financiero Banorte SAB de CV",
+   "Grupo Financiero Banorte SAB de CV (BrandProtection)",
+   "PlataCard"
+  ]
+ },
+ "techSeqUpdate": null,
+ "threatLandscapeOptions": [
+  {
+   "label": "company",
+   "value": "company"
+  },
+  {
+   "label": "partner",
+   "value": "partner"
+  },
+  {
+   "label": "industry",
+   "value": "industry"
+  },
+  {
+   "label": "other",
+   "value": "other"
+  }
+ ],
+ "updatedAt": "2026-11-02T23:54:24+03:00"
+}

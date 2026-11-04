@@ -1,0 +1,579 @@
+{
+ "contacts": [],
+ "countries": [
+  "RU"
+ ],
+ "createdAt": "2022-06-27T12:24:51+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2022-06-23",
+ "dateLastSeen": "2022-06-23",
+ "datePublished": "2022-06-27",
+ "description": "<p>Group-IB Threat Intelligence and Attribution system has detected a malicious document at VirusTotal (VT). The file \"Пояснительная записка к ЗНИ.doc\" was submitted in 2022-06-23 21:18:58 UTC from RU via Web.</p><h2>RoyalRoad RTF</h2><p>The analyzed file \"Пояснительная записка к ЗНИ.doc\" is a malicious RTF document which was weaponized by Royal Road RTF Weaponizer. Royal Road is commonly used by Chinese-speaking attackers.</p><p>The decoy is about the request to change the passport of the federal project \"Information Security\" (№D4-2022/015 from 06.06.2022).</p><figure class=\"image image_resized\" style=\"width:504px;\"><img src=\"/api/v2/hi/threat/d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9/file/e6f748164140b4f42b89370449f7c46de181d77c163dcdbd1a10638359dc0fb0?placeholder=__IMAGE_d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9:e6f748164140b4f42b89370449f7c46de181d77c163dcdbd1a10638359dc0fb0_IMAGE__\"  /></figure><p>Meta-information of decoy:</p><figure class=\"image image_resized\" style=\"width:466px;\"><img src=\"/api/v2/hi/threat/d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9/file/23aaeb6be8c40812d87a3eec8cf1f40f652376bea40a380ea6f5e4899fa2d783?placeholder=__IMAGE_d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9:23aaeb6be8c40812d87a3eec8cf1f40f652376bea40a380ea6f5e4899fa2d783_IMAGE__\"  /></figure><p>The malicious encoded payload:</p><figure class=\"image image_resized\" style=\"width:589px;\"><img src=\"/api/v2/hi/threat/d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9/file/b7c8b37de4dd38c65e16ab18669df0dc272bfab46f8aac856f1667442b0c9ac1?placeholder=__IMAGE_d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9:b7c8b37de4dd38c65e16ab18669df0dc272bfab46f8aac856f1667442b0c9ac1_IMAGE__\"  /></figure><h2>Decoded payload - Bisonal.DoubleT variant</h2><p>The decoded payload is a malicious PE32 format EXE file which can be classified as a Bisonal.DoubleT backdoor. This malware provides remote access to a compromised computer and allows an attacker to execute various commands on it.</p><p>Compilation TimeDateStamp: 20.06.2022 03:16:24 UTC. The payload has the same capabilities as we described in previous <a href=\"https://tap.group-ib.com/ta/actors?ta=b9f1eb449d596cf1b57aa5ea974472b7fda3dd2e&amp;tab=timeline&amp;reportId=94257748c27154a5e1a02241fb93792b9f82a3e1\">notification</a>.</p><h2>Attribution</h2><p>This campaign belongs to APT Tonto Team. You can see it from Group-IB Graph picture:</p><figure class=\"image image_resized\" style=\"width:526px;\"><img src=\"/api/v2/hi/threat/d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9/file/582b34aacb02822591dbb04cfb5c54a90ebc7c8414e72d80bd26580977108968?placeholder=__IMAGE_d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9:582b34aacb02822591dbb04cfb5c54a90ebc7c8414e72d80bd26580977108968_IMAGE__\"  /></figure><h2>Additional IoCs</h2><h3><strong>URLs</strong></h3><ul><li>(Hello - GET request) hXXps://news[.]wooordhunts[.]com/ru/order/index.php?strPageID=[ID], where ID is a decimal number (example: hXXps://news[.]wooordhunts[.]com/ru/order/index.php?strPageID=167880896)</li><li>(Command - GET request) hXXps://news[.]wooordhunts[.]com/ru/news/index.php?strPageID=[ID]&amp;newsID=[YYYY-MM-DD-mmss]</li><li>(Response- POST request) hXXps://news[.]wooordhunts[.]com/xhome[.]native[.]page/datareader.php?sid=[ID]</li><li>(Download &amp; Execute - GET request) hXXps://news[.]wooordhunts[.]com/siteFiles/index.php?strPageID=[ID]</li></ul><h3><strong>Other IoCs</strong></h3><pre><code class=\"language-plaintext\">User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36\\r\\nAccept-Encoding: gzip, deflate\\r\\nAccept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7\\r\\nCookie: JSESSIONID=[Base32 encoded infromation about victim computer]</code></pre>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "A2",
+  "credibility": 80,
+  "reliability": 100,
+  "severity": "orange",
+  "tlp": "red",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "e6f748164140b4f42b89370449f7c46de181d77c163dcdbd1a10638359dc0fb0",
+   "mime": "image/png",
+   "name": "e6f748164140b4f42b89370449f7c46de181d77c163dcdbd1a10638359dc0fb0",
+   "size": 95851
+  },
+  {
+   "hash": "23aaeb6be8c40812d87a3eec8cf1f40f652376bea40a380ea6f5e4899fa2d783",
+   "mime": "image/png",
+   "name": "23aaeb6be8c40812d87a3eec8cf1f40f652376bea40a380ea6f5e4899fa2d783",
+   "size": 79693
+  },
+  {
+   "hash": "b7c8b37de4dd38c65e16ab18669df0dc272bfab46f8aac856f1667442b0c9ac1",
+   "mime": "image/png",
+   "name": "b7c8b37de4dd38c65e16ab18669df0dc272bfab46f8aac856f1667442b0c9ac1",
+   "size": 167162
+  },
+  {
+   "hash": "582b34aacb02822591dbb04cfb5c54a90ebc7c8414e72d80bd26580977108968",
+   "mime": "image/png",
+   "name": "582b34aacb02822591dbb04cfb5c54a90ebc7c8414e72d80bd26580977108968",
+   "size": 203045
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "d0fb1bbcb5d0bd411a88f3daee3aa396f6d4a3e9",
+ "indicatorMalwareRelationships": [
+  {
+   "indicatorId": "20fbae5b4f3551d67a50d949920b68dd57cc7c1f",
+   "malwareId": "143f2b6525874454e925b75d386879f28b8f0242"
+  }
+ ],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-06-27",
+   "dateLastSeen": "2022-06-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "d748141a5878b7ef21c2663e9a1cdd2d",
+    "other": [],
+    "sha1": "dc943ff76af8384913bc0b79573fea71c7999a08",
+    "sha256": "10f881212a7c60f1da2f0b0473a7f1dd0af0b99a1e154f46f7fed45d92b7b05d"
+   },
+   "id": "b00f36abc2f785f780d9c0608ab1ec3a11b9afa2",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "d748141a5878b7ef21c2663e9a1cdd2d",
+     "sha1": "dc943ff76af8384913bc0b79573fea71c7999a08",
+     "sha256": "10f881212a7c60f1da2f0b0473a7f1dd0af0b99a1e154f46f7fed45d92b7b05d"
+    },
+    "name": "dcnx18pwh.wmf",
+    "nameList": [
+     "dcnx18pwh.wmf"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "dcnx18pwh.wmf"
+   ],
+   "seqUpdate": 16563218950184,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-06-27",
+   "dateLastSeen": "2022-06-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "543bb103b8ad231ca53f6c1eb369c094",
+    "other": [],
+    "sha1": "415ce2db3957294d73fa832ed844940735120bae",
+    "sha256": "43622526694b40bad5fde8971f7937a22b8e6f4012dbd39cd4746429e056c609"
+   },
+   "id": "fb3115a2a7a2abca63c65f8fa2bcca347862251a",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "543bb103b8ad231ca53f6c1eb369c094",
+     "sha1": "415ce2db3957294d73fa832ed844940735120bae",
+     "sha256": "43622526694b40bad5fde8971f7937a22b8e6f4012dbd39cd4746429e056c609"
+    },
+    "name": "Пояснительная записка к ЗНИ.doc",
+    "nameList": [
+     "Пояснительная записка к ЗНИ.doc"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Пояснительная записка к ЗНИ.doc"
+   ],
+   "seqUpdate": 16563218950005,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-06-27",
+   "dateLastSeen": "2022-06-27",
+   "domain": "news.wooordhunts.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "004b1e2c34e621a4418abb4f1368cc2842c74a39",
+   "ip": [
+    "137.220.176.165"
+   ],
+   "ipScores": [
+    {
+     "ip": "137.220.176.165",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "https://news.wooordhunts.com/ru/order/index.php?strPageID=167880896",
+    "domain": "news.wooordhunts.com",
+    "ipv4": [
+     "137.220.176.165"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16563218949617,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": "https://news.wooordhunts.com/ru/order/index.php?strPageID=167880896"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "d598baa47b9bcb4f5059a81515f9480b",
+    "other": [],
+    "sha1": "295a4c55c24260fad46e00f6935c7172f207c247",
+    "sha256": "dcb854e32d3ca08852371673ed7cd9139af761b8b127113746a527050b5e2b1d"
+   },
+   "id": "20fbae5b4f3551d67a50d949920b68dd57cc7c1f",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "d598baa47b9bcb4f5059a81515f9480b",
+     "sha1": "295a4c55c24260fad46e00f6935c7172f207c247",
+     "sha256": "dcb854e32d3ca08852371673ed7cd9139af761b8b127113746a527050b5e2b1d"
+    },
+    "name": "d598baa47b9bcb4f5059a81515f9480b",
+    "nameList": [
+     "d598baa47b9bcb4f5059a81515f9480b"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "143f2b6525874454e925b75d386879f28b8f0242"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "143f2b6525874454e925b75d386879f28b8f0242",
+     "name": "DoubleT",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "d598baa47b9bcb4f5059a81515f9480b"
+   ],
+   "seqUpdate": 17809989992280,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "b00f36abc2f785f780d9c0608ab1ec3a11b9afa2",
+  "fb3115a2a7a2abca63c65f8fa2bcca347862251a",
+  "004b1e2c34e621a4418abb4f1368cc2842c74a39",
+  "20fbae5b4f3551d67a50d949920b68dd57cc7c1f"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "Backdoor"
+   ],
+   "class": null,
+   "id": "143f2b6525874454e925b75d386879f28b8f0242",
+   "name": "DoubleT",
+   "platform": [],
+   "threatLevel": "Medium"
+  },
+  {
+   "category": [
+    "Downloader"
+   ],
+   "class": null,
+   "id": "1bb4aee803eb9bf2f3dbdae7f231b3e5401a5494",
+   "name": "TontoTeam.Downloader",
+   "platform": [],
+   "threatLevel": "Medium"
+  },
+  {
+   "category": [
+    "Exploit"
+   ],
+   "class": null,
+   "id": "41770bd2cb4e28ca478b92c6ebdfb6e7acf87524",
+   "name": "RoyalRoad",
+   "platform": [],
+   "threatLevel": "Medium"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "[Command and Scripting Interpreter->Windows Command Shell]",
+   "attackPatternId": "attack-pattern--d1fcf083-a721-4223-aedf-bf8960798d62",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.003",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Command and Scripting Interpreter",
+   "attackPatternId": "attack-pattern--7385dfaf-6886-4229-9ecd-6fd678040830",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Exploitation for Client Execution",
+   "attackPatternId": "attack-pattern--be2dcee9-a7a7-4e38-afd6-21b31ecc3d63",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1203",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[User Execution->Malicious File]",
+   "attackPatternId": "attack-pattern--232b7f21-adf9-4b42-b936-b9d6f7df856e",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204.002",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "User Execution",
+   "attackPatternId": "attack-pattern--8c32eb4d-805f-4fc5-bf60-c4d476c131b5",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Deobfuscate/Decode Files or Information",
+   "attackPatternId": "attack-pattern--3ccef7ae-cb5e-48f6-8302-897105fbf55c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1140",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Obfuscated Files or Information",
+   "attackPatternId": "attack-pattern--b3d682b6-98f2-4fb0-aa3b-b4df007ca70a",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1027",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Process Discovery",
+   "attackPatternId": "attack-pattern--8f4a33ec-8b1f-4b80-a2f6-642b2e479580",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1057",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Information Discovery",
+   "attackPatternId": "attack-pattern--354a7f88-63fb-41b5-a801-ce3b377b36f1",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1082",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[System Location Discovery->System Language Discovery]",
+   "attackPatternId": "attack-pattern--c1b68a96-3c48-49ea-a6c0-9b27359f9c19",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1614.001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Location Discovery",
+   "attackPatternId": "attack-pattern--c877e33f-1df6-40d6-b1e7-ce70f16f4979",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1614",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Network Configuration Discovery",
+   "attackPatternId": "attack-pattern--707399d6-ab3e-4963-9315-d9d3818cd6a0",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1016",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Owner/User Discovery",
+   "attackPatternId": "attack-pattern--03d7999c-1f4c-42cc-8373-e7690d318104",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1033",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "System Time Discovery",
+   "attackPatternId": "attack-pattern--f3c544dc-673c-4ef3-accb-53229f1ae077",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1124",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Application Layer Protocol",
+   "attackPatternId": "attack-pattern--355be19c-ffc9-46d5-8d50-d6a036c675b6",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Data Obfuscation",
+   "attackPatternId": "attack-pattern--ad255bfe-a9e6-4b52-a258-8d3462abe842",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1001",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "[Encrypted Channel->Asymmetric Cryptography]",
+   "attackPatternId": "attack-pattern--bf176076-b789-408e-8cba-7275e81c0ada",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573.002",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Encrypted Channel",
+   "attackPatternId": "attack-pattern--b8902400-e6c5-4ba2-95aa-2d35b442b118",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Ingress Tool Transfer",
+   "attackPatternId": "attack-pattern--e6919abc-99f9-4c6c-95a5-14761e7b2add",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1105",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  },
+  {
+   "attackName": "Exfiltration Over C2 Channel",
+   "attackPatternId": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1041",
+   "params": {
+    "data": "",
+    "sampleList": null
+   }
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "europe"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2606-1224",
+ "sectors": [
+  "government-and-military:government",
+  "government-and-military"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 16867251902085,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "CN",
+  "id": "b9f1eb449d596cf1b57aa5ea974472b7fda3dd2e",
+  "isAPT": true,
+  "name": "Tonto Team"
+ },
+ "title": "New malicious document of Tonto Team",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2023-06-14T09:46:30+03:00"
+}

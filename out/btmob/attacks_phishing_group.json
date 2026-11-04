@@ -1,0 +1,324 @@
+[
+ {
+  "brand": "404",
+  "countPhishing": 1,
+  "date": {
+   "blocked": null,
+   "added": "2021-08-19T20:25:56+03:00",
+   "detected": "2021-08-19T20:24:19+03:00",
+   "blockedIndexed": null,
+   "updated": "2021-08-19T20:26:01+03:00"
+  },
+  "domain": "btmoblleupgrqde.weebly.com",
+  "domainInfo": {
+   "domain": "btmoblleupgrqde.weebly.com",
+   "domainPuny": "btmoblleupgrqde.weebly.com",
+   "expirationDate": null,
+   "registered": null,
+   "registrar": null,
+   "tld": "com",
+   "title": "404 - Page Not Found",
+   "category": []
+  },
+  "domainTitle": "404 - Page Not Found",
+  "evaluation": {
+   "admiraltyCode": "C3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "green",
+   "tlp": "amber",
+   "ttl": 0
+  },
+  "falsePositive": false,
+  "groupLifetime": 2739697,
+  "id": "fe8465505d536d11311a901aa7cc9fa726001fc3afe64c2747ea5c58fb68de1d",
+  "ip": [
+   {
+    "ip": "199.34.228.53",
+    "countryCode": "US",
+    "countryName": "United States",
+    "provider": "Weebly"
+   }
+  ],
+  "objective": [
+   "Not Found"
+  ],
+  "phishingKitArray": [],
+  "screenshot": {
+   "icon": {
+    "hashSha256": "i:29bd61683747e9288f62407525d5ed4dccf3feaad2684bbb2c2df41f6027e4db",
+    "filetype": "icon",
+    "filename": "i:29bd61683747e9288f62407525d5ed4dccf3feaad2684bbb2c2df41f6027e4db",
+    "mime": "image/x-icon",
+    "fileHashMd5": ""
+   },
+   "pageHtml": {
+    "hashSha256": "h:a4283a5189bf9aed3407b712745a96800b9e8c63f0e3a13f8c0d047e3049e0b2",
+    "filetype": "pageHtml",
+    "filename": "h:a4283a5189bf9aed3407b712745a96800b9e8c63f0e3a13f8c0d047e3049e0b2",
+    "mime": "text/html",
+    "fileHashMd5": ""
+   },
+   "pageScreen": {
+    "hashSha256": "s:dcef48243ecde7a99bf3749f7dabdec9ca754ec3e5276a08b565ec596b75d5b8",
+    "filetype": "pageScreen",
+    "filename": "s:dcef48243ecde7a99bf3749f7dabdec9ca754ec3e5276a08b565ec596b75d5b8",
+    "mime": "image/jpeg",
+    "fileHashMd5": ""
+   }
+  },
+  "seqUpdate": 1629393961906345,
+  "signature": {
+   "resource": [
+    "f80769d6037219c0c7e6fdcff293dc08fb7e65ec38c2bee84ff8eaf7eca7573a"
+   ],
+   "screen": [],
+   "manual": []
+  },
+  "source": [
+   "phishtank"
+  ],
+  "status": 7,
+  "threatActor": {
+   "id": "",
+   "name": "",
+   "nameIndexed": "",
+   "isAPT": false
+  },
+  "uniqueTitles": [
+   {
+    "faviconHashes": {
+     "md5": "199783f9459a960310d18ee4dd251027",
+     "sha1": "",
+     "sha256": "29bd61683747e9288f62407525d5ed4dccf3feaad2684bbb2c2df41f6027e4db"
+    },
+    "title": ""
+   }
+  ],
+  "urlListLink": "",
+  "whitelist": false,
+  "phishing": [
+   {
+    "id": "f81209fb68bf1aa9c6657648e51230d64e53b833f42d649b985baff4b00dacf4",
+    "url": "https://btmoblleupgrqde.weebly.com",
+    "date": {
+     "blocked": null,
+     "added": "2021-08-19T20:25:46+03:00",
+     "detected": "2021-08-19T20:24:19+03:00"
+    },
+    "status": 7,
+    "objective": [
+     "Not Found"
+    ],
+    "source": [
+     "phishtank"
+    ],
+    "client": [
+     "UrlPreProcessor"
+    ],
+    "title": "",
+    "domain": {
+     "registrar": "",
+     "domain": "btmoblleupgrqde.weebly.com",
+     "registered": "",
+     "title": "404 - Page Not Found",
+     "category": [],
+     "expiration": "",
+     "tld": "com",
+     "puny": "btmoblleupgrqde.weebly.com"
+    },
+    "ip": {
+     "countryCode": "US",
+     "city": "San Francisco",
+     "provider": "Weebly",
+     "ip": "199.34.228.53",
+     "countryName": "United States"
+    },
+    "phishingKit": [],
+    "screen": {
+     "icon": {
+      "hashSha256": "i:29bd61683747e9288f62407525d5ed4dccf3feaad2684bbb2c2df41f6027e4db",
+      "filetype": "icon",
+      "filename": "i:29bd61683747e9288f62407525d5ed4dccf3feaad2684bbb2c2df41f6027e4db",
+      "mime": "image/x-icon",
+      "fileHashMd5": "199783f9459a960310d18ee4dd251027"
+     },
+     "pageHtml": {
+      "hashSha256": "h:a4283a5189bf9aed3407b712745a96800b9e8c63f0e3a13f8c0d047e3049e0b2",
+      "filetype": "pageHtml",
+      "filename": "h:a4283a5189bf9aed3407b712745a96800b9e8c63f0e3a13f8c0d047e3049e0b2",
+      "mime": "text/html",
+      "fileHashMd5": ""
+     },
+     "pageScreen": {
+      "hashSha256": "s:dcef48243ecde7a99bf3749f7dabdec9ca754ec3e5276a08b565ec596b75d5b8",
+      "filetype": "pageScreen",
+      "filename": "s:dcef48243ecde7a99bf3749f7dabdec9ca754ec3e5276a08b565ec596b75d5b8",
+      "mime": "image/jpeg",
+      "fileHashMd5": ""
+     }
+    },
+    "renderedUrls": [
+     "https://btmoblleupgrqde.weebly.com/"
+    ]
+   }
+  ],
+  "displayOptions": {
+   "isFavourite": false,
+   "isHidden": false
+  }
+ },
+ {
+  "brand": "Not specified",
+  "countPhishing": 1,
+  "date": {
+   "blocked": "2023-12-06T12:04:54+00:00",
+   "added": "2023-12-06T12:04:54+00:00",
+   "detected": "2023-12-06T12:04:54+00:00",
+   "blockedIndexed": null,
+   "updated": "2023-12-07T00:05:10+00:00"
+  },
+  "domain": "btmobile.onepage.me",
+  "domainInfo": {
+   "domain": "btmobile.onepage.me",
+   "domainPuny": "btmobile.onepage.me",
+   "expirationDate": null,
+   "registered": null,
+   "registrar": null,
+   "tld": "me",
+   "title": "",
+   "category": [
+    ""
+   ]
+  },
+  "domainTitle": "Home page",
+  "evaluation": {
+   "admiraltyCode": "C3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "green",
+   "tlp": "amber",
+   "ttl": 0
+  },
+  "falsePositive": false,
+  "groupLifetime": 0,
+  "id": "6095bacb9312e076ec18b8c3dcd9bda35fe4709d4a298c0b5bf98840fd9c7007",
+  "ip": [
+   {
+    "ip": "34.89.236.29",
+    "countryCode": "DE",
+    "countryName": "Germany",
+    "provider": "Google Cloud"
+   }
+  ],
+  "objective": [],
+  "phishingKitArray": [],
+  "screenshot": {
+   "pageHtml": {
+    "hashSha256": "h:3d7149b186b26c095827e9f2d8b5f6a33569d893d431392e0ca1fb0026c6c774",
+    "filetype": "pageHtml",
+    "filename": "h:3d7149b186b26c095827e9f2d8b5f6a33569d893d431392e0ca1fb0026c6c774",
+    "mime": "text/html",
+    "fileHashMd5": ""
+   },
+   "pageScreen": {
+    "hashSha256": "s:6986177104287d4c7640cddcad57a826c57b5c8a3b1ec2c8fb6a0f070c977230",
+    "filetype": "pageScreen",
+    "filename": "s:6986177104287d4c7640cddcad57a826c57b5c8a3b1ec2c8fb6a0f070c977230",
+    "mime": "image/jpeg",
+    "fileHashMd5": ""
+   }
+  },
+  "seqUpdate": 1701907510017330,
+  "signature": {
+   "resource": [],
+   "screen": [],
+   "manual": []
+  },
+  "source": [
+   "openphish"
+  ],
+  "status": 1,
+  "threatActor": {
+   "id": "",
+   "name": "",
+   "nameIndexed": "",
+   "isAPT": false
+  },
+  "uniqueTitles": [
+   {
+    "faviconHashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "title": ""
+   }
+  ],
+  "urlListLink": "",
+  "whitelist": false,
+  "phishing": [
+   {
+    "id": "de55d490547ecd3e6001f63fe73b0d7ff65236eaac3a1e288ea2e1f1ac231afc",
+    "url": "https://btmobile.onepage.me",
+    "date": {
+     "blocked": "2023-12-06T12:04:54Z",
+     "added": "2023-12-06T12:04:54Z",
+     "detected": "2023-12-06T12:04:54Z"
+    },
+    "status": 1,
+    "objective": [],
+    "source": [
+     "openphish"
+    ],
+    "client": [
+     "process-v2"
+    ],
+    "title": "",
+    "domain": {
+     "registrar": "",
+     "domain": "btmobile.onepage.me",
+     "registered": "",
+     "title": "",
+     "category": [
+      ""
+     ],
+     "expiration": "",
+     "tld": "me",
+     "puny": "btmobile.onepage.me"
+    },
+    "ip": {
+     "countryCode": "DE",
+     "city": "Frankfurt am Main",
+     "provider": "Google Cloud",
+     "ip": "34.89.236.29",
+     "countryName": "Germany"
+    },
+    "phishingKit": [],
+    "screen": {
+     "pageHtml": {
+      "hashSha256": "h:3d7149b186b26c095827e9f2d8b5f6a33569d893d431392e0ca1fb0026c6c774",
+      "filetype": "pageHtml",
+      "filename": "h:3d7149b186b26c095827e9f2d8b5f6a33569d893d431392e0ca1fb0026c6c774",
+      "mime": "text/html",
+      "fileHashMd5": "34e69b4503bcede248410f6a124a1cce"
+     },
+     "pageScreen": {
+      "hashSha256": "s:6986177104287d4c7640cddcad57a826c57b5c8a3b1ec2c8fb6a0f070c977230",
+      "filetype": "pageScreen",
+      "filename": "s:6986177104287d4c7640cddcad57a826c57b5c8a3b1ec2c8fb6a0f070c977230",
+      "mime": "image/jpeg",
+      "fileHashMd5": "7b953edd0adbc2581b720dd1a3888f98"
+     }
+    },
+    "renderedUrls": [
+     "https://btmobile.onepage.me/"
+    ]
+   }
+  ],
+  "displayOptions": {
+   "isFavourite": false,
+   "isHidden": false
+  }
+ }
+]

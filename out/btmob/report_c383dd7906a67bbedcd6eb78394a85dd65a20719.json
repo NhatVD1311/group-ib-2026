@@ -1,0 +1,647 @@
+{
+ "contacts": [],
+ "countries": [],
+ "createdAt": "2024-10-01T15:20:21+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2024-10-01",
+ "dateLastSeen": "2024-10-01",
+ "datePublished": "2024-10-02",
+ "description": "\n<pre>\n    <code>This report is published automatically.</code>\n</pre><p>\n        During daily monitoring of malicious infrastructure the Group-IB Threat Intelligence detected the following indicators:\n    </p>\n\n    <ul><li>hosts (2)</li><li>files (12)</li></ul><p>\n    The disclosed indicators with medium/medium-high confidence belong to the\n    ALPHV. The indicators have already been used or will be used in future attacks.\n</p>\n\n<p>\n    Source description:\n</p>\n<ul><li>\n                Open threats – information obtained from public sources.\n            </li></ul><p>Detected network indicators:</p>\n<table>\n    <tr>\n        <td>Source</td>\n        <td>URL</td>\n        <td>Domain</td>\n        <td>IP</td>\n        <td>Related malware</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>-</td>\n        <td>make-catherine[.]at[.]ply[.]gg</td>\n        <td>-</td>\n        <td>-</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>-</td>\n        <td>fastxstreamz[.]herokuapp[.]com</td>\n        <td>-</td>\n        <td>-</td>\n    </tr></table><p>Detected file indicators:</p>\n<table>\n    <tr>\n        <td>Source</td>\n        <td>Date of first file upload to VT</td>\n        <td>File name on VT</td>\n        <td>Hash</td>\n        <td>Number of detections on VT</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>bb02702434bc4565db92df8bf4b169bf4fd57f71</td>\n        <td>55/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>51bc4a02d672ce0c4b6e9d5a3a517b934adb670e</td>\n        <td>66/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>f481e3cd126a429c33568070c2ff56d27c41a8ce</td>\n        <td>68/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>8d79b89eb9473364371b3649d47ca49ff2dfa93b</td>\n        <td>64/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>1b919a9f24b4e1b6311fc6739595816d910d2aed</td>\n        <td>49/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>7a36afb00dc04927478303dc7df10c088d00da37</td>\n        <td>67/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>e13198f5b835e8a37249e48c6563d120c09d47fd</td>\n        <td>55/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>544df97a35a303af547947624e6f51a69bc57616</td>\n        <td>51/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>151e91ab21a6c155856f760a435e8edbed60988a</td>\n        <td>50/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>e74b5df0d4d93ee9ddf6881f4f1d29fa56971623</td>\n        <td>59/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>1f776a75a4a60473f4ea97bff9324392b8321e02</td>\n        <td>62/77</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>2024-10-01</td>\n        <td><p></p></td>\n        <td>1b4d56ecc2b54586fa0e2c75fd986f2bb557124a</td>\n        <td>58/77</td>\n    </tr></table>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "red",
+  "tlp": "red",
+  "ttl": null
+ },
+ "expertise": [
+  "AutoReport"
+ ],
+ "files": [],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "c383dd7906a67bbedcd6eb78394a85dd65a20719",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "65cd0e68b4b5803064c6ca8be9b05b89",
+    "other": [],
+    "sha1": "bb02702434bc4565db92df8bf4b169bf4fd57f71",
+    "sha256": "d70b4362ab2ecbb1e3f618222f3494fcf5afc7bb757d40f99335ebeddfa685e5"
+   },
+   "id": "fefbf0d5f6c81f6c8f517b7e704580e73e4eb420",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "65cd0e68b4b5803064c6ca8be9b05b89",
+     "sha1": "bb02702434bc4565db92df8bf4b169bf4fd57f71",
+     "sha256": "d70b4362ab2ecbb1e3f618222f3494fcf5afc7bb757d40f99335ebeddfa685e5"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852430112,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "b404acd8cfce28de0fcf5d2b0be04989",
+    "other": [],
+    "sha1": "51bc4a02d672ce0c4b6e9d5a3a517b934adb670e",
+    "sha256": "ca073b77bb9d36ab8aeec19b780f59024b5bb5d985312fb9ad0aa52adeb28775"
+   },
+   "id": "63a5af97fd4d811a59f6f3b0807d6c8e2543775c",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "b404acd8cfce28de0fcf5d2b0be04989",
+     "sha1": "51bc4a02d672ce0c4b6e9d5a3a517b934adb670e",
+     "sha256": "ca073b77bb9d36ab8aeec19b780f59024b5bb5d985312fb9ad0aa52adeb28775"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852430876,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "5aa991c89a6564a3c6351052e157f9d8",
+    "other": [],
+    "sha1": "f481e3cd126a429c33568070c2ff56d27c41a8ce",
+    "sha256": "b26784415a946873e073c3838499fb1bea96f1b6a637e15f1ae85662f8598979"
+   },
+   "id": "267a45d0e783f2a0030ae66bbf231985904df1c6",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "5aa991c89a6564a3c6351052e157f9d8",
+     "sha1": "f481e3cd126a429c33568070c2ff56d27c41a8ce",
+     "sha256": "b26784415a946873e073c3838499fb1bea96f1b6a637e15f1ae85662f8598979"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852431573,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "c2e1048e1e5130e36af297c73a83aff6",
+    "other": [],
+    "sha1": "8d79b89eb9473364371b3649d47ca49ff2dfa93b",
+    "sha256": "4aedbbf653261e60847d9ab2840adec6590e55291336b378da68e40f97c9f9e4"
+   },
+   "id": "d775478a1202c9d9b0492109f2be20d5f9497515",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "c2e1048e1e5130e36af297c73a83aff6",
+     "sha1": "8d79b89eb9473364371b3649d47ca49ff2dfa93b",
+     "sha256": "4aedbbf653261e60847d9ab2840adec6590e55291336b378da68e40f97c9f9e4"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852432327,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "f93695564b97f03cc95ca242edcfb5f8",
+    "other": [],
+    "sha1": "1b919a9f24b4e1b6311fc6739595816d910d2aed",
+    "sha256": "f981e6f147e30b54a386239409d381801ecf082f64bffb91f8f8b05b89236fa3"
+   },
+   "id": "7f8de57b44c4262bce1a0449ed8f5b6711a3d894",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "f93695564b97f03cc95ca242edcfb5f8",
+     "sha1": "1b919a9f24b4e1b6311fc6739595816d910d2aed",
+     "sha256": "f981e6f147e30b54a386239409d381801ecf082f64bffb91f8f8b05b89236fa3"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852438108,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "a7ed00a3b0f827a3dccc69d8908f5a22",
+    "other": [],
+    "sha1": "7a36afb00dc04927478303dc7df10c088d00da37",
+    "sha256": "bf17f462722749cdbad455170d45b0b314311178207921a3ea9144b03eb31eb2"
+   },
+   "id": "1f7d129eb9c63c492b12a23c248e44a53bd91c18",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "a7ed00a3b0f827a3dccc69d8908f5a22",
+     "sha1": "7a36afb00dc04927478303dc7df10c088d00da37",
+     "sha256": "bf17f462722749cdbad455170d45b0b314311178207921a3ea9144b03eb31eb2"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852439028,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "843f24afda0e1b375f00a00b39cf4a6e",
+    "other": [],
+    "sha1": "e13198f5b835e8a37249e48c6563d120c09d47fd",
+    "sha256": "f37452ab619dac62881a4de8dc2d716c7a0cb023ca8f20abf40bc7d3f198172f"
+   },
+   "id": "e9649a1eb866aebb741d14b4337e021718a76308",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "843f24afda0e1b375f00a00b39cf4a6e",
+     "sha1": "e13198f5b835e8a37249e48c6563d120c09d47fd",
+     "sha256": "f37452ab619dac62881a4de8dc2d716c7a0cb023ca8f20abf40bc7d3f198172f"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852439761,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "3f224adb6164f9a9c9e39e437fd0874c",
+    "other": [],
+    "sha1": "e74b5df0d4d93ee9ddf6881f4f1d29fa56971623",
+    "sha256": "da5e78ad0e38c951bb4b53adcc5afe693c2e33533a45a9c666a8dc9852766ffd"
+   },
+   "id": "07424d1f38f58d49320524533fea645e39d096c0",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "3f224adb6164f9a9c9e39e437fd0874c",
+     "sha1": "e74b5df0d4d93ee9ddf6881f4f1d29fa56971623",
+     "sha256": "da5e78ad0e38c951bb4b53adcc5afe693c2e33533a45a9c666a8dc9852766ffd"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852434545,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "d2ffadec5aa0a5cdd5e5cf1a7901eb29",
+    "other": [],
+    "sha1": "544df97a35a303af547947624e6f51a69bc57616",
+    "sha256": "0cbca1a748510ca17fa6af478c90e8c2faccd885ed36ad54fb211b427c94161c"
+   },
+   "id": "45c7fcf18d62662458a01e37d9a13436a7d79fd1",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "d2ffadec5aa0a5cdd5e5cf1a7901eb29",
+     "sha1": "544df97a35a303af547947624e6f51a69bc57616",
+     "sha256": "0cbca1a748510ca17fa6af478c90e8c2faccd885ed36ad54fb211b427c94161c"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852433077,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "636e1a7083439e77920c5c902de8e2ae",
+    "other": [],
+    "sha1": "151e91ab21a6c155856f760a435e8edbed60988a",
+    "sha256": "3f03156b35672e0ec22c782445a1895602ed8a3d04936b3d0dd6582f4aaa8e79"
+   },
+   "id": "66df443215cebc609ce2dc828ab60e7e6d0543da",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "636e1a7083439e77920c5c902de8e2ae",
+     "sha1": "151e91ab21a6c155856f760a435e8edbed60988a",
+     "sha256": "3f03156b35672e0ec22c782445a1895602ed8a3d04936b3d0dd6582f4aaa8e79"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852433826,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "910534b81e283ea8a26c764158fc244f44c36f08",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17277852435270,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "dc408ce9ac4bdf6c5cf2bda34f1efe971cb20ad1",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17277852436039,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "7249f2373bb6adfc60db971b4f7a1d20",
+    "other": [],
+    "sha1": "1f776a75a4a60473f4ea97bff9324392b8321e02",
+    "sha256": "47c2d85fe3f2bf9742428033ecf7b68d04b8300bf0fbfb016af03da0b5fc8059"
+   },
+   "id": "02bc0d529b379057cb8718585a5ebccf66da95de",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "7249f2373bb6adfc60db971b4f7a1d20",
+     "sha1": "1f776a75a4a60473f4ea97bff9324392b8321e02",
+     "sha256": "47c2d85fe3f2bf9742428033ecf7b68d04b8300bf0fbfb016af03da0b5fc8059"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852436726,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2024-10-01",
+   "dateLastSeen": "2024-10-01",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "7237881af3c17426fa262ea362c2d50f",
+    "other": [],
+    "sha1": "1b4d56ecc2b54586fa0e2c75fd986f2bb557124a",
+    "sha256": "0353e25eb6b5a7151861a6f69c3c4505a3021d1831376c3374a091f8e4cd1112"
+   },
+   "id": "36d78d5d2c145b9806aba382df1725de6b67832f",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "7237881af3c17426fa262ea362c2d50f",
+     "sha1": "1b4d56ecc2b54586fa0e2c75fd986f2bb557124a",
+     "sha256": "0353e25eb6b5a7151861a6f69c3c4505a3021d1831376c3374a091f8e4cd1112"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17277852437402,
+   "size": null,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "fefbf0d5f6c81f6c8f517b7e704580e73e4eb420",
+  "63a5af97fd4d811a59f6f3b0807d6c8e2543775c",
+  "267a45d0e783f2a0030ae66bbf231985904df1c6",
+  "d775478a1202c9d9b0492109f2be20d5f9497515",
+  "7f8de57b44c4262bce1a0449ed8f5b6711a3d894",
+  "1f7d129eb9c63c492b12a23c248e44a53bd91c18",
+  "e9649a1eb866aebb741d14b4337e021718a76308",
+  "07424d1f38f58d49320524533fea645e39d096c0",
+  "45c7fcf18d62662458a01e37d9a13436a7d79fd1",
+  "66df443215cebc609ce2dc828ab60e7e6d0543da",
+  "910534b81e283ea8a26c764158fc244f44c36f08",
+  "dc408ce9ac4bdf6c5cf2bda34f1efe971cb20ad1",
+  "02bc0d529b379057cb8718585a5ebccf66da95de",
+  "36d78d5d2c145b9806aba382df1725de6b67832f"
+ ],
+ "isAutogen": true,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2810-1520",
+ "sectors": [],
+ "seqPublish": null,
+ "seqUpdate": 17278272416396,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://securelist.com/key-group-ransomware-samples-and-telegram-schemes/114025/",
+   "datePublished": "2024-10-01"
+  }
+ ],
+ "sources": [
+  "https://securelist.com/key-group-ransomware-samples-and-telegram-schemes/114025/"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "a35fd1154b5308a41e5d248df00e8c94670a86e0",
+  "isAPT": false,
+  "name": "ALPHV"
+ },
+ "title": "ALPHV - New indicators have been found",
+ "toolList": [],
+ "type": "event",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2024-10-02T03:00:41+03:00"
+}

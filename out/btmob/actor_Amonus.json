@@ -1,0 +1,86 @@
+{
+ "addedToThreatLandscapeFor": null,
+ "aliases": [
+  "Rasul"
+ ],
+ "country": null,
+ "createdAt": "2026-06-25T11:30:55+03:00",
+ "description": "<p>Based on the following evidences, the name “Amonus” is the author of&nbsp; the SiriusQT RAT (which the following evidence is referring to):&nbsp;</p><p>&nbsp;</p><img src=\"/api/v2/hi/threat_actor/63d50e6608cda4bbae81261cf543ad658de4b7fb/file/06ebeb3be192492e7bdf8505796abfe2035327561ce860936c12568bbbe40362?placeholder=__IMAGE_63d50e6608cda4bbae81261cf543ad658de4b7fb:06ebeb3be192492e7bdf8505796abfe2035327561ce860936c12568bbbe40362_IMAGE__\" width=\"585\" /><p>&nbsp;</p><p>The name “Amonus”, is also contained in two PDB references consistent with a Windows development environment:&nbsp;</p><p>&nbsp;</p><p>C:\\Users\\Rasul\\source\\repos\\Amonus\\Sirius-QT\\dotnet_loader\\obj\\Release\\NetLoader32.pdb</p><p>C:\\Users\\Rasul\\source\\repos\\Amonus\\Sirius-QT\\dotnet_loader\\obj\\Release\\NetLoader64.pdb</p><p></p><p><strong>Observed</strong></p><ul><li><p>Author (or co-author) of the SiriusQT RAT, based on the name \"Amonus\" in the PDB paths of the .NET loader (<code>NetLoader32.pdb</code>, <code>NetLoader64.pdb</code>).</p></li><li><p>Develops on Windows with Visual Studio under the local username \"Rasul\".</p></li><li><p>Builds in Release configuration, with separate 32-bit and 64-bit loader variants.</p></li></ul><p><strong>Assessed</strong></p><ul><li><p>Primarily a malware developer</p></li><li><p>Uses a loader + payload architecture</p></li><li><p>\"Amonus\" may be an individual or a team, and \"Rasul\" one of its members (low confidence).</p></li></ul><p></p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "files": [
+  {
+   "hash": "06ebeb3be192492e7bdf8505796abfe2035327561ce860936c12568bbbe40362",
+   "mime": "image/png",
+   "name": "06ebeb3be192492e7bdf8505796abfe2035327561ce860936c12568bbbe40362",
+   "size": 22557
+  }
+ ],
+ "goals": [],
+ "hasIocs": true,
+ "id": "63d50e6608cda4bbae81261cf543ad658de4b7fb",
+ "isAPT": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "linkedAttackPatterns": null,
+ "name": "Amonus",
+ "oldId": null,
+ "roles": [],
+ "seqUpdate": 17926867230248,
+ "spokenOnLangs": [],
+ "stat": {
+  "allIndicatorsCount": 402,
+  "allReportsCount": 1,
+  "contactsCount": 0,
+  "countries": [],
+  "cve": [],
+  "dateFirstSeen": "2026-04-01",
+  "dateLastSeen": "2026-10-22",
+  "expertise": [
+   "GIB origin",
+   "Unique_data"
+  ],
+  "forumsAccountsCount": 0,
+  "malware": [],
+  "regions": [],
+  "relatedThreatActorsCount": 0,
+  "reports": [
+   {
+    "companyId": [],
+    "datePublished": "2026-10-22",
+    "id": "3f5e694b8f139f5b8cc808a2aaa347fdc1b507d9",
+    "name": {
+     "en": "Blog article published for SiriusQT RAT"
+    }
+   }
+  ],
+  "sectors": [],
+  "targetDomain": [],
+  "targetedCompany": [],
+  "targetedPartnersAndClients": []
+ },
+ "techSeqUpdate": null,
+ "threatLandscapeOptions": [
+  {
+   "label": "company",
+   "value": "company"
+  },
+  {
+   "label": "partner",
+   "value": "partner"
+  },
+  {
+   "label": "industry",
+   "value": "industry"
+  },
+  {
+   "label": "other",
+   "value": "other"
+  }
+ ],
+ "updatedAt": "2026-10-22T19:32:03+03:00"
+}

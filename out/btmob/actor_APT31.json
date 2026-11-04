@@ -1,0 +1,164 @@
+{
+ "addedToThreatLandscapeFor": null,
+ "aliases": [
+  "Zirconium",
+  "JUDGMENT PANDA",
+  "BRONZE VINEWOOD",
+  "RedBravo"
+ ],
+ "country": "CN",
+ "createdAt": "2019-02-20T17:44:21+00:00",
+ "description": "<p>APT31, also known as Zirconium, is a Chinese state-sponsored hacking group that has been active since at least early 2016, and has historically targeted foreign companies to steal intellectual property, however, it has also targeted diplomatic entities, government, international financial organization, and defense organizations, as well as high tech, construction and engineering, telecommunications, and media.</p><p>In most cases, APT31 delivers malicious files on victim host via phishing emails. The emails contain the downloader or a link to a legitimate resource that contains it (e.g. Google Drive). Next step is download payload from attacker-controlled Github. For social engineering this file is disguised as legitimate software as Microsoft OneDrive, McAfee antivirus etc. Next step is stealing information and sending it to the C2. Threat actor’s C2 usually bases on public services such as DropBox.&nbsp;</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "files": [],
+ "goals": [],
+ "hasIocs": true,
+ "id": "ad8ae7ebfe7b40df4c92a7f89f2c028fdd64cff2",
+ "isAPT": true,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "linkedAttackPatterns": null,
+ "name": "APT31",
+ "oldId": null,
+ "roles": [],
+ "seqUpdate": 17062029612859,
+ "spokenOnLangs": [
+  "zh"
+ ],
+ "stat": {
+  "allIndicatorsCount": 333,
+  "allReportsCount": 23,
+  "contactsCount": 0,
+  "countries": [
+   "US",
+   "NO",
+   "RU",
+   "FR",
+   "BY",
+   "CA",
+   "DE",
+   "FI",
+   "HK",
+   "KR",
+   "MN",
+   "NZ"
+  ],
+  "cve": [
+   "CVE-2017-0005",
+   "CVE-2018-13379",
+   "CVE-2019-0803",
+   "CVE-2021-26885",
+   "CVE-2021-27065",
+   "CVE-2021-31207",
+   "CVE-2021-34473",
+   "CVE-2021-34523"
+  ],
+  "dateFirstSeen": "2014-10-27",
+  "dateLastSeen": "2023-05-17",
+  "expertise": [
+   "GIB origin"
+  ],
+  "forumsAccountsCount": 0,
+  "malware": [
+   "Mimikatz",
+   "HanaLoader",
+   "SoWaT",
+   "Trochilus",
+   "Cobalt Strike",
+   "DropboxAES RAT",
+   "Meterpreter",
+   "FourteenHi",
+   "JuicyPotato",
+   "LaZagne",
+   "MeatBall",
+   "Metasploit",
+   "RCSession",
+   "Rekoobe",
+   "Tiny SHell"
+  ],
+  "regions": [
+   "europe",
+   "america:northern_america",
+   "europe:european_union",
+   "asia",
+   "oceania"
+  ],
+  "relatedThreatActorsCount": 0,
+  "reports": [
+   {
+    "companyId": [],
+    "datePublished": "2023-08-29",
+    "id": "a875fd7bb68cf40e25f870e451e89e6e6d7954cb",
+    "name": {
+     "ru": "Бэкдор Rekoobe используется для атак на Linux-системы в Корее",
+     "en": "The Rekoobe Backdoor Being Used In Attacks Against Linux Systems in Korea"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2023-08-23",
+    "id": "5340a9e40365d8a3ab4c419a19afa6ef50dcb607",
+    "name": {
+     "ru": "APT31: Типичная хакерская атака на примере реагирования на инцидент",
+     "en": "APT31: A typical hacker attack on the example of an incident response"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2023-07-27",
+    "id": "976c5f63c5d8fa264969e0d2b93c20d14d5e0740",
+    "name": {
+     "ru": "Промышленные организации в Восточной Европе, на которые нацелена APT31",
+     "en": "Industrial Organizations in Eastern Europe Targeted by APT31"
+    }
+   }
+  ],
+  "sectors": [
+   "government-and-military:government",
+   "government-and-military:politics",
+   "software",
+   "government-and-military:military",
+   "hardware:telecommunications",
+   "information-technology:data-integration",
+   "manufacturing:industrial",
+   "media-and-entertainment:news",
+   "other:non-profit",
+   "other:universities",
+   "professional-services:consulting",
+   "professional-services:legal"
+  ],
+  "targetDomain": [],
+  "targetedCompany": [
+   "Atlantic Council",
+   "The Stimson Center",
+   "Visma"
+  ],
+  "targetedPartnersAndClients": []
+ },
+ "techSeqUpdate": null,
+ "threatLandscapeOptions": [
+  {
+   "label": "company",
+   "value": "company"
+  },
+  {
+   "label": "partner",
+   "value": "partner"
+  },
+  {
+   "label": "industry",
+   "value": "industry"
+  },
+  {
+   "label": "other",
+   "value": "other"
+  }
+ ],
+ "updatedAt": "2024-01-25T20:16:01+03:00"
+}

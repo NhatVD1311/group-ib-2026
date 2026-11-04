@@ -1,0 +1,129 @@
+{
+ "contacts": [
+  {
+   "account": "14Q5xgBHAkWxDVrnHautcm4PPGmy5cfw6b",
+   "flag": "fake",
+   "service": "bitcoin",
+   "type": "wallet"
+  }
+ ],
+ "countries": [],
+ "createdAt": "2024-03-07T14:39:56+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2024-03-01",
+ "dateLastSeen": "2024-03-06",
+ "datePublished": "2024-03-07",
+ "description": "<p>The ALPHV ransomware group, also known as BlackCat, has reportedly engaged in an exit scam, allegedly shutting down its operations and absconding with affiliates' funds under the guise of law enforcement seizure. The group has been active since at least 2020, evolving through various iterations and facing increasing scrutiny from global law enforcement agencies.&nbsp;</p><h4>Exit Scam Details:</h4><p>- Shutdown Operations: Starting with the offline transition of their Tor data leak blog and negotiation servers, ALPHV announced the closure of their project, attributing the decision vaguely to \"the feds.\" This was followed by a change in their status on the Tox messaging platform to \"GG\" (good game) and subsequently advertising the sale of their malware source code for $5 million.</p><p><img src=\"/api/v2/hi/threat/3dfb6cc1f8df01f6abbda022c19f47a01113f852/file/2658a52386bcbd0af18923dce6195a2f26b13a38d21a9ee971a391a9df2ebd73?placeholder=__IMAGE_3dfb6cc1f8df01f6abbda022c19f47a01113f852:2658a52386bcbd0af18923dce6195a2f26b13a38d21a9ee971a391a9df2ebd73_IMAGE__\" data-mce-src=\"__IMAGE_:2658a52386bcbd0af18923dce6195a2f26b13a38d21a9ee971a391a9df2ebd73_IMAGE__\" /></p><p>- Deception Tactics: The group placed a fake seizure banner on their leak site, falsely claiming an FBI-led law enforcement action against them. Investigations and statements from Europol, the NCA, and cybersecurity experts have debunked this claim, indicating it as a stratagem for their exit scam.</p><p><img src=\"/api/v2/hi/threat/3dfb6cc1f8df01f6abbda022c19f47a01113f852/file/4065bf0b61379b096788cd73e267ed7a4dd08d25e608c6b852e62cbe81bdb2c1?placeholder=__IMAGE_3dfb6cc1f8df01f6abbda022c19f47a01113f852:4065bf0b61379b096788cd73e267ed7a4dd08d25e608c6b852e62cbe81bdb2c1_IMAGE__\" data-mce-src=\"__IMAGE_:4065bf0b61379b096788cd73e267ed7a4dd08d25e608c6b852e62cbe81bdb2c1_IMAGE__\" /></p><p>- Affiliate Complaints: Prior to the shutdown, affiliates accused ALPHV operators of stealing significant ransom payments, including a notable $22 million from a ransom paid by Change Healthcare. Cryptocurrency transactions linked to these allegations suggest that the operators redistributed the stolen funds across various wallets. Affiliates posted Abuse on ALPHV ransomware program:</p><p><img src=\"/api/v2/hi/threat/3dfb6cc1f8df01f6abbda022c19f47a01113f852/file/636c09241cf3a21646a6c62e06703598f2838a5cba6a8f620c150fef01eeaf29?placeholder=__IMAGE_3dfb6cc1f8df01f6abbda022c19f47a01113f852:636c09241cf3a21646a6c62e06703598f2838a5cba6a8f620c150fef01eeaf29_IMAGE__\" data-mce-src=\"__IMAGE_:636c09241cf3a21646a6c62e06703598f2838a5cba6a8f620c150fef01eeaf29_IMAGE__\" /></p><p><img src=\"/api/v2/hi/threat/3dfb6cc1f8df01f6abbda022c19f47a01113f852/file/adbce03f55156ab43d18feb92cd73b298284c9a85b0f3fa7cdc5e19c22de4594?placeholder=__IMAGE_3dfb6cc1f8df01f6abbda022c19f47a01113f852:adbce03f55156ab43d18feb92cd73b298284c9a85b0f3fa7cdc5e19c22de4594_IMAGE__\" data-mce-src=\"__IMAGE_:adbce03f55156ab43d18feb92cd73b298284c9a85b0f3fa7cdc5e19c22de4594_IMAGE__\" /></p><p><img src=\"/api/v2/hi/threat/3dfb6cc1f8df01f6abbda022c19f47a01113f852/file/aab7107bbb604655d776c1c867b7e968440cb159b8b0dcbcd240a86e6fedac97?placeholder=__IMAGE_3dfb6cc1f8df01f6abbda022c19f47a01113f852:aab7107bbb604655d776c1c867b7e968440cb159b8b0dcbcd240a86e6fedac97_IMAGE__\" data-mce-src=\"__IMAGE_:aab7107bbb604655d776c1c867b7e968440cb159b8b0dcbcd240a86e6fedac97_IMAGE__\" /><img src=\"/api/v2/hi/threat/3dfb6cc1f8df01f6abbda022c19f47a01113f852/file/da1a6a47f2f3fbf60ed4762bcc310c132b44168f317d8e14332fc8d0dc13575c?placeholder=__IMAGE_3dfb6cc1f8df01f6abbda022c19f47a01113f852:da1a6a47f2f3fbf60ed4762bcc310c132b44168f317d8e14332fc8d0dc13575c_IMAGE__\" data-mce-src=\"__IMAGE_:da1a6a47f2f3fbf60ed4762bcc310c132b44168f317d8e14332fc8d0dc13575c_IMAGE__\" /></p><p>Address of BTC wallet related to this incident:</p><p>14Q5xgBHAkWxDVrnHautcm4PPGmy5cfw6b</p><p><img src=\"/api/v2/hi/threat/3dfb6cc1f8df01f6abbda022c19f47a01113f852/file/78fdcf67647e9ed7e2139157ade0ddd7fcb5ed167b6e7b31127cbedb916c107a?placeholder=__IMAGE_3dfb6cc1f8df01f6abbda022c19f47a01113f852:78fdcf67647e9ed7e2139157ade0ddd7fcb5ed167b6e7b31127cbedb916c107a_IMAGE__\" data-mce-src=\"__IMAGE_:78fdcf67647e9ed7e2139157ade0ddd7fcb5ed167b6e7b31127cbedb916c107a_IMAGE__\" /></p><p>On 6th of March Europol issued a statement denying any involvement in the recent disruptions of ALPHV's ransomware infrastructure, further corroborating the exit scam narrative.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "A2",
+  "credibility": 80,
+  "reliability": 100,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Ransomware"
+ ],
+ "files": [
+  {
+   "hash": "2658a52386bcbd0af18923dce6195a2f26b13a38d21a9ee971a391a9df2ebd73",
+   "mime": "image/png",
+   "name": "2658a52386bcbd0af18923dce6195a2f26b13a38d21a9ee971a391a9df2ebd73",
+   "size": 10546
+  },
+  {
+   "hash": "4065bf0b61379b096788cd73e267ed7a4dd08d25e608c6b852e62cbe81bdb2c1",
+   "mime": "image/png",
+   "name": "4065bf0b61379b096788cd73e267ed7a4dd08d25e608c6b852e62cbe81bdb2c1",
+   "size": 424061
+  },
+  {
+   "hash": "636c09241cf3a21646a6c62e06703598f2838a5cba6a8f620c150fef01eeaf29",
+   "mime": "image/png",
+   "name": "636c09241cf3a21646a6c62e06703598f2838a5cba6a8f620c150fef01eeaf29",
+   "size": 289349
+  },
+  {
+   "hash": "adbce03f55156ab43d18feb92cd73b298284c9a85b0f3fa7cdc5e19c22de4594",
+   "mime": "image/png",
+   "name": "adbce03f55156ab43d18feb92cd73b298284c9a85b0f3fa7cdc5e19c22de4594",
+   "size": 76609
+  },
+  {
+   "hash": "aab7107bbb604655d776c1c867b7e968440cb159b8b0dcbcd240a86e6fedac97",
+   "mime": "image/png",
+   "name": "aab7107bbb604655d776c1c867b7e968440cb159b8b0dcbcd240a86e6fedac97",
+   "size": 70485
+  },
+  {
+   "hash": "da1a6a47f2f3fbf60ed4762bcc310c132b44168f317d8e14332fc8d0dc13575c",
+   "mime": "image/png",
+   "name": "da1a6a47f2f3fbf60ed4762bcc310c132b44168f317d8e14332fc8d0dc13575c",
+   "size": 46423
+  },
+  {
+   "hash": "78fdcf67647e9ed7e2139157ade0ddd7fcb5ed167b6e7b31127cbedb916c107a",
+   "mime": "image/png",
+   "name": "78fdcf67647e9ed7e2139157ade0ddd7fcb5ed167b6e7b31127cbedb916c107a",
+   "size": 79721
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "3dfb6cc1f8df01f6abbda022c19f47a01113f852",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [
+  {
+   "country": null,
+   "id": "76a757c9321d382d6c66d30d1a4a62009c8941a7",
+   "isAPT": false,
+   "name": "notchy",
+   "type": "partner"
+  }
+ ],
+ "reportNumber": "CP-2803-1439",
+ "sectors": [],
+ "seqPublish": null,
+ "seqUpdate": 17098116348713,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "a35fd1154b5308a41e5d248df00e8c94670a86e0",
+  "isAPT": false,
+  "name": "ALPHV"
+ },
+ "title": "Exit Scam of ALPHV (BlackCat) ransomware group",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2024-03-07T14:40:34+03:00"
+}

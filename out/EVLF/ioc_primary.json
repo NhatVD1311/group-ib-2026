@@ -1,0 +1,210 @@
+[
+ {
+  "id": "30b70f0f47e51b941197d3ea72d8d210208de696",
+  "seqUpdate": 16720877223407,
+  "type": "file",
+  "dateFirstSeen": "2022-12-26T00:00:00Z",
+  "dateLastSeen": "2022-12-26T00:00:00Z",
+  "domain": [],
+  "url": [],
+  "ip": [],
+  "potentialNames": [
+   "vtdl_evlfj_id"
+  ],
+  "hash": {
+   "sha1": "73615f3b7e2a85e9455234cd381adc89846db8e5",
+   "sha256": "9c0ff45a0465b6e9f4a478f0a58370c08b38cb2560e715b70733633f0122a011",
+   "md5": "05d231f7dde4fa424f2cd504fcc7bdbb",
+   "other": []
+  },
+  "riskScore": 100,
+  "malwareList": [
+   {
+    "name": "Agent Tesla",
+    "id": "38408227dfda17b7d41bd05608782d4b2fa4073a",
+    "aliases": [
+     "AgentTesla"
+    ]
+   }
+  ],
+  "threatActorList": [],
+  "threatList": [],
+  "tags": [],
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "TLP": "TLP:AMBER",
+   "reliability": 80,
+   "credibility": 60,
+   "TTL": 14600
+  },
+  "source": "XDR"
+ },
+ {
+  "id": "c959379b70422c5d55722bd2dedc136bd76aeae6",
+  "seqUpdate": 17195450299964,
+  "type": "network",
+  "dateFirstSeen": "2024-06-28T03:23:49Z",
+  "dateLastSeen": "2024-06-28T03:23:49Z",
+  "domain": [
+   {
+    "domain": "evlfdev.com",
+    "riskScore": 0
+   }
+  ],
+  "url": [],
+  "ip": [],
+  "potentialNames": [],
+  "malwareList": [],
+  "threatActorList": [],
+  "threatList": [
+   {
+    "name": "EvLFDev",
+    "title": "EvLFDev Profile",
+    "id": "68d72a659ac8e7b268c61953b806d419cd67f2c6"
+   }
+  ],
+  "tags": [],
+  "evaluation": {
+   "admiraltyCode": "C3",
+   "TLP": "TLP:AMBER",
+   "reliability": 60,
+   "credibility": 60,
+   "TTL": 1825
+  },
+  "source": "custom"
+ },
+ {
+  "id": "0e39dd475518ffeddc7acbc0c4b2c519c202685a",
+  "seqUpdate": 17856986308120,
+  "type": "network",
+  "dateFirstSeen": "2024-10-31T00:00:00Z",
+  "dateLastSeen": "2024-10-31T00:00:00Z",
+  "domain": [
+   {
+    "domain": "ukpleaserheels.com",
+    "riskScore": 100
+   }
+  ],
+  "url": [
+   {
+    "url": "https://ukpleaserheels.com/products/-03914evlf-p-857.html",
+    "riskScore": 100
+   }
+  ],
+  "ip": [],
+  "potentialNames": [],
+  "malwareList": [
+   {
+    "name": "FakeLuxury phishing kit",
+    "id": "3f5c3ef1fbee9c62b3d6d6624088105689504b50",
+    "aliases": [
+     "FakeLuxury"
+    ]
+   }
+  ],
+  "threatActorList": [],
+  "threatList": [],
+  "tags": [],
+  "evaluation": {
+   "admiraltyCode": "B2",
+   "TLP": "TLP:AMBER",
+   "reliability": 80,
+   "credibility": 80,
+   "TTL": 365
+  },
+  "source": "Proprietary Intel"
+ },
+ {
+  "id": "766ccbf096cfe6b5bcdd1ef7de958c446471e0b8",
+  "seqUpdate": 17897546864112,
+  "type": "network",
+  "dateFirstSeen": "2024-07-24T00:00:00Z",
+  "dateLastSeen": "2024-07-24T12:06:55Z",
+  "domain": [
+   {
+    "domain": "pay.levlfi.com",
+    "riskScore": 100
+   }
+  ],
+  "url": [
+   {
+    "url": "https://pay.levlfi.com/",
+    "riskScore": 100
+   }
+  ],
+  "ip": [],
+  "potentialNames": [],
+  "malwareList": [
+   {
+    "name": "Inter",
+    "id": "de5782693038cdcdca3436118298409187ea6f25",
+    "aliases": []
+   }
+  ],
+  "threatActorList": [],
+  "threatList": [],
+  "tags": [],
+  "evaluation": {
+   "admiraltyCode": "B2",
+   "TLP": "TLP:AMBER",
+   "reliability": 80,
+   "credibility": 80,
+   "TTL": 365
+  },
+  "source": "Proprietary Intel"
+ },
+ {
+  "id": "16c681fbe891338e1c68fed23f3af66867b500cb",
+  "seqUpdate": 17901673660931,
+  "type": "network",
+  "dateFirstSeen": "2026-09-22T00:00:00Z",
+  "dateLastSeen": "2026-09-22T00:00:00Z",
+  "domain": [
+   {
+    "domain": "georgia.org-zjy.cc",
+    "riskScore": 100
+   }
+  ],
+  "url": [
+   {
+    "url": "https://georgia.org-zjy.cc/dds?var=fWevlFlbfd",
+    "riskScore": 100
+   }
+  ],
+  "ip": [],
+  "potentialNames": [],
+  "malwareList": [],
+  "threatActorList": [
+   {
+    "id": "8b7f98947e4b0f71dc736126f52d075d17482360",
+    "isAPT": false,
+    "name": "Chen Lun"
+   }
+  ],
+  "threatList": [
+   {
+    "name": "Chen Lun",
+    "title": "Outsider PhaaS Hitting Serbia",
+    "id": "35c9b417dc3bc9815f8d10176fcd84cd6b45ac6e"
+   },
+   {
+    "name": "Chen Lun",
+    "title": "Outsider Phishing Kit Analysis ",
+    "id": "05c12cae00636a606ebb137faf9b3ff7cca38581"
+   }
+  ],
+  "tags": [
+   "GIB origin",
+   "Unique_data",
+   "Phishing"
+  ],
+  "evaluation": {
+   "admiraltyCode": "A1",
+   "TLP": "TLP:AMBER",
+   "reliability": 100,
+   "credibility": 100,
+   "TTL": 1825
+  },
+  "source": "Regional HUMINT"
+ }
+]

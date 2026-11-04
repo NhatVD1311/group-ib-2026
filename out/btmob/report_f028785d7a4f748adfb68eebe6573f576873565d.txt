@@ -1,0 +1,4 @@
+ALPHV Ransomware attack on Administradora de Subsidios Sociales (ADESS)
+['https://www.instagram.com/adessdo/p/C4QyeFZuZI-/']
+
+On March 7th, it was reported that the ALPHV (BlackCat) ransomware group attacked the Administradora de Subsidios Sociales (ADESS). (adess[.]gob[.]do) As a result of the attack, there was an unavailability of some systems hosted on their internal servers. As of March 11th, it remains unclear whether the attackers have exfiltrated data from the victim's servers. Additionally, the perpetrators have not made any announcements or disclosures on the Data Leaks Site (DLS) concerning the attack on Administradora de Subsidios Sociales (ADESS).

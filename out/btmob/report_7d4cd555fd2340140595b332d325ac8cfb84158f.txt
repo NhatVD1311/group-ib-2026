@@ -1,0 +1,4 @@
+Starlink - New indicators have been found
+[]
+
+This report is published automatically. During daily monitoring of malicious infrastructure the Group-IB Threat Intelligence detected the following indicators: hosts (1) The disclosed indicators with medium/medium-high confidence belong to the Starlink. The indicators have already been used or will be used in future attacks. Source description: Open threats – information obtained from public sources. Detected network indicators: Source URL Domain IP Related malware open threats - - 66[.]9[.]169[.]170 -

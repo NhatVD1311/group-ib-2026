@@ -1,0 +1,73 @@
+{
+ "contacts": [],
+ "countries": [],
+ "createdAt": "2026-09-24T13:58:12+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2026-09-24",
+ "dateLastSeen": "2026-09-24",
+ "datePublished": "2026-09-24",
+ "description": "<h1>Old Version</h1><p>Previous Outisder version was loading the templates using a GET request:</p><pre><code>/api/open/getTemplateData/&lt;template name&gt;/a_index.html</code></pre><p>Additionally, the templates names have the following naming structure:</p><pre><code>&lt;ISO code of the country that is being targeted&gt;-&lt;Template name/Targeted brand name&gt;</code></pre><p>For example, for Serbia:</p><table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><th colspan=\"1\" rowspan=\"1\"><p>Template Name</p></th><th colspan=\"1\" rowspan=\"1\"><p>Targeted Brand</p></th></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>RS-Points-BancaIntesa</p></td><td colspan=\"1\" rowspan=\"1\"><p>Banca Intensa</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>RS-POST-posta</p></td><td colspan=\"1\" rowspan=\"1\"><p>Posta Serbia</p></td></tr></tbody></table><p>For Spain:</p><table style=\"min-width: 50px;\"><colgroup><col style=\"min-width: 25px;\"><col style=\"min-width: 25px;\"></colgroup><tbody><tr><th colspan=\"1\" rowspan=\"1\"><p>Template Name</p></th><th colspan=\"1\" rowspan=\"1\"><p>Targeted Brand</p></th></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>ES-POST-correos</p></td><td colspan=\"1\" rowspan=\"1\"><p>Correos</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>ES-BUZHU-endesa</p></td><td colspan=\"1\" rowspan=\"1\"><p>Endesa</p></td></tr></tbody></table><p>So, for searching for templates from previous version targeting an specific country, in this case, Spain, the following query can be used, depending on the platform:</p><pre><code>filename:\"api/open/getTemplateData/ES-*\"</code></pre><h1>Current Version</h1><p>The new version loads the template name from a GET request that receives a JS file (common.js):<br>HTTP GET request:</p><pre><code>/static/js/common.js</code></pre><p>Response:</p><pre><code>var cfg = {\n  projectName: \"AU-Points-Qantas3\",\n  errorJumpAddress: \"hxxps://www[.]qantas[.]com/\",\n  loadinglayerStyles: \"#d1331a\",\n  loadinglayerFont: \"Loading, please do not close the page...\",\n  customPhoneDefaultValue: \"your phone\",\n  customEmailDefaultValue: \"Your email\",\n  isThankPage:\"1\"\n};</code></pre><pre><code>var cfg = {\n  projectName: \"JO-ticket-ammancity\",\n  errorJumpAddress: \"hxxps://www[.]ammancity[.]gov[.]jo/\",\n  loadinglayerStyles: \"#6d0b00\",\n  loadinglayerFont: \"جاري التحقق، يرجى عدم مغادرة هذه الصفحة...\",\n  customPhoneDefaultValue: \"هاتفك\",\n  customEmailDefaultValue: \"بريدك الإلكتروني\",\n  isThankPage:\"1\"\n};</code></pre><p>The template naming structure using the targeted country ISO code remains the same as before.<br><br>The current searches can be used to get templates from certain queries, for Australia and Jordan, for example:</p><pre><code>body:{body:\"var cfg =\" AND body:\"projectName:\" AND body:\"errorJumpAddress:\" AND body:\"loadinglayerStyles:\" AND body:\"loadinglayerFont\" AND body:\"customPhoneDefaultValue\" AND body:\"AU-\"}</code></pre><pre><code>body:{body:\"var cfg =\" AND body:\"projectName:\" AND body:\"errorJumpAddress:\" AND body:\"loadinglayerStyles:\" AND body:\"loadinglayerFont\" AND body:\"customPhoneDefaultValue\" AND body:\"JO-\"}</code></pre><p></p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "A1",
+  "credibility": 100,
+  "reliability": 100,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Unique_data",
+  "GIB origin",
+  "Phishing"
+ ],
+ "files": [],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "472c3f9f3d4977d16564466f3aa523db3cdaf561",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3009-1358",
+ "sectors": [],
+ "seqPublish": "01a0d310-dcf2-7228-9aee-74f806c3b0a7",
+ "seqUpdate": 17902474929126,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "CN",
+  "id": "8b7f98947e4b0f71dc736126f52d075d17482360",
+  "isAPT": false,
+  "name": "Chen Lun"
+ },
+ "title": "Template mechanism and search queries",
+ "toolList": [],
+ "type": "event",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-09-24T13:58:12+03:00"
+}

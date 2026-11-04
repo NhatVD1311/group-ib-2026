@@ -1,0 +1,120 @@
+{
+ "contacts": [],
+ "countries": [],
+ "createdAt": "2025-07-14T15:02:32+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2025-04-22",
+ "dateLastSeen": "2025-04-22",
+ "datePublished": "2025-07-15",
+ "description": "\n<pre>\n    <code>This report is published automatically.</code>\n</pre><p>\n        During daily monitoring of malicious infrastructure the Group-IB Threat Intelligence detected the following indicators:\n    </p>\n\n    <ul><li>hosts (1)</li></ul><p>\n    The disclosed indicators with medium/medium-high confidence belong to the\n    Starlink. The indicators have already been used or will be used in future attacks.\n</p>\n\n<p>\n    Source description:\n</p>\n<ul><li>\n                Open threats – information obtained from public sources.\n            </li></ul><p>Detected network indicators:</p>\n<table>\n    <tr>\n        <td>Source</td>\n        <td>URL</td>\n        <td>Domain</td>\n        <td>IP</td>\n        <td>Related malware</td>\n    </tr><tr>\n        <td><p>open threats</p></td>\n        <td>-</td>\n        <td>-</td>\n        <td><p>66[.]9[.]169[.]170</p></td>\n        <td>-</td>\n    </tr></table>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "red",
+  "tlp": "red",
+  "ttl": null
+ },
+ "expertise": [
+  "AutoReport"
+ ],
+ "files": [],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "7d4cd555fd2340140595b332d325ac8cfb84158f",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2025-04-22",
+   "dateLastSeen": "2025-04-22",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "40b6f40aa71dad3c4cee8341912a5f707386e217",
+   "ip": [
+    "66.9.169.170"
+   ],
+   "ipScores": [
+    {
+     "ip": "66.9.169.170",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "66.9.169.170"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17525636703601,
+   "sources": [
+    "dm_public_iocs"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "40b6f40aa71dad3c4cee8341912a5f707386e217"
+ ],
+ "isAutogen": true,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2907-1502",
+ "sectors": [],
+ "seqPublish": null,
+ "seqUpdate": 17525636704321,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "ed8e1634a867031f3e99009a0ed62b313180f578",
+  "isAPT": false,
+  "name": "Starlink"
+ },
+ "title": "Starlink - New indicators have been found",
+ "toolList": [],
+ "type": "event",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2025-07-15T10:14:30+03:00"
+}

@@ -1,0 +1,3770 @@
+{
+ "contacts": [],
+ "countries": [
+  "US",
+  "JP",
+  "KR",
+  "TH",
+  "ID",
+  "AU",
+  "TW",
+  "IN",
+  "SG",
+  "AE",
+  "SA"
+ ],
+ "createdAt": "2026-10-26T06:08:00+03:00",
+ "cveList": [
+  {
+   "dateModified": "2026-11-02T14:52:09+00:00",
+   "datePublished": "2026-10-21T13:48:34+00:00",
+   "evaluation": {
+    "admiraltyCode": "A1",
+    "credibility": 100,
+    "reliability": 100,
+    "severity": "red",
+    "tlp": "green",
+    "ttl": 30
+   },
+   "name": "CVE-2026-109618",
+   "products": [
+    {
+     "vendor": "php",
+     "product": "php"
+    }
+   ]
+  },
+  {
+   "dateModified": "2026-11-02T14:52:13+00:00",
+   "datePublished": "2026-10-21T13:54:43+00:00",
+   "evaluation": {
+    "admiraltyCode": "A1",
+    "credibility": 100,
+    "reliability": 100,
+    "severity": "red",
+    "tlp": "green",
+    "ttl": 30
+   },
+   "name": "CVE-2026-109619",
+   "products": [
+    {
+     "vendor": "php",
+     "product": "php"
+    }
+   ]
+  }
+ ],
+ "dateFirstSeen": "2026-10-17",
+ "dateLastSeen": "2026-10-25",
+ "datePublished": "2026-10-26",
+ "description": "<p><em>[Update - 26th October 6:51PM AEDT]</em></p><p><em>Group-IB’s confidence level for attribution to Lazarus has been downgraded from HIGH to MODERATE - at the time of writing, no secondary sources have been identified corroborating the activity or infrastructure and attribution is mainly based on primary language and target prioritisation. </em></p><h2>PHP2Shell Vulnerability Background</h2><p>PHP2Shell is the collective name for two critical, unauthenticated remote code execution vulnerabilities in the PHP runtime itself: CVE-2026-109618 and CVE-2026-109619. Both carry a CVSS v4.0 score of 9.2. Technical details leaked publicly on 20 October 2026, ahead of coordinated disclosure, and the PHP project released fixes on 21 October 2026. The two bugs share a single root cause: PHP's longjmp()-based \"bailout\" mechanism aborts a request mid-operation and can leave internal state half-built or pointing at freed memory. In worker-based deployments, a subsequent request handled by the same worker inherits that stale state, which is what the attacker abuses. Both issues have been reproduced in research, with the original disclosure chaining the two memory-safety flaws using frontier AI models.</p><p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://tap.group-ib.com/ta/last-threats?threat=b8e395737e590d84d887a8f1e0d323ef42c83ea8\">For more details on PHP2shell, read the main report on the vulnerabilities here.</a></p><h2>Campaign Overview and Progression</h2><p>On 22 October 2026 (approximately 11:00 JST / 10:00 SGT), closed-source collection surfaced a Korean-speaking threat actor coordinating, through a closed I2P (Invisible Internet Project) channel, global reconnaissance and attack planning against all web-accessible assets carrying the two PHP2Shell vulnerabilities. Two operator handles - one assessed as tasking and lead, the other as collection and exploit triage - have been active since March 2026. <strong>Group-IB assesses this activity</strong> <strong>with MODERATE confidence to be a North Korean state-nexus operation and with MODERATE confidence to be affiliated with the Lazarus Group ecosystem.</strong> No launch date has been stated.</p><p>The activity has been tracked across three observation points. On 22 October the operators set tasking and sector/geography priorities and shared fifteen pieces of campaign infrastructure in-channel for staging, target-list hosting and launch. By 23 October, seventeen suspected source IP addresses were identified within an 8-hour window performing PHP web-shell tooling and upload-progress session poisoning; on their own these did not link to the channel at that time and were published as additional hunting and blocking indicators. On 24 October (approximately 01:47–02:22 as displayed in the channel), the operators reported completion of an initial filtered target set of 216 hosts and named twenty-one compromised scan nodes running active PHP weakness checks, a day earlier than the 25 October date previously expected.</p><p>Unlike the 23 October position, which could not tie the seventeen newly observed source IPs to the channel, the twenty-one scan-node addresses are the same addresses the operators named as the nodes running their PHP weakness checks, and they were observed in the 8 hours preceding the update performing PHP web-shell tooling and upload-progress session poisoning attempts. This directly tied the scan nodes to the channel. The exchange marks the campaign's progression from reconnaissance and infrastructure staging into active, low-and-slow scanning of a filtered target set; at the time of the exchange roughly one third of the 216 hosts had already been touched.</p><p>The next adversary milestone is the first-pass result across all 216 hosts and a refined shortlist of highest-confidence hosts, from which the operators will choose which public exploit approaches are worth adapting. The earliest known exploitation recorded of PHP2Shell is 17 October 2026, pre-disclosure, which is the recommended starting point for retrospective hunting.</p><p></p><img src=\"/api/v2/hi/threat/f869ed595c91608c117f74263f627d6122f1bc74/file/0c4d1a13fde414b4126623ec4ccd5d354b272baf1cc038213c9f0dc3074b211c?placeholder=__IMAGE_f869ed595c91608c117f74263f627d6122f1bc74:0c4d1a13fde414b4126623ec4ccd5d354b272baf1cc038213c9f0dc3074b211c_IMAGE__\" alt=\"Timeline of the exposure and hunt window, with the hunt window opening at the earliest known exploitation on 17 October 2026.\" /><p><em>Timeline of the exposure and hunt window, with the hunt window opening at the earliest known recorded exploitation on 17 October 2026.</em></p><p></p><img src=\"/api/v2/hi/threat/f869ed595c91608c117f74263f627d6122f1bc74/file/984dc3e2571b666dc146f20483f5499b53a9f1f38ef8ba8e8be99f7c2da2e86d?placeholder=__IMAGE_f869ed595c91608c117f74263f627d6122f1bc74:984dc3e2571b666dc146f20483f5499b53a9f1f38ef8ba8e8be99f7c2da2e86d_IMAGE__\" alt=\"Redacted screenshot of the closed I2P forum thread, 24 October 2026.\" /><p><em>Redacted screenshot of the closed I2P forum thread, 24 October 2026.</em></p><p></p><img src=\"/api/v2/hi/threat/f869ed595c91608c117f74263f627d6122f1bc74/file/f1cf2fb7d67af69971fe48de3eca651b950818779b217362f993da13a490dcd6?placeholder=__IMAGE_f869ed595c91608c117f74263f627d6122f1bc74:f1cf2fb7d67af69971fe48de3eca651b950818779b217362f993da13a490dcd6_IMAGE__\" alt=\"Redacted screenshot of the chat exchange between the two channel operators, 24 October 2026.\" /><p><em>Redacted screenshot of the chat exchange between the two channel operators, 24 October 2026.</em></p><p></p><img src=\"/api/v2/hi/threat/f869ed595c91608c117f74263f627d6122f1bc74/file/697beb4e39269ade92f4794268b12f3bba2da2ebf78fcbf204ec0dc15501a887?placeholder=__IMAGE_f869ed595c91608c117f74263f627d6122f1bc74:697beb4e39269ade92f4794268b12f3bba2da2ebf78fcbf204ec0dc15501a887_IMAGE__\" alt=\"Redacted screenshot of the closed I2P channel exchange sharing campaign infrastructure and tasking, 22 October 2026.\" /><p><em>Redacted screenshot of the closed I2P channel exchange sharing campaign infrastructure and tasking, 22 October 2026.</em></p><h2>Filtered Target Set and Scanning Tradecraft</h2><p>On 24 October the operators reported identifying 216 hosts that still appear unpatched or only partially mitigated for PHP2Shell, with the first batch reported ready at approximately 01:47. Hosts bannering the fixed versions, or sitting behind heavy filtering, were dropped from the list; the remaining 216 still advertise older PHP, which makes a current banner itself a de-selection criterion. The target set carries the following characteristics:</p><ul><li><p>Hosts identified: 216 hosts that still look unpatched or partially exposed; first batch ready at approximately 01:47 on 24 October 2026.</p></li></ul><ul><li><p>Geographic coverage: USA, Japan, Thailand, Indonesia, South Korea, Australia, Taiwan, India, Singapore, UAE, Saudi Arabia and the EU (matching the previously stated priorities)</p></li></ul><ul><li><p>Sector mix: government, financial institutions, logistics, airports/aviation, manufacturing and online transaction platforms.</p></li></ul><ul><li><p>Selection criteria: hosts advertising the fixed versions, or protected by heavy filtering, were removed.</p></li></ul><ul><li><p>Collection point: the target spreadsheet is staged at the collection point with sector and country tags already recorded; scan results are written back to the same sheet under a separate column to show which hosts look more promising.</p></li></ul><ul><li><p>Scan progress: roughly one third of the 216 hosts (estimate) had been touched by the scan nodes at approximately 02:10; the first pass across all hosts and a refined shortlist were due later on 24 October 2026.</p></li></ul><ul><li><p>Next step: from the shortlist of highest-confidence hosts, the operators will decide which public exploit approaches are worth adapting.</p></li></ul><p>Active PHP weakness checks are run from a separate set of twenty-one compromised nodes, distinct from the earlier staging and collection IPs. Scanning is described as low-volume and paced, with deliberate avoidance of broad, noisy sweeps. The operators articulated a disciplined scanning methodology:</p><ul><li><p>Infrastructure separation — the scan nodes are kept separate from the earlier preparation addresses (confirmed by the operator at approximately 02:04).</p></li></ul><ul><li><p>Low-and-slow pacing — volume is kept low and paced so that not every target is lit up at once; no broad noisy sweeps.</p></li></ul><ul><li><p>Node rotation — the operators rotate through the node list, logging which addresses respond with the expected indicators.</p></li></ul><ul><li><p>Burn discipline — nodes showing filtering or rate-limiting are marked, pulled from the active set and not reused (\"do not reuse burned addresses\").</p></li></ul><p>Because the operators describe these nodes as compromised, some may belong to victim organisations. The guidance is therefore to block at the perimeter and hunt in logs for prior contact rather than assume the address belongs to the attacker.</p><h2>Victimology and Prioritised Targeting</h2><p>No specific customer hosts or victims were named in-channel; the campaign is global and begins opportunistically before narrowing to a filtered, prioritised list. The 216-host spreadsheet sits at the operators' collection point and has not been seen, so no organisation is identified. The tasking does, however, set a clear three-tier prioritisation across twelve geographies: the United States, Japan, Thailand, Indonesia, South Korea, Australia, Taiwan, India, Singapore, UAE, Saudi Arabia and the European Union.</p><h3>Tier 1 (targeted first)</h3><ul><li><p>National government agencies.</p></li></ul><ul><li><p>Banks and financial institutions.</p></li></ul><h3>Tier 2</h3><ul><li><p>Manufacturing.</p></li></ul><ul><li><p>Logistics, shipping and ports.</p></li></ul><ul><li><p>Airports and aviation.</p></li></ul><h3>Tier 3</h3><ul><li><p>Online transaction and trading platforms.</p></li></ul><ul><li><p>Trading companies.</p></li></ul><ul><li><p>Construction firms.</p></li></ul><p>Government and financial institutions are prioritised first, then logistics, ports, airports and manufacturing. This deliberate sector and geographic prioritisation, rather than indiscriminate scanning, distinguishes the activity from commodity opportunistic exploitation and raises the consequence ceiling for targeted organisations. The entire internet-facing PHP estate is considered in scope: PHP-FPM, Apache mod_php, php-cgi, FrankenPHP, LiteSpeed (LSAPI), and embedded PHP in appliances and hosting control panels such as cPanel and Plesk, with unpatched Apache mod_php the highest risk.</p><h2>Attribution Assessment</h2><p>The campaign is assessed with<strong> MODERATE </strong>confidence to be a North Korean state-nexus operation and with <strong>MODERATE</strong> confidence to be linked to the Lazarus Group ecosystem (also referenced as APT38 and Hidden Cobra), directed by the DPRK Reconnaissance General Bureau (RGB) and its Bureau 121 offensive cyber units. The Lazarus link rests on behavioural and linguistic indicators rather than definitive infrastructure or malware-family overlap. Public reporting as of 22 October 2026 had not attributed PHP2Shell exploitation to any named actor; the assessed link is based on closed-source channel collection.</p><p>\"Lazarus\" is best understood as a family of related RGB-directed clusters that share tooling, infrastructure and tasking; any of them, or a shared access team feeding them, could operationalise PHP2Shell access. The clusters of relevance are:</p><ul><li><p>Lazarus Group (APT38, Hidden Cobra) — financial theft at scale, destructive operations and espionage; documented use of compromised web servers and web shells for C2 and staging, and opportunistic mass-RCE weaponisation.</p></li></ul><ul><li><p>BlueNoroff — financial institutions, SWIFT networks, cryptocurrency and DeFi theft; BFSI and crypto/trading platforms are top-tier targets in the intercepted tasking.</p></li></ul><ul><li><p>Andariel — espionage against defence, aerospace and healthcare, plus opportunistic ransomware; watering-hole and web-server compromise tradecraft and ransomware-precursor risk.</p></li></ul><ul><li><p>Kimsuky (APT43) — strategic intelligence collection, spear-phishing and credential theft; may consume web-server footholds for collection and onward credential harvesting.</p></li></ul><p>The assessment weighs supporting indicators against alternative explanations. Indicators supporting the DPRK/Lazarus assessment:</p><ul><li><p>Korean-language operational tasking in a closed, OPSEC-conscious I2P channel.</p></li></ul><ul><li><p>Sector prioritisation (government and BFSI first) mirrors the Lazarus dual mandate.</p></li></ul><ul><li><p>Geographic spread and interest in trading/crypto platforms align with APT38/BlueNoroff.</p></li></ul><ul><li><p>Historical Lazarus use of PHP and web-shell tradecraft and compromised web C2.</p></li></ul><ul><li><p>Disciplined, access-focused tradecraft (AI-assisted PoC triage, lab validation and scan avoidance).</p></li></ul><p>Uncertainties and alternative explanations:</p><ul><li><p>Language alone is not attribution; the activity could reflect a Korean-speaking criminal crew without state direction.</p></li></ul><ul><li><p>Government and BFSI are high-value to many financially motivated actors.</p></li></ul><ul><li><p>Open-source PHP2Shell exploitation is broadly opportunistic and multi-actor.</p></li></ul><ul><li><p>No confirmed malware-family or infrastructure overlap with a named Lazarus cluster yet.</p></li></ul><ul><li><p>Tradecraft discipline is increasingly common across capable criminal groups.</p></li></ul><p>The net assessment is MODERATE confidence in a Lazarus-ecosystem link, revisable upward on observation of infrastructure or tooling overlap with a named cluster, a launch statement, or confirmed compromises, and downward if collection indicates an unaffiliated Korean-speaking criminal group. The ecosystem's dual financial-and-espionage mandate means access gained here could feed initial-access resale, cryptocurrency theft, ransomware precursors, credential theft and long-term espionage.</p><p>Historical PHP and web tradecraft cited in support of the assessment:</p><ul><li><p>Compromised web infrastructure for C2 — repeated abuse of legitimate, compromised web servers, including PHP/WordPress environments, as first-stage command-and-control relays and malware distribution points.</p></li></ul><ul><li><p>Web-shell persistence — deployment of ASP and PHP web shells (publicly documented variants include the \"RedHat Hacker\" web-shell family) to maintain access after initial exploitation.</p></li></ul><ul><li><p>Watering-hole operations — the SyncHole activity compromised legitimate South Korean websites to stage payloads.</p></li></ul><ul><li><p>Financial heists and crypto theft — SWIFT-network heists including the Bangladesh Bank theft, AppleJeus, and sustained DeFi/exchange intrusions, underlining appetite for the BFSI and crypto sectors prioritised in the tasking.</p></li></ul><ul><li><p>Destructive and disruptive capability — from DarkSeoul to WannaCry, the ecosystem has shown willingness to escalate from access to disruption.</p></li></ul><h2>Operator Tradecraft and OPSEC</h2><p>The operator is assessed as disciplined and access-focused, harvesting public proof-of-concept code, ranking it with AI, lab-validating before use, and avoiding noisy scanning. Coordination takes place in a closed I2P channel chosen for anonymity, with staging and collection points kept separate from the active scan nodes. The observed tradecraft:</p><ul><li><p>AI-assisted PoC triage — local AI is used to rank public proof-of-concept repositories and accelerate reconnaissance, compressing the historical gap from disclosure to reliable weaponisation; the operators state AI is only for \"speed on sorting and validation of open material\".</p></li></ul><ul><li><p>Public-code-only policy — the operators direct use of public technical descriptions and public exploit code, with an explicit instruction not to invent new primitives, focusing on the out-of-memory path and the stale-state path exploitable in common Apache and FPM setups without local access.</p></li></ul><ul><li><p>Manual lab validation — public repositories are manually verified in a controlled lab before use.</p></li></ul><ul><li><p>Scan avoidance — passive collection of public banners and version strings, staying off assets that look already heavily monitored, building a shortlist of likely-vulnerable hosts first, and avoiding broad noisy scanning.</p></li></ul><ul><li><p>Node rotation and burn discipline — slow rotation through the node list, with addresses showing filtering or rate-limiting dropped immediately and never reused.</p></li></ul><ul><li><p>Patch-aware filtering — hosts that appear to have applied the 21 October patches are flagged and dropped from the target set.</p></li></ul><p>A consequence of the public-code-only policy is a faster weaponisation cycle: AI-assisted triage of public PoCs shortens the disclosure-to-exploit gap, so patch and mitigation timelines should be measured in hours, not days. The flip side for the operators is exploit-supply risk.&nbsp;Public proof-of-concept repositories are of unverified or disputed quality, some require GDB or local access, and several circulating \"PoCs\" are fake and distribute malware, so public tooling must be treated as untrusted and audited before use.</p><h2>Expected Attack Path</h2><p>One unauthenticated multipart POST against an unpatched worker can reach code execution before any application code runs; there is no vulnerable route to discover and little application-layer trace, which also means forensic visibility is poor. The anticipated progression, mapped from the intercepted tasking, open-source exploitation telemetry and historical web tradecraft, moves through the following phases:</p><ul><li><p>Reconnaissance — passive banner and version fingerprinting of PHP; country- and sector-segmented target-list building; probing of multipart endpoints and session upload-progress; AI-assisted ranking of public PoCs.</p></li></ul><ul><li><p>Resource development — acquisition and adaptation of public PHP2Shell exploit code; staging on campaign infrastructure; lab validation before use.</p></li></ul><ul><li><p>Initial access — exploitation of CVE-2026-109618 / CVE-2026-109619 via crafted multipart/form-data for unauthenticated RCE, with highest success against Apache mod_php in default prefork.</p></li></ul><ul><li><p>Execution and persistence — command execution as the web-worker user; PHP/ASP web-shell deployment in web roots; cron and SSH-key implants; abandoned-config persistence.</p></li></ul><ul><li><p>Credential access and collection — harvesting of wp-config.php, .env, database credentials and API keys; roughly 67 KB of memory disclosure via PHPSESSID; configuration and file reads via the OPcache primitive.</p></li></ul><ul><li><p>Command-and-control and impact — loader fetch-and-run from a staging host (Mirai convention); outbound C2 from web workers; cryptomining, ransomware, lateral movement and data exfiltration.</p></li></ul><h2>Infrastructure Analysis</h2><p>Three distinct sets of adversary-associated infrastructure have been identified, alongside corroborating open-source exploitation artefacts.</p><h3>Campaign / staging infrastructure (15 addresses, captured 22 October)</h3><p>Fifteen IPv4 addresses were shared in-channel for staging, target-list hosting and launch, with roles not fully differentiated. One additional possible variant appears once in the direct-message exchange and may be an operator typo of one of the fifteen; it is carried as a precaution. Because this set is staging rather than scanning infrastructure, the recommended handling is monitor-and-hunt rather than blind-block.</p><h3>Suspected source IPs (17 addresses, 23 October)</h3><p>Seventeen addresses were identified within an 8-hour window on 23 October performing PHP web-shell tooling and upload-progress session poisoning. On their own they did not link to the channel and were published as additional block/monitor indicators, with a recommendation to hunt logs for prior contact. These remain valid.</p><h3>Scan-node infrastructure (21 addresses, 24 October)</h3><p>Twenty-one addresses observed in the 8 hours before the 24 October update performing the same PHP web-shell tooling and upload-progress session poisoning are the same nodes the operators named as running their PHP weakness checks, tying them directly to the channel. They should be treated as DPRK-nexus scanning infrastructure and blocked or closely monitored. Because the operators describe them as compromised, some may belong to victim organisations, so prior-contact hunting is advised before assuming ownership.</p><h3>Corroborating exploitation artefacts</h3><p>Open-source exploitation telemetry corroborated active PHP2Shell exploitation both before and after patch release, yielding several distinctive, hunting-relevant artefacts. A dropper staging host serves a Mirai-style loader fetched to /tmp and executed with the argument 'php':</p><pre><code>92[.]118[.]112[.]100\nhxxp://92[.]118[.]112[.]100/nfs   (Mirai-style loader fetched to /tmp, run with arg 'php')</code></pre><p>A pre-disclosure exploit attempt was observed on 17 October 2026 from 103[.]216[.]220[.]92. Leak-derived scanner and public-PoC exploitation can be fingerprinted by their User-Agent strings:</p><pre><code>php2shell-scan/109618\nphp2shell-verify/1.0\nphp2shell-109618\nMozilla/5.0 (php2shell-poc)</code></pre><p>The out-of-memory exploit kit uses a characteristic multipart boundary prefix, and blind-RCE validation relies on a canary string:</p><pre><code>----p2s  /  ----p2shell      (OOM exploit-kit multipart boundary prefix)\nuname -a; id; echo JACKALPOC   (blind-RCE validation; 'JACKALPOC' appearing in a response = execution)</code></pre><p>A second-stage 'nfs' ELF x86-64 binary (stripped, 179,632 bytes) was reported by a single honeypot source and is not independently corroborated:</p><pre><code>SHA-256: 0c5486f06620e26e316f4b33f318b0d646d5e1133789331aa2fed012360d1486\nMD5:     b61a098fc62a2c2696e196dca78da71a</code></pre><h2>Detection and Hunting Guidance</h2><p>The strongest single signal is a PHP or web-server process spawning something it never normally spawns. Request-side signals are useful but noisy, and application logs will usually show nothing because no application code ran. All hunting should start from 17 October 2026, and because the scanning is deliberately low-volume, reviews must cover extended time windows rather than relying on rate-based alerts.</p><p>The highest-value behavioural and host indicators are:</p><ul><li><p>Unusual multipart/form-data POSTs to non-upload endpoints (e.g. '/', '/index.php'); PHP_SESSION_UPLOAD_PROGRESS fields on endpoints that never take uploads.</p></li></ul><ul><li><p>Very high multipart part/field counts, or field names nested dozens of levels deep; bodies of a few hundred KB.</p></li></ul><ul><li><p>PHP worker crashes / OOM fatals in bursts ('Allowed memory size exhausted', 'zend_mm_heap corrupted', SIGSEGV) correlated with preceding multipart POSTs; HTTP 500 on PHP endpoints.</p></li></ul><ul><li><p>Web-server/PHP processes (php-fpm, php-cgi, httpd, apache2, lsphp, frankenphp) spawning shells, interpreters or download tools (sh, bash, curl, wget, nc, busybox), or executing from /tmp, /var/tmp, /dev/shm.</p></li></ul><ul><li><p>New or modified .php / .phtml / .phar files in web roots; .user.ini / .htaccess changes adding auto_prepend_file; new cron jobs, local users or SSH authorized_keys.</p></li></ul><ul><li><p>Abnormally large PHPSESSID values in Set-Cookie (memory disclosure); outbound connections from web workers to uncommon destinations or I2P egress.</p></li></ul><p>A process-creation detection should alert where a PHP or web-server parent (php-fpm, php-cgi, httpd, apache2, lsphp, frankenphp) spawns a shell, interpreter or download tool, or launches an image from a temporary directory. A read-only host-triage pass confirms the serving binary and configuration and searches for recently changed PHP files and known markers:</p><pre><code>php -v   # confirm the SERVING binary, not only CLI\nphp -i | grep -E 'session.upload_progress|memory_limit|post_max_size|max_input_nesting_level|fatal_error_backtraces|opcache.enable'\nfind /var/www -type f -name '*.php' -newermt '2026-10-17' -ls\nfind /tmp /var/tmp /dev/shm -type f -perm -u+x -newermt '2026-10-17' -ls\ngrep -rIl -e '92[.]118[.]112[.]100' -e 'JACKALPOC' /var/log 2&gt;/dev/null</code></pre><p>PHP2Shell exploitation happens in worker memory before application code runs and writes no file by itself, so file-based rules cannot detect the exploit directly; a YARA set instead covers what the attack leaves behind — captured requests and logs, PHP session files, second-stage payloads and web shells dropped after successful RCE, and staged exploit tooling. The nine rules provided are:</p><ul><li><p>PHP2Shell_SecondStage_ELF_SHA256 (High) — the second-stage ELF x86-64 binary by SHA-256 and exact size; scan /tmp, /var/tmp, /dev/shm and web roots, noting the loader may delete the file after launch.</p></li></ul><ul><li><p>PHP2Shell_Captured_Request_Body_SHA256 (Medium) — saved scanner and OOM-tool request bodies by exact hash; fragile, as any change to boundary or field values defeats it.</p></li></ul><ul><li><p>PHP2Shell_Infrastructure_IPs_In_Content (Medium) — anonymisation-network, scanner and staging IPs in logs and text content; a hit means investigate, not confirmed compromise.</p></li></ul><ul><li><p>PHP2Shell_Request_Shape_In_Capture (Medium) — scanner user-agents, boundaries, the JACKALPOC marker, or the exploit request shape; run only on per-request captures, not multi-request logs.</p></li></ul><ul><li><p>PHP2Shell_Log_Crash_Signatures (Low) — PHP and PHP-FPM log lines from trigger attempts; side effects, not proof, so correlate with multipart POSTs from the same source.</p></li></ul><ul><li><p>PHP2Shell_Session_File_Anomaly (Medium) — session files containing PHP code, or a residual upload-progress entry with an empty-filename spray.</p></li></ul><ul><li><p>PHP_Webshell_Input_To_Exec_Heuristic (Medium) — generic web shells passing request input to execution or evaluation; not PHP2Shell-specific, so validate against application code.</p></li></ul><ul><li><p>PHP_Suspicious_Command_Execution_Hunting (Low) — broad hunting for PHP files combining command execution with shell paths, request input or decoding; hunting only, not alerting.</p></li></ul><ul><li><p>PHP2Shell_Public_PoC_Script (Low) — staged exploit scripts referencing PHP2Shell CVEs or tooling strings with the upload-progress field; hits on analyst systems may also indicate a trojanised PoC.</p></li></ul><p>User-agent, boundary and marker strings are trivially changed by attackers, so the request-shape, session-file and payload rules should be weighted over string matches. Seven of the nine rules will match the rule file itself and other detection content, so rule repositories and threat-intelligence feeds should be excluded from scans.</p><h2>Recommended Actions and Mitigations</h2><p>Immediate (P1) actions:</p><ul><li><p>Inventory every PHP runtime — VMs, containers, Kubernetes, appliances, CI/CD, shared hosting and bundled PHP in vendor software — prioritising internet-facing systems, and confirm the live web-serving process version (Apache/FPM), not only the CLI binary.</p></li></ul><ul><li><p>Patch to PHP 8.5.12+, 8.4.27+, 8.3.36+ or 8.2.35+ (or a verified vendor/distribution backport) and restart ALL PHP workers; a reload that keeps old workers alive leaves the stale state in place. Hosts still bannering older PHP are the ones the operators kept.</p></li></ul><ul><li><p>Isolate or take offline any internet-facing PHP that cannot be patched within hours, with Apache mod_php the highest priority; organisations in the prioritised sectors and geographies should treat this as urgent.</p></li></ul><ul><li><p>Block or closely monitor the three catalogued address sets — the 15 staging addresses, the 17 source IPs and the 21 scan nodes — at perimeter and host level, and block the dropper staging host and loader URL on egress.</p></li></ul><p>Short-horizon (P2, 72 hours) actions:</p><ul><li><p>Hunt back to 17 October 2026 across extended windows for malformed multipart POSTs, session upload-progress anomalies, PHP worker crashes/OOM, web-server processes spawning shells, new PHP files in web roots, and any prior contact with the listed indicators.</p></li></ul><ul><li><p>If compromise is suspected, preserve volatile evidence before patching (restarting workers destroys CVE-2026-109619 state), capture memory and logs, isolate the host, rebuild from a trusted patched image, and rotate all secrets accessible to the PHP worker.</p></li></ul><p>Seven-day (P3) action: notify relevant national CERTs and sector coordination channels and brief leadership, watching for the catalogued infrastructure, I2P egress, a launch statement or the operators' refined shortlist.</p><p>Temporary controls reduce exposure while patching is scheduled but do not replace it — a fixed release is the only complete mitigation. The two bugs require different interim controls.</p><h3>CVE-2026-109618 interim controls</h3><pre><code>memory_limit = -1   (admin-enforced via php_admin_value)\npost_max_size = 8M where uploads are not required, 32M where they are\nconstrain multipart body size, part and header counts at the reverse proxy\nmax_input_nesting_level = 32\nuse cgroup/container memory boundaries (not RLIMIT_AS / RLIMIT_DATA)</code></pre><h3>CVE-2026-109619 interim controls</h3><pre><code>session.upload_progress.enabled = 0   (administrative config, not ini_set)\nfatal_error_backtraces = 0   (PHP 8.5)\nremove pre-init diagnostics and attacker-reachable fatal paths\npm.max_requests = 1   (where performance allows)</code></pre><p>For defence in depth: deploy or confirm WAF protections as a supplement; lock origins to CDN/WAF ranges so attackers cannot bypass to the origin IP; and egress-filter web workers, blocking 92[.]118[.]112[.]100 and hxxp://92[.]118[.]112[.]100/nfs.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "red",
+  "tlp": "green",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "0c4d1a13fde414b4126623ec4ccd5d354b272baf1cc038213c9f0dc3074b211c",
+   "mime": "image/jpeg",
+   "name": "0c4d1a13fde414b4126623ec4ccd5d354b272baf1cc038213c9f0dc3074b211c",
+   "size": 24247
+  },
+  {
+   "hash": "984dc3e2571b666dc146f20483f5499b53a9f1f38ef8ba8e8be99f7c2da2e86d",
+   "mime": "image/jpeg",
+   "name": "984dc3e2571b666dc146f20483f5499b53a9f1f38ef8ba8e8be99f7c2da2e86d",
+   "size": 95023
+  },
+  {
+   "hash": "f1cf2fb7d67af69971fe48de3eca651b950818779b217362f993da13a490dcd6",
+   "mime": "image/jpeg",
+   "name": "f1cf2fb7d67af69971fe48de3eca651b950818779b217362f993da13a490dcd6",
+   "size": 62979
+  },
+  {
+   "hash": "697beb4e39269ade92f4794268b12f3bba2da2ebf78fcbf204ec0dc15501a887",
+   "mime": "image/jpeg",
+   "name": "697beb4e39269ade92f4794268b12f3bba2da2ebf78fcbf204ec0dc15501a887",
+   "size": 68775
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "f869ed595c91608c117f74263f627d6122f1bc74",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e31b7e0e-6f87-4740-9c4a-3fd69df28f2d",
+   "ip": [
+    "142.93.155.162"
+   ],
+   "ipScores": [
+    {
+     "ip": "142.93.155.162",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "142.93.155.162"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015149084,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "11ad0781-17bc-4c79-9f12-2ea409b6d525",
+   "ip": [
+    "134.122.38.73"
+   ],
+   "ipScores": [
+    {
+     "ip": "134.122.38.73",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "134.122.38.73"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015150033,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5eceefac-8b25-4252-90f3-0d704538b3b5",
+   "ip": [
+    "5.255.114.109"
+   ],
+   "ipScores": [
+    {
+     "ip": "5.255.114.109",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "5.255.114.109"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015150795,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8d95a42b-b1ae-4553-bc04-3ded941ef62e",
+   "ip": [
+    "165.22.232.198"
+   ],
+   "ipScores": [
+    {
+     "ip": "165.22.232.198",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "165.22.232.198"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015152043,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8e7764eb-10c4-4cff-966a-65f9ce391ba3",
+   "ip": [
+    "159.223.59.200"
+   ],
+   "ipScores": [
+    {
+     "ip": "159.223.59.200",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "159.223.59.200"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015153003,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4c68abc2-477e-48a3-b340-12dab91bec2d",
+   "ip": [
+    "192.177.131.13"
+   ],
+   "ipScores": [
+    {
+     "ip": "192.177.131.13",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "192.177.131.13"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015153847,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e9465c1c-fab6-4aa4-b76b-dc0e74ecd703",
+   "ip": [
+    "94.154.42.149"
+   ],
+   "ipScores": [
+    {
+     "ip": "94.154.42.149",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "94.154.42.149"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015154802,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c13fd6f5-ec3b-4bc1-8de2-067a59f7f094",
+   "ip": [
+    "173.249.16.178"
+   ],
+   "ipScores": [
+    {
+     "ip": "173.249.16.178",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "173.249.16.178"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015155861,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d0162021-f8ef-4e05-a203-48497a3cae66",
+   "ip": [
+    "170.64.224.137"
+   ],
+   "ipScores": [
+    {
+     "ip": "170.64.224.137",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "170.64.224.137"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015156706,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d5de0de0-9a99-44eb-92cf-ba530691756c",
+   "ip": [
+    "170.64.226.40"
+   ],
+   "ipScores": [
+    {
+     "ip": "170.64.226.40",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "170.64.226.40"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015158545,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "bbc36e1d-8143-4533-a9f6-a4bf5b05c9d5",
+   "ip": [
+    "45.148.10.80"
+   ],
+   "ipScores": [
+    {
+     "ip": "45.148.10.80",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "45.148.10.80"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015161814,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "793eecf9-1100-4297-a42c-4f7378eed570",
+   "ip": [
+    "152.237.230.29"
+   ],
+   "ipScores": [
+    {
+     "ip": "152.237.230.29",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "152.237.230.29"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015162830,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "9cb30bb9-688e-45a2-ae66-ef2711b67f3e",
+   "ip": [
+    "146.70.194.93"
+   ],
+   "ipScores": [
+    {
+     "ip": "146.70.194.93",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "146.70.194.93"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015163816,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "174b71cc-2b7e-4d18-bfc4-83900ab77f4d",
+   "ip": [
+    "185.157.109.60"
+   ],
+   "ipScores": [
+    {
+     "ip": "185.157.109.60",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "185.157.109.60"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015164589,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4c9c8f2c-ce15-4789-bff1-473e3419fd86",
+   "ip": [
+    "143.246.213.138"
+   ],
+   "ipScores": [
+    {
+     "ip": "143.246.213.138",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "143.246.213.138"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015165575,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4a988b71-c34c-456c-bccf-fa9fbf296792",
+   "ip": [
+    "144.91.70.51"
+   ],
+   "ipScores": [
+    {
+     "ip": "144.91.70.51",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "144.91.70.51"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015166433,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4948af56-1297-4233-bc1e-dbf9267665a5",
+   "ip": [
+    "217.60.196.124"
+   ],
+   "ipScores": [
+    {
+     "ip": "217.60.196.124",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "217.60.196.124"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015167329,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "736fb2a2-d08a-4053-8633-7f88d1c4089d",
+   "ip": [
+    "151.253.243.219"
+   ],
+   "ipScores": [
+    {
+     "ip": "151.253.243.219",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "151.253.243.219"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015168370,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a3242a99-91be-4c5a-8e3a-2719fa8cad6b",
+   "ip": [
+    "23.106.131.214"
+   ],
+   "ipScores": [
+    {
+     "ip": "23.106.131.214",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "23.106.131.214"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015169654,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "90423e52-3222-4c2d-8540-22412648d020",
+   "ip": [
+    "173.249.16.192"
+   ],
+   "ipScores": [
+    {
+     "ip": "173.249.16.192",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "173.249.16.192"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015170542,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "179c3ee3-8fe9-4a8e-bdaf-a58cee0402c4",
+   "ip": [
+    "45.148.10.201"
+   ],
+   "ipScores": [
+    {
+     "ip": "45.148.10.201",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "45.148.10.201"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015171562,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f2ed18f0-807d-459d-b232-f8dfc03702cb",
+   "ip": [
+    "146.70.114.180"
+   ],
+   "ipScores": [
+    {
+     "ip": "146.70.114.180",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "146.70.114.180"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015175156,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f3cd7e8a-b1e4-40bc-8ad6-44de5ca312cf",
+   "ip": [
+    "146.70.114.182"
+   ],
+   "ipScores": [
+    {
+     "ip": "146.70.114.182",
+     "score": 100
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "146.70.114.182"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015176137,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "379c4816-a826-4eb7-8e34-215509cfda52",
+   "ip": [
+    "147.175.149.67"
+   ],
+   "ipScores": [
+    {
+     "ip": "147.175.149.67",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "147.175.149.67"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015177186,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "b4dc461c-6d53-4920-924d-012dfc7b353a",
+   "ip": [
+    "147.78.168.57"
+   ],
+   "ipScores": [
+    {
+     "ip": "147.78.168.57",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "147.78.168.57"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015179492,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "63a5f50a-1aa3-4fdc-9556-6d3520dd27b9",
+   "ip": [
+    "109.56.219.150"
+   ],
+   "ipScores": [
+    {
+     "ip": "109.56.219.150",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "109.56.219.150"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015180393,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f01e5b5f-73e1-46b2-80a4-bd6b1cafa65d",
+   "ip": [
+    "158.173.75.178"
+   ],
+   "ipScores": [
+    {
+     "ip": "158.173.75.178",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "158.173.75.178"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015182034,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a148b5b5-4831-458b-8e52-d4879d7889c2",
+   "ip": [
+    "185.203.18.54"
+   ],
+   "ipScores": [
+    {
+     "ip": "185.203.18.54",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "185.203.18.54"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015183324,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a7c43e96-5fa7-45d2-9546-358bf2af564b",
+   "ip": [
+    "185.235.212.105"
+   ],
+   "ipScores": [
+    {
+     "ip": "185.235.212.105",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "185.235.212.105"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015184652,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "bd11b98b-d079-402d-a03f-c1f78751b516",
+   "ip": [
+    "103.77.210.80"
+   ],
+   "ipScores": [
+    {
+     "ip": "103.77.210.80",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "103.77.210.80"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015185688,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "072d425d-2f7f-4f8a-995b-4971f0ddc82f",
+   "ip": [
+    "128.90.176.13"
+   ],
+   "ipScores": [
+    {
+     "ip": "128.90.176.13",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "128.90.176.13"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015186533,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c0d79828-a456-4188-9670-a0c8d9fd8ab4",
+   "ip": [
+    "138.199.34.201"
+   ],
+   "ipScores": [
+    {
+     "ip": "138.199.34.201",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "138.199.34.201"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015187589,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "be70620c-9be1-47af-8731-b590868e8a33",
+   "ip": [
+    "145.255.150.25"
+   ],
+   "ipScores": [
+    {
+     "ip": "145.255.150.25",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "145.255.150.25"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015188743,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "766fc637-2362-4cb3-a3b0-a388cf874ab5",
+   "ip": [
+    "149.102.232.44"
+   ],
+   "ipScores": [
+    {
+     "ip": "149.102.232.44",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "149.102.232.44"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015190067,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "3752c5eb-1f64-4b02-8561-af1a672297ba",
+   "ip": [
+    "149.102.232.93"
+   ],
+   "ipScores": [
+    {
+     "ip": "149.102.232.93",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "149.102.232.93"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015191163,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "04d61e95-d1f9-4b3c-b24f-c5b7b762268c",
+   "ip": [
+    "158.173.242.133"
+   ],
+   "ipScores": [
+    {
+     "ip": "158.173.242.133",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "158.173.242.133"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015192173,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "adf98095-fb6c-4172-850f-427a353e5283",
+   "ip": [
+    "147.78.168.67"
+   ],
+   "ipScores": [
+    {
+     "ip": "147.78.168.67",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "147.78.168.67"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015193368,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4c81ab70-85da-448a-86ae-7dbcbc54124e",
+   "ip": [
+    "102.207.250.188"
+   ],
+   "ipScores": [
+    {
+     "ip": "102.207.250.188",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "102.207.250.188"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015194647,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f7b69684-1a5c-417a-bdd8-36eafeb1919c",
+   "ip": [
+    "94.154.43.185"
+   ],
+   "ipScores": [
+    {
+     "ip": "94.154.43.185",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "94.154.43.185"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015197225,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "567356e0-d0dd-44f7-9a77-552f5ae4ced9",
+   "ip": [
+    "75.119.143.189"
+   ],
+   "ipScores": [
+    {
+     "ip": "75.119.143.189",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "75.119.143.189"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015198495,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "654cf633-1496-4070-a615-b6d468ba1550",
+   "ip": [
+    "117.203.73.63"
+   ],
+   "ipScores": [
+    {
+     "ip": "117.203.73.63",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "117.203.73.63"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015199291,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d79c0fad-9655-4655-94f2-d3e09190e3e0",
+   "ip": [
+    "146.190.107.103"
+   ],
+   "ipScores": [
+    {
+     "ip": "146.190.107.103",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "146.190.107.103"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015200346,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "78c246ed-bf7f-4d42-b6f0-09135b36a32a",
+   "ip": [
+    "95.217.164.124"
+   ],
+   "ipScores": [
+    {
+     "ip": "95.217.164.124",
+     "score": 45
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "95.217.164.124"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015201581,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "aa076589-f6b7-4eab-8b04-a2bb957e9edc",
+   "ip": [
+    "124.122.142.142"
+   ],
+   "ipScores": [
+    {
+     "ip": "124.122.142.142",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "124.122.142.142"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015202614,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "55b23cbc-c2a0-4915-9047-38864fbf54de",
+   "ip": [
+    "188.80.228.122"
+   ],
+   "ipScores": [
+    {
+     "ip": "188.80.228.122",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "188.80.228.122"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015203469,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "71c7874d-2af7-4fe6-90bf-71a8aecbec28",
+   "ip": [
+    "134.209.181.133"
+   ],
+   "ipScores": [
+    {
+     "ip": "134.209.181.133",
+     "score": 45
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "134.209.181.133"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015204522,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "cb1c581d-de38-4fa9-9935-934cc529ac52",
+   "ip": [
+    "134.209.252.157"
+   ],
+   "ipScores": [
+    {
+     "ip": "134.209.252.157",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "134.209.252.157"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015206948,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "691e246d-4c99-473d-9267-580f16a9cc40",
+   "ip": [
+    "119.63.72.54"
+   ],
+   "ipScores": [
+    {
+     "ip": "119.63.72.54",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "119.63.72.54"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015207727,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ec7092b7-5537-4bc8-8385-c2a7b2e5c36e",
+   "ip": [
+    "138.68.161.170"
+   ],
+   "ipScores": [
+    {
+     "ip": "138.68.161.170",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "138.68.161.170"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015208512,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "972377ba-467d-45e2-a0b5-eda70663f769",
+   "ip": [
+    "95.216.5.90"
+   ],
+   "ipScores": [
+    {
+     "ip": "95.216.5.90",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "95.216.5.90"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015209284,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "7c980ac4-38db-483b-82ee-141cc7c5ded5",
+   "ip": [
+    "103.21.161.105"
+   ],
+   "ipScores": [
+    {
+     "ip": "103.21.161.105",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "103.21.161.105"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015210064,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c29d1cf8-5f27-43a5-96d7-a52927ec6567",
+   "ip": [
+    "115.96.27.126"
+   ],
+   "ipScores": [
+    {
+     "ip": "115.96.27.126",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "115.96.27.126"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015211196,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d95eca5e-b28b-4fb7-8e56-23424f48d29e",
+   "ip": [
+    "185.207.232.121"
+   ],
+   "ipScores": [
+    {
+     "ip": "185.207.232.121",
+     "score": 0
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "185.207.232.121"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015212208,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8526196e-c876-4785-a25b-dfa96296335a",
+   "ip": [
+    "78.47.85.99"
+   ],
+   "ipScores": [
+    {
+     "ip": "78.47.85.99",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "78.47.85.99"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015213214,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "cd74c6c8-4584-447e-8f23-83f99e04a180",
+   "ip": [
+    "92.118.112.100"
+   ],
+   "ipScores": [
+    {
+     "ip": "92.118.112.100",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "92.118.112.100"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015214913,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5d5b7790-a097-4aa5-969a-9d92ad2e6548",
+   "ip": [
+    "103.216.220.92"
+   ],
+   "ipScores": [
+    {
+     "ip": "103.216.220.92",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "103.216.220.92"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015215879,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ffd94059-47d7-4d04-b5a5-21922399a71d",
+   "ip": [
+    "31.223.184.166"
+   ],
+   "ipScores": [
+    {
+     "ip": "31.223.184.166",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "31.223.184.166"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015218240,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a536d14c-4195-463c-ac1f-1af0b3d985c8",
+   "ip": [
+    "37.19.200.5"
+   ],
+   "ipScores": [
+    {
+     "ip": "37.19.200.5",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "37.19.200.5"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015219220,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "b6c42de9-02d1-43b7-936b-ecc30ce1a6a6",
+   "ip": [
+    "134.209.159.64"
+   ],
+   "ipScores": [
+    {
+     "ip": "134.209.159.64",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "134.209.159.64"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015221940,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "62e01c6a-5fc9-477f-908b-a3d0f2fd9a99",
+   "ip": [
+    "103.114.163.188"
+   ],
+   "ipScores": [
+    {
+     "ip": "103.114.163.188",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "103.114.163.188"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015223231,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "3c092c17-4afa-4d7e-8af1-043fa5385a70",
+   "ip": [
+    "95.217.98.37"
+   ],
+   "ipScores": [
+    {
+     "ip": "95.217.98.37",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "95.217.98.37"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015224276,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d68f3a9f-bb8e-492d-8541-ff5d9d044f61",
+   "ip": [
+    "85.11.167.243"
+   ],
+   "ipScores": [
+    {
+     "ip": "85.11.167.243",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "85.11.167.243"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015225246,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c7397242-ca20-4b25-a22e-b23ed9f239b3",
+   "ip": [
+    "45.198.224.169"
+   ],
+   "ipScores": [
+    {
+     "ip": "45.198.224.169",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "45.198.224.169"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015227746,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a9501710-04ef-4e65-967d-d84ae4e0f9f5",
+   "ip": [
+    "109.71.252.97"
+   ],
+   "ipScores": [
+    {
+     "ip": "109.71.252.97",
+     "score": 95
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "109.71.252.97"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015228797,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c6b35113-2205-4074-8907-33d8af73f456",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "http://92.118.112.100/nfs",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17930015229853,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "http://92.118.112.100/nfs"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": "0c5486f06620e26e316f4b33f318b0d646d5e1133789331aa2fed012360d1486"
+   },
+   "id": "087ea948-41bf-4279-a7ad-9d1861a3b0df",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": "0c5486f06620e26e316f4b33f318b0d646d5e1133789331aa2fed012360d1486"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17930015310294,
+   "size": null,
+   "sources": [
+    "https://www.cyfirma.com/research/cyfirma-threat-advisory-suspected-dprk-campaign-staging-php2shell-targeting-against-global-php-infrastructure/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "b61a098fc62a2c2696e196dca78da71a",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "22122689-4f5a-4b65-841c-4c0991684ae7",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "b61a098fc62a2c2696e196dca78da71a",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17930015320545,
+   "size": null,
+   "sources": [
+    "https://www.cyfirma.com/research/cyfirma-threat-advisory-suspected-dprk-campaign-staging-php2shell-targeting-against-global-php-infrastructure/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": "43898a0a53bbd25d31ad9f5018ed3182be98a66109b22c9cab545a9fc447992a"
+   },
+   "id": "a8b2aa67-40bf-4a4b-80f3-a0a696bdb2d5",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": "43898a0a53bbd25d31ad9f5018ed3182be98a66109b22c9cab545a9fc447992a"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17930015330753,
+   "size": null,
+   "sources": [
+    "https://www.cyfirma.com/research/cyfirma-threat-advisory-suspected-dprk-campaign-staging-php2shell-targeting-against-global-php-infrastructure/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-26",
+   "dateLastSeen": "2026-10-26",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": "7bc41ed79a9ae909927a9e40701736460a8cb70fca16ce1510e58677aca764b6"
+   },
+   "id": "f8bd2a4b-3801-480d-ad98-08b825beaf57",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": "7bc41ed79a9ae909927a9e40701736460a8cb70fca16ce1510e58677aca764b6"
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17930015340702,
+   "size": null,
+   "sources": [
+    "https://www.cyfirma.com/research/cyfirma-threat-advisory-suspected-dprk-campaign-staging-php2shell-targeting-against-global-php-infrastructure/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "e31b7e0e-6f87-4740-9c4a-3fd69df28f2d",
+  "11ad0781-17bc-4c79-9f12-2ea409b6d525",
+  "5eceefac-8b25-4252-90f3-0d704538b3b5",
+  "8d95a42b-b1ae-4553-bc04-3ded941ef62e",
+  "8e7764eb-10c4-4cff-966a-65f9ce391ba3",
+  "4c68abc2-477e-48a3-b340-12dab91bec2d",
+  "e9465c1c-fab6-4aa4-b76b-dc0e74ecd703",
+  "c13fd6f5-ec3b-4bc1-8de2-067a59f7f094",
+  "d0162021-f8ef-4e05-a203-48497a3cae66",
+  "d5de0de0-9a99-44eb-92cf-ba530691756c",
+  "bbc36e1d-8143-4533-a9f6-a4bf5b05c9d5",
+  "793eecf9-1100-4297-a42c-4f7378eed570",
+  "9cb30bb9-688e-45a2-ae66-ef2711b67f3e",
+  "174b71cc-2b7e-4d18-bfc4-83900ab77f4d",
+  "4c9c8f2c-ce15-4789-bff1-473e3419fd86",
+  "4a988b71-c34c-456c-bccf-fa9fbf296792",
+  "4948af56-1297-4233-bc1e-dbf9267665a5",
+  "736fb2a2-d08a-4053-8633-7f88d1c4089d",
+  "a3242a99-91be-4c5a-8e3a-2719fa8cad6b",
+  "90423e52-3222-4c2d-8540-22412648d020",
+  "179c3ee3-8fe9-4a8e-bdaf-a58cee0402c4",
+  "f2ed18f0-807d-459d-b232-f8dfc03702cb",
+  "f3cd7e8a-b1e4-40bc-8ad6-44de5ca312cf",
+  "379c4816-a826-4eb7-8e34-215509cfda52",
+  "b4dc461c-6d53-4920-924d-012dfc7b353a",
+  "63a5f50a-1aa3-4fdc-9556-6d3520dd27b9",
+  "f01e5b5f-73e1-46b2-80a4-bd6b1cafa65d",
+  "a148b5b5-4831-458b-8e52-d4879d7889c2",
+  "a7c43e96-5fa7-45d2-9546-358bf2af564b",
+  "bd11b98b-d079-402d-a03f-c1f78751b516",
+  "072d425d-2f7f-4f8a-995b-4971f0ddc82f",
+  "c0d79828-a456-4188-9670-a0c8d9fd8ab4",
+  "be70620c-9be1-47af-8731-b590868e8a33",
+  "766fc637-2362-4cb3-a3b0-a388cf874ab5",
+  "3752c5eb-1f64-4b02-8561-af1a672297ba",
+  "04d61e95-d1f9-4b3c-b24f-c5b7b762268c",
+  "adf98095-fb6c-4172-850f-427a353e5283",
+  "4c81ab70-85da-448a-86ae-7dbcbc54124e",
+  "f7b69684-1a5c-417a-bdd8-36eafeb1919c",
+  "567356e0-d0dd-44f7-9a77-552f5ae4ced9",
+  "654cf633-1496-4070-a615-b6d468ba1550",
+  "d79c0fad-9655-4655-94f2-d3e09190e3e0",
+  "78c246ed-bf7f-4d42-b6f0-09135b36a32a",
+  "aa076589-f6b7-4eab-8b04-a2bb957e9edc",
+  "55b23cbc-c2a0-4915-9047-38864fbf54de",
+  "71c7874d-2af7-4fe6-90bf-71a8aecbec28",
+  "cb1c581d-de38-4fa9-9935-934cc529ac52",
+  "691e246d-4c99-473d-9267-580f16a9cc40",
+  "ec7092b7-5537-4bc8-8385-c2a7b2e5c36e",
+  "972377ba-467d-45e2-a0b5-eda70663f769",
+  "7c980ac4-38db-483b-82ee-141cc7c5ded5",
+  "c29d1cf8-5f27-43a5-96d7-a52927ec6567",
+  "d95eca5e-b28b-4fb7-8e56-23424f48d29e",
+  "8526196e-c876-4785-a25b-dfa96296335a",
+  "cd74c6c8-4584-447e-8f23-83f99e04a180",
+  "5d5b7790-a097-4aa5-969a-9d92ad2e6548",
+  "ffd94059-47d7-4d04-b5a5-21922399a71d",
+  "a536d14c-4195-463c-ac1f-1af0b3d985c8",
+  "b6c42de9-02d1-43b7-936b-ecc30ce1a6a6",
+  "62e01c6a-5fc9-477f-908b-a3d0f2fd9a99",
+  "3c092c17-4afa-4d7e-8af1-043fa5385a70",
+  "d68f3a9f-bb8e-492d-8541-ff5d9d044f61",
+  "c7397242-ca20-4b25-a22e-b23ed9f239b3",
+  "a9501710-04ef-4e65-967d-d84ae4e0f9f5",
+  "c6b35113-2205-4074-8907-33d8af73f456",
+  "087ea948-41bf-4279-a7ad-9d1861a3b0df",
+  "22122689-4f5a-4b65-841c-4c0991684ae7",
+  "a8b2aa67-40bf-4a4b-80f3-a0a696bdb2d5",
+  "f8bd2a4b-3801-480d-ad98-08b825beaf57"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [
+  {
+   "attackName": "[Active Scanning->Vulnerability Scanning]",
+   "attackPatternId": "attack-pattern--5502c4e9-24ef-4d5f-8ee9-9e906c2f82c4",
+   "attackTactic": "reconnaissance",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1595.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Operators ran low-and-slow vulnerability checks against CVE-2026-109618 and CVE-2026-109619 from a dedicated set of compromised scan nodes, probing multipart/form-data endpoints and the session upload-progress field across a filtered list of 216 candidate hosts, with roughly one third of the set touched as of 24 October 2026.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Gather Victim Network Information->IP Addresses]",
+   "attackPatternId": "attack-pattern--0dda99f0-4701-48ca-9774-8504922e92d3",
+   "attackTactic": "reconnaissance",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1590.005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The operators built and maintained a target spreadsheet of candidate victim hosts tagged by country and sector, dropping hosts that already bannered the fixed PHP versions and retaining 216 hosts that still advertised older, vulnerable PHP versions, with scan results written back to the same sheet to flag more promising targets.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Obtain Capabilities->Exploits]",
+   "attackPatternId": "attack-pattern--f4b843c1-7e92-4701-8fed-ce82f8be2636",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1588.005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The operators used AI-assisted triage to rank public PHP2Shell proof-of-concept exploit code rather than developing novel exploitation primitives, intending to adapt the most reliable public approach once a shortlist of high-confidence hosts is finalised.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Obtain Capabilities->Malware]",
+   "attackPatternId": "attack-pattern--7807d3a4-a885-4639-a786-c1ed41484970",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1588.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"A Mirai-convention second-stage ELF x86-64 loader ('nfs') was fetched from a staging host and executed as part of PHP2Shell post-exploitation tooling, consistent with reuse of an existing malware convention rather than purpose-built code.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Stage Capabilities->Upload Malware]",
+   "attackPatternId": "attack-pattern--3ee16395-03f0-4690-a32e-69ce9ada0f9e",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1608.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Exploit tooling and a second-stage ELF payload were staged on adversary-controlled infrastructure, including a dropper host from which vulnerable PHP workers fetched the loader before execution.\"],\"Procedures\":[\"hxxp://92.118.112[.]100/nfs\"]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Compromise Infrastructure->Server]",
+   "attackPatternId": "attack-pattern--e196b5c5-8118-4a1c-ab8a-936586ce3db5",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1584.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The operators ran their active PHP vulnerability checks from a dedicated set of compromised servers (21 scan nodes plus 17 previously published addresses), explicitly described by the operators as compromised infrastructure separate from the staging and collection addresses, rotating and discarding nodes once blocked or rate-limited.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Exploit Public-Facing Application",
+   "attackPatternId": "attack-pattern--3f886f2a-874f-4333-b794-aa6075009b1c",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1190",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The campaign exploits CVE-2026-109618 and CVE-2026-109619 in the PHP runtime via crafted multipart/form-data requests to achieve unauthenticated remote code execution, with the highest demonstrated success against Apache mod_php running in its default prefork configuration.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Server Software Component->Web Shell]",
+   "attackPatternId": "attack-pattern--5d0d3609-d06d-49e1-b9c9-b544e0c618cb",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1505.003",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The 21 newly identified scan-node addresses, together with the 17 addresses published previously, were observed performing PHP web shell tooling in the eight hours preceding detection, consistent with deployment of PHP (and historically ASP) web shells into web roots for execution and post-exploitation access.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Command and Scripting Interpreter->Unix Shell]",
+   "attackPatternId": "attack-pattern--a9d4b653-6915-42af-98b2-5758c4ceee56",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Blind remote code execution was validated by running a canary command on the exploited PHP worker and checking for a marker string in the HTTP response; PHP worker processes were also expected to spawn shell interpreters and download utilities from temporary directories following exploitation.\"],\"Procedures\":[\"uname -a; id; echo JACKALPOC\"]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Cron]",
+   "attackPatternId": "attack-pattern--2acf44aa-542f-4366-b4eb-55ef5747759c",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.003",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The assessed post-exploitation progression, following command execution as the web-worker user, includes installation of new cron jobs on the compromised host to maintain persistence alongside web-shell and SSH-key implants.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Cron]",
+   "attackPatternId": "attack-pattern--2acf44aa-542f-4366-b4eb-55ef5747759c",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.003",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The assessed post-exploitation progression, following command execution as the web-worker user, includes installation of new cron jobs on the compromised host to maintain persistence alongside web-shell and SSH-key implants.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Cron]",
+   "attackPatternId": "attack-pattern--2acf44aa-542f-4366-b4eb-55ef5747759c",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.003",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The assessed post-exploitation progression, following command execution as the web-worker user, includes installation of new cron jobs on the compromised host to maintain persistence alongside web-shell and SSH-key implants.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Account Manipulation->SSH Authorized Keys]",
+   "attackPatternId": "attack-pattern--6b57dc31-b814-4a03-8706-28bc20d739c4",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1098.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The assessed post-exploitation progression includes addition of attacker-controlled entries to SSH authorized_keys on the compromised web server to maintain persistent access under the web-worker account.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Account Manipulation->SSH Authorized Keys]",
+   "attackPatternId": "attack-pattern--6b57dc31-b814-4a03-8706-28bc20d739c4",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1098.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The assessed post-exploitation progression includes addition of attacker-controlled entries to SSH authorized_keys on the compromised web server to maintain persistent access under the web-worker account.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Unsecured Credentials->Credentials In Files]",
+   "attackPatternId": "attack-pattern--837f9164-50af-4ac0-8219-379d8a74cefc",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1552.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Following initial access, the assessed attack path includes harvesting of in-file credentials such as wp-config.php, .env files, database credentials and API keys from the compromised web root.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Data from Local System",
+   "attackPatternId": "attack-pattern--3c4a2599-71ee-4405-ba1e-0e28414b4bc5",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The PHP2Shell flaws were demonstrated to expose local data independent of full code execution, including an OPcache-based arbitrary file-read primitive and roughly 67 KB of process memory disclosed via the PHPSESSID session cookie.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Ingress Tool Transfer",
+   "attackPatternId": "attack-pattern--e6919abc-99f9-4c6c-95a5-14761e7b2add",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1105",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"A Mirai-style convention was used to retrieve a second-stage ELF loader from a staging host onto the compromised PHP host and execute it with the argument 'php', consistent with automated tool transfer following successful exploitation.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Acquire Infrastructure->Server]",
+   "attackPatternId": "attack-pattern--60c4b628-4807-4b0b-bbf5-fdac8643c337",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1583.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Fifteen pieces of campaign infrastructure were shared in the closed channel on 22 October 2026 for staging, target-list hosting and launch, consistent with acquisition of adversary-controlled servers to host and stage the operation.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Exploitation of Remote Services",
+   "attackPatternId": "attack-pattern--9db0cf3a-a3c9-4012-8268-123b9db6fd82",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1210",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The anticipated impact phase includes lateral movement from an initially compromised PHP web server deeper into the victim environment following unauthenticated RCE.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Exfiltration Over C2 Channel",
+   "attackPatternId": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1041",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The anticipated impact phase includes data exfiltration over outbound command-and-control connections initiated from compromised web-worker processes.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Resource Hijacking",
+   "attackPatternId": "attack-pattern--cd25c1b4-935c-4f0e-ba8d-552f28bc4783",
+   "attackTactic": "impact",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1496",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The anticipated impact phase includes cryptomining on compromised PHP hosts as one monetisation outcome of the access obtained.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Data Encrypted for Impact",
+   "attackPatternId": "attack-pattern--b80d107d-fa0d-4b60-9684-b0433e8bdba0",
+   "attackTactic": "impact",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1486",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The anticipated impact phase includes ransomware deployment against compromised hosts, consistent with the ecosystem's demonstrated willingness to escalate from access to disruption.\"],\"Procedures\":[]}"
+    ]
+   }
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "america:northern_america",
+  "asia",
+  "asia",
+  "asia",
+  "asia",
+  "oceania",
+  "asia",
+  "asia",
+  "asia",
+  "middle_east",
+  "middle_east"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3010-0608",
+ "sectors": [
+  "government-and-military",
+  "financial-services",
+  "manufacturing",
+  "transportation",
+  "payments",
+  "other",
+  "government-and-military:government-and-military",
+  "financial-services:financial-services",
+  "manufacturing:manufacturing",
+  "transportation:transportation",
+  "payments:payments"
+ ],
+ "seqPublish": "01a17631-e593-7d3f-98e1-dc6476ce83ca",
+ "seqUpdate": 17930015249652,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://www.cyfirma.com/research/cyfirma-threat-advisory-suspected-dprk-campaign-staging-php2shell-targeting-against-global-php-infrastructure/",
+   "datePublished": "2026-10-23"
+  }
+ ],
+ "sources": [
+  "https://www.cyfirma.com/research/cyfirma-threat-advisory-suspected-dprk-campaign-staging-php2shell-targeting-against-global-php-infrastructure/"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "KP",
+  "id": "5e9f20fdcf5876b5772b3d09b432f4080711ac5f",
+  "isAPT": true,
+  "name": "Lazarus"
+ },
+ "title": "Lazarus Shadow: Staging PHP2Shell Against Global PHP Infrastructure",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-10-26T10:58:44+03:00"
+}

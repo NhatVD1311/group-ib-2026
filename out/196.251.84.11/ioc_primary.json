@@ -1,0 +1,45 @@
+[
+ {
+  "id": "df9ea0eaff5d3a03006d63bf0745bd407eb9fa31",
+  "seqUpdate": 17936528611161,
+  "type": "network",
+  "dateFirstSeen": "2026-09-14T00:00:00Z",
+  "dateLastSeen": "2026-09-14T20:54:21Z",
+  "domain": [],
+  "url": [],
+  "ip": [
+   {
+    "ip": "196.251.84.11",
+    "riskScore": 85
+   }
+  ],
+  "potentialNames": [],
+  "malwareList": [],
+  "threatActorList": [
+   {
+    "id": "2530a2b46223154e3bc70a245138aa3c4eb75446",
+    "isAPT": false,
+    "name": "BalonxSistema"
+   }
+  ],
+  "threatList": [
+   {
+    "name": "BalonxSistema",
+    "title": "CallFlow Project - AI Vishing Module",
+    "id": "875cdf19e1a05ba65dc4fff650f22080cfdedea9"
+   }
+  ],
+  "tags": [
+   "Phishing",
+   "Unique_data"
+  ],
+  "evaluation": {
+   "admiraltyCode": "A1",
+   "TLP": "TLP:AMBER",
+   "reliability": 100,
+   "credibility": 100,
+   "TTL": 1825
+  },
+  "source": "Regional HUMINT"
+ }
+]

@@ -1,0 +1,141 @@
+{
+ "addedToThreatLandscapeFor": null,
+ "aliases": [
+  "BLACKMARKET",
+  "Tinkoff Bank Russia",
+  "BLACK MARKET",
+  "BLACK MARKET RU"
+ ],
+ "country": null,
+ "createdAt": "2019-02-20T17:44:21+00:00",
+ "description": "<p>This Russian-speaking threat actor was detected on underground forums in 2021. They have been offering debit cards particularly of Russian banks on Antimigalki forum.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "files": [],
+ "goals": [],
+ "hasIocs": false,
+ "id": "64eb857a75cd47e3ffe877364afd9dfd3ba74ce7",
+ "isAPT": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "linkedAttackPatterns": null,
+ "name": "BLACK MARKET",
+ "oldId": null,
+ "roles": [],
+ "seqUpdate": 16523774780590,
+ "spokenOnLangs": [
+  "ru"
+ ],
+ "stat": {
+  "allIndicatorsCount": 0,
+  "allReportsCount": 11,
+  "contactsCount": 7,
+  "countries": [
+   "RU",
+   "KZ",
+   "UA"
+  ],
+  "cve": [],
+  "dateFirstSeen": "2021-10-14",
+  "dateLastSeen": "2022-05-09",
+  "expertise": [
+   "Credit card",
+   "Sale",
+   "Money mule",
+   "Insider",
+   "Search"
+  ],
+  "forumsAccountsCount": 12,
+  "malware": [],
+  "regions": [
+   "europe",
+   "asia"
+  ],
+  "relatedThreatActorsCount": 12,
+  "reports": [
+   {
+    "companyId": [],
+    "datePublished": "2022-05-12",
+    "id": "2a33b1feebe8b5759a0b775c28048ad2ae32bf7b",
+    "name": {
+     "ru": "Сервис по продаже дебетовых карт на форуме Rutor",
+     "en": "Service of the sale of ready-made debit cards of Russian banks on Rutor forum"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2022-01-21",
+    "id": "9da9ac59d33929df1499834082adf704fa54580d",
+    "name": {
+     "ru": "Регистрация аккаунта на андеграундном форуме Antimigalki",
+     "en": "Account registration on Antimigalki underground forum"
+    }
+   },
+   {
+    "companyId": [],
+    "datePublished": "2022-01-21",
+    "id": "6e4eb4df098fc563a1b613a56d19e8eb1cf8a5af",
+    "name": {
+     "ru": "Публикация комментария в теме на форуме Darkmoney с предложением своих услуг",
+     "en": "Posting a comment in a topic on the Darkmoney forum with the offer of a service for the sale of debit cards "
+    }
+   }
+  ],
+  "sectors": [
+   "financial-services:banking",
+   "financial-services:debit-cards",
+   "mobile"
+  ],
+  "targetDomain": [],
+  "targetedCompany": [],
+  "targetedPartnersAndClients": [
+   "АО \"АЛЬФА-БАНК\"",
+   "Банк Левобережный",
+   "Банк Открытие",
+   "ВТБ (ПАО)",
+   "Кузнецкбизнесбанк",
+   "ОАО \"БАНК УРАЛСИБ\"",
+   "ОАО \"ОТП БАНК\"",
+   "ПАО «МТС-Банк»",
+   "ПАО «Почта Банк»",
+   "ПАО ПРОМСВЯЗЬБАНК",
+   "Тинькофф",
+   "\"Газпромбанк\" (Акционерное общество)",
+   "Home Credit International",
+   "ПАО \"Московский Кредитный Банк\"",
+   "ПАО \"Сбербанк\"",
+   "ПАО КБ «УБРиР»",
+   "Ренессанс Кредит",
+   "Россельхозбанк",
+   "Акционерное общество ЮниКредит Банк",
+   "Банк Авангард",
+   "ООО \"Хоум Кредит энд Финанс Банк\"",
+   "ПАО «Совкомбанк»"
+  ]
+ },
+ "techSeqUpdate": null,
+ "threatLandscapeOptions": [
+  {
+   "label": "company",
+   "value": "company"
+  },
+  {
+   "label": "partner",
+   "value": "partner"
+  },
+  {
+   "label": "industry",
+   "value": "industry"
+  },
+  {
+   "label": "other",
+   "value": "other"
+  }
+ ],
+ "updatedAt": "2022-05-12T20:44:38+03:00"
+}

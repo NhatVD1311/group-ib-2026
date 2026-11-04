@@ -1,0 +1,90 @@
+{
+ "contacts": [],
+ "countries": [
+  "ID"
+ ],
+ "createdAt": "2026-11-02T02:13:56+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2026-10-31",
+ "dateLastSeen": "2026-10-31",
+ "datePublished": "2026-11-02",
+ "description": "<p>The Group-IB Threat Intelligence team identified an alleged data leak from an unspecified Messaging and Telecommunications / Mobile Networks company in Indonesia, claimed by an actor on darkforums[.]me. The organisation is not named; the actor gave: additional info: Web-based maps showing locations of Base Transceiver Stations (BTS) provider-specific for Batam Island, Indonesia. Download link given by the actor: hxxps://pasted[.]pw/view.php?id=123587.</p><p>The threat actor <b>Argfilox</b> posted a thread on <b>darkforums[.]me</b> on <b>2026-10-31</b>:</p><p><pre><code class=\"language-plaintext\">Hidden Content\nALL DATA:\nhxxps://pasted[.]pw/view.php?id=123587</code></pre></p><p>This message can also be viewed in the <a target=\"_blank\" href=\"https://tap.group-ib.com/ta/darkweb?id=b272c8e8753b1322519d9ecde44538b7\">Darkweb section</a>.</p><h3>General information</h3><p>A data leak is the publication or sale of data taken from a company&#x27;s systems — customer or employee databases, internal documents, source code. Sellers and posters on underground forums claim a breach of a named or unnamed organisation and offer the data, or a sample of it, for download or for a price. The claim is the actor&#x27;s own and is not verified here: the useful part for the affected company is to learn that the data is circulating, which fields it holds and how fresh it is, so that it can confirm the leak, find its source and notify its customers and regulators in time.</p><h3>Recommendations</h3><h4>Preparation</h4><ul><li>Regularly check for employee credentials in breaches and block accounts that reuse passwords from earlier leaks. A Threat Intelligence service gives this as a real-time feed (in Group-IB Threat Intelligence: tap.group-ib.com/cd/accounts, /cd/leaks, /cd/git-leaks, /cd/breached, /cd/shops).</li><li>Monitor new breaches closely to act at once — Group-IB Threat Intelligence tracks all mentions of breaches and notifies about new ones (tap.group-ib.com/ta/last-threats).</li><li>Watch for compromised accounts from information stealers and illegal shops, and train employees in digital hygiene.</li><li>Keep an Incident Response retainer in place for better preparedness.</li></ul><h4>Response</h4><ul><li>If an employee account is found compromised, block all its access, issued certificates and VPNs at once and run digital forensics on the device to see what the attacker did on it.</li><li>For a server data leak, first identify the source of the leak and start Incident Response.</li><li>Establish what data was compromised and act on it — revoke compromised certificates, change credentials and any other leaked information that could give access to company or client data.</li><li>Prepare a plan for communicating with the public and the regulators.</li></ul><h4>Post-incident</h4><ul><li>Audit the affected systems to make sure no more sophisticated attack was carried out.</li><li>Investigate where needed — it helps to find who is behind the attack.</li><li>Prepare a report for the relevant regulators if required.</li><li>Train the employees whose actions led to the leak in digital hygiene.</li></ul><h3>Disclaimer</h3><ul><li><em>Please note that the information in this report is based on statements made by alleged threat actors and should be independently verified.</em></li><li><em>This report was generated using artificial intelligence and may contain inaccuracies; it is advisable to double-check the provided information.</em></li><li><em>The recommendations above, like this notification as a whole, are generated automatically and are general in nature. Each incident is unique and should be analyzed by specialists with the appropriate experience and skills. If you would like Group-IB&#x27;s specialists to review the incident and provide a more detailed description or a tailored list of recommendations, please submit a request in https://tap.group-ib.com/service_desk — our specialists will be happy to assist you.</em></li></ul>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "AutoReport",
+  "Leak",
+  "Leak Analysis"
+ ],
+ "files": [],
+ "forumsAccounts": [
+  {
+   "messageCount": null,
+   "nickname": "Argfilox",
+   "registeredAt": null,
+   "url": "https://darkforums.as/User-Argfilox"
+  }
+ ],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "d94c0dc88fac7e685fb48b3f931656d8daa2609c",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [],
+ "oldId": null,
+ "regions": [
+  "asia"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3011-0213",
+ "sectors": [
+  "messaging-and-telecommunications",
+  "messaging-and-telecommunications:messaging-and-telecommunications"
+ ],
+ "seqPublish": "01a19964-1966-7b9c-b617-9a663ff703f6",
+ "seqUpdate": 17935748384623,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [],
+ "sources": [
+  "https://darkforums.as/Thread-web-based-maps-location-of-Base-Transceiver-Station-Provider-specific-for-Batam-Islan--117260?pid=779431#pid779431"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "4c6675a105dbbe2ec4e05bdb8ca8679beff0137e",
+  "isAPT": false,
+  "name": "Argfilox"
+ },
+ "title": "Claims to have leaked data from an unspecified Messaging and Telecommunications / Mobile Networks company in Indonesia",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-11-02T02:13:58+03:00"
+}

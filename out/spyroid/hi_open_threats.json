@@ -1,0 +1,349 @@
+[
+ {
+  "author": {
+   "name": "cyberundergroundfeed",
+   "profileUrl": "https://x.com/cyberfeeddigest",
+   "screenName": "cyberfeeddigest",
+   "userId": "1823332931802206208",
+   "reposted": false,
+   "originalUserId": "",
+   "originalName": "",
+   "originalScreenName": ""
+  },
+  "createdAt": "2025-02-26T07:06:34+00:00",
+  "dateDetected": "2025-03-07T20:03:04+00:00",
+  "detected": "2025-03-07T20:03:04+00:00",
+  "displayOptions": {
+   "isFavourite": false,
+   "isHidden": false
+  },
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "green",
+   "tlp": "white",
+   "ttl": 0
+  },
+  "id": "a38f56ae3c24a2e0a0768c70de01b2f307fd9d4a",
+  "link": "https://x.com/cyberfeeddigest/status/1894645213349433674",
+  "original": "",
+  "seqUpdate": 1741377784726451,
+  "source": "x.com (formerly twitter.com)",
+  "sourceType": "Social Network",
+  "text": "🐍 \"Computer Worm\" Telegram Channel Sharing Malicious Tools! 🐍\n\nA Telegram channel is allegedly distributing various #Malware for Android, including:\n📌 CraxsRat\n📌 Spyroid RAT\n📌 Remote Control RATs and more...\n🔗 hxxps://t.me/hackeri2p\n⚠️ Handle with caution. Good source for #Malware analysts.\n#CyberSecurity #AndroidMalware #RAT #HackingTools #Infosec",
+  "threatActors": [],
+  "title": "1894645213349433674",
+  "updatedAt": "2025-03-07T20:03:04+00:00",
+  "data": {
+   "countries": [],
+   "companyTags": [],
+   "cryptoWallets": [],
+   "cve": [],
+   "domains": [],
+   "emails": [],
+   "files": [],
+   "hashes": [],
+   "malware": [],
+   "pdbPaths": [],
+   "rules": [],
+   "tags": [
+    "Android",
+    "Malware",
+    "RAT",
+    "Telegram"
+   ],
+   "telegramApiKeys": [],
+   "ip": []
+  }
+ },
+ {
+  "author": {
+   "name": "cyberundergroundfeed",
+   "profileUrl": "https://x.com/cyberfeeddigest",
+   "screenName": "cyberfeeddigest",
+   "userId": "1823332931802206208",
+   "reposted": false,
+   "originalUserId": "",
+   "originalName": "",
+   "originalScreenName": ""
+  },
+  "createdAt": "2025-06-21T07:35:49+00:00",
+  "dateDetected": "2025-06-21T08:05:28+00:00",
+  "detected": "2025-06-21T08:05:28+00:00",
+  "displayOptions": {
+   "isFavourite": false,
+   "isHidden": false
+  },
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "orange",
+   "tlp": "white",
+   "ttl": 0
+  },
+  "id": "14a9e44fe10e743c798fe7cc1d42e6b49e176df9",
+  "link": "https://x.com/cyberfeeddigest/status/1936327179710689621",
+  "original": "",
+  "seqUpdate": 1750493128234680,
+  "source": "x.com (formerly twitter.com)",
+  "sourceType": "Social Network",
+  "text": "🕷️ Clear Web #RAT Bazaar Exposed 🕷️\n\nA clear web site (blackhattoolsandcoursesshop2[.]ru) is openly offering multiple #RATs including:\n🛠️ GTX-700 RAT\n🦅 Eagle Spy\n🪓 CRAX RAT\n🐍 XWorm RAT\n☠️ Venom RAT\n🕵️ Silver RAT\n📱 Spyroid RAT\n...and more.\n🔬 A notable source for #Malware analysts. Handle with extreme caution.\n\n#Infosec #CyberThreats #OSINT #CyberSecurity #Russia",
+  "threatActors": [],
+  "title": "1936327179710689621",
+  "updatedAt": "2025-06-21T08:05:28+00:00",
+  "data": {
+   "countries": [
+    {
+     "country": "Russia",
+     "countryCode": "RU"
+    }
+   ],
+   "companyTags": [],
+   "cryptoWallets": [],
+   "cve": [],
+   "domains": [
+    {
+     "value": "blackhattoolsandcoursesshop2.ru",
+     "tags": []
+    }
+   ],
+   "emails": [],
+   "files": [],
+   "hashes": [],
+   "malware": [],
+   "pdbPaths": [],
+   "rules": [],
+   "tags": [
+    "Malware",
+    "RAT"
+   ],
+   "telegramApiKeys": [],
+   "ip": []
+  }
+ },
+ {
+  "author": {
+   "name": "Man-in-the-Middle . MITM",
+   "profileUrl": "https://x.com/man1nth3middle",
+   "screenName": "man1nth3middle",
+   "userId": "1899921790857789440",
+   "reposted": true,
+   "originalUserId": "1823332931802206208",
+   "originalName": "darkweb-deepwebfeed",
+   "originalScreenName": "cyberfeeddigest"
+  },
+  "createdAt": "2025-11-20T21:23:58+00:00",
+  "dateDetected": "2025-11-21T11:09:58+00:00",
+  "detected": "2025-11-21T11:09:58+00:00",
+  "displayOptions": {
+   "isFavourite": false,
+   "isHidden": false
+  },
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "orange",
+   "tlp": "white",
+   "ttl": 0
+  },
+  "id": "98a92677ec002309878bf17339c486eb4f56d8c3",
+  "link": "https://x.com/man1nth3middle/status/1991618547588689931",
+  "original": "",
+  "seqUpdate": 1763723398294430,
+  "source": "x.com (formerly twitter.com)",
+  "sourceType": "Social Network",
+  "text": "🕷️ Clear Web #RAT Bazaar Exposed 🕷️\n\nA clear web site (blackhattoolsandcoursesshop2[.]ru) is openly offering multiple #RATs including:\n🛠️ GTX-700 RAT\n🦅 Eagle Spy\n🪓 CRAX RAT\n🐍 XWorm RAT\n☠️ Venom RAT\n🕵️ Silver RAT\n📱 Spyroid RAT\n...and more.\n🔬 A notable source for #Malware analysts. Handle with extreme caution.\n\n#Infosec #CyberThreats #OSINT #CyberSecurity #Russia",
+  "threatActors": [],
+  "title": "1991618547588689931",
+  "updatedAt": "2025-11-21T11:09:58+00:00",
+  "data": {
+   "countries": [
+    {
+     "country": "Russia",
+     "countryCode": "RU"
+    }
+   ],
+   "companyTags": [],
+   "cryptoWallets": [],
+   "cve": [],
+   "domains": [
+    {
+     "value": "blackhattoolsandcoursesshop2.ru",
+     "tags": []
+    }
+   ],
+   "emails": [],
+   "files": [],
+   "hashes": [],
+   "malware": [],
+   "pdbPaths": [],
+   "rules": [],
+   "tags": [
+    "Malware",
+    "RAT"
+   ],
+   "telegramApiKeys": [],
+   "ip": []
+  }
+ },
+ {
+  "author": {
+   "name": "RST Cloud",
+   "profileUrl": "https://x.com/rst_cloud",
+   "screenName": "rst_cloud",
+   "userId": "2990778574",
+   "reposted": false,
+   "originalUserId": "",
+   "originalName": "",
+   "originalScreenName": ""
+  },
+  "createdAt": "2026-08-22T07:40:54+00:00",
+  "dateDetected": "2026-08-22T13:00:25+00:00",
+  "detected": "2026-08-22T13:00:25+00:00",
+  "displayOptions": {
+   "isFavourite": false,
+   "isHidden": false
+  },
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "green",
+   "tlp": "white",
+   "ttl": 0
+  },
+  "id": "f3abebb533fc61955679cb89bef74e726efbb3ec",
+  "link": "https://x.com/rst_cloud/status/2091068076355727675",
+  "original": "",
+  "seqUpdate": 1787403625990050,
+  "source": "x.com (formerly twitter.com)",
+  "sourceType": "Social Network",
+  "text": "#threatreport #HighCompleteness\nBalonx Sistema: The Face Behind the PhaaS Affecting Mexican Banking | 19-08-2026\nSource: https://www.group-ib.com/blog/balonx-sistema-mexico-phaas/\nKey details below ↓\n\n🧑‍💻Actors/Campaigns:\nBalonx_sistema (🧠motivation: cyber_criminal)\n\n💀Threats:\nMitm_technique, Credential_harvesting_technique, Aitm_technique, Spear-phishing_technique, \n🎯Victims: Financial institutions, Banking customers\n\n🏭Industry: Education, Financial, E-commerce\n\n🌐Geo: Latin america, Mexican, Brazil, Latam, Mexico\n\n📚TTPs:\n⚔️Tactics: 1\n🛠️Technics: 12\n\n🧨IOCs:\n - File: 1\n - IP: 4\n - Domain: 5\n - Url: 3\n\n💽Software: Android, Telegram, OpenAI, FreePBX, PostgreSQL, AppStores, WhatsApp\n\n🔢Algorithms: base64\n\n📜Programming Languages: javascript\n\n#threatreport:\nBalonx Sistema is a subscription-based Phishing-as-a-Service (PhaaS) operation targeting more than 20 Mexican financial institutions. The platform reportedly harvested over 1,100 sets of credentials and financial data since at least October 2025. Affiliates access the service through weekly plans, while administrators control users, targeted banks, phishing links, and active victim sessions. The infrastructure supports domain rotation, allowing operators to replace exposed domains while retaining victim data, affiliate accounts, and session histories through a centralized PostgreSQL backend. More than 350 domains have been associated with Balonx and related “Aclaraciones Bancarias” campaigns.\n\nThe phishing component uses persistent WebSocket connections through the `/ws` endpoint to provide real-time, bidirectional control of victim sessions. Operators can observe submitted credentials, relay them to legitimate banking portals, and then dynamically display screens requesting SMS one-time passwords, transaction codes, or purchase authorization codes. This enables adversary-in-the-middle session hijacking and circumvents SMS-based multifactor authentication. Affiliates can also configure automated “personal flows” that present scripted screen sequences based on victim input or timed transitions.\n\nBalonx additionally distributes an Android RAT through a fake banking-protection prompt. The identified APK uses package name `sacred.explosion` and is based on the Spyroid framework. It contains obfuscated, Base64-encoded configuration data and maintains a persistent TCP connection to its command-and-control server. Reported capabilities include screen capture, keylogging, SMS interception, file access, and monitoring of banking applications. The identified C2 address was `196.251.84.11:7771`.\n\nA separate module called CallFlow automates voice phishing. It combines FreePBX telephony infrastructure, GPT-4o-mini for dialogue generation, ElevenLabs for synthetic speech, and OpenAI Whisper for speech transcription. The system impersonates a bank representative and supports approximately 30 concurrent SIP channels, enabling large-scale outbound campaigns without human call operators. The reported SIP server was `85.31.235.109`, using TCP port 5160. The combined use of live web phishing, Android malware, and AI-driven vishing gives affiliates multiple ways to steal credentials, MFA codes, financial information, and device data.",
+  "threatActors": [],
+  "title": "2091068076355727675",
+  "updatedAt": "2026-08-22T13:00:25+00:00",
+  "data": {
+   "countries": [
+    {
+     "country": "Brazil",
+     "countryCode": "BR"
+    },
+    {
+     "country": "Mexico",
+     "countryCode": "MX"
+    }
+   ],
+   "companyTags": [],
+   "cryptoWallets": [],
+   "cve": [],
+   "domains": [],
+   "emails": [],
+   "files": [],
+   "hashes": [],
+   "malware": [],
+   "pdbPaths": [],
+   "rules": [],
+   "tags": [
+    "Access",
+    "Android",
+    "Bank",
+    "Domain",
+    "IP address v4",
+    "Keylogger",
+    "Malware",
+    "Phishing",
+    "RAT",
+    "Server",
+    "Telegram",
+    "Vishing & OTP Bypass"
+   ],
+   "telegramApiKeys": [],
+   "ip": []
+  }
+ },
+ {
+  "author": {
+   "name": "",
+   "profileUrl": "",
+   "screenName": "",
+   "userId": "",
+   "reposted": false,
+   "originalUserId": "",
+   "originalName": "",
+   "originalScreenName": ""
+  },
+  "createdAt": "2026-08-26T19:14:31+05:30",
+  "dateDetected": "2026-08-26T14:35:42+00:00",
+  "detected": "2026-08-26T14:35:42+00:00",
+  "displayOptions": {
+   "isFavourite": false,
+   "isHidden": false
+  },
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "orange",
+   "tlp": "white",
+   "ttl": 0
+  },
+  "id": "82d11c3ab9db2f21038c2f4baf9dfb8dd310e77f",
+  "link": "https://thehackernews.com/2026/08/novacookies-campaigns-abuse-genuine.html",
+  "original": "<div class=\"articlebody clear cf\" id=\"articlebody\"><div class=\"separator\" style=\"clear: both;\"></div>\n<p>Cybersecurity researchers have disclosed details of a new adversary-in-the-middle (AitM) phishing toolkit called <strong>NovaCookies</strong> that's used as a proxy to redirect Microsoft 365 sign-ins, while capturing authenticated sessions in the process.</p>\n<p>In a report shared with The Hacker News ahead of publication, Island characterized the $320/month service as a subscription-based phishing platform that facilitates real-time Microsoft 365 session theft. The kit has been used to target hundreds of organizations across multiple sectors in the U.S., the U.K., Canada, Germany, Israel, and the U.A.E. to date. </p>\n<p>\"Observed campaigns used genuine Docusign envelopes to carry counterfeit document-share lures, with some clicks routed through legitimate Microsoft or Google sign-in endpoints as redirect hops before reaching the kit,\" Island said. \"The message, document service and redirect can therefore appear trustworthy until the browser reaches attacker-controlled infrastructure.\"</p>\n<p>Like other AitM phishing kits, NovaCookies is designed to relay Microsoft 365 authentication through attacker-controlled infrastructure, allowing it to act as a proxy and harvest the resulting session after victims enter their passwords and multi-factor authentication (MFA) codes.</p>\n<p>Evidence indicates that NovaCookies is advertised via Telegram, with the messaging service also used as infrastructure to manage customer profiles, configure redirect services, and contact support. According to Proofpoint, NovaCookies is assessed to be a variant of the Sneaky 2FA phishing kit.</p>\n<p>\"While the original Sneaky2FA appeared to focus mainly on Microsoft accounts, the NovaCookies variant includes dedicated flows for other identity providers, including Okta, and Entra domains federated to GoDaddy,\" Proofpoint noted in an X post last month.</p>\n<!--adsense-->\n<p>\"Unlike Sneaky2FA, NovaCookies uses a fully managed phishing-as-a-service (PhaaS) model where affiliates pay to use a PhaaS platform, and the infrastructure is hosted centrally by the PhaaS operator rather than by each affiliate.\"</p>\n\n<p>Many NovaCookies lure domains have been found to be hosted on the \".vu\" domain (e.g., \"fordmotbvmorcompany[.]vu\"), with the phishing URLs featuring alternating-case labels such as PwPt-sHaRe, Ms36-AcCeSs, and ClOd-ViEw in an attempt to masquerade as legitimate Microsoft services.</p>\n<p>One of the attack chains employs Docusign notifications as decoys to lead victims to the phishing pages, while bypassing sender-authentication and reputation checks by taking advantage of the fact that the email is a genuine Docusign notification. What's malicious is the document shared via the service.</p>\n<p>\"Styled as a Docusign share notice, it claimed that an accounting department had shared a remittance-advice PDF and invited the recipient to open it,\" Island said. \"The malicious destination sat inside the document, below the layer most mail security products inspect.\"</p>\n<div class=\"separator\" style=\"clear: both;\"></div>\n<p>The attack then employs an OAuth error-redirect technique detailed by Microsoft earlier this March to lead victims to attacker-controlled infrastructure. The phishing infrastructure operated by NovaCookies is a live AitM relay designed to capture credentials and session information, and relay it to Microsoft in real time.</p>\n<p>The commercial offering also boasts of various anti-analysis checks to evade security scanners before serving the bogus login form impersonating Microsoft 365. This includes a Cloudflare gate and a mechanism to detect execution passes associated with debugging tools.</p>\n<p>\"NovaCookies is built so each hop can look legitimate on its own: a trusted delivery service, an identity-provider redirect, then a familiar sign-in page,\" Island said. \"Those pieces often land in different tools. The browser is where they become a single event.\"</p>\n<p>The disclosure comes as PhaaS toolkits continue to be a lucrative subscription service in the cybercrime underground, allowing cybercriminals with little to no technical expertise to mount phishing campaigns at scale. Some of the new services that have emerged in recent months include -</p>\n<ul>\n<li><strong>AnonyMousKIT</strong>, which has been active since early 2024 and uses artificial intelligence (AI)-powered vishing tactics to target stolen device owners by posing as Apple Support and asking them to provide their device passcode, Apple ID, and 6-digit 2FA code on fake domains embedded in emails with the end goal of disabling Activation Lock on the device and reselling it. The service obtains the owner's contact information supplied through the Lost Mode feature, using it to reach out to them through email, SMS, WhatsApp, or a phone call.</li>\n<li><strong>p1bot.io</strong>, a vishing-as-a-service platform that uses ElevenLabs' text-to-speech capabilities to generate Interactive Voice Response (IVR) prompts in English, French, or Spanish, play them to victims mid-call, and capture keypad presses (e.g., PINs, OTPs, or account numbers) in real time.</li>\n<li><strong>Bluekit</strong>, which advertises 40+ website templates, automated domain purchase and registration, 2FA support, spoofing, geolocation emulation, Telegram and browser notifications, antibot cloaking, and add-ons like an AI assistant, voice cloning, and a mail sender</li>\n<li><strong>ATHR</strong>, which uses AI vishing agents, credential harvesting panels, and built-in phishing mailers to execute and scale telephone-oriented attack delivery (TOAD) attacks.</li>\n<li><strong>ZeroTokens</strong>, which supports impersonation of 53 financial institution brands to harvest credentials, identity data, payment details, and verification codes. The service makes use of ten sender domains (four \".com\" and six \".asia\") and nine SendGrid accounts to bypass SPF, DKIM, and DMARC checks.</li>\n<li><strong>iAuthFlow V2</strong>, which uses a browser-in-the-middle (BitM) relay to turn a temporary foothold afforded by a phished Google session into persistent access by enrolling an attacker-controlled passkey. It's advertised for $10,000 for the base package, with additional capability modules sold separately, along with other versions for Microsoft, iCloud, and LinkedIn.</li>\n<li><strong>LinXcoded</strong> (aka <strong>Mirage2FA</strong>), which makes use of compromised senders, analysis evasion, and real-time Microsoft 365 relays to capture authenticated sessions. Phishing messages leveraging the kit originate from compromised, authenticated Microsoft 365 tenants and carry the payload as an HTML attachment rather than a link in the message body to evade email security controls.</li>\n<li><strong>Matrix</strong>, which shares the same lineage as Sneaky 2FA and enables Microsoft 365 credential-phishing via an AitM harvester. Phishing messages leveraging the kit employ OneDrive notifications that prompt recipients to open a shared document.</li>\n<li><strong>ARToken</strong>, which steals Microsoft 365 tokens through the OAuth device code flow and facilitates full account takeover via invoice-themed phishing emails sent from a compromised legitimate Google Workspace or Microsoft 365 mailbox that link to an anonymous SharePoint file share hosted on a compromised third-party tenant. The share contains a Windows Internet Shortcut file that displays an identity-verification prompt to carry out device code phishing.</li>\n<li><strong>Blacksite</strong>, which pairs an AitM reverse-proxy kit with Cloaked.gg, a cloaking service, to hide phishing pages from automated URL analysis and serve benign decoys to scanners. The kit is designed to intercept authentication tokens, session cookies, and one-time 2FA codes in real time.</li>\n<li><strong>Balonx Sistema</strong>, which is a Mexican PhaaS operation that targets over 20 financial institutions in the country with live WebSocket victim interaction, an integrated Android Remote Access Trojan (RAT) based on Spyroid, and an advanced AI-driven vishing component dubbed CallFlow that automates voice fraud via synthetic speech and large language models (LLMs). More than 1,100 users' credentials and financial information have been collected since at least October 2025.</li>\n<li><strong>EvilTokens</strong>, which provides an off-the-shelf Microsoft device code phishing kit and malicious AI-powered analytics services that allow customers to identify valuable data for fraud and scam campaigns.</li>\n<li><strong>Forg365</strong>, which combines device code phishing, AitM tactics, antibot evasion, AI-assisted lure creation, and post-compromise mailbox operations targeting Microsoft 365 accounts.</li>\n</ul>\n<p>The findings also come as a threat actor tracked as DOUBLOON DREDGER has been observed abusing Notion accounts to invite targets to view a PDF that contains a malicious link, clicking which takes them to an EvilTokens device code harvesting page.</p>\n<!--linkads-->\n<p>\"They abuse Notion to gain access to a legitimate email sender, reputable infrastructure, and a place to host a malicious PDF,\" Sublime said. \"They use a PDF builder that includes two to three overlapping links, attempting to evade defensive tooling and detections while potentially increasing the shelf life of any single malicious PDF with redundant infrastructure.\"</p>\n<p>\"The payload landing page uses a JavaScript obfuscation and encryption technique similar to recent Tycoon 2FA device code harvesting campaigns.\"</p>\n<div class=\"separator\" style=\"clear: both;\"></div>\n<p>It's suspected with low confidence that DOUBLOON DREDGER has acquired access to both EvilTokens and Tycoon 2FA and then uses their own custom first-stage JavaScript in front of the PhaaS kits. The threat actor is believed to be financially motivated.</p>\n<p>\"EvilTokens represents a structural shift in the PhaaS market. Previous platforms commoditized the front end of the attack: the lure, the landing page, the credential capture,\" Flare security researcher Assaf Morag said. \"EvilTokens commoditizes what comes after.\"</p>\n<p>\"By automating inbox analysis, stakeholder mapping, and AI-generated fraud messages, it removes the skill barrier that once separated a captured token from a successful financial compromise. An affiliate no longer needs to understand business email compromise tradecraft, as the platform provides it as a feature.\"</p>\n<div class=\"stophere\" id=\"hiddenH1\"></div>\n<div class=\"cf note-b\">Found this article interesting?  Follow us on Google News, Twitter and LinkedIn to read more exclusive content we post.</div>\n</div>",
+  "seqUpdate": 1787754942685575,
+  "source": "feedburner.com",
+  "sourceType": "Blog",
+  "text": "Cybersecurity researchers have disclosed details of a new adversary-in-the-middle (AitM) phishing toolkit called NovaCookies that's used as a proxy to redirect Microsoft 365 sign-ins, while capturing authenticated sessions in the process.\nIn a report shared with The Hacker News ahead of publication, Island characterized the $320/month service as a subscription-based phishing platform that facilitates real-time Microsoft 365 session theft. The kit has been used to target hundreds of organizations across multiple sectors in the U.S., the U.K., Canada, Germany, Israel, and the U.A.E. to date. \n\"Observed campaigns used genuine Docusign envelopes to carry counterfeit document-share lures, with some clicks routed through legitimate Microsoft or Google sign-in endpoints as redirect hops before reaching the kit,\" Island said. \"The message, document service and redirect can therefore appear trustworthy until the browser reaches attacker-controlled infrastructure.\"\nLike other AitM phishing kits, NovaCookies is designed to relay Microsoft 365 authentication through attacker-controlled infrastructure, allowing it to act as a proxy and harvest the resulting session after victims enter their passwords and multi-factor authentication (MFA) codes.\nEvidence indicates that NovaCookies is advertised via Telegram, with the messaging service also used as infrastructure to manage customer profiles, configure redirect services, and contact support. According to Proofpoint, NovaCookies is assessed to be a variant of the Sneaky 2FA phishing kit.\n\"While the original Sneaky2FA appeared to focus mainly on Microsoft accounts, the NovaCookies variant includes dedicated flows for other identity providers, including Okta, and Entra domains federated to GoDaddy,\" Proofpoint noted in an X post last month.\n\n\"Unlike Sneaky2FA, NovaCookies uses a fully managed phishing-as-a-service (PhaaS) model where affiliates pay to use a PhaaS platform, and the infrastructure is hosted centrally by the PhaaS operator rather than by each affiliate.\"\n\nMany NovaCookies lure domains have been found to be hosted on the \".vu\" domain (e.g., \"fordmotbvmorcompany[.]vu\"), with the phishing URLs featuring alternating-case labels such as PwPt-sHaRe, Ms36-AcCeSs, and ClOd-ViEw in an attempt to masquerade as legitimate Microsoft services.\nOne of the attack chains employs Docusign notifications as decoys to lead victims to the phishing pages, while bypassing sender-authentication and reputation checks by taking advantage of the fact that the email is a genuine Docusign notification. What's malicious is the document shared via the service.\n\"Styled as a Docusign share notice, it claimed that an accounting department had shared a remittance-advice PDF and invited the recipient to open it,\" Island said. \"The malicious destination sat inside the document, below the layer most mail security products inspect.\"\n\nThe attack then employs an OAuth error-redirect technique detailed by Microsoft earlier this March to lead victims to attacker-controlled infrastructure. The phishing infrastructure operated by NovaCookies is a live AitM relay designed to capture credentials and session information, and relay it to Microsoft in real time.\nThe commercial offering also boasts of various anti-analysis checks to evade security scanners before serving the bogus login form impersonating Microsoft 365. This includes a Cloudflare gate and a mechanism to detect execution passes associated with debugging tools.\n\"NovaCookies is built so each hop can look legitimate on its own: a trusted delivery service, an identity-provider redirect, then a familiar sign-in page,\" Island said. \"Those pieces often land in different tools. The browser is where they become a single event.\"\nThe disclosure comes as PhaaS toolkits continue to be a lucrative subscription service in the cybercrime underground, allowing cybercriminals with little to no technical expertise to mount phishing campaigns at scale. Some of the new services that have emerged in recent months include -\n\nAnonyMousKIT, which has been active since early 2024 and uses artificial intelligence (AI)-powered vishing tactics to target stolen device owners by posing as Apple Support and asking them to provide their device passcode, Apple ID, and 6-digit 2FA code on fake domains embedded in emails with the end goal of disabling Activation Lock on the device and reselling it. The service obtains the owner's contact information supplied through the Lost Mode feature, using it to reach out to them through email, SMS, WhatsApp, or a phone call.\np1bot.io, a vishing-as-a-service platform that uses ElevenLabs' text-to-speech capabilities to generate Interactive Voice Response (IVR) prompts in English, French, or Spanish, play them to victims mid-call, and capture keypad presses (e.g., PINs, OTPs, or account numbers) in real time.\nBluekit, which advertises 40+ website templates, automated domain purchase and registration, 2FA support, spoofing, geolocation emulation, Telegram and browser notifications, antibot cloaking, and add-ons like an AI assistant, voice cloning, and a mail sender\nATHR, which uses AI vishing agents, credential harvesting panels, and built-in phishing mailers to execute and scale telephone-oriented attack delivery (TOAD) attacks.\nZeroTokens, which supports impersonation of 53 financial institution brands to harvest credentials, identity data, payment details, and verification codes. The service makes use of ten sender domains (four \".com\" and six \".asia\") and nine SendGrid accounts to bypass SPF, DKIM, and DMARC checks.\niAuthFlow V2, which uses a browser-in-the-middle (BitM) relay to turn a temporary foothold afforded by a phished Google session into persistent access by enrolling an attacker-controlled passkey. It's advertised for $10,000 for the base package, with additional capability modules sold separately, along with other versions for Microsoft, iCloud, and LinkedIn.\nLinXcoded (aka Mirage2FA), which makes use of compromised senders, analysis evasion, and real-time Microsoft 365 relays to capture authenticated sessions. Phishing messages leveraging the kit originate from compromised, authenticated Microsoft 365 tenants and carry the payload as an HTML attachment rather than a link in the message body to evade email security controls.\nMatrix, which shares the same lineage as Sneaky 2FA and enables Microsoft 365 credential-phishing via an AitM harvester. Phishing messages leveraging the kit employ OneDrive notifications that prompt recipients to open a shared document.\nARToken, which steals Microsoft 365 tokens through the OAuth device code flow and facilitates full account takeover via invoice-themed phishing emails sent from a compromised legitimate Google Workspace or Microsoft 365 mailbox that link to an anonymous SharePoint file share hosted on a compromised third-party tenant. The share contains a Windows Internet Shortcut file that displays an identity-verification prompt to carry out device code phishing.\nBlacksite, which pairs an AitM reverse-proxy kit with Cloaked.gg, a cloaking service, to hide phishing pages from automated URL analysis and serve benign decoys to scanners. The kit is designed to intercept authentication tokens, session cookies, and one-time 2FA codes in real time.\nBalonx Sistema, which is a Mexican PhaaS operation that targets over 20 financial institutions in the country with live WebSocket victim interaction, an integrated Android Remote Access Trojan (RAT) based on Spyroid, and an advanced AI-driven vishing component dubbed CallFlow that automates voice fraud via synthetic speech and large language models (LLMs). More than 1,100 users' credentials and financial information have been collected since at least October 2025.\nEvilTokens, which provides an off-the-shelf Microsoft device code phishing kit and malicious AI-powered analytics services that allow customers to identify valuable data for fraud and scam campaigns.\nForg365, which combines device code phishing, AitM tactics, antibot evasion, AI-assisted lure creation, and post-compromise mailbox operations targeting Microsoft 365 accounts.\n\nThe findings also come as a threat actor tracked as DOUBLOON DREDGER has been observed abusing Notion accounts to invite targets to view a PDF that contains a malicious link, clicking which takes them to an EvilTokens device code harvesting page.\n\n\"They abuse Notion to gain access to a legitimate email sender, reputable infrastructure, and a place to host a malicious PDF,\" Sublime said. \"They use a PDF builder that includes two to three overlapping links, attempting to evade defensive tooling and detections while potentially increasing the shelf life of any single malicious PDF with redundant infrastructure.\"\n\"The payload landing page uses a JavaScript obfuscation and encryption technique similar to recent Tycoon 2FA device code harvesting campaigns.\"\n\nIt's suspected with low confidence that DOUBLOON DREDGER has acquired access to both EvilTokens and Tycoon 2FA and then uses their own custom first-stage JavaScript in front of the PhaaS kits. The threat actor is believed to be financially motivated.\n\"EvilTokens represents a structural shift in the PhaaS market. Previous platforms commoditized the front end of the attack: the lure, the landing page, the credential capture,\" Flare security researcher Assaf Morag said. \"EvilTokens commoditizes what comes after.\"\n\"By automating inbox analysis, stakeholder mapping, and AI-generated fraud messages, it removes the skill barrier that once separated a captured token from a successful financial compromise. An affiliate no longer needs to understand business email compromise tradecraft, as the platform provides it as a feature.\"\n\nFound this article interesting?  Follow us on Google News, Twitter and LinkedIn to read more exclusive content we post.",
+  "threatActors": [],
+  "title": "NovaCookies Campaigns Abuse Genuine Docusign Notifications to Steal Microsoft 365 Sessions",
+  "updatedAt": "2026-08-26T14:35:42+00:00",
+  "data": {
+   "countries": [
+    {
+     "country": "Germany",
+     "countryCode": "DE"
+    },
+    {
+     "country": "Israel",
+     "countryCode": "IL"
+    }
+   ],
+   "companyTags": [],
+   "cryptoWallets": [],
+   "cve": [],
+   "domains": [
+    {
+     "value": "fordmotbvmorcompany.vu",
+     "tags": []
+    }
+   ],
+   "emails": [],
+   "files": [],
+   "hashes": [],
+   "malware": [],
+   "pdbPaths": [],
+   "rules": [],
+   "tags": [
+    "2FA",
+    "Access",
+    "Android",
+    "Bypass",
+    "Domain",
+    "Malware",
+    "Phishing",
+    "Proxy",
+    "RAT",
+    "Spam Infrastructure",
+    "Telegram",
+    "Vishing & OTP Bypass",
+    "Windows",
+    "pal_isr_conflict"
+   ],
+   "telegramApiKeys": [],
+   "ip": []
+  }
+ }
+]

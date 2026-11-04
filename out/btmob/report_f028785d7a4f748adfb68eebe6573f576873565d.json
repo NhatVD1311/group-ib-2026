@@ -1,0 +1,102 @@
+{
+ "contacts": [],
+ "countries": [
+  "DO"
+ ],
+ "createdAt": "2024-03-11T12:19:35+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2024-03-07",
+ "dateLastSeen": "2024-03-09",
+ "datePublished": "2024-03-11",
+ "description": "<p>On March 7th, it was reported that the ALPHV (BlackCat) ransomware group attacked the Administradora de Subsidios Sociales (ADESS). (adess[.]gob[.]do)&nbsp;</p><p>As a result of the attack, there was an unavailability of some systems hosted on their internal servers.&nbsp;</p><p><img src=\"/api/v2/hi/threat/f028785d7a4f748adfb68eebe6573f576873565d/file/e0a6068d4c6d6a587abd1f2ace3520b883a977651a522cccce926deebf843f70?placeholder=__IMAGE_:e0a6068d4c6d6a587abd1f2ace3520b883a977651a522cccce926deebf843f70_IMAGE__\" data-mce-src=\"__IMAGE_:e0a6068d4c6d6a587abd1f2ace3520b883a977651a522cccce926deebf843f70_IMAGE__\" /></p><p>As of March 11th, it remains unclear whether the attackers have exfiltrated data from the victim's servers.&nbsp;</p><p>Additionally, the perpetrators have not made any announcements or disclosures on the Data Leaks Site (DLS) concerning the attack on Administradora de Subsidios Sociales (ADESS).</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B2",
+  "credibility": 80,
+  "reliability": 80,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "e0a6068d4c6d6a587abd1f2ace3520b883a977651a522cccce926deebf843f70",
+   "mime": "image/png",
+   "name": "e0a6068d4c6d6a587abd1f2ace3520b883a977651a522cccce926deebf843f70",
+   "size": 792880
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "f028785d7a4f748adfb68eebe6573f576873565d",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [
+  {
+   "attackName": "Data Encrypted for Impact",
+   "attackPatternId": "attack-pattern--b80d107d-fa0d-4b60-9684-b0433e8bdba0",
+   "attackTactic": "impact",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1486",
+   "params": null
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "america:the_caribbean"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2803-1219",
+ "sectors": [
+  "government-and-military",
+  "government-and-military:government-and-military"
+ ],
+ "seqPublish": null,
+ "seqUpdate": 17101487753445,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://www.instagram.com/adessdo/p/C4QyeFZuZI-/",
+   "datePublished": "2024-03-09"
+  }
+ ],
+ "sources": [
+  "https://www.instagram.com/adessdo/p/C4QyeFZuZI-/"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [
+  "Administradora de Subsidios Sociales (ADESS)"
+ ],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": null,
+  "id": "a35fd1154b5308a41e5d248df00e8c94670a86e0",
+  "isAPT": false,
+  "name": "ALPHV"
+ },
+ "title": "ALPHV Ransomware attack on Administradora de Subsidios Sociales (ADESS)",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2024-03-11T12:19:35+03:00"
+}

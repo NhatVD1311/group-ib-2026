@@ -1,0 +1,638 @@
+{
+ "contacts": [],
+ "countries": [
+  "KR"
+ ],
+ "createdAt": "2023-08-29T09:23:08+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2020-12-03",
+ "dateLastSeen": "2022-08-17",
+ "datePublished": "2023-08-29",
+ "description": "<p>Rekoobe is a backdoor that targets Linux environments. Known to have been created based on the source code of the open-source program Tiny SHell, which is publicly available on GitHub, Rekoobe supports basic features as the name “Tiny” implies. Aside from subsidiary features such as process name changing, it has only three other features. It can download, upload, and execute commands from a C&amp;C server. Due to its open-source foundation, categorizing Rekoobe and similar variants can be challenging, but this post will analyze the generally known Rekoobe variants.</p><p>There is limited information available regarding how threat actors install Rekoobe on Linux systems and their specific targets. However, Rekoobe is known for being a malware strain used by the Chinese threat <a href=\"https://tap.group-ib.com/ta/actors?ta=ad8ae7ebfe7b40df4c92a7f89f2c028fdd64cff2&amp;tab=timeline&amp;reportId=ac36757ad44cc415c983ff2b9727c7d16b37d0e4\">group APT31</a>.</p><h2>Analysis of Rekoobe</h2><p>Here, we will analyze one of the Rekoobe malware samples reported in Korea.</p><ul><li>MD5: 8921942fb40a4d417700cfe37cce1ce7</li><li>C&amp;C Server: resolv[.]ctmailer[.]net:80 (103[.]140[.]186[.]32)</li><li>Download URL: hxxp://103[.]140[.]186[.]32/mails</li></ul><p>Rekoobe disguises itself by changing its process name to “/bin/bash”, which matches the name of a normal process. This makes it difficult for users to detect its presence.&nbsp; This is implemented by using the strcpy() function to change the arguments given upon executing the program. Additionally, this particular feature is not present in the original Tiny SHell codebase.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/a875fd7bb68cf40e25f870e451e89e6e6d7954cb/file/f9c6b7a950e1e4fa9499783f8638742b7bdbc69b2aad9d86a6d633a493e85e77?placeholder=__IMAGE_a875fd7bb68cf40e25f870e451e89e6e6d7954cb:f9c6b7a950e1e4fa9499783f8638742b7bdbc69b2aad9d86a6d633a493e85e77_IMAGE__\"  /></figure><p>Another notable difference between Rekoobe and Tiny SHell is the absence of command-line options for receiving the C&amp;C server address or password. Due to the lack of these options, the C&amp;C server address is hard-coded in the malware.</p><figure class=\"table\" style=\"width:906.975px;\"><table style=\"border-style:solid;border-width:1px;\"><thead><tr><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Argument</th><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Feature</th></tr></thead><tbody><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">P</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">C&amp;C URL or bind port number</td></tr><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">S</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Change password</td></tr><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">C</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">C&amp;C server address</td></tr><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">default</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Help message</td></tr></tbody></table></figure><p>Table 1. Execution arguments of Tiny SHell</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/a875fd7bb68cf40e25f870e451e89e6e6d7954cb/file/e5143a9cf2a1642823a2b5f0e2b30f10d7b21874ee74e1495dc22b9c88e1c3a0?placeholder=__IMAGE_a875fd7bb68cf40e25f870e451e89e6e6d7954cb:e5143a9cf2a1642823a2b5f0e2b30f10d7b21874ee74e1495dc22b9c88e1c3a0_IMAGE__\"  /></figure><p>Both Tiny SHell and Rekoobe utilize the HMAC SHA1 algorithm to generate an AES-128 key. This key is then used to encrypt the communication data with the C&amp;C server.</p><h3>A. C&amp;C -&gt; CLIENT: HMAC SHA1 GENERATION</h3><p>First, a 0x28-sized data packet is received from the C&amp;C server. This packet is divided into two 0x14-byte segments, which are used as the IV during the initialization of the HMAC SHA1 context. In addition, aside from the two 0x14-byte IVs that are transmitted during the initialization process, a hard-coded password string, “0p;/9ol.”, is also used.</p><figure class=\"image image_resized\" style=\"width:405px;\"><img src=\"/api/v2/hi/threat/a875fd7bb68cf40e25f870e451e89e6e6d7954cb/file/721806ef7757b0f5a7c4a4caeef2070e5e247afdd630ac71aee7fb89c2465aa6?placeholder=__IMAGE_a875fd7bb68cf40e25f870e451e89e6e6d7954cb:721806ef7757b0f5a7c4a4caeef2070e5e247afdd630ac71aee7fb89c2465aa6_IMAGE__\"  /></figure><p>The generated HMAC SHA1 values serve as the AES-128 key. This key is used for encrypting data when sending it to the C&amp;C server and decrypting data received from the C&amp;C server.</p><h3>B. C&amp;C -&gt; REKOOBE: INTEGRITY DATA</h3><p>Next, 0x10-byte data is transmitted from the C&amp;C server for integrity verification purposes. Rekoobe decodes this received data using the previously set AES-128 key and performs an additional XOR operation. This process allows the malware to obtain the size of the subsequent data it will receive. The subsequently transmitted data is used for integrity verification. It is 0x10 bytes and should have the same value as the one shown below. Additionally, these values are the same as those designated in the Tiny SHell source code.</p><figure class=\"image image_resized\" style=\"width:410px;\"><img src=\"/api/v2/hi/threat/a875fd7bb68cf40e25f870e451e89e6e6d7954cb/file/fa4336e3a0d052b4ad68817dff4dcf05c573bc36b5ab6e2d0d0927d089e0322c?placeholder=__IMAGE_a875fd7bb68cf40e25f870e451e89e6e6d7954cb:fa4336e3a0d052b4ad68817dff4dcf05c573bc36b5ab6e2d0d0927d089e0322c_IMAGE__\"  /></figure><h3>C. REKOOBE -&gt; C&amp;C: INTEGRITY DATA</h3><p>Once the integrity verification process is complete, the malware reverses the process and sends the C&amp;C server a 0x10-byte data segment containing the same integrity data. When sending the data, it is also encrypted using the AES-128 key generated earlier from the HMAC SHA1 value.</p><figure class=\"image\"><img src=\"/api/v2/hi/threat/a875fd7bb68cf40e25f870e451e89e6e6d7954cb/file/967ddad02b4ae275ec7461fc4451121872bacd729dd4d683310d4a4319c647bb?placeholder=__IMAGE_a875fd7bb68cf40e25f870e451e89e6e6d7954cb:967ddad02b4ae275ec7461fc4451121872bacd729dd4d683310d4a4319c647bb_IMAGE__\"  /></figure><h3>D. C&amp;C -&gt; REKOOBE: C&amp;C COMMAND</h3><h3>E. C&amp;C -&gt; REKOOBE: ADDITIONAL DATA FOR EACH COMMAND</h3><p>Once the previous steps are completed, a 1-byte command is received from the C&amp;C server. Depending on the value of this 1 byte, three different commands can be performed: file upload, file download, or reverse shell execution.</p><figure class=\"table\" style=\"width:906.975px;\"><table style=\"border-style:solid;border-width:1px;\"><thead><tr><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Command Number</th><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Command Type</th></tr></thead><tbody><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">1</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Upload file</td></tr><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">2</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Download file</td></tr><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">3</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Reverse shell</td></tr></tbody></table></figure><figure class=\"image image_resized\" style=\"width:378px;\"><img src=\"/api/v2/hi/threat/a875fd7bb68cf40e25f870e451e89e6e6d7954cb/file/ab070e33a40faeab4f8b8a223bf5acac6d4053951f9b14f3c863b15474f3de9c?placeholder=__IMAGE_a875fd7bb68cf40e25f870e451e89e6e6d7954cb:ab070e33a40faeab4f8b8a223bf5acac6d4053951f9b14f3c863b15474f3de9c_IMAGE__\"  /></figure><h2>Rekoobe Types</h2><p>Although the analysis so far has focused on one particular sample, it is worth noting that Rekoobe is still being detected in numerous recent samples. The similarities, differences, and characteristics of recently collected Rekoobe samples will be covered in this segment. The basic structure of using an HMAC SHA1-based AES128 encryption algorithm for communication with the C&amp;C server and the support for features such as file download/upload and reverse shell remain consistent.</p><p>The major difference is the method of communication with the C&amp;C server. The Rekoobe variant discussed above initially connects to a hard-coded C&amp;C server, but there are also variants that open ports and await connection from the C&amp;C server in a bind shell form. This is possible because Tiny SHell supports both methods.</p><figure class=\"image image_resized\" style=\"width:225px;\"><img src=\"/api/v2/hi/threat/a875fd7bb68cf40e25f870e451e89e6e6d7954cb/file/2d83dcef19c2ce49166dc10663fa51f12f1576f4c42e4fec005c6e51d2c3da81?placeholder=__IMAGE_a875fd7bb68cf40e25f870e451e89e6e6d7954cb:2d83dcef19c2ce49166dc10663fa51f12f1576f4c42e4fec005c6e51d2c3da81_IMAGE__\"  /></figure><p>Rekoobe is suspected to have a separate builder tool. One of the reasons for this assumption is the frequent appearance of malware that uses the default string “replace with your password” instead of random password strings like the one covered above. Therefore, it is believed that each malware is generated by a builder tool with the threat actor specifying a password for each attack. Unlike the passwords that use a different string every time, the data used for integrity verification contrarily uses the same “58 90 AE 86 F1 B9 1C F6 29 83 95 71 1D DE 58 0D” like most other source codes.</p><h2>Rekoobe Malware Used in Attacks Targeting Korea</h2><p>The following are Rekoobe malware samples used in attacks targeting systems in Korea. Given that all the samples are based on the x64 architecture and in the form of reverse shell, it suggests that they were targeting Linux servers. The “mails” and “service” samples were collected during a relatively similar time frame, and based on the almost identical passwords specified by the threat actor, it is presumed that they were used by the same threat actor.</p><figure class=\"table\" style=\"width:1090.34px;\"><table style=\"border-style:solid;border-width:1px;\"><thead><tr><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Name</th><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Architecture</th><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">C&amp;C Communication Type</th><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">C&amp;C URL</th><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Process Name Change</th><th style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Password</th></tr></thead><tbody><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">java</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">x64</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Reverse</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">139[.]162[.]116[.]218:18120</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">“/bin/bash”</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">“uiuizhihuowienjkn8891231.,@#$@FSAF”</td></tr><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">rmicd(123)</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">x64</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Reverse</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">172[.]105[.]200[.]233:3661</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">“[kondemand/23]”</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">“replaceadsfCSDFwithxdfyoasdfXX.password”</td></tr><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">mails</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">x64</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Reverse</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">resolv[.]ctmailer[.]net:80</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">“/bin/bash”</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">“0p;/9ol.”</td></tr><tr><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">service</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">x64</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">Reverse</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">www[.]jxedunavi[.]com:443</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">“/bin/bash”</td><td style=\"border-style:solid;border-width:1px;padding:10px 13.3333px;\">“0p;/0p;/”</td></tr></tbody></table></figure>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "C3",
+  "credibility": 60,
+  "reliability": 60,
+  "severity": "orange",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [],
+ "files": [
+  {
+   "hash": "f9c6b7a950e1e4fa9499783f8638742b7bdbc69b2aad9d86a6d633a493e85e77",
+   "mime": "image/png",
+   "name": "f9c6b7a950e1e4fa9499783f8638742b7bdbc69b2aad9d86a6d633a493e85e77",
+   "size": 157588
+  },
+  {
+   "hash": "e5143a9cf2a1642823a2b5f0e2b30f10d7b21874ee74e1495dc22b9c88e1c3a0",
+   "mime": "image/png",
+   "name": "e5143a9cf2a1642823a2b5f0e2b30f10d7b21874ee74e1495dc22b9c88e1c3a0",
+   "size": 362739
+  },
+  {
+   "hash": "721806ef7757b0f5a7c4a4caeef2070e5e247afdd630ac71aee7fb89c2465aa6",
+   "mime": "image/png",
+   "name": "721806ef7757b0f5a7c4a4caeef2070e5e247afdd630ac71aee7fb89c2465aa6",
+   "size": 269867
+  },
+  {
+   "hash": "fa4336e3a0d052b4ad68817dff4dcf05c573bc36b5ab6e2d0d0927d089e0322c",
+   "mime": "image/png",
+   "name": "fa4336e3a0d052b4ad68817dff4dcf05c573bc36b5ab6e2d0d0927d089e0322c",
+   "size": 362321
+  },
+  {
+   "hash": "967ddad02b4ae275ec7461fc4451121872bacd729dd4d683310d4a4319c647bb",
+   "mime": "image/png",
+   "name": "967ddad02b4ae275ec7461fc4451121872bacd729dd4d683310d4a4319c647bb",
+   "size": 99598
+  },
+  {
+   "hash": "ab070e33a40faeab4f8b8a223bf5acac6d4053951f9b14f3c863b15474f3de9c",
+   "mime": "image/png",
+   "name": "ab070e33a40faeab4f8b8a223bf5acac6d4053951f9b14f3c863b15474f3de9c",
+   "size": 191982
+  },
+  {
+   "hash": "2d83dcef19c2ce49166dc10663fa51f12f1576f4c42e4fec005c6e51d2c3da81",
+   "mime": "image/png",
+   "name": "2d83dcef19c2ce49166dc10663fa51f12f1576f4c42e4fec005c6e51d2c3da81",
+   "size": 249952
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "a875fd7bb68cf40e25f870e451e89e6e6d7954cb",
+ "indicatorMalwareRelationships": [
+  {
+   "indicatorId": "a99ff7b03c6b648080b998e5f443843defdad7be",
+   "malwareId": "4b1b31c939692a2691b4979404dc29a06fdb588e"
+  },
+  {
+   "indicatorId": "785f80042001d5bd7d98548af425b2260f024137",
+   "malwareId": "4b1b31c939692a2691b4979404dc29a06fdb588e"
+  },
+  {
+   "indicatorId": "04d8815122360fcf5179fc8e06cc96d9b3baa15b",
+   "malwareId": "4b1b31c939692a2691b4979404dc29a06fdb588e"
+  },
+  {
+   "indicatorId": "e3f1b03f3e8fae1e1fa469dc6c8ee6e2a46a5803",
+   "malwareId": "4b1b31c939692a2691b4979404dc29a06fdb588e"
+  }
+ ],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-29",
+   "dateLastSeen": "2023-08-29",
+   "domain": "resolv.ctmailer.net",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "5ec2421bf1059daa6ba02425716e6e66f04e37e6",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "resolv.ctmailer.net",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16932905362038,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-29",
+   "dateLastSeen": "2023-08-29",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "8f175859911005f38e1e91901238d15e60b0dea8",
+   "ip": [
+    "139.162.116.218"
+   ],
+   "ipScores": [
+    {
+     "ip": "139.162.116.218",
+     "score": 25
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "139.162.116.218"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16932905359651,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-29",
+   "dateLastSeen": "2023-08-29",
+   "domain": "www.jxedunavi.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d507c94fc511003d4e425f71c08a696f764f6a2f",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "www.jxedunavi.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16932905363210,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "03a87253a8fac6d91d19ea3b47e2ca6c",
+    "other": [],
+    "sha1": "d00c9c459a94b3778e0f353464350b609e5b71b3",
+    "sha256": "50527f5fe77004c9bf888ca781b4a9366ca07b10e06f917e51f51a1c0732e69d"
+   },
+   "id": "a99ff7b03c6b648080b998e5f443843defdad7be",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "03a87253a8fac6d91d19ea3b47e2ca6c",
+     "sha1": "d00c9c459a94b3778e0f353464350b609e5b71b3",
+     "sha256": "50527f5fe77004c9bf888ca781b4a9366ca07b10e06f917e51f51a1c0732e69d"
+    },
+    "name": "03a87253a8fac6d91d19ea3b47e2ca6c",
+    "nameList": [
+     "03a87253a8fac6d91d19ea3b47e2ca6c"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "4b1b31c939692a2691b4979404dc29a06fdb588e"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "4b1b31c939692a2691b4979404dc29a06fdb588e",
+     "name": "Rekoobe",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "03a87253a8fac6d91d19ea3b47e2ca6c"
+   ],
+   "seqUpdate": 17810062657833,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "5f2e72ff741c4544f66fec16101aeaf0",
+    "other": [],
+    "sha1": "f733802a106f1a2a4249f1605522cdd436110109",
+    "sha256": "14a33415e95d104cf5cf1acaff9586f78f7ec3ffb26efd0683c468edeaf98fd7"
+   },
+   "id": "785f80042001d5bd7d98548af425b2260f024137",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "5f2e72ff741c4544f66fec16101aeaf0",
+     "sha1": "f733802a106f1a2a4249f1605522cdd436110109",
+     "sha256": "14a33415e95d104cf5cf1acaff9586f78f7ec3ffb26efd0683c468edeaf98fd7"
+    },
+    "name": "5f2e72ff741c4544f66fec16101aeaf0",
+    "nameList": [
+     "5f2e72ff741c4544f66fec16101aeaf0"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "4b1b31c939692a2691b4979404dc29a06fdb588e"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "4b1b31c939692a2691b4979404dc29a06fdb588e",
+     "name": "Rekoobe",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "5f2e72ff741c4544f66fec16101aeaf0"
+   ],
+   "seqUpdate": 17810062657834,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2023-08-29",
+   "dateLastSeen": "2023-08-29",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "a814d78458a8022de7b0ea42afcc5b1b4e80cab5",
+   "ip": [
+    "172.105.200.233"
+   ],
+   "ipScores": [
+    {
+     "ip": "172.105.200.233",
+     "score": 25
+    }
+   ],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [
+     "172.105.200.233"
+    ],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 16932905360858,
+   "sources": [],
+   "taIdList": [],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "7851833a0cc3482993aac2692ff41635",
+    "other": [],
+    "sha1": "696e36d3788a09e93b215f44d53936284a7d15a8",
+    "sha256": "43c595d220662036208d29a030f5d926032543a50ac359fa91bcf9cdfb3f12c8"
+   },
+   "id": "04d8815122360fcf5179fc8e06cc96d9b3baa15b",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "7851833a0cc3482993aac2692ff41635",
+     "sha1": "696e36d3788a09e93b215f44d53936284a7d15a8",
+     "sha256": "43c595d220662036208d29a030f5d926032543a50ac359fa91bcf9cdfb3f12c8"
+    },
+    "name": "7851833a0cc3482993aac2692ff41635",
+    "nameList": [
+     "7851833a0cc3482993aac2692ff41635"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "4b1b31c939692a2691b4979404dc29a06fdb588e"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "4b1b31c939692a2691b4979404dc29a06fdb588e",
+     "name": "Rekoobe",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "7851833a0cc3482993aac2692ff41635"
+   ],
+   "seqUpdate": 17810062657835,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-01-09",
+   "dateLastSeen": "2026-05-25",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "8921942fb40a4d417700cfe37cce1ce7",
+    "other": [],
+    "sha1": "d1201a52d58a02e86920fd089a9379944543c728",
+    "sha256": "dc958004e0727e0a1e491629438073b7dbeb806dbcbeb7cb4d25c95ead51f443"
+   },
+   "id": "e3f1b03f3e8fae1e1fa469dc6c8ee6e2a46a5803",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "8921942fb40a4d417700cfe37cce1ce7",
+     "sha1": "d1201a52d58a02e86920fd089a9379944543c728",
+     "sha256": "dc958004e0727e0a1e491629438073b7dbeb806dbcbeb7cb4d25c95ead51f443"
+    },
+    "name": "8921942fb40a4d417700cfe37cce1ce7",
+    "nameList": [
+     "8921942fb40a4d417700cfe37cce1ce7"
+    ],
+    "size": null
+   },
+   "malwareIdList": [
+    "4b1b31c939692a2691b4979404dc29a06fdb588e"
+   ],
+   "malwareList": [
+    {
+     "category": [],
+     "class": null,
+     "id": "4b1b31c939692a2691b4979404dc29a06fdb588e",
+     "name": "Rekoobe",
+     "platform": [],
+     "threatLevel": null
+    }
+   ],
+   "potentialNames": [
+    "8921942fb40a4d417700cfe37cce1ce7"
+   ],
+   "seqUpdate": 17810062657836,
+   "size": null,
+   "sources": [
+    "tap"
+   ],
+   "taIdList": [],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "5ec2421bf1059daa6ba02425716e6e66f04e37e6",
+  "8f175859911005f38e1e91901238d15e60b0dea8",
+  "d507c94fc511003d4e425f71c08a696f764f6a2f",
+  "a99ff7b03c6b648080b998e5f443843defdad7be",
+  "785f80042001d5bd7d98548af425b2260f024137",
+  "a814d78458a8022de7b0ea42afcc5b1b4e80cab5",
+  "04d8815122360fcf5179fc8e06cc96d9b3baa15b",
+  "e3f1b03f3e8fae1e1fa469dc6c8ee6e2a46a5803"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "Trojan"
+   ],
+   "class": "",
+   "id": "4b1b31c939692a2691b4979404dc29a06fdb588e",
+   "name": "Rekoobe",
+   "platform": [
+    "Linux"
+   ],
+   "threatLevel": "Medium"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "[Command and Scripting Interpreter->Unix Shell]",
+   "attackPatternId": "attack-pattern--a9d4b653-6915-42af-98b2-5758c4ceee56",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.004",
+   "params": null
+  },
+  {
+   "attackName": "Obfuscated Files or Information",
+   "attackPatternId": "attack-pattern--b3d682b6-98f2-4fb0-aa3b-b4df007ca70a",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1027",
+   "params": null
+  },
+  {
+   "attackName": "Application Layer Protocol",
+   "attackPatternId": "attack-pattern--355be19c-ffc9-46d5-8d50-d6a036c675b6",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071",
+   "params": null
+  },
+  {
+   "attackName": "Non-Application Layer Protocol",
+   "attackPatternId": "attack-pattern--c21d5a77-d422-4a69-acd7-2c53c1faa34b",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1095",
+   "params": null
+  },
+  {
+   "attackName": "Command and Scripting Interpreter",
+   "attackPatternId": "attack-pattern--7385dfaf-6886-4229-9ecd-6fd678040830",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059",
+   "params": null
+  },
+  {
+   "attackName": "[Create or Modify System Process->Systemd Service]",
+   "attackPatternId": "attack-pattern--dfefe2ed-4389-4318-8762-f0272b350a1b",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1543.002",
+   "params": null
+  },
+  {
+   "attackName": "[Create or Modify System Process->Systemd Service]",
+   "attackPatternId": "attack-pattern--dfefe2ed-4389-4318-8762-f0272b350a1b",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1543.002",
+   "params": null
+  },
+  {
+   "attackName": "System Information Discovery",
+   "attackPatternId": "attack-pattern--354a7f88-63fb-41b5-a801-ce3b377b36f1",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1082",
+   "params": null
+  },
+  {
+   "attackName": "File and Directory Discovery",
+   "attackPatternId": "attack-pattern--7bc57495-ea59-4380-be31-a64af124ef18",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1083",
+   "params": null
+  },
+  {
+   "attackName": "[Software Discovery->Security Software Discovery]",
+   "attackPatternId": "attack-pattern--cba37adb-d6fb-4610-b069-dd04c0643384",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1518.001",
+   "params": null
+  },
+  {
+   "attackName": "Encrypted Channel",
+   "attackPatternId": "attack-pattern--b8902400-e6c5-4ba2-95aa-2d35b442b118",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573",
+   "params": null
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "asia"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-2708-0923",
+ "sectors": [],
+ "seqPublish": null,
+ "seqUpdate": 17012830236065,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://asec.ahnlab.com/en/55229/",
+   "datePublished": "2023-10-29"
+  }
+ ],
+ "sources": [
+  "https://asec.ahnlab.com/en/55229/"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "CN",
+  "id": "ad8ae7ebfe7b40df4c92a7f89f2c028fdd64cff2",
+  "isAPT": true,
+  "name": "APT31"
+ },
+ "title": "The Rekoobe Backdoor Being Used In Attacks Against Linux Systems in Korea",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2023-11-29T21:37:03+03:00"
+}

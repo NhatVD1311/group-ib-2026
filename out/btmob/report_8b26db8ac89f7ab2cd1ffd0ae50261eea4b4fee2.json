@@ -1,0 +1,1594 @@
+{
+ "contacts": [],
+ "countries": [
+  "KR"
+ ],
+ "createdAt": "2026-10-27T15:10:55+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2026-09-07",
+ "dateLastSeen": "2026-09-15",
+ "datePublished": "2026-10-27",
+ "description": "<h2>Campaign Overview</h2>\n<p>Operation FlashHole is a targeted intrusion campaign attributed to the Lazarus Group and directed against organisations in South Korea, identified during an incident response engagement in January 2026. It is assessed as a direct successor to the earlier Operation SyncHole, reusing the same overall strategy — abuse of mandatory South Korean security software as part of a watering-hole approach — while deploying a substantially updated malware chain that combines long-standing and newly developed tooling.</p>\n<p>The earliest evidence of the operation dates to July 2025, indicating that the group began preparing the campaign shortly after concluding Operation SyncHole, which ran for at least four months. Compared with the previous operation, targeting was markedly more selective: victims received spear-phishing emails containing links to fabricated but contextually relevant websites — such as portfolio and résumé pages — tailored to each individual target.</p>\n<p>At least three organisations in South Korea's software, construction, and wired communication equipment manufacturing sectors were confirmed as affected. These sectors differ from those hit during Operation SyncHole, showing that the actor has broadened its target scope over time. Operation FlashHole is assessed to be the latest wave of the broader Cascade Hole campaign, which repeatedly uses South Korean software as an entry point to deliver malware within the country.</p>\n<p><img src=\"/api/v2/hi/threat/8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2/file/164115fefc73aa95749019346dac2226e970aee1e5b052b27a81d802c8b25f07?placeholder=__IMAGE_8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2:164115fefc73aa95749019346dac2226e970aee1e5b052b27a81d802c8b25f07_IMAGE__\" alt=\"Operation FlashHole attack flow during the initial compromise.\" data-mce-src=\"__IMAGE_:164115fefc73aa95749019346dac2226e970aee1e5b052b27a81d802c8b25f07_IMAGE__\" /></p>\n<p><em>Operation FlashHole attack flow during the initial compromise.</em></p>\n<h2>Initial Access: Abuse of Mandatory Financial-Security Software and Tailored Lure Sites</h2>\n<p>The infection originated from a suspicious execution chain spawned by legitimate South Korean software, mirroring the pattern seen in the previous operation. Whereas Operation SyncHole abused Cross EX, Operation FlashHole abused CrossWeb EX — a related product from the same vendor. CrossWeb EX is a financial-security solution that is mandatory for accessing widely used online banking and government websites in South Korea; it encrypts communications between the user's browser and the web server using public key infrastructure (PKI) and typically runs in the background to interact with the browser. Because such software is compulsory for South Korean users and continuously resident, it has long served the group as a critical attack vector. This is not the first abuse of this product line: it was previously leveraged in 2021 to deploy the Racket downloader, and again in 2022 and 2023.</p>\n<p>The exact method by which CrossWeb EX was abused could not be fully determined, but the chain was confirmed to ultimately execute the malware in memory, with the spawned process running at a high integrity level. The parent process originates from the installation bundle of INISAFE CrossWeb EX V3 version 3[.]4[.]1[.]2, released in 2023 following a public advisory. The approach aligns with recent guidance from South Korean authorities on the group's techniques, and academic research presented in 2025 at a security conference demonstrated how the country's mandatory security software can unintentionally create a large attack surface.</p>\n<pre><code>Parent process: INISAFECrossWebEXSvc.exe (INISAFE CrossWeb EX V3 v3[.]4[.]1[.]2)</code></pre>\n<p>The lure infrastructure was traced to a website hosted on GitHub Pages associated with the GitHub account that was also used as a C2 channel. The account was created in September 2025; its initial site was designed to showcase the résumé of a senior network appliance developer, and by January 2026 it had been replaced with an interior-design showcase. The résumé site was likely accessed by an employee of a wired communication equipment manufacturer, while the interior-design site likely targeted a victim in the construction sector.</p>\n<p>The résumé site displayed a photograph purporting to show a job seeker, but the absence of EXIF metadata and the unnatural texture of the image indicated it was AI-generated, showing that the group has incorporated AI into its long-standing social-engineering approach. The lure site itself was most likely also AI-generated: the job seeker's name resembled the Korean equivalent of 'John Doe', and the portfolio was populated with meaningless details and random company names before being manually tailored to specific targets.</p>\n<p><img src=\"/api/v2/hi/threat/8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2/file/72cb17398815072052a209dbd1ff20cb2953cfc744ab9f7eb34a732a104fecdf?placeholder=__IMAGE_8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2:72cb17398815072052a209dbd1ff20cb2953cfc744ab9f7eb34a732a104fecdf_IMAGE__\" alt=\"Appearance of the malicious résumé and interior-design lure websites.\" data-mce-src=\"__IMAGE_:72cb17398815072052a209dbd1ff20cb2953cfc744ab9f7eb34a732a104fecdf_IMAGE__\" /></p>\n<p><em>Appearance of the malicious résumé and interior-design lure websites.</em></p>\n<p><img src=\"/api/v2/hi/threat/8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2/file/b929d056e614b7f218c8dc68ec02afa66b7684ef7d5039cffcc8e0bab110ae43?placeholder=__IMAGE_8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2:b929d056e614b7f218c8dc68ec02afa66b7684ef7d5039cffcc8e0bab110ae43_IMAGE__\" alt=\"Suspected AI-generated job-seeker photograph used on the résumé lure site.\" data-mce-src=\"__IMAGE_:b929d056e614b7f218c8dc68ec02afa66b7684ef7d5039cffcc8e0bab110ae43_IMAGE__\" /></p>\n<p><em>Suspected AI-generated job-seeker photograph used on the résumé lure site.</em></p>\n<p>Each lure site embedded a link that loaded an external JavaScript file via a script tag:</p>\n<pre><code>Résumé site: hxxps://javadevhouse[.]co[.]kr/ajax/libs/jquery/1.7.3/jquery.min.js</code></pre>\n<pre><code>Interior-design site: hxxps://pythonapischool[.]com/api/detach</code></pre>\n<p>It is assessed with medium-to-high confidence that targets received phishing emails containing links to the malicious GitHub Pages site (hosted under the &lt;username&gt;.github[.]io domain), and that visiting the site initiated the infection process involving CrossWeb EX.</p>\n<h2>Full Infection Chain</h2>\n<p>Following the initial compromise, the legitimate Windows binary fsquirt.exe was executed under the CrossWeb EX process and injected with shellcode carrying a malicious DLL — the TechHub downloader. The initial execution chain exists only in memory during the first stage of infiltration, reflecting considerable effort to conceal the initial compromise; only minimal traces were ever written to disk.</p>\n<p><img src=\"/api/v2/hi/threat/8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2/file/75b2778540b88b974882f83cf030404a3ba471de18943eb6113bb41491737bf7?placeholder=__IMAGE_8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2:75b2778540b88b974882f83cf030404a3ba471de18943eb6113bb41491737bf7_IMAGE__\" alt=\"The initial, memory-only infection chain.\" data-mce-src=\"__IMAGE_:75b2778540b88b974882f83cf030404a3ba471de18943eb6113bb41491737bf7_IMAGE__\" /></p>\n<p><em>The initial, memory-only infection chain.</em></p>\n<p>To establish persistence, the group deployed a pair of implants — TouchHub and TouchShift — using DLL side-loading under the name mscoree.dll. The first TechHub instance deployed TouchHub, which used DLL side-loading to launch TouchShift, which in turn led to the in-memory execution of a second TechHub instance. Rather than executing the Cubridge orchestrator directly, this second TechHub instance deployed another pair of implants — ClientHub and LPEClient.</p>\n<p>Because Cubridge remains only in memory during the initial compromise, the group is assessed to have deliberately designed this indirect, multi-stage chain to re-deploy Cubridge after persistence was secured, since it serves as the most sophisticated orchestrator of the framework.</p>\n<p><img src=\"/api/v2/hi/threat/8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2/file/12e1dcefcaa51ab81e9e73d02fea52f6a1ff21ed6b9cad6adfdf22e000c61e69?placeholder=__IMAGE_8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2:12e1dcefcaa51ab81e9e73d02fea52f6a1ff21ed6b9cad6adfdf22e000c61e69_IMAGE__\" alt=\"The expanded infection chain after persistence is established.\" data-mce-src=\"__IMAGE_:12e1dcefcaa51ab81e9e73d02fea52f6a1ff21ed6b9cad6adfdf22e000c61e69_IMAGE__\" /></p>\n<p><em>The expanded infection chain after persistence is established.</em></p>\n<p>The full chain comprises advanced variants of known Lazarus strains — TechHub, Cubridge, TouchShift, and LPEClient — together with two newly identified implants, TouchHub and ClientHub.</p>\n<h2>TechHub — Downloader and Entry Point</h2>\n<p>TechHub is the downloader that sits at the top of the chain. It serves as the initial payload, providing enough functionality to profile compromised hosts and stage subsequent payloads, and it communicates with a private GitHub repository using a Personal Access Token (PAT). It is an advanced evolution of a previously documented Lazarus downloader; whereas earlier versions fetched additional payloads from a C2 server over HTTP(S), this iteration uses GitHub for C2 and carries updated command strings.</p>\n<p>Three variants were observed in the chain: an in-memory version, a simple DLL side-loading version, and a DLL side-loading version that runs via a registered Windows service. Depending on the loading stage, TechHub authenticates to its private GitHub repository through the GitHub API using either hard-coded credentials or credentials read from its configuration file.</p>\n<p>On load, TechHub creates a 4-byte hexadecimal identifier in the range 0x1000–0xFFFF (or reads one from its configuration) so operators can distinguish compromised hosts. It then checks for an existing GitHub issue to determine whether prior communication is still active, removing any traces it finds, before beginning a handshake:</p>\n<pre><code>GET /issues?state=[open/closed]</code></pre>\n<ul><li>It creates a new issue titled 1[ID] with the body 'hel' via POST /issues, setting its status to open.</li></ul>\n<ul><li>It retrieves a repository file whose name contains the 2[ID] value; this file contains an RSA public key.</li></ul>\n<ul><li>It generates a random 16-byte XOR key, encrypts it with the RSA public key, and uploads the result prefixed with 1[ID].</li></ul>\n<ul><li>A hard-coded IV is XORed with the generated 16-byte key and used after the handshake.</li></ul>\n<p>During file exchange, filenames follow a consistent pattern, where the '2' prefix denotes delivery from the repository to TechHub and '1' denotes delivery from TechHub to the repository. The random 16-byte key embedded in each filename is used for AES encryption/decryption of that file's contents, using either a hard-coded or an updated IV.</p>\n<pre><code>Filename pattern: [1|2][ID][random-16-byte-key]</code></pre>\n<p>After the key exchange, TechHub again reads a '2'-prefixed file and verifies that the delivered data equals 'hel'. If the check passes, it gathers extensive host information, encrypts it, and uploads it to the repository, then updates the issue body from 'hel' to 'hey' via PATCH /issues/[issue number], signalling readiness to receive commands. TechHub supports four commands:</p>\n<ul><li>mqdrz — Collect information about the device and its running processes.</li></ul>\n<ul><li>laeca — Directly invoke received shellcode in memory; the shellcode reflectively loads an embedded payload.</li></ul>\n<ul><li>aqvxp — Terminate the current process.</li></ul>\n<ul><li>rtcya — Beacon after completing the handshake.</li></ul>\n<h2>Cubridge — Framework Orchestrator</h2>\n<h3>Orchestration and C2</h3>\n<p>Cubridge, deployed on the compromised host via TechHub, is the central orchestrator of the entire framework. It can retrieve a range of payloads — plugins, modules, and tools — through multiple injection and loading techniques, and an earlier version of it was documented alongside earlier TechHub versions.</p>\n<p>To communicate with its C2, Cubridge randomly selects one of several predefined C2 servers and constructs a unique URL for every request by concatenating terms from predefined word lists, following a fixed pattern. The examined instance was configured as version 5.1 and carried a single hard-coded C2 server. During URL generation the placeholder AABBCC is replaced with a null value, page3 is set to a random integer between 10000000 and 99999999, and page1/page2 are drawn from fixed word lists, producing authentic-looking, unique URLs.</p>\n<pre><code>URL pattern: [C2_URL]/[page1]/[page2]/[page3]</code></pre>\n<pre><code>Hard-coded C2: hxxps://cubedesign[.]co[.]kr/news/AABBCC</code></pre>\n<pre><code>page1 list: economy, opinion, politics, national, international, medical, investment, sports, lifestyle, shopping, culture</code></pre>\n<pre><code>page2 list: article, list, story</code></pre>\n<pre><code>Example generated URL: hxxps://cubedesign[.]co[.]kr/news/economy/article/12345678</code></pre>\n<p>Authentication uses a POST request carrying three key-value pairs, where each key is randomly chosen from a different predefined dictionary and the values comprise a random 8-byte hexadecimal bot ID, a fixed authentication token, and a random 16-byte hexadecimal session ID. Cubridge uses a more robust handshake than TechHub, combining RSA and RC6, and skips host profiling to proceed directly to command and control. Its traffic mimics browser requests, using X-CSRF-Token and X-Requested-With headers for authentication and Upgrade-Insecure-Requests to request additional data.</p>\n<pre><code>Fixed authentication token: KW4Ofw982CNJjxd51AVqkGAop</code></pre>\n<p><img src=\"/api/v2/hi/threat/8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2/file/30319cd299e89826f4a95f5cd5f65454c45d5c57282a39f66acc29fdd2f9f288?placeholder=__IMAGE_8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2:30319cd299e89826f4a95f5cd5f65454c45d5c57282a39f66acc29fdd2f9f288_IMAGE__\" alt=\"Cubridge&#x27;s C2 communication sequence.\" data-mce-src=\"__IMAGE_:30319cd299e89826f4a95f5cd5f65454c45d5c57282a39f66acc29fdd2f9f288_IMAGE__\" /></p>\n<p><em>Cubridge's C2 communication sequence.</em></p>\n<h3>Core commands (0–22)</h3>\n<p>Cubridge supports commands 0 through 22, focused heavily on loading subsequent-stage payloads via DLL injection, reflective loading, and section-mapping injection:</p>\n<ul><li>0 — Collect device info (computer name, time zone, PID and similar details).</li></ul>\n<ul><li>1 — Archive a specified file/directory using the legacy ZipCrypto algorithm with a hard-coded password.</li></ul>\n<ul><li>2 — Create a file at a specified path.</li></ul>\n<ul><li>3 — Inject a provided DLL into a target process and load it via reflective DLL injection (possibly a plugin).</li></ul>\n<ul><li>4 — Reflectively load a plugin in DLL form.</li></ul>\n<ul><li>5 — Retrieve the address of a specified exported function from a target plugin and run it with provided parameters.</li></ul>\n<ul><li>6 — Retrieve information about all loaded plugins.</li></ul>\n<ul><li>7 — Unload a specified plugin.</li></ul>\n<ul><li>8 — Inject provided shellcode into a target process via section-mapping injection.</li></ul>\n<ul><li>9 — Load provided shellcode directly into memory.</li></ul>\n<ul><li>10 — Retrieve the address of a specified export from target shellcode and run it with a provided parameter.</li></ul>\n<ul><li>11 — Retrieve information about all loaded shellcode.</li></ul>\n<ul><li>12 — Unload specified shellcode.</li></ul>\n<ul><li>13 — Set the scheduled Cubridge execution time (in minutes) via a global variable.</li></ul>\n<ul><li>14 — Set the scheduled execution time while also disabling monitoring via another global variable.</li></ul>\n<ul><li>15 — Terminate in a controlled manner.</li></ul>\n<ul><li>16 — Retrieve the Cubridge configuration (global flags, number of C2 servers, C2 addresses, etc.).</li></ul>\n<ul><li>17 — Update the global flags, number of C2 servers, C2 addresses, etc.</li></ul>\n<ul><li>18 — Reflectively load a DLL (tool) with a specified parameter.</li></ul>\n<ul><li>19 — Configure parameters for loading a single DLL.</li></ul>\n<ul><li>20 — Unload the single DLL.</li></ul>\n<ul><li>21 — Reflectively load the action module (ActionModule.dll) and invoke its AppinfoView export.</li></ul>\n<ul><li>22 — Reflectively load the function module (FunctionModule.dll) and invoke its PresentationFontConfig export.</li></ul>\n<pre><code>ZipCrypto hard-coded password: xdkiTajAAxc3i/w[&lt;881fnC!G*cb1Dit2sh.gAk/</code></pre>\n<h3>Action module (ActionModule.dll)</h3>\n<p>The action module handles system, file-system, and process operations and is invoked through its AppinfoView export. It implements commands 23–41, with results returned to Cubridge and relayed to the C2:</p>\n<ul><li>23 — Get local disk space for each drive.</li></ul>\n<ul><li>24 — Get information about a specified file or directory.</li></ul>\n<ul><li>25 — Execute a provided command.</li></ul>\n<ul><li>26 — Get information about a specified file or directory (similar to 24).</li></ul>\n<ul><li>27 — Execute a provided command under a target process (PPID spoofing).</li></ul>\n<ul><li>28 — Execute a provided command under a target process within a provided session (PPID spoofing plus session impersonation).</li></ul>\n<ul><li>29 — Get detailed information about processes.</li></ul>\n<ul><li>30 — Terminate a provided process.</li></ul>\n<ul><li>31 — Suspend all threads of a specified process.</li></ul>\n<ul><li>32 — Resume all threads of a specified process.</li></ul>\n<ul><li>33 — Permanently delete a file by overwriting its contents with the sequence 0 → 1 → random bytes → 1 → 0.</li></ul>\n<ul><li>34 — Rename a file to the :EFS alternate data stream and delete it via the native SetFileInformationByHandle API.</li></ul>\n<ul><li>35 — Set the current working directory.</li></ul>\n<ul><li>36 — Copy a specified file to a provided path.</li></ul>\n<ul><li>37 — Delete a specified directory.</li></ul>\n<ul><li>38 — Move a specified file to a provided path.</li></ul>\n<ul><li>39 — Create a provided directory.</li></ul>\n<ul><li>40 — Initiate a non-blocking connection to a specified IP and port (possibly for port scanning).</li></ul>\n<ul><li>41 — Read a specified file.</li></ul>\n<h3>Function module (FunctionModule.dll)</h3>\n<p>The function module emulates Windows' built-in commands and is accessed through its PresentationFontConfig export. It offers commands 42–79 and is believed to be based on a previously documented command-line implementation, here observed for the first time as a separate module. Notable commands include:</p>\n<ul><li>42 — Capture all displays and archive them using ZipCrypto with the hard-coded password.</li></ul>\n<ul><li>43 — Synchronise the MAC (Modified/Accessed/Created) times of one file to match those of another.</li></ul>\n<ul><li>44 — Get information about a specified directory.</li></ul>\n<ul><li>45 — Get information about a specified drive.</li></ul>\n<ul><li>46 — Inject a provided DLL into a target process.</li></ul>\n<ul><li>47 — Unload a specified DLL from a specified process.</li></ul>\n<ul><li>61 — Call CryptUnprotectData to retrieve the DPAPI-protected AES key, extracted via the encrypted_key keyword from Chromium's Local State file.</li></ul>\n<pre><code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Local State</code></pre>\n<ul><li>64 — Read a specified file, decrypt it with an XOR key of 0x59, extract paths from the buffer, and archive the referenced files/directories using ZipCrypto with the hard-coded password.</li></ul>\n<p>Commands 48–60 implement emulations of standard Windows utilities, while commands 62–63 and 65–79 are not implemented:</p>\n<pre><code>48: ipconfig   49: net   50: netsh advfirewall firewall   51: netstat   52: ping -6   53: reg   54: sc   55: ping   56: whoami   57: nslookup   58: schtasks   59: systeminfo   60: arp</code></pre>\n<h3>Plugins and tools</h3>\n<p>Alongside the modules, Cubridge deploys standalone plugins and tools:</p>\n<ul><li>ADFinder (AdFinder.dll) — plugin that launches LDAP queries in an Active Directory environment, taking six arguments such as log file path, ADsPath, search filter, and attribute names.</li></ul>\n<ul><li>FileCollector (Dll.dll) — plugin that recursively scans every subdirectory and file in a provided directory, gathering detailed information about each.</li></ul>\n<ul><li>Browser stealer — tool injected into Chromium-based browsers (Google Chrome, Microsoft Edge, Brave) to extract files and credentials including stored passwords, bookmarks, history, preferences, and cookies.</li></ul>\n<ul><li>Process collector — tool that iterates over all running processes, collecting each process's ID, path, and command line.</li></ul>\n<h2>TouchHub — Service Installer for TouchShift</h2>\n<p>TouchHub is a previously unknown implant retrieved from TechHub's private GitHub repository that acts as the parent installer for TouchShift. On execution it copies the legitimate printfilterpipelinesvc.exe to a new System32 subdirectory, registers it as a service, and drops an embedded TouchShift payload named mscoree.dll in the same directory. To hinder forensic analysis, it then synchronises the MAC timestamps of the newly written file with those of C:\\Windows\\System32\\drivers\\monitor.sys.</p>\n<p>For service registration, TouchHub collects up to 100 legitimate service names registered under the netsvcs svchost group, randomly selects one, appends two random alphabetic characters to form a new service name, and creates a service with the description 'Microsoft Service' that runs a hard-coded command line; the service is started immediately, launching TouchShift with SYSTEM privileges.</p>\n<pre><code>Svchost group key: HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Svchost</code></pre>\n<pre><code>Service command line: C:\\Windows\\System32\\RasConv\\ImeBroker.exe -TimeBroker (service description: Microsoft Service)</code></pre>\n<p>In total TouchHub creates three files in the target directory:</p>\n<ul><li>C:\\Windows\\System32\\RasConv\\ImeBroker.exe — executable registered as a service, copied from printfilterpipelinesvc.exe.</li></ul>\n<ul><li>C:\\Windows\\System32\\RasConv\\mscoree.dll — the side-loaded TouchShift payload; it contains encrypted payloads and portions of a legitimate DLL's contents that significantly inflate its size.</li></ul>\n<ul><li>C:\\Windows\\System32\\RasConv\\ActivationStore.dat — TechHub's configuration file, dropped after extracting configuration values.</li></ul>\n<h2>TouchShift — Side-Loaded Loader</h2>\n<p>The TouchShift version dropped by TouchHub is almost identical to a previously documented version, even sharing the same malicious export function, LockClrVersion. It takes the argument supplied by TouchHub and XORs it with a hard-coded key; the result is XORed again with the executable's filename to produce the AES key. All three input strings must be exactly 16 bytes — padded with NULL bytes if shorter, truncated if longer. In the obtained sample the combination was:</p>\n<pre><code>Argument: -TimeBroker\\x00\\x00\\x00\\x00\\x00 (NULL-padded)</code></pre>\n<pre><code>Hard-coded XOR key: x809G736iC3f8Wp8</code></pre>\n<pre><code>Executable filename: ImeBroker.exe\\x00\\x00\\x00 (NULL-padded)</code></pre>\n<pre><code>Malicious export function: LockClrVersion</code></pre>\n<p>Using the derived key, TouchShift decrypts its embedded payload with AES-CBC-128 (no padding). The decrypted data is shellcode beginning with a call instruction that wraps the next stage — identified as the third TechHub variant (DLL side-loading via a registered service), which reads ActivationStore.dat as its external configuration.</p>\n<h2>ClientHub — Modular Loader</h2>\n<p>ClientHub is a newly identified implant stored in TechHub's private repository that drives its commands through a bitmask scheme. At least two versions exist: one that communicates with websites over HTTP(S) and one that interacts with the Dropbox API using credentials. Depending on the version, its configuration is sourced internally or from an external file; the configuration holds keys and IVs for the SNOW 1.0 stream cipher, scheduled execution times, and C2 addresses that are themselves SNOW-encrypted. This is the first observation of the SNOW cipher in Lazarus Group malware. ClientHub is assessed with medium-high confidence to be an advanced version of CookiePlus, based on overlaps in class name, configuration path, and plugins.</p>\n<pre><code>External config path: C:\\Program Files\\Common Files\\System\\msadc\\msadc[.]inc</code></pre>\n<p>To establish C2 communication, ClientHub generates a 32-byte random array and overwrites portions of it with data collected from the host; the resulting array serves as the SNOW key for decrypting C2 data, and is then encrypted with a hard-coded RSA public key and Base64-encoded. The array is composed as follows:</p>\n<ul><li>Offset 0, 4 bytes — current process ID.</li></ul>\n<ul><li>Offset 4, 4 bytes — first four bytes of the decrypted C2 server information.</li></ul>\n<ul><li>Offset 8, 7 bytes — randomly generated bytes.</li></ul>\n<ul><li>Offset 15, 1 byte — a calculated flag value indicating a state machine.</li></ul>\n<ul><li>Offset 16, 8 bytes — current system time as a FILETIME structure.</li></ul>\n<ul><li>Offset 24, 8 bytes — randomly generated bytes.</li></ul>\n<p>The ciphertext is delivered to the C2 via GET requests carrying headers that are atypical for malware but normal for legitimate Chromium-based browsers, enabling it to blend into legitimate traffic:</p>\n<pre><code>Sec-CH-UA, Sec-CH-UA-Platform, Sec-CH-UA-Mobile, Sec-Fetch-Mode, Sec-Fetch-Dest</code></pre>\n<p>The C2 replies with commands in a custom header and a message body. The header has the following structure:</p>\n<pre><code>struct header {\n    int has_more_data;  // whether more body data remains\n    int body_checksum;  // ROR13 checksum for the body data\n    int body_type;      // specifies the body type\n    int unknown;\n    int body_length;    // length of the body data\n    int IV[2];          // random IV used to encrypt the body data\n};</code></pre>\n<p>The body_type field acts as a bitmask whose behaviour depends on whether the least-significant bit is set. When the value is odd, the body is treated as a new payload to load into memory; when even, a previously loaded payload is invoked. Odd values support four loading methods, each executed only once:</p>\n<ul><li>1 (0x00000001) — DLL loading: load the body reflectively with a provided parameter (returns the payload's image base).</li></ul>\n<ul><li>3 (0x00000011) — Plugin: load the body reflectively, resolve a function address, and invoke it with the parameter (returns image base, function address, and result).</li></ul>\n<ul><li>5 (0x00000101) — Plugin: load the body reflectively and resolve a function address but do not invoke it (returns image base and function address).</li></ul>\n<ul><li>11 (0x00001011) — Plugin: perform the behaviour of value 3, then unload immediately after invocation.</li></ul>\n<ul><li>17 (0x00010001) — DLL loading: load the body reflectively with a parameter, maintaining stateful communication via a persistent interactive session using a shared buffer.</li></ul>\n<p>Even values provide two invocation methods for already-loaded DLLs and plugins:</p>\n<ul><li>2 (0x00000010) — invoke previously loaded DLLs and plugins (loaded with bitmask 1, 3, or 5) with a provided parameter.</li></ul>\n<ul><li>4 (0x00000100) — not implemented.</li></ul>\n<ul><li>8 (0x00001000) — unload previously loaded DLLs and plugins.</li></ul>\n<ul><li>16 (0x00010000) — exchange data with the payload loaded by command 17 through the interactive session, and determine whether to retrieve the result or unload the payload.</li></ul>\n<p>Four plugins were observed working with ClientHub:</p>\n<ul><li>File archiver — archives a provided file using ZipCrypto without password protection and returns the compressed data.</li></ul>\n<ul><li>File collector — searches for all files matching a provided pattern and collects metadata including filename, MAC timestamps, file size, and attributes.</li></ul>\n<ul><li>File cleaner — overwrites a file with NULL bytes, renames it to a random name of the same length, and deletes it (handling entire directories by pattern).</li></ul>\n<ul><li>Drive and session monitor — monitors remote-session and local-drive changes for a given duration (in 10-minute intervals) and returns status information.</li></ul>\n<p>In addition, ClientHub loads and communicates with LPEClient; its body_type values 16 and 17 correspond to LPEClient's C2 communication mechanism.</p>\n<h2>LPEClient — Profiler and Payload Delivery with Post-Quantum Cryptography</h2>\n<p>LPEClient is the only implant also seen in Operation SyncHole, underscoring the actor's heavy reliance on it for victim profiling and payload delivery across operations. It first appeared in 2019 (publicly documented in 2020) and has since featured in the Dream Job and Cascade Hole campaigns against South Korea; research has also observed it being used to deploy the FudModule rootkit via a zero-day. LPEClient has evolved continuously and recently underwent a major operational revamp: it no longer contains a C2 address itself, instead interacting with ClientHub through a shared buffer — a change assessed to enhance concealment.</p>\n<p><img src=\"/api/v2/hi/threat/8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2/file/d22ac558aea4d2672b9594bd4fdeb5f235e40b4752743a2dc2cf34dd0ff14ad9?placeholder=__IMAGE_8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2:d22ac558aea4d2672b9594bd4fdeb5f235e40b4752743a2dc2cf34dd0ff14ad9_IMAGE__\" alt=\"Timeline of LPEClient&#x27;s evolution.\" data-mce-src=\"__IMAGE_:d22ac558aea4d2672b9594bd4fdeb5f235e40b4752743a2dc2cf34dd0ff14ad9_IMAGE__\" /></p>\n<p><em>Timeline of LPEClient's evolution.</em></p>\n<p>Earlier versions collected the computer name, memory status, CPU specifications, OS details, the version of ntoskrnl.exe, the firmware table, the antivirus product name, the domain name, the user name, the integrity level of the current process, and a 1,568-byte random sequence. The updated variant collects largely the same data but introduces several changes:</p>\n<ul><li>Instead of querying the FileVersion of ntoskrnl.exe, it reads either the HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\UBR registry key or the SYSTEM_BUILD_VERSION_INFORMATION structure to obtain the Windows build revision, allowing inference of the system's cumulative update/patch level.</li></ul>\n<ul><li>Instead of a WQL query, it reads the WMI repository file directly (C:\\Windows\\System32\\wbem\\Repository\\OBJECTS[.]DATA) and searches for keywords such as AntiVirusProduct, companyName, and displayName to identify installed antivirus products.</li></ul>\n<ul><li>It collects low-level security-mitigation states, querying SYSTEM_KERNEL_VA_SHADOW_INFORMATION for Kernel VA Shadow status and SYSTEM_SHADOW_STACK_INFORMATION for Shadow Stack (CET) status.</li></ul>\n<p>LPEClient generates a 32-byte unique identifier using the HighwayHash algorithm XORed with the current system time. The collected data (including the identifier) is compressed with XPRESS Huffman at maximum compression, concatenated with a message ID, and encrypted with GOST (Magma) — Russia's national cryptographic standard with a DES-like structure — before being sent to ClientHub via the shared buffer; the randomly generated key is prepended to the message. The algorithm, initially mischaracterised as a custom DES-like scheme, was subsequently confirmed to be GOST.</p>\n<pre><code>Collection message ID: 0xF07D6B34</code></pre>\n<p>A key exchange follows, using a second message ID together with the generated identifier; the response is decrypted with AES-CBC-256 using the SHA-256 hash of the previously sent 1,568-byte random value as the key. Through this exchange LPEClient receives four 1,568-byte blocks, each containing an ML-KEM-1024 public key — a NIST-standardised post-quantum key-encapsulation mechanism derived from CRYSTALS-Kyber. LPEClient generates four shared-key/ciphertext pairs, encrypts the ciphertexts with GOST, and transmits them with a further message ID and the identifier. The group's adoption of post-quantum cryptography indicates an intent to conceal subsequent payloads.</p>\n<pre><code>Key-exchange message ID: 0xA39CF278</code></pre>\n<pre><code>Post-quantum submission message ID: 0xEF8C0D51</code></pre>\n<p>The response is decrypted with the Threefish tweakable block cipher using a 128-byte key composed of the four shared keys, with the tweak derived by XORing the unique identifier with 0xA5. The first four bytes of the decrypted message specify the parameter length, followed by the parameter and then the payload; the payload must exceed 4 KB and begin with the characters 'MZ', after which it is reflectively loaded into memory and a completion message ID is sent. The final payload loaded in this manner was identified as Cubridge.</p>\n<pre><code>Load-complete message ID: 0xCB790A25</code></pre>\n<p>Before loading the payload, LPEClient takes measures to bypass security products. Rather than calling VirtualProtect directly, it uses HeapPageAllocator::ProtectPages in jscript9.dll to change the memory protection of the MD4Update function, overwrites the start of that function with a hard-coded opcode sequence acting as a syscall stub, and uses that stub to disable a user-mode syscall instrumentation hook.</p>\n<h2>A Modular, Segmented Malware Framework</h2>\n<p>Across the engagement, the payloads delivered by TechHub, Cubridge, and ClientHub were categorised as tools, plugins, and modules that together form the group's modular framework. The evidence indicates the toolkit is becoming increasingly sophisticated and segmented into specialised components rather than a single comprehensive backdoor, and TechHub and Cubridge are believed to share some tools:</p>\n<ul><li>TechHub / Cubridge — tools: Process collector, Browser stealer.</li></ul>\n<ul><li>Cubridge — modules: action module, function module.</li></ul>\n<ul><li>Cubridge — plugins: ADFinder, FileCollector.</li></ul>\n<ul><li>ClientHub — plugins: File archiver, File collector, File cleaner, Drive/session monitor.</li></ul>\n<p>Similar modular patterns have been identified in CookiePlus, MISTPEN, SIGNBT, and IMETHOD. Notably, the ThreatNeedle variant used in Operation SyncHole has been reclassified as the latest version of IMETHOD — the predecessor of ThreatNeedle, in use since at least 2016.</p>\n<h2>Infrastructure</h2>\n<p>TechHub data showed the group has leveraged GitHub as a C2 server since at least July 2025, using at least three primary repositories plus one fallback repository. The associated accounts are suspected to have been created with hijacked email accounts and disguised as normal repositories by copying or creating legitimate-looking projects to avoid suspicion.</p>\n<p>For the Cubridge and ClientHub C2, the group initially used only a small number of compromised but legitimate South Korean media and interior-design websites, later expanding to a broader range of compromised legitimate sites across various industries. One ClientHub sample additionally used Dropbox as its C2 channel. Observed C2 endpoints include:</p>\n<pre><code>javadevhouse[.]co[.]kr</code></pre>\n<pre><code>pythonapischool[.]com</code></pre>\n<pre><code>hxxps://cubedesign[.]co[.]kr/news  (Cubridge)</code></pre>\n<pre><code>hxxps://cubedesign[.]co[.]kr/mobile/fashion  (Cubridge)</code></pre>\n<pre><code>hxxps://fp-news[.]co[.]kr/shop/cart  (Cubridge)</code></pre>\n<pre><code>hxxps://k-wbc[.]co[.]kr/skin/social/social_view.php  (ClientHub)</code></pre>\n<pre><code>hxxps://rcsh[.]co[.]kr/modules/bbs/tiles/bbs_div/inputForm.php  (ClientHub)</code></pre>\n<pre><code>hxxps://www[.]ksog[.]org/insert_file/handle.php  (ClientHub)</code></pre>\n<h2>Victimology</h2>\n<p>At least three firms in South Korea's software, construction, and wired communication equipment industries were confirmed as targets of Operation FlashHole, though a considerably larger number of organisations across a broader range of industries is assessed to have been affected. The software sector was the only industry targeted in both the SyncHole and FlashHole campaigns, suggesting the actor is especially eager to compromise that sector — to steal source code and exploit vulnerabilities for follow-on attacks.</p>\n<h2>Attribution and Links to Other Campaigns</h2>\n<p>Operation FlashHole is assessed with medium-to-high confidence to be the work of the same actor responsible for Operation SyncHole, based on the shared initial vector, target profile, multi-stage chain, and technical and operational improvements; the continued use of LPEClient is a particularly strong indicator. Both operations fall within the broader Cascade Hole campaign.</p>\n<p>The malware set is historically linked to the Lazarus Group's Dream Job campaign. Earlier versions of TechHub, Cubridge, and TouchShift were all observed in that campaign, especially between 2022 and 2023. ClientHub, meanwhile, shares significant overlaps in class name, configuration path, and plugins with CookiePlus and is assessed with medium-high confidence to be an advanced version of it.</p>\n<p>Around the same time — from roughly July 2025, as Operation SyncHole wound down — a separate strand of attacks against various South Korean organisations used the COPPERHEDGE backdoor. Although COPPERHEDGE formed part of the second phase of Operation SyncHole, it has since operated independently with its own custom loader, using malware chains and tools distinct from those in SyncHole and FlashHole. The same backdoor was likely involved in atypical activity including a Gunra ransomware infection, and one backdoor infection ultimately led to data exfiltration to a dedicated dark-web leak site that differed from Gunra's — meaning the backdoor was used in conjunction with both ransomware and data exfiltration.</p>\n<p>The recent Dream Job campaign has, since around 2024, relied primarily on MISTPEN and ForestTiger rather than the earlier arsenal that included TechHub and Cubridge; the re-emergence of updated versions of this older malware in Operation FlashHole is therefore notable and factors into the broader classification of these overlapping Lazarus activities.</p>\n<h2>Assessment and Outlook</h2>\n<p>The group's tempo — beginning preparations for its next operation almost immediately after completing the previous one, and fielding an enhanced chain built by refining existing tools — points to a mature, well-resourced development process. The continued, carefully maintained use of LPEClient for profiling and payload delivery, and the rapid adoption of post-quantum cryptography (ahead of many legitimate security products), suggest a dedicated developer supporting operators who orchestrate comprehensive attack scenarios against newly selected software targets.</p>\n<p>Multiple campaigns appear to be running simultaneously against South Korea, each leveraging different software and tooling. The COPPERHEDGE cluster appears oriented toward monetisation, combining ransomware and data exfiltration, whereas Operation FlashHole is focused on espionage. In October 2025 the South Korean government announced a cybersecurity plan to phase out the mandatory installation of security software from 2026; operations exploiting this software are expected to remain highly active in the interim, maximising their yield before the attack surface is eliminated or mitigated.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B2",
+  "credibility": 80,
+  "reliability": 80,
+  "severity": "red",
+  "tlp": "amber",
+  "ttl": null
+ },
+ "expertise": [
+  "Windows",
+  "Phishing",
+  "Backdoor"
+ ],
+ "files": [
+  {
+   "hash": "164115fefc73aa95749019346dac2226e970aee1e5b052b27a81d802c8b25f07",
+   "mime": "image/jpeg",
+   "name": "164115fefc73aa95749019346dac2226e970aee1e5b052b27a81d802c8b25f07",
+   "size": 60177
+  },
+  {
+   "hash": "72cb17398815072052a209dbd1ff20cb2953cfc744ab9f7eb34a732a104fecdf",
+   "mime": "image/jpeg",
+   "name": "72cb17398815072052a209dbd1ff20cb2953cfc744ab9f7eb34a732a104fecdf",
+   "size": 102855
+  },
+  {
+   "hash": "b929d056e614b7f218c8dc68ec02afa66b7684ef7d5039cffcc8e0bab110ae43",
+   "mime": "image/jpeg",
+   "name": "b929d056e614b7f218c8dc68ec02afa66b7684ef7d5039cffcc8e0bab110ae43",
+   "size": 100642
+  },
+  {
+   "hash": "75b2778540b88b974882f83cf030404a3ba471de18943eb6113bb41491737bf7",
+   "mime": "image/jpeg",
+   "name": "75b2778540b88b974882f83cf030404a3ba471de18943eb6113bb41491737bf7",
+   "size": 23809
+  },
+  {
+   "hash": "12e1dcefcaa51ab81e9e73d02fea52f6a1ff21ed6b9cad6adfdf22e000c61e69",
+   "mime": "image/jpeg",
+   "name": "12e1dcefcaa51ab81e9e73d02fea52f6a1ff21ed6b9cad6adfdf22e000c61e69",
+   "size": 40684
+  },
+  {
+   "hash": "30319cd299e89826f4a95f5cd5f65454c45d5c57282a39f66acc29fdd2f9f288",
+   "mime": "image/jpeg",
+   "name": "30319cd299e89826f4a95f5cd5f65454c45d5c57282a39f66acc29fdd2f9f288",
+   "size": 101804
+  },
+  {
+   "hash": "d22ac558aea4d2672b9594bd4fdeb5f235e40b4752743a2dc2cf34dd0ff14ad9",
+   "mime": "image/jpeg",
+   "name": "d22ac558aea4d2672b9594bd4fdeb5f235e40b4752743a2dc2cf34dd0ff14ad9",
+   "size": 33478
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": true,
+ "id": "8b26db8ac89f7ab2cd1ffd0ae50261eea4b4fee2",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": "javadevhouse.co.kr",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "94073e64-a69f-418a-9540-9e1f70aecb75",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "javadevhouse.co.kr",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034534756,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": "pythonapischool.com",
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "11961c45-6de2-4581-8006-973747f68a51",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "",
+    "domain": "pythonapischool.com",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034535615,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "359ea75e-5ad5-46ac-89a0-9b000a226e9f",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://javadevhouse.co.kr/ajax/libs/jquery/1.7.3/jquery.min.js",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034536446,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://javadevhouse.co.kr/ajax/libs/jquery/1.7.3/jquery.min.js"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "6d66bafe-787a-4829-8905-7090f6c3deec",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://pythonapischool.com/api/detach",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034537272,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://pythonapischool.com/api/detach"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "d442e732-8531-44a5-a8e9-6b9376fcb424",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://cubedesign.co.kr/news/AABBCC",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034538270,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://cubedesign.co.kr/news/AABBCC"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e789bdff-3440-4bac-8bdd-af7c20f74a71",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://cubedesign.co.kr/news/economy/article/12345678",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034540019,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://cubedesign.co.kr/news/economy/article/12345678"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "ae3b3933-81d3-421e-9948-497d4298d545",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://cubedesign.co.kr/mobile/fashion",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034541266,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://cubedesign.co.kr/mobile/fashion"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "b142be0b-a7e2-4469-80ab-646a1825f829",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://fp-news.co.kr/shop/cart",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034542063,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://fp-news.co.kr/shop/cart"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "fd74912a-f2f4-4519-a8f4-1d240d5e20f1",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://k-wbc.co.kr/skin/social/social_view.php",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034543029,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://k-wbc.co.kr/skin/social/social_view.php"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e73b5d60-32fb-4081-91fc-7d4984cb4212",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://rcsh.co.kr/modules/bbs/tiles/bbs_div/inputForm.php",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034545365,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://rcsh.co.kr/modules/bbs/tiles/bbs_div/inputForm.php"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-09-15",
+   "dateLastSeen": "2026-10-21",
+   "domain": null,
+   "hashes": {
+    "md5": null,
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "3a54603a-e8f1-4a5b-aa7a-181be6b21c2f",
+   "ip": [],
+   "ipScores": [],
+   "params": {
+    "url": "https://www.ksog.org/insert_file/handle.php",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "",
+     "sha1": "",
+     "sha256": ""
+    },
+    "ssl": []
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "seqUpdate": 17931034546371,
+   "sources": [
+    "manual"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "network",
+   "url": "https://www.ksog.org/insert_file/handle.php"
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-27",
+   "dateLastSeen": "2026-10-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "ec84d6cb2ae7974767aedac246b50a3e",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c9c769ad-bcb3-4815-8198-8f5d3ca35eb7",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "ec84d6cb2ae7974767aedac246b50a3e",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17931034673531,
+   "size": null,
+   "sources": [
+    "https://securelist.com/lazarus-operation-flashhole/121541/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-27",
+   "dateLastSeen": "2026-10-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "a28cba214058fcae2883d8cffc883abd",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "e9890ce1-5cc9-457e-b17d-cf93de06e2bc",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "a28cba214058fcae2883d8cffc883abd",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17931034685598,
+   "size": null,
+   "sources": [
+    "https://securelist.com/lazarus-operation-flashhole/121541/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-27",
+   "dateLastSeen": "2026-10-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "c105d6b16f544582772de0159f24c00a",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "13a4303f-ea67-4b8f-8ddd-55f576e2dce4",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "c105d6b16f544582772de0159f24c00a",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17931034695840,
+   "size": null,
+   "sources": [
+    "https://securelist.com/lazarus-operation-flashhole/121541/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-27",
+   "dateLastSeen": "2026-10-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "2f8475a90a25624ed02f1d18d4e6d65d",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "f55dba36-f193-489a-ad1d-9d14201b0d98",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "2f8475a90a25624ed02f1d18d4e6d65d",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17931034708833,
+   "size": null,
+   "sources": [
+    "https://securelist.com/lazarus-operation-flashhole/121541/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-27",
+   "dateLastSeen": "2026-10-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "676fabe30a28b53925fba98e34b35986",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "7d1b9090-6130-4ae7-a36d-0550afd5f2d5",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "676fabe30a28b53925fba98e34b35986",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17931034720283,
+   "size": null,
+   "sources": [
+    "https://securelist.com/lazarus-operation-flashhole/121541/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-27",
+   "dateLastSeen": "2026-10-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "b4a7eff35f048f06fb0a2d7631f23a7d",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "c0faa6ad-e805-4142-9b43-42660011f74e",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "b4a7eff35f048f06fb0a2d7631f23a7d",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17931034730475,
+   "size": null,
+   "sources": [
+    "https://securelist.com/lazarus-operation-flashhole/121541/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  },
+  {
+   "attributes": null,
+   "dateFirstSeen": "2026-10-27",
+   "dateLastSeen": "2026-10-27",
+   "domain": null,
+   "hasPolygonReport": false,
+   "hashes": {
+    "md5": "ff07641dc56914dd90ee0bd7404d7ad7",
+    "other": [],
+    "sha1": null,
+    "sha256": null
+   },
+   "id": "cf20dc05-b32a-4aab-8043-517344647920",
+   "ip": [],
+   "params": {
+    "url": "",
+    "domain": "",
+    "ipv4": [],
+    "ipv6": [],
+    "hashes": {
+     "md5": "ff07641dc56914dd90ee0bd7404d7ad7",
+     "sha1": "",
+     "sha256": ""
+    },
+    "name": null,
+    "nameList": [],
+    "size": null
+   },
+   "malwareIdList": [],
+   "malwareList": [],
+   "potentialNames": [],
+   "seqUpdate": 17931034740586,
+   "size": null,
+   "sources": [
+    "https://securelist.com/lazarus-operation-flashhole/121541/"
+   ],
+   "taIdList": [
+    "5e9f20fdcf5876b5772b3d09b432f4080711ac5f"
+   ],
+   "type": "file",
+   "url": null
+  }
+ ],
+ "indicatorsIds": [
+  "94073e64-a69f-418a-9540-9e1f70aecb75",
+  "11961c45-6de2-4581-8006-973747f68a51",
+  "359ea75e-5ad5-46ac-89a0-9b000a226e9f",
+  "6d66bafe-787a-4829-8905-7090f6c3deec",
+  "d442e732-8531-44a5-a8e9-6b9376fcb424",
+  "e789bdff-3440-4bac-8bdd-af7c20f74a71",
+  "ae3b3933-81d3-421e-9948-497d4298d545",
+  "b142be0b-a7e2-4469-80ab-646a1825f829",
+  "fd74912a-f2f4-4519-a8f4-1d240d5e20f1",
+  "e73b5d60-32fb-4081-91fc-7d4984cb4212",
+  "3a54603a-e8f1-4a5b-aa7a-181be6b21c2f",
+  "c9c769ad-bcb3-4815-8198-8f5d3ca35eb7",
+  "e9890ce1-5cc9-457e-b17d-cf93de06e2bc",
+  "13a4303f-ea67-4b8f-8ddd-55f576e2dce4",
+  "f55dba36-f193-489a-ad1d-9d14201b0d98",
+  "7d1b9090-6130-4ae7-a36d-0550afd5f2d5",
+  "c0faa6ad-e805-4142-9b43-42660011f74e",
+  "cf20dc05-b32a-4aab-8043-517344647920"
+ ],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [
+  {
+   "category": [
+    "Dropper"
+   ],
+   "class": null,
+   "id": "a0459ac37894341d924fb69c09e3c747cb1cc271",
+   "name": "TouchShift",
+   "platform": [
+    "Windows"
+   ],
+   "threatLevel": "Medium"
+  }
+ ],
+ "mitreMatrix": [
+  {
+   "attackName": "Exploitation for Client Execution",
+   "attackPatternId": "attack-pattern--be2dcee9-a7a7-4e38-afd6-21b31ecc3d63",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1203",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"After the victim visited the malicious watering-hole or lure site, the attack chain exploited CrossWeb EX (INISAFECrossWebEXSvc.exe), a mandatory South Korean financial security software from the INISAFE CrossWeb EX V3 version 3.4.1.2 bundle (released in 2023), to initiate code execution. The exploited CrossWeb EX process spawned the legitimate Windows binary fsquirt.exe running at high integrity level, then injected shellcode containing a malicious DLL (TechHub malware) into it. This exploitation of a widely-installed, trusted financial security application provided the initial foothold with elevated privileges, enabling an entirely in-memory infection chain without dropping files to disk.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Exploitation for Privilege Escalation",
+   "attackPatternId": "attack-pattern--b21c3b2d-02e6-45b1-980b-e69051040839",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1068",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"After the victim visited the malicious watering-hole or lure site, the attack chain exploited CrossWeb EX (INISAFECrossWebEXSvc.exe), a mandatory South Korean financial security software from the INISAFE CrossWeb EX V3 version 3.4.1.2 bundle (released in 2023), to initiate code execution. The exploited CrossWeb EX process spawned the legitimate Windows binary fsquirt.exe running at high integrity level, then injected shellcode containing a malicious DLL (TechHub malware) into it. This exploitation of a widely-installed, trusted financial security application provided the initial foothold with elevated privileges, enabling an entirely in-memory infection chain without dropping files to disk.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Process Injection",
+   "attackPatternId": "attack-pattern--43e7dc91-05b2-474c-b9ac-2ed4fe101f4d",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1055",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"After the victim visited the malicious watering-hole or lure site, the attack chain exploited CrossWeb EX (INISAFECrossWebEXSvc.exe), a mandatory South Korean financial security software from the INISAFE CrossWeb EX V3 version 3.4.1.2 bundle (released in 2023), to initiate code execution. The exploited CrossWeb EX process spawned the legitimate Windows binary fsquirt.exe running at high integrity level, then injected shellcode containing a malicious DLL (TechHub malware) into it. This exploitation of a widely-installed, trusted financial security application provided the initial foothold with elevated privileges, enabling an entirely in-memory infection chain without dropping files to disk.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Process Injection",
+   "attackPatternId": "attack-pattern--43e7dc91-05b2-474c-b9ac-2ed4fe101f4d",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1055",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"After the victim visited the malicious watering-hole or lure site, the attack chain exploited CrossWeb EX (INISAFECrossWebEXSvc.exe), a mandatory South Korean financial security software from the INISAFE CrossWeb EX V3 version 3.4.1.2 bundle (released in 2023), to initiate code execution. The exploited CrossWeb EX process spawned the legitimate Windows binary fsquirt.exe running at high integrity level, then injected shellcode containing a malicious DLL (TechHub malware) into it. This exploitation of a widely-installed, trusted financial security application provided the initial foothold with elevated privileges, enabling an entirely in-memory infection chain without dropping files to disk.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Create or Modify System Process->Windows Service]",
+   "attackPatternId": "attack-pattern--2959d63f-73fd-46a1-abd2-109d7dcede32",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1543.003",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub, retrieved from TechHub's private GitHub repository, acts as a parent installer for the TouchShift persistence mechanism. Upon execution, TouchHub copies the legitimate Windows binary printfilterpipelinesvc.exe to C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe, registers it as a service, and drops an embedded TouchShift payload named mscoree.dll into the same C:\\\\Windows\\\\System32\\\\RasConv\\\\ directory. This setup enables DLL side-loading: when the ImeBroker.exe service starts, it loads the malicious mscoree.dll (TouchShift), establishing persistent execution on the compromised host.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Create or Modify System Process->Windows Service]",
+   "attackPatternId": "attack-pattern--2959d63f-73fd-46a1-abd2-109d7dcede32",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1543.003",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub, retrieved from TechHub's private GitHub repository, acts as a parent installer for the TouchShift persistence mechanism. Upon execution, TouchHub copies the legitimate Windows binary printfilterpipelinesvc.exe to C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe, registers it as a service, and drops an embedded TouchShift payload named mscoree.dll into the same C:\\\\Windows\\\\System32\\\\RasConv\\\\ directory. This setup enables DLL side-loading: when the ImeBroker.exe service starts, it loads the malicious mscoree.dll (TouchShift), establishing persistent execution on the compromised host.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Masquerading->Match Legitimate Resource Name or Location]",
+   "attackPatternId": "attack-pattern--1c4e5d32-1fe9-4116-9d9d-59e3925bd6a2",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1036.005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub, retrieved from TechHub's private GitHub repository, acts as a parent installer for the TouchShift persistence mechanism. Upon execution, TouchHub copies the legitimate Windows binary printfilterpipelinesvc.exe to C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe, registers it as a service, and drops an embedded TouchShift payload named mscoree.dll into the same C:\\\\Windows\\\\System32\\\\RasConv\\\\ directory. This setup enables DLL side-loading: when the ImeBroker.exe service starts, it loads the malicious mscoree.dll (TouchShift), establishing persistent execution on the compromised host.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Deobfuscate/Decode Files or Information",
+   "attackPatternId": "attack-pattern--3ccef7ae-cb5e-48f6-8302-897105fbf55c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1140",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub registers a Windows service that side-loads the TouchShift DLL via the legitimate binary ImeBroker.exe, which calls the malicious export function LockClrVersion. Upon execution, TouchShift takes the command-line argument \\\"-TimeBroker\\\" supplied by TouchHub and XORs it with the hard-coded key \\\"x809G736iC3f8Wp8\\\", then XORs the result again with the executable filename \\\"ImeBroker.exe\\\" (NULL-padded) to derive an AES-CBC-128 decryption key. Using this derived key, TouchShift decrypts an embedded payload without padding, producing shellcode that begins with a call instruction wrapping the next-stage payload — identified as the third version of TechHub — which reads the external configuration file ActivationStore.dat. This multi-layered key derivation scheme ties decryption to the specific executable filename and argument, preventing analysis outside the intended side-loading context.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Execution Guardrails->Environmental Keying]",
+   "attackPatternId": "attack-pattern--f244b8dd-af6c-4391-a497-fc03627ce995",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1480.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub registers a Windows service that side-loads the TouchShift DLL via the legitimate binary ImeBroker.exe, which calls the malicious export function LockClrVersion. Upon execution, TouchShift takes the command-line argument \\\"-TimeBroker\\\" supplied by TouchHub and XORs it with the hard-coded key \\\"x809G736iC3f8Wp8\\\", then XORs the result again with the executable filename \\\"ImeBroker.exe\\\" (NULL-padded) to derive an AES-CBC-128 decryption key. Using this derived key, TouchShift decrypts an embedded payload without padding, producing shellcode that begins with a call instruction wrapping the next-stage payload — identified as the third version of TechHub — which reads the external configuration file ActivationStore.dat. This multi-layered key derivation scheme ties decryption to the specific executable filename and argument, preventing analysis outside the intended side-loading context.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Application Layer Protocol->Web Protocols]",
+   "attackPatternId": "attack-pattern--df8b2a25-8bdf-4856-953c-a04372b1c161",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1071.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deploys ClientHub, a C2 implant available in two variants: one communicating with attacker-controlled servers via HTTP(S) and another interacting with the Dropbox API using embedded credentials. ClientHub sources its configuration either from internal resources or from an external file at C:\\\\Program Files\\\\Common Files\\\\System\\\\msadc\\\\msadc.inc, which contains SNOW 1.0 algorithm keys and IVs, scheduled execution times, and C2 server addresses encrypted with the SNOW stream cipher. To evade network detection, ClientHub crafts HTTP requests with browser-like headers including Sec-CH-UA, Sec-CH-UA-Platform, Sec-CH-UA-Mobile, Sec-Fetch-Mode, and Sec-Fetch-Dest, mimicking legitimate browser traffic. This component supplements the primary Cubridge orchestrator by providing an additional, redundant C2 channel leveraging both direct HTTPS communication and the legitimate Dropbox platform.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Web Service->Bidirectional Communication]",
+   "attackPatternId": "attack-pattern--be055942-6e63-49d7-9fa1-9cb7d8a8f3f4",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1102.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deploys ClientHub, a C2 implant available in two variants: one communicating with attacker-controlled servers via HTTP(S) and another interacting with the Dropbox API using embedded credentials. ClientHub sources its configuration either from internal resources or from an external file at C:\\\\Program Files\\\\Common Files\\\\System\\\\msadc\\\\msadc.inc, which contains SNOW 1.0 algorithm keys and IVs, scheduled execution times, and C2 server addresses encrypted with the SNOW stream cipher. To evade network detection, ClientHub crafts HTTP requests with browser-like headers including Sec-CH-UA, Sec-CH-UA-Platform, Sec-CH-UA-Mobile, Sec-Fetch-Mode, and Sec-Fetch-Dest, mimicking legitimate browser traffic. This component supplements the primary Cubridge orchestrator by providing an additional, redundant C2 channel leveraging both direct HTTPS communication and the legitimate Dropbox platform.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Data Obfuscation->Protocol or Service Impersonation]",
+   "attackPatternId": "attack-pattern--c325b232-d5bc-4dde-a3ec-71f3db9e8adc",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1001.003",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deploys ClientHub, a C2 implant available in two variants: one communicating with attacker-controlled servers via HTTP(S) and another interacting with the Dropbox API using embedded credentials. ClientHub sources its configuration either from internal resources or from an external file at C:\\\\Program Files\\\\Common Files\\\\System\\\\msadc\\\\msadc.inc, which contains SNOW 1.0 algorithm keys and IVs, scheduled execution times, and C2 server addresses encrypted with the SNOW stream cipher. To evade network detection, ClientHub crafts HTTP requests with browser-like headers including Sec-CH-UA, Sec-CH-UA-Platform, Sec-CH-UA-Mobile, Sec-Fetch-Mode, and Sec-Fetch-Dest, mimicking legitimate browser traffic. This component supplements the primary Cubridge orchestrator by providing an additional, redundant C2 channel leveraging both direct HTTPS communication and the legitimate Dropbox platform.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Fallback Channels",
+   "attackPatternId": "attack-pattern--f24faf46-3b26-4dbb-98f2-63460498e433",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1008",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deploys ClientHub, a C2 implant available in two variants: one communicating with attacker-controlled servers via HTTP(S) and another interacting with the Dropbox API using embedded credentials. ClientHub sources its configuration either from internal resources or from an external file at C:\\\\Program Files\\\\Common Files\\\\System\\\\msadc\\\\msadc.inc, which contains SNOW 1.0 algorithm keys and IVs, scheduled execution times, and C2 server addresses encrypted with the SNOW stream cipher. To evade network detection, ClientHub crafts HTTP requests with browser-like headers including Sec-CH-UA, Sec-CH-UA-Platform, Sec-CH-UA-Mobile, Sec-Fetch-Mode, and Sec-Fetch-Dest, mimicking legitimate browser traffic. This component supplements the primary Cubridge orchestrator by providing an additional, redundant C2 channel leveraging both direct HTTPS communication and the legitimate Dropbox platform.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Impair Defenses->Disable or Modify Tools]",
+   "attackPatternId": "attack-pattern--ac08589e-ee59-4935-8667-d845e38fe579",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1562.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"LPEClient bypasses security product monitoring by avoiding direct calls to VirtualProtect, instead leveraging the HeapPageAllocator::ProtectPages function within jscript9.dll to modify the memory page protection of the MD4Update function. After changing the page permissions, LPEClient overwrites the beginning of MD4Update with a hard-coded opcode sequence that serves as an indirect syscall stub with the required arguments. The malware then executes this syscall stub to disable a user-mode syscall instrumentation hook, effectively neutralizing security product hooking before loading acquired payloads.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Native API",
+   "attackPatternId": "attack-pattern--391d824f-0ef1-47a0-b0ee-c59a75e27670",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1106",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"LPEClient bypasses security product monitoring by avoiding direct calls to VirtualProtect, instead leveraging the HeapPageAllocator::ProtectPages function within jscript9.dll to modify the memory page protection of the MD4Update function. After changing the page permissions, LPEClient overwrites the beginning of MD4Update with a hard-coded opcode sequence that serves as an indirect syscall stub with the required arguments. The malware then executes this syscall stub to disable a user-mode syscall instrumentation hook, effectively neutralizing security product hooking before loading acquired payloads.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Credentials from Password Stores->Credentials from Web Browsers]",
+   "attackPatternId": "attack-pattern--58a3e6aa-4453-4cc8-a51f-4befe80b31a8",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1555.003",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"A Cubridge function module extracted the Chrome DPAPI-protected AES encryption key by reading the `encrypted_key` value from Chromium's Local State file located at `%LOCALAPPDATA%\\\\Google\\\\Chrome\\\\User Data\\\\Local State`. The module then called the Windows `CryptUnprotectData` function to decrypt the DPAPI-protected AES key, which is used by Chrome to encrypt stored credentials, cookies, and other sensitive browser data. Retrieving this key enabled subsequent decryption of Chrome's encrypted stored secrets as part of the browser credential stealing capability.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Steal Web Session Cookie",
+   "attackPatternId": "attack-pattern--10ffac09-e42d-4f56-ab20-db94c67d76ff",
+   "attackTactic": "credential-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1539",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deployed a browser stealer plugin, injected into Chromium-based browsers such as Google Chrome, Microsoft Edge, and Brave, to extract stored credentials and browsing data from victim systems. Once injected into the target browser process, the stealer harvested stored passwords, bookmarks, browsing history, preferences, and cookies. This plugin operated as part of the Cubridge orchestrator's broader plugin ecosystem, enabling the attackers to collect authentication material and user activity data for further lateral movement or intelligence gathering.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Data from Local System",
+   "attackPatternId": "attack-pattern--3c4a2599-71ee-4405-ba1e-0e28414b4bc5",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deployed a browser stealer plugin, injected into Chromium-based browsers such as Google Chrome, Microsoft Edge, and Brave, to extract stored credentials and browsing data from victim systems. Once injected into the target browser process, the stealer harvested stored passwords, bookmarks, browsing history, preferences, and cookies. This plugin operated as part of the Cubridge orchestrator's broader plugin ecosystem, enabling the attackers to collect authentication material and user activity data for further lateral movement or intelligence gathering.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Stage Capabilities->Link Target]",
+   "attackPatternId": "attack-pattern--84ae8255-b4f4-4237-b5c5-e717405a9701",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1608.005",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group created fabricated lure websites hosted on GitHub Pages, initially deploying a résumé site for a fictitious \\\"senior network appliance developer\\\" in September, then replacing it in January with an interior design showcase site. The sites featured AI-generated content, including a photograph of a fake job seeker that lacked EXIF metadata and exhibited unnatural image textures characteristic of AI generation. The fictitious persona used a name resembling the Korean equivalent of \\\"John Doe,\\\" and the portfolio was populated with meaningless details and random company names before being manually tailored to specific targets. These lure sites were tied to the same GitHub account used as a C2 channel for the TechHub downloader component, serving as the initial social engineering vector to drive victims toward the exploit chain.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Acquire Infrastructure->Web Services]",
+   "attackPatternId": "attack-pattern--88d31120-5bc7-4ce3-a9c0-7cf147be8e54",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1583.006",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group created fabricated lure websites hosted on GitHub Pages, initially deploying a résumé site for a fictitious \\\"senior network appliance developer\\\" in September, then replacing it in January with an interior design showcase site. The sites featured AI-generated content, including a photograph of a fake job seeker that lacked EXIF metadata and exhibited unnatural image textures characteristic of AI generation. The fictitious persona used a name resembling the Korean equivalent of \\\"John Doe,\\\" and the portfolio was populated with meaningless details and random company names before being manually tailored to specific targets. These lure sites were tied to the same GitHub account used as a C2 channel for the TechHub downloader component, serving as the initial social engineering vector to drive victims toward the exploit chain.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Stage Capabilities->Upload Malware]",
+   "attackPatternId": "attack-pattern--3ee16395-03f0-4690-a32e-69ce9ada0f9e",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1608.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group established attacker-controlled servers to host and deliver malicious JavaScript payloads as part of the watering-hole attack chain. These servers, including domains such as javadevhouse.co[.]kr and pythonapischool[.]com, served external scripts that were loaded by the malicious JavaScript embedded in the GitHub Pages lure sites (fabricated résumé and portfolio pages). The scripts were disguised under legitimate-looking URL paths mimicking common libraries and API endpoints, such as /ajax/libs/jquery/1.7.3/jquery.min.js and /api/detach, to blend in with normal web traffic. This infrastructure was prepared during the pre-attack phase alongside the creation of the lure websites and the development of source code designed to abuse CrossWeb EX software.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Acquire Infrastructure->Domains]",
+   "attackPatternId": "attack-pattern--40f5caa0-4cb7-4117-89fc-d421bb493df3",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1583.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group established attacker-controlled servers to host and deliver malicious JavaScript payloads as part of the watering-hole attack chain. These servers, including domains such as javadevhouse.co[.]kr and pythonapischool[.]com, served external scripts that were loaded by the malicious JavaScript embedded in the GitHub Pages lure sites (fabricated résumé and portfolio pages). The scripts were disguised under legitimate-looking URL paths mimicking common libraries and API endpoints, such as /ajax/libs/jquery/1.7.3/jquery.min.js and /api/detach, to blend in with normal web traffic. This infrastructure was prepared during the pre-attack phase alongside the creation of the lure websites and the development of source code designed to abuse CrossWeb EX software.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Develop Capabilities->Exploits]",
+   "attackPatternId": "attack-pattern--bbc3cba7-84ae-410d-b18b-16750731dfa2",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1587.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group established attacker-controlled servers to host and deliver malicious JavaScript payloads as part of the watering-hole attack chain. These servers, including domains such as javadevhouse.co[.]kr and pythonapischool[.]com, served external scripts that were loaded by the malicious JavaScript embedded in the GitHub Pages lure sites (fabricated résumé and portfolio pages). The scripts were disguised under legitimate-looking URL paths mimicking common libraries and API endpoints, such as /ajax/libs/jquery/1.7.3/jquery.min.js and /api/detach, to blend in with normal web traffic. This infrastructure was prepared during the pre-attack phase alongside the creation of the lure websites and the development of source code designed to abuse CrossWeb EX software.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Phishing->Spearphishing Link]",
+   "attackPatternId": "attack-pattern--2b742742-28c3-4e1b-bab7-8350d6300fa7",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1566.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group sent spear-phishing emails to targeted individuals in South Korea's software, construction, and wired communication equipment manufacturing sectors, containing links to fabricated portfolio and résumé websites hosted on GitHub Pages (via &lt;username&gt;.github.io domains). The lure sites were tailored to each target's industry and role, increasing the likelihood of interaction. This selective targeting approach directed victims to attacker-controlled pages that served as the initial entry point for the broader Operation FlashHole infection chain.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[User Execution->Malicious Link]",
+   "attackPatternId": "attack-pattern--ef67e13e-5598-4adc-bdb2-998225874fa9",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1204.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group sent spear-phishing emails to targeted individuals in South Korea's software, construction, and wired communication equipment manufacturing sectors, containing links to fabricated portfolio and résumé websites hosted on GitHub Pages (via &lt;username&gt;.github.io domains). The lure sites were tailored to each target's industry and role, increasing the likelihood of interaction. This selective targeting approach directed victims to attacker-controlled pages that served as the initial entry point for the broader Operation FlashHole infection chain.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Drive-by Compromise",
+   "attackPatternId": "attack-pattern--d742a578-d70e-4d0e-96a6-02a9c30204e6",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1189",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group embedded malicious external JavaScript references within their fabricated portfolio and résumé lure sites hosted on GitHub Pages. These sites contained script tags that loaded external JavaScript files from attacker-controlled servers, including URLs disguised as legitimate libraries such as hxxps://javadevhouse.co[.]kr/ajax/libs/jquery/1.7.3/jquery.min.js (embedded in the résumé site) and hxxps://pythonapischool[.]com/api/detach (embedded in the interior design site). When victims visited the lure pages—either via spear-phishing links or the watering-hole redirect—their browsers automatically fetched and executed these external scripts, enabling the next stage of the drive-by download chain that ultimately led to exploitation of CrossWeb EX and in-memory shellcode execution.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Command and Scripting Interpreter->JavaScript]",
+   "attackPatternId": "attack-pattern--0f4a0c76-ab2d-4cb0-85d3-3f0efb8cba0d",
+   "attackTactic": "execution",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1059.007",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group embedded malicious external JavaScript references within their fabricated portfolio and résumé lure sites hosted on GitHub Pages. These sites contained script tags that loaded external JavaScript files from attacker-controlled servers, including URLs disguised as legitimate libraries such as hxxps://javadevhouse.co[.]kr/ajax/libs/jquery/1.7.3/jquery.min.js (embedded in the résumé site) and hxxps://pythonapischool[.]com/api/detach (embedded in the interior design site). When victims visited the lure pages—either via spear-phishing links or the watering-hole redirect—their browsers automatically fetched and executed these external scripts, enabling the next stage of the drive-by download chain that ultimately led to exploitation of CrossWeb EX and in-memory shellcode execution.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Encrypted Channel->Asymmetric Cryptography]",
+   "attackPatternId": "attack-pattern--bf176076-b789-408e-8cba-7275e81c0ada",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TechHub initiates its C2 handshake by authenticating to the GitHub API using a hardcoded Personal Access Token (PAT). Upon loading, it generates or reads a 4-byte hexadecimal identifier (ID) in the range 0x1000–0xFFFF from its configuration file, then creates a new GitHub issue titled \\\"1[ID]\\\" with the body \\\"hel\\\" via a POST /issues request to signal its presence to the operator. TechHub retrieves an RSA public key from a repository file whose name contains the corresponding \\\"2[ID]\\\" value. It then generates a random 16-byte XOR key, encrypts it with the retrieved RSA public key, and uploads the encrypted result—prefixed with \\\"1[ID]\\\"—back to the repository, completing the key exchange and establishing an encrypted communication channel over GitHub's legitimate infrastructure.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "System Information Discovery",
+   "attackPatternId": "attack-pattern--354a7f88-63fb-41b5-a801-ce3b377b36f1",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1082",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TechHub collected host device information from the compromised system and exfiltrated it to the attacker-controlled GitHub repository by posting the data to a GitHub issue. After successfully transmitting the device information, TechHub updated the body of the previously created GitHub issue from \\\"hel\\\" to \\\"hey\\\" using a PATCH request to /issues/[issue number], signaling that the host profiling step had completed. This mechanism leveraged GitHub's issue-tracking API as a covert C2 channel for data exfiltration and status coordination.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Exfiltration Over C2 Channel",
+   "attackPatternId": "attack-pattern--92d7da27-2d91-488e-a00c-059dc162766d",
+   "attackTactic": "exfiltration",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1041",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TechHub collected host device information from the compromised system and exfiltrated it to the attacker-controlled GitHub repository by posting the data to a GitHub issue. After successfully transmitting the device information, TechHub updated the body of the previously created GitHub issue from \\\"hel\\\" to \\\"hey\\\" using a PATCH request to /issues/[issue number], signaling that the host profiling step had completed. This mechanism leveraged GitHub's issue-tracking API as a covert C2 channel for data exfiltration and status coordination.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Ingress Tool Transfer",
+   "attackPatternId": "attack-pattern--e6919abc-99f9-4c6c-95a5-14761e7b2add",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1105",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TechHub downloads the Cubridge orchestrator from GitHub and deploys it on the compromised host. Cubridge is delivered as a payload packaged in shellcode that reflectively loads directly into memory via the \\\"laeca\\\" command, maintaining the operation's entirely in-memory infection chain. Once active, Cubridge serves as the central orchestrator of the malware framework, capable of retrieving various additional payloads through multiple methods and communicating with a hardcoded C2 server at hxxps://cubedesign[.]co[.]kr/news/AABBCC (configured to version 5.1).\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Reflective Code Loading",
+   "attackPatternId": "attack-pattern--4933e63b-9b77-476e-ab29-761bc5b7d15a",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1620",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TechHub downloads the Cubridge orchestrator from GitHub and deploys it on the compromised host. Cubridge is delivered as a payload packaged in shellcode that reflectively loads directly into memory via the \\\"laeca\\\" command, maintaining the operation's entirely in-memory infection chain. Once active, Cubridge serves as the central orchestrator of the malware framework, capable of retrieving various additional payloads through multiple methods and communicating with a hardcoded C2 server at hxxps://cubedesign[.]co[.]kr/news/AABBCC (configured to version 5.1).\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Compromise Infrastructure->Server]",
+   "attackPatternId": "attack-pattern--e196b5c5-8118-4a1c-ab8a-936586ce3db5",
+   "attackTactic": "resource-development",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1584.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Cubridge establishes command-and-control communication by randomly selecting from a list of predefined C2 servers—compromised Korean websites—and constructing unique C2 URLs for each request using the pattern [C2_URL]/[page1]/[page2]/[page3]. To authenticate with the C2 server, Cubridge sends a POST request containing three key-value pairs: a randomly generated 8-byte hexadecimal bot ID, a fixed authentication token (KW4Ofw982CNJjxd51AVqkGAop), and a randomly generated 16-byte hexadecimal session ID, with each key name drawn from a different predefined word dictionary to evade signature-based detection. The C2 handshake employs a combination of RSA and RC6 encryption algorithms, providing a more robust secure channel establishment than the earlier TechHub downloader stage.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Encrypted Channel->Symmetric Cryptography]",
+   "attackPatternId": "attack-pattern--24bfaeba-cb0d-4525-b3dc-507c77ecec41",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Cubridge establishes command-and-control communication by randomly selecting from a list of predefined C2 servers—compromised Korean websites—and constructing unique C2 URLs for each request using the pattern [C2_URL]/[page1]/[page2]/[page3]. To authenticate with the C2 server, Cubridge sends a POST request containing three key-value pairs: a randomly generated 8-byte hexadecimal bot ID, a fixed authentication token (KW4Ofw982CNJjxd51AVqkGAop), and a randomly generated 16-byte hexadecimal session ID, with each key name drawn from a different predefined word dictionary to evade signature-based detection. The C2 handshake employs a combination of RSA and RC6 encryption algorithms, providing a more robust secure channel establishment than the earlier TechHub downloader stage.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Indicator Removal->Timestomp]",
+   "attackPatternId": "attack-pattern--47f2d673-ca62-47e9-929b-1b0be9657611",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1070.006",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub performs timestamp stomping as an anti-forensic measure by copying the MAC (Modified, Accessed, Created) timestamps from the legitimate Windows driver C:\\\\Windows\\\\System32\\\\drivers\\\\monitor.sys onto newly written files. This synchronization of timestamps with a known system file hinders forensic analysis by making malicious files blend in with legitimate system artifacts, obscuring the true creation and modification times of attacker-deployed components.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Masquerading->Masquerade Task or Service]",
+   "attackPatternId": "attack-pattern--7bdca9d5-d500-4d7d-8c52-5fd47baf4c0c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1036.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub establishes persistence by enumerating up to 100 legitimate service names registered under the netsvcs svchost group in the registry key HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Svchost, randomly selecting one, and appending two random alphabetic characters to generate a plausible but unique service name. It then registers a new Windows service using this masqueraded name with the command line C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe -TimeBroker and the generic description \\\"Microsoft Service,\\\" starting the service immediately upon creation. This technique disguises the malicious service among legitimate system services to evade detection. The registered service ultimately enables TouchShift to launch with SYSTEM privileges via DLL side-loading from the designated directory.\"],\"Procedures\":[\"C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe -TimeBroker\"]}"
+    ]
+   }
+  },
+  {
+   "attackName": "System Service Discovery",
+   "attackPatternId": "attack-pattern--322bad5a-1c49-4d23-ab79-76d641794afa",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1007",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub establishes persistence by enumerating up to 100 legitimate service names registered under the netsvcs svchost group in the registry key HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Svchost, randomly selecting one, and appending two random alphabetic characters to generate a plausible but unique service name. It then registers a new Windows service using this masqueraded name with the command line C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe -TimeBroker and the generic description \\\"Microsoft Service,\\\" starting the service immediately upon creation. This technique disguises the malicious service among legitimate system services to evade detection. The registered service ultimately enables TouchShift to launch with SYSTEM privileges via DLL side-loading from the designated directory.\"],\"Procedures\":[\"C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe -TimeBroker\"]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Query Registry",
+   "attackPatternId": "attack-pattern--c32f7008-9fea-41f7-8366-5eb9b74bd896",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1012",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"TouchHub establishes persistence by enumerating up to 100 legitimate service names registered under the netsvcs svchost group in the registry key HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Svchost, randomly selecting one, and appending two random alphabetic characters to generate a plausible but unique service name. It then registers a new Windows service using this masqueraded name with the command line C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe -TimeBroker and the generic description \\\"Microsoft Service,\\\" starting the service immediately upon creation. This technique disguises the malicious service among legitimate system services to evade detection. The registered service ultimately enables TouchShift to launch with SYSTEM privileges via DLL side-loading from the designated directory.\"],\"Procedures\":[\"C:\\\\Windows\\\\System32\\\\RasConv\\\\ImeBroker.exe -TimeBroker\"]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Software Discovery->Security Software Discovery]",
+   "attackPatternId": "attack-pattern--cba37adb-d6fb-4610-b069-dd04c0643384",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1518.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"LPEClient performs detailed victim host profiling by collecting system and security software information through unconventional methods designed to evade detection. Rather than querying the FileVersion value of ntoskrnl.exe, LPEClient reads the HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\UBR registry key or the SYSTEM_BUILD_VERSION_INFORMATION structure to determine the OS build version. To enumerate installed antivirus products, it bypasses standard WQL queries and instead directly reads the WMI repository file at C:\\\\Windows\\\\System32\\\\wbem\\\\Repository\\\\OBJECTS.DATA. LPEClient no longer contains a hardcoded C2 address; instead, it communicates profiling results to its C2 infrastructure indirectly through a shared buffer with ClientHub, which handles the actual network communication via body_type values 16 and 17.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Encrypted Channel",
+   "attackPatternId": "attack-pattern--b8902400-e6c5-4ba2-95aa-2d35b442b118",
+   "attackTactic": "command-and-control",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1573",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"LPEClient performs a post-quantum key exchange with its C2 server by first sending a key exchange request with message ID 0xA39CF278 along with a generated unique identifier. The C2 server responds with four 1,568-byte blocks, each containing an ML-KEM-1024 (NIST post-quantum key encapsulation mechanism derived from CRYSTALS-Kyber) public key. LPEClient generates four distinct shared key and ciphertext pairs from these public key blocks, encrypts the ciphertexts using the GOST (Magma) algorithm, and transmits them back to the C2 server via ClientHub with message identifier 0xEF8C0D51. Prior to the key exchange, collected victim information is compressed using the XPRESS Huffman algorithm at maximum compression, concatenated with message ID 0xF07D6B34, and encrypted with GOST before transmission. This multi-layered scheme establishes quantum-resistant shared secrets for securing subsequent C2 communications.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Indicator Removal->File Deletion]",
+   "attackPatternId": "attack-pattern--d63a3fb8-9452-4e9d-a60a-54be68d5998c",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1070.004",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Cubridge's action module performs secure file deletion using a multi-pass overwrite sequence, writing 0 → 1 → random bytes → 1 → 0 across the entire file contents to prevent forensic recovery. After overwriting, the module renames the target file to its Alternate Data Stream (ADS) path `:EFS` and then deletes it by calling the native API `SetFileInformationByHandle`. This two-stage approach—data destruction followed by ADS-based metadata cleanup—ensures that both the file content and its NTFS directory entry are thoroughly eliminated, significantly hindering incident response and forensic analysis.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Screen Capture",
+   "attackPatternId": "attack-pattern--0259baeb-9f63-4c69-bf10-eb038c390688",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1113",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"A Cubridge function module captures screenshots of all connected displays and compresses the resulting images into a ZIP archive using the legacy ZipCrypto algorithm with the hard-coded password \\\"xdkiTajAAxc3i/w[&lt;881fnC!G*cb1Dit2sh.gAk/\\\". This enables the attackers to collect visual intelligence from victim workstations, including multi-monitor setups, while encrypting the captured data for exfiltration.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Archive Collected Data->Archive via Library]",
+   "attackPatternId": "attack-pattern--41868330-6ee2-4d0f-b743-9f2294c3c9b6",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1560.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"A Cubridge function module captures screenshots of all connected displays and compresses the resulting images into a ZIP archive using the legacy ZipCrypto algorithm with the hard-coded password \\\"xdkiTajAAxc3i/w[&lt;881fnC!G*cb1Dit2sh.gAk/\\\". This enables the attackers to collect visual intelligence from victim workstations, including multi-monitor setups, while encrypting the captured data for exfiltration.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Account Discovery->Domain Account]",
+   "attackPatternId": "attack-pattern--21875073-b0ee-49e3-9077-1e2a885359af",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1087.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deployed the ADFinder plugin (AdFinder.dll) to perform reconnaissance against Active Directory environments via LDAP queries. ADFinder accepts six arguments including a log file path, ADsPath, search filter, and attribute names, allowing the operators to craft targeted LDAP queries to enumerate directory objects such as users, groups, computers, and organizational units. The collected Active Directory information was logged to a specified file for exfiltration, enabling the attackers to map the victim's domain structure and identify high-value targets for lateral movement.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Permission Groups Discovery->Domain Groups]",
+   "attackPatternId": "attack-pattern--2aed01ad-3df3-4410-a8cb-11ea4ded587c",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1069.002",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deployed the ADFinder plugin (AdFinder.dll) to perform reconnaissance against Active Directory environments via LDAP queries. ADFinder accepts six arguments including a log file path, ADsPath, search filter, and attribute names, allowing the operators to craft targeted LDAP queries to enumerate directory objects such as users, groups, computers, and organizational units. The collected Active Directory information was logged to a specified file for exfiltration, enabling the attackers to map the victim's domain structure and identify high-value targets for lateral movement.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Remote System Discovery",
+   "attackPatternId": "attack-pattern--e358d692-23c0-4a31-9eb6-ecc13a8d7735",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1018",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deployed the ADFinder plugin (AdFinder.dll) to perform reconnaissance against Active Directory environments via LDAP queries. ADFinder accepts six arguments including a log file path, ADsPath, search filter, and attribute names, allowing the operators to craft targeted LDAP queries to enumerate directory objects such as users, groups, computers, and organizational units. The collected Active Directory information was logged to a specified file for exfiltration, enabling the attackers to map the victim's domain structure and identify high-value targets for lateral movement.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "[Data Staged->Local Data Staging]",
+   "attackPatternId": "attack-pattern--1c34f7aa-9341-4a48-bfab-af22e51aca6c",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1074.001",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deployed the ADFinder plugin (AdFinder.dll) to perform reconnaissance against Active Directory environments via LDAP queries. ADFinder accepts six arguments including a log file path, ADsPath, search filter, and attribute names, allowing the operators to craft targeted LDAP queries to enumerate directory objects such as users, groups, computers, and organizational units. The collected Active Directory information was logged to a specified file for exfiltration, enabling the attackers to map the victim's domain structure and identify high-value targets for lateral movement.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "File and Directory Discovery",
+   "attackPatternId": "attack-pattern--7bc57495-ea59-4380-be31-a64af124ef18",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1083",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deployed the FileCollector plugin (Dll.dll), likely loaded through Cubridge's plugin framework, to perform recursive directory enumeration on compromised hosts. FileCollector scanned every subdirectory and file within a specified target directory, gathering detailed information about each entry. This automated collection enabled the attackers to map the file system structure and identify high-value files for subsequent exfiltration.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Process Discovery",
+   "attackPatternId": "attack-pattern--8f4a33ec-8b1f-4b80-a2f6-642b2e479580",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1057",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"The Lazarus Group deployed a process collector plugin through the Cubridge orchestrator that iterated over all running processes on compromised hosts, collecting each process's ID, file path, and command line arguments. This enumeration provided the operators with a detailed snapshot of the victim's active software environment, enabling identification of security tools, business applications, and other processes relevant to further exploitation decisions.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Automated Collection",
+   "attackPatternId": "attack-pattern--30208d3e-0d6b-43c8-883e-44462a514619",
+   "attackTactic": "collection",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1119",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deploys four plugins through the ClientHub framework to perform file and drive operations on compromised hosts. The File collector plugin searches for files matching a specified pattern and collects metadata including filename, MAC timestamps, file size, and attribute values. The File archiver plugin compresses targeted files using the legacy ZipCrypto algorithm without password protection and returns the compressed data for exfiltration. The File cleaner plugin performs anti-forensic secure deletion by overwriting a target file with NULL bytes, renaming it to a randomly generated filename of the same length, and then deleting it. The Drive and session monitor plugin tracks remote session changes and local drive changes over a specified duration in 10-minute intervals, returning collected status information to the operator.\"],\"Procedures\":[]}"
+    ]
+   }
+  },
+  {
+   "attackName": "Peripheral Device Discovery",
+   "attackPatternId": "attack-pattern--348f1eef-964b-4eb6-bb53-69b3dcb0c643",
+   "attackTactic": "discovery",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1120",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "{\"Description\":[\"Lazarus Group deploys four plugins through the ClientHub framework to perform file and drive operations on compromised hosts. The File collector plugin searches for files matching a specified pattern and collects metadata including filename, MAC timestamps, file size, and attribute values. The File archiver plugin compresses targeted files using the legacy ZipCrypto algorithm without password protection and returns the compressed data for exfiltration. The File cleaner plugin performs anti-forensic secure deletion by overwriting a target file with NULL bytes, renaming it to a randomly generated filename of the same length, and then deleting it. The Drive and session monitor plugin tracks remote session changes and local drive changes over a specified duration in 10-minute intervals, returning collected status information to the operator.\"],\"Procedures\":[]}"
+    ]
+   }
+  }
+ ],
+ "oldId": null,
+ "regions": [
+  "asia"
+ ],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3010-1510",
+ "sectors": [
+  "software",
+  "manufacturing",
+  "real-estate:construction",
+  "real-estate",
+  "software:software",
+  "manufacturing:manufacturing"
+ ],
+ "seqPublish": "01a17d48-a45b-70eb-9089-1f0bbab0a173",
+ "seqUpdate": 17931034568560,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://securelist.com/lazarus-operation-flashhole/121541/",
+   "datePublished": "2026-10-21"
+  }
+ ],
+ "sources": [
+  "https://securelist.com/lazarus-operation-flashhole/121541/"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "KP",
+  "id": "5e9f20fdcf5876b5772b3d09b432f4080711ac5f",
+  "isAPT": true,
+  "name": "Lazarus"
+ },
+ "title": "Operation FlashHole: Lazarus Breaks Security, Defies Control",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-10-27T15:17:36+03:00"
+}

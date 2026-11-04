@@ -1,0 +1,223 @@
+{
+ "contacts": [],
+ "countries": [],
+ "createdAt": "2026-10-30T05:29:41+03:00",
+ "cveList": [],
+ "dateFirstSeen": "2026-10-29",
+ "dateLastSeen": "2026-10-30",
+ "datePublished": "2026-10-30",
+ "description": "<p><em>Status: Investigation ongoing. This report may be updated as new findings emerge.</em></p><h2>Update Summary (3 November 2026)</h2><p>The investigation remains ongoing, however Binance have published “Initial Findings and Response Update” documenting previously unknown details about the initial compromise of their network, it is described below in the “Initial Compromise &amp; Infrastructure Breach” section.</p><p>In a statement Tuesday, Kim Yo Jong, the influential sister of North Korean leader Kim Jong Un, called the accusations against Pyongyang “a trite provocation.”</p><img src=\"/api/v2/hi/threat/87280fc5dc8c880922f2aa833614728037937a7a/file/ce6f8c36d5dbe7e972089f440503e69ca299b7b7149de3df37903688c9940271?placeholder=__IMAGE_87280fc5dc8c880922f2aa833614728037937a7a:ce6f8c36d5dbe7e972089f440503e69ca299b7b7149de3df37903688c9940271_IMAGE__\" data-mce-src=\"__IMAGE_87280fc5dc8c880922f2aa833614728037937a7a:ce6f8c36d5dbe7e972089f440503e69ca299b7b7149de3df37903688c9940271_IMAGE__\" /><h2>Update Summary (2 November 2026)</h2><ul><li><p><strong>Attribution:</strong> On 31 October 2026 the FBI, with USSS and IRS-CI, publicly attributed the theft to North Korea and named the activity “TraderTraitor”. The alert asks THORNode and RPC node operators, instant exchanges, DeFi services, analytics firms and other VASPs to block transactions with or derived from the addresses it lists (608 Ethereum, 19 Bitcoin, 1 Solana). TRM Labs and Chainalysis (30 October) and Elliptic reached the same assessment independently.</p></li></ul><ul><li><p><strong>Scale:</strong> Total losses are now reported at approximately USD 6.3–6.4 billion across ten blockchains (Binance ~6.3B; TRM Labs 6.36B; Chainalysis 6.4B), superseding the 3.3–5.8 billion third-party estimates cited earlier in this report. Figures still differ by source.</p></li></ul><ul><li><p><strong>Freezes and recovery:</strong> Roughly USD 2.7–3.0 billion in stablecoins has been frozen (TRM ~2.7B; Chainalysis ~2.8B; Binance ~3.0B). About USD 1.5 billion in Bitcoin (18,270 BTC) cannot be frozen. Binance states it has replenished 90% of affected assets from SAFU, insurance and corporate funds (31 October) and resumed withdrawals on 1 November.</p></li></ul><ul><li><p><strong>Root cause (as stated by Binance):</strong> a compromised engineer’s laptop was used to submit unauthorized withdrawals through the exchange’s signing pipeline; Binance reports no private-key leakage. The delivery method on the laptop remains unpublished.</p></li></ul><h2>Incident Description</h2><p>On 29 October 2026, public reporting described an active investigation into abnormal cryptocurrency movements associated with exchange wallets labeled as belonging to Binance.</p><p><strong>Initial estimates of suspicious outflows ranged from approximately USD 3.3 billion to USD 5.8 billion</strong>, depending on the blockchain networks, wallet clusters, and transactions included in the analysis. These figures represent third-party estimates of potentially suspicious asset movements rather than confirmed financial losses. The actual amount stolen and the final net financial impact remain undetermined. Public reporting also described temporary withdrawal restrictions and the freezing of substantial stablecoin holdings by token issuers.</p><p>On-chain analysis linked a set of Ethereum transfers to EIP-7702 account delegation activity that preceded the largest movements. This assessment is based on publicly available information and remains preliminary. Further validation is required to establish the full scope of the incident and confirm the suspected attack mechanism.</p><img src=\"/api/v2/hi/threat/87280fc5dc8c880922f2aa833614728037937a7a/file/07dac3267388a20f6caed0a59b86f07cb2e936f72359ba74f5c7451e2356514c?placeholder=__IMAGE_87280fc5dc8c880922f2aa833614728037937a7a:07dac3267388a20f6caed0a59b86f07cb2e936f72359ba74f5c7451e2356514c_IMAGE__\"  /><h2>Incident Timeline (UTC, preliminary)</h2><p>The following timeline is preliminary and expressed in UTC. Every entry is drawn from public reporting and reflects reported rather than confirmed activity.</p><ul><li><p>02:28 — Reported deployment of a wallet-sweeping contract by a suspected operator.</p></li></ul><ul><li><p>13:51–16:47 — Reported preparation or testing involving smaller wallets.</p></li></ul><ul><li><p>20:20:59 — Reported EIP-7702 authorization entries associated with the wallet labeled Binance 14.</p></li></ul><ul><li><p>20:24:23 — Reported transfer of approximately 167,464 ETH, 1.615 billion USDT and additional tokens from Binance 14.</p></li></ul><ul><li><p>20:24:47 — Reported movement of approximately 28,006 ETH from the wallet labeled Binance 16.</p></li></ul><ul><li><p>20:38–21:04 — Further reported outflows and redistribution of digital assets.</p></li></ul><ul><li><p>After detection — Reported exchange security investigation, withdrawal restrictions, and issuer asset freezes.</p></li></ul><h1>Technical Analysis</h1><h2>Initial Compromise &amp; Infrastructure Breach</h2><ul><li><p><strong>Compromise Vector:</strong> Preliminary investigation confirmed that the incident originated via the compromise of a Binance DevOps engineer’s laptop.</p><img src=\"/api/v2/hi/threat/87280fc5dc8c880922f2aa833614728037937a7a/file/52a1961b07d40833d38fe68221ce5548d02b3159ac2c73ba5d79b0f47af11049?placeholder=__IMAGE_87280fc5dc8c880922f2aa833614728037937a7a:52a1961b07d40833d38fe68221ce5548d02b3159ac2c73ba5d79b0f47af11049_IMAGE__\"  /></li><li><p>investigation indicates that this was a sophisticated, multi-stage campaign. It was not a single isolated breach or a simple phishing incident.</p></li><li><p>The attackers combined a range of techniques, including social engineering by fake recruitment interviews, malicious software downloads, compromised internal AI tooling, endpoint compromise, and an advanced transaction-authorisation method.</p></li><li><p><strong>June 2026 — Supply chain attack. </strong>Engineer A from Wallet DevOps downloaded tampered Homebrew installation in order to install a popular AI coding tool after searching for it on a search engine. Binance security team detected the anomaly, replaced the device, and rotated all related credentials as a proactive security action. However, Engineer A’s role and his related colleagues on Binance’s wallet infrastructure team was exposed to the hacker.</p></li><li><p>Throughout 2026, Binance's security team detected and prevented 57 suspected North Korea-linked cyber threat cases. These attempts reflect the persistent threat posed by state-sponsored actors targeting the cryptocurrency industry. The techniques include fraudulent job interviews, malicious software disguised as popular developer tools, compromised software packages and browser extensions, fake video conferencing applications, and social engineering campaigns designed to steal credentials or deploy remote access malware.</p></li><li><p><strong>September — social engineering. </strong>Software Engineer B was contacted through a legitimate job-hunting platform by an individual posing as a Project Director. Software Engineer B had a profile on the platform that referenced his experience at Binance. The purported Project Director arranged a first-round interview with a HR representative, followed by a second-round interview with an individual claiming to be the CEO of a fictitious company.</p></li><li><p>In the first round, the purported HR representative conducted a live video interview with Software Engineer B. The interviewer shared a social media account with him, including personal photos and videos posted on the platform, in order to build trust. This was more advanced and deceptive than previously seen social engineering approaches.</p></li><li><p>The second interview was conducted in a popular social chat app, near the end of the interview, Engineer B was instructed to download an “assignment” containing a malicious code repository onto his work computer. The repository contained malicious code that executed during the setup process, initiating a series of unauthorized activities.</p></li><li><p>The malware employed sophisticated obfuscation and evasion techniques, including replacing a legitimate development tool component with a malicious version to execute commands and establish communication with an attacker-controlled external server. The 0-day malware was not detected by the endpoint security protection tools at the time. The attacker also took steps to conceal the malicious activity and remove traces of the compromise, making detection and subsequent investigation more challenging.</p></li><li><p>The script executed the below steps by applying obfuscation techniques to evade security detection.</p></li></ul><pre><code>CREATE /opt/homebrew/Cellar/pyenv/2.8.0/libexec/pyenv_\nMODIFY pyenv_ → 3,414 B\nDELETE .../libexec/pyenv (3,344 B) ← remove the valid pyenv\nRENAME pyenv_ → pyenv (3,414 B) ← replace it with a malicious version\nDELETE /opt/homebrew/bin/pyenv (3,414 B)\nln (create a new symlink) + spawn zsh</code></pre><ul><li><p><strong>20 October — use of an internal AI tool as a springboard. </strong>The attacker leveraged the compromised computer of engineer B and used an internal AI tool to gain control over the Wallet DevOps Engineer A and another Wallet Software Engineer C. The attacker soon discovered Wallet DevOps Engineer A had a container deployment permission token on his computer.</p></li><li><p><strong>29 October — reach into wallet signing operations. </strong>On 29 October between 17:15 and 19:56, the attacker logged onto Software Engineer C’s computer, used the credentials stolen from Wallet DevOps Engineer A, deployed a container, and triggered a malicious script to launch the attack.</p></li><li><p><strong>Privilege Misuse:</strong> The attacker leveraged the compromised workstation to access an internal service container, executing unauthorized withdrawal operations directly through the exchange's transaction generation and signing pipelines.</p></li><li><p><strong>Integrity of Private Keys:</strong> Binance found no evidence of any cold-storage or hot-wallet private key leakage. Instead, the attacker abused the automated hot-wallet signing infrastructure across multiple heterogeneous chains to generate legitimate, cryptographically valid signatures on attacker-controlled payloads</p></li></ul><h2>Pre-Operational Staging &amp; Smart Contract Testing</h2><ul><li><p><strong>Funding:</strong> Operational funding commenced approximately 36 hours prior to the theft. On the morning of 28 October 2026, an operator wallet (<code>0x7c8601d4645b93cea45f71e118a729332e6b5ca0</code>) received three seed transfers from Tornado Cash.</p></li><li><p><strong>Contract Deployment &amp; Dry Runs:</strong> Early on 29 October 2026, the operator deployed the primary wallet-sweeping smart contract. The code was iteratively validated across two test wallets between 13:51 and 16:47 UTC, followed by a final rehearsal on a third wallet before routing test funds back to the operator. Approximately four hours after this rehearsal, the payload was installed on Binance’s primary hot wallet</p></li></ul><h2>Ethereum Vector: EIP-7702 Account Delegation Abuse</h2><p>Ethereum's EIP-7702 standard (implemented in the May 2025 Pectra upgrade) allows an externally owned account (EOA) to temporarily delegate its code execution logic to a designated smart contract address by signing an authorization payload.</p><ul><li><p><strong>Nonce-Race Mitigation (50 Pre-Signed Authorizations):</strong> Because an active centralized exchange hot wallet continuously processes customer withdrawals, its transaction sequence number (nonce) advances rapidly. To overcome nonce invalidation, the threat actor generated a pre-signed batch of <strong>50 consecutive EIP-7702 authorizations</strong> pointing to their malicious sweeper contract.</p></li><li><p><strong>Sweeper Deployment:</strong> At 20:20:59 UTC, the operator broadcasted the authorization transaction. One of the 50 consecutive nonces matched the hot wallet's active nonce state, instantly binding the hot wallet (<code>Binance 14</code>: <code>0x28C6c06298d514Db089934071355E5743bf21d60</code>) to the malicious sweeper. The sweeper was constructed to accept execution commands exclusively from the operator.</p></li><li><p><strong>Primary Asset Sweep:</strong> At 20:24:23 UTC (3 minutes, 24 seconds post-delegation), the operator invoked the sweeper, draining <strong>167,464 ETH</strong> and 63 ERC-20 tokens—including <strong>1.615 billion USDT</strong>—into the primary collection address (<code>0x5227f603c1ee34ce3c06efe6477003bdfccb2f8c</code>) in a single transaction.</p></li><li><p><strong>Smart Account Drainage &amp; Persistent Interception:</strong> The compromised <code>Binance 14</code> address also served as the authorized executor for a secondary Binance smart account, enabling the attacker to trigger an unauthorized transfer of <strong>823 million USDC</strong>. Because the EIP-7702 delegation remained active on-chain, incoming customer deposits were automatically swept across consecutive intervals at 20:41, 20:59, 21:04, 21:44, 22:39, and 23:56 UTC.</p></li><li><p><strong>Secondary Ethereum Hot Wallet Drainage:</strong> Simultaneously at 20:24:47 UTC, a secondary hot wallet (<code>Binance 16</code>) was drained of <strong>28,006 ETH</strong>, <strong>55.7 million USDT</strong>, and <strong>25.9 million RLUSD</strong> via direct standard signed transactions without EIP-7702 delegation.</p></li></ul><h2>Asset Movement and Cross-Chain Impact</h2><p>Ethereum-focused reporting described transfers from the wallets labeled Binance 14 and Binance 16 into a common receiving address, followed by onward movement that may have included asset swaps. The transfers to a shared collection point and subsequent redistribution are the most consistently reported elements of the on-chain activity.</p><p>Broader claims extended the activity to Bitcoin and Tron, but not every cross-chain transfer can be conclusively linked to a single malicious operation. The various published estimates of suspicious outflows overlap one another and should never be summed into a single total.</p><h1>Threat Actor Attribution</h1><p><strong>Threat Actor Attribution:</strong><em> TraderTraitor / Lazarus Group (DPRK)</em></p><p><strong>Assessment:</strong><em> We assess with </em><strong>Moderate Confidence</strong><em> that the threat actor responsible for the 29 October 2026 Binance hot-wallet compromise and unauthorized multi-chain asset exfiltration is </em><strong>TraderTraitor</strong><em> (an elite cyber unit operating under North Korea's </em><strong>Lazarus Group</strong><em> / RGB)</em></p><p><strong>Update (31 October 2026):</strong> The FBI, together with USSS and IRS-CI, issued a public alert stating that North Korea was responsible for the theft and that the activity is tracked as “TraderTraitor”. The alert states the stolen assets are being converted primarily into ETH and expects further laundering through DeFi and instant-swap services. This government attribution, together with the independent assessments of TRM Labs, Chainalysis and Elliptic, supports raising confidence from Moderate to High.</p><h2>Analytic Basis &amp; Supporting Evidence</h2><ul><li><p><strong>On-Chain Fund Commingling:</strong><em> </em>Blockchain intelligence investigators observed funds stolen in the Binance exploit directly commingling with proceeds from <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://tap.group-ib.com/ta/last-threats?q=Bitget&amp;section=common&amp;ai_q=Bitget&amp;threat=ed8ca91de974c30e0579dd4c7f178df5062b727b\">DPRK's exploit of Bitget </a>from the previous month.</p></li></ul><img src=\"/api/v2/hi/threat/87280fc5dc8c880922f2aa833614728037937a7a/file/dfaae47f123745e91956a455f185f5d700ef937ed6e2b59fe80c0d770e98a5b9?placeholder=__IMAGE_87280fc5dc8c880922f2aa833614728037937a7a:dfaae47f123745e91956a455f185f5d700ef937ed6e2b59fe80c0d770e98a5b9_IMAGE__\"  /><ul><li><p><strong>Operational Pre-Staging &amp; Infrastructure Setup:</strong> Preparation began at least 36 hours prior to the theft, originating with small funding transfers from Tornado Cash to an operator wallet starting on the morning of 28 October 2026. The operator deployed sweeper code, rehearsed execution across three test wallets, and routed funds back before deploying the payload against Binance’s hot wallet. This disciplined multi-stage reconnaissance and staging pattern mirrors prior DPRK-attributed operations, including the February 2025 Bybit heist ($1.5B) and the April 2026 KelpDAO exploit.</p></li><li><p><strong>Burst Execution &amp; Batch Signing Exploitation:</strong><em> </em>The exfiltration leveraged 50 pre-signed EIP-7702 authorizations targeting consecutive transaction nonces on Ethereum, executed simultaneously alongside coordinated signed withdrawals across nine non-EVM and EVM chains within a ~20-minute window. This synchronized, multi-chain signing abuse demonstrates the high organizational capacity characteristic of state-sponsored DPRK actors.</p></li><li><p><strong>Alignment with Established Initial Access Playbooks (Social Engineering &amp; DevOps Targeting):</strong> Binance’s preliminary finding that the incident originated via a compromised DevOps engineer’s endpoint strongly aligns with the known initial access tradecraft of TraderTraitor / Lazarus Group. State-sponsored DPRK cyber units systematically deploy sophisticated recruitment-themed social engineering campaigns (e.g., fraudulent job offers, technical interview coding challenges, and trojanized open-source repositories) specifically tailored to compromise engineers, system administrators, and DevOps personnel possessing elevated operational privileges. While the definitive delivery payload on the engineer's device remains under investigation, the exploitation of an infrastructure engineer’s workstation to bridge into internal production containers closely mirrors historical DPRK campaigns against digital asset platforms.</p></li></ul><h1>Blockchain Investigative Indicators</h1><p>Analysts and compliance officers must exercise caution and avoid indiscriminately blocking addresses—particularly known exchange hot wallets. All wallet labels, network contexts, and timestamps should be revalidated prior to taking operational or blacklisting actions</p><h2>Ethereum Core Infrastructure &amp; Account Delegation</h2><ul><li><p><strong>Victim / Source Hot Wallet (Do Not Block):</strong></p><ul><li><p><code>0x28C6c06298d514Db089934071355E5743bf21d60</code> (<code>Binance 14</code>)</p></li><li><p>Role: Primary compromised hot wallet; targeted by 50 pre-signed EIP-7702 authorizations binding it to the malicious sweeper contract. Also acted as executor for a secondary Binance smart account (used to initiate the 823M USDC transfer).</p></li></ul></li><li><p><strong>Secondary Victim Hot Wallet (Do Not Block):</strong></p><ul><li><p><code>Binance 16</code> (Ethereum)</p></li><li><p>Role: Drained via direct standard authorized transactions of 28,006 ETH, 55.7M USDT, and 25.9M RLUSD without EIP-7702 delegation.</p></li></ul></li><li><p><strong>Suspected Operator Wallet:</strong></p><ul><li><p><code>0x7c8601d4645b93cea45f71e118a729332e6b5ca0</code></p></li><li><p>Role: Funded via three small Tornado Cash withdrawals on 28 October 2026. Deployed the malicious sweeper smart contract, executed test dry runs across three staging wallets, and submitted the EIP-7702 batch delegation and sweep transactions.</p></li></ul></li><li><p><strong>Primary Exploiter Receiving / Consolidation Address:</strong></p><ul><li><p><code>0x5227f603c1ee34ce3c06efe6477003bdfccb2f8c</code></p></li><li><p>Role: Primary collection address for initial sweep of 167,464 ETH, 1.615B USDT, and 823M USDC.</p></li><li><p>Status: <strong>Frozen on-chain.</strong> Currently holds 1.175B USDT (Tether freeze at 21:01 UTC), 823M USDC (Circle freeze at 21:04 UTC), and 27.8M USD1 (World Liberty Financial freeze at 22:10 UTC).</p></li></ul></li><li><p><strong>Secondary Receiver / Hop Address:</strong></p><ul><li><p><code>0x8532fa14acaf483729c449b8458aeddb900543d4</code></p></li><li><p>Role: Intermediate follow-on recipient for redistribution and DEX swaps.</p></li></ul></li><li><p><strong>Key Incident Transaction Hashes:</strong></p><ul><li><p><code>0x53bd38b816c23e74134786c29a8c18d792777998a3b9326047b583100e88e2f3</code> — Benchmark EIP-7702 / execution transaction cited in public forensics.</p></li></ul></li></ul><h2>Cross-Chain Outflow Clusters &amp; Destination Wallets</h2><ul><li><p><strong>Bitcoin (BTC):</strong></p><ul><li><p>Outflow Volume: 18,270 BTC (~$1.47B) drained at 20:20 UTC from Binance Bitcoin hot wallet.</p></li><li><p>Pattern: Immediately routed into automated in-block <strong>peel chains</strong>, decomposing funds into standardized UTXO denominations of 1,000 BTC and 100 BTC.</p></li><li><p>Status: Unfreezable; actively monitored across peel-chain outputs.</p></li></ul></li><li><p><strong>Tron (TRX / TRC-20):</strong></p><ul><li><p>Outflow Volume: 612.7M USDT and 46.4M TRX (~$628M) drained at 20:22 UTC.</p></li><li><p>Intermediary Flows: 300M USDT deposited into the <strong>JustLend</strong> lending protocol.</p></li><li><p>Status: <strong>378.7M USDT frozen</strong> by Tether across two attacker-controlled Tron wallets.</p></li></ul></li><li><p><strong>XRP Ledger (XRP):</strong></p><ul><li><p>Outflow Volume: 233.46M XRP (~$296M) drained between 20:05 and 20:09 UTC across five Binance wallets.</p></li><li><p>Destination: Consolidated into a single attacker XRPL address (each exchange wallet left with minimum reserve balance only).</p></li></ul></li><li><p><strong>Solana (SOL):</strong></p><ul><li><p>Outflow Volume: 970,500 SOL (~$96M) exfiltrated post-20:10 UTC.</p></li></ul></li><li><p><strong>Arbitrum (L2):</strong></p><ul><li><p>Outflow Volume: 8,426 ETH and 74.6M ARB (~$30M).</p></li><li><p>Status: <strong>Forced State Reversal.</strong> Arbitrum Security Council executed an emergency administrative state transition at 00:08 UTC, recovering all 8,426 ETH and 74.6M ARB from the attacker's wallet.</p></li></ul></li><li><p><strong>Avalanche &amp; Polygon:</strong></p><ul><li><p>Avalanche: ~$28M drained; 8.4M USDt frozen by Tether; 1.56M USDC bridged to Ethereum frozen by Circle.</p></li><li><p>Polygon: ~$10M drained; 6.2M USDT0 frozen by Tether</p></li></ul></li></ul><h2>DeFi Intermediation &amp; Threat Actor Commingling Indicators</h2><ul><li><p><strong>UniswapX &amp; Intent-Based DEX Swaps:</strong></p><ul><li><p>Attacker swapped approximately <strong>325M USDT</strong> via UniswapX solvers and market makers into <strong>~122,300 ETH</strong> at a heavy execution discount (&gt;10% slippage, ~$2,650/ETH) before issuer freezes took effect.</p></li></ul></li><li><p><strong>Aave Protocol Collateralization:</strong></p><ul><li><p>Secondary attacker wallet supplied <strong>60M USDT</strong> as collateral to borrow <strong>19,760 ETH</strong>, prompting subsequent market freezing by Aave governance.</p></li></ul></li><li><p><strong>DEX Liquidation of RLUSD:</strong></p><ul><li><p>Attacker moved 88.5M RLUSD through two hops, liquidating <strong>48M RLUSD</strong> via DEXes between 21:42 and 22:01 UTC prior to Ripple freezing the remaining <strong>40.5M RLUSD</strong> in transit.</p></li></ul></li><li><p><strong>Prior Campaign Linkage (TraderTraitor / Lazarus):</strong></p><ul><li><p>Investigators identified downstream transaction links and direct commingling between the Binance exploit proceeds and addresses tied to North Korea’s <strong>Bitget exploit</strong> from the previous month.</p></li></ul></li></ul><h2>Additional Laundering Observations (30 October–1 November 2026)</h2><ul><li><p>Chainalysis reports the Ethereum attacker wallet was funded through Tornado Cash and that laundering shows automated patterns: thousands of transactions in a short period, funds repeatedly recirculated, and many Tron addresses first receiving exactly 1 TRX before larger transfers and onward forwarding.</p></li><li><p>Chainalysis observed the attacker move USD 500 million in stablecoins to a swap wallet, converting USD 325 million into about USD 285 million of ETH over nearly 20 minutes; issuer freezes began by about 17:14 ET on 29 October.</p></li><li><p>Elliptic reports that some of the stolen Tron funds were laundered alongside proceeds of the September 2026 Bitget exploit, consistent with the commingling first reported by ZachXBT (THORChain routing to a shared Ethereum address, <code>0x15104a9ce0f08a8f0075a0869ae80e795fe0feb7</code>).</p></li><li><p>On 30 October at about 01:15 ET, 17,260 ETH moved to a new wallet (<code>0x03b0ee5d82990cff1bda48651ac3e436d1a020ea</code>), which is on the FBI list.</p></li><li><p>As of 30 October the attackers had not converted the proceeds to fiat. Unverified social-media claims about insider involvement are not supported by Binance, the FBI or the analytics firms and are not included in this assessment.</p></li></ul><h2>FBI-Published Addresses (31 October 2026)</h2><p>The FBI lists these addresses as holding or having held assets from the theft and as operated by or closely connected to TraderTraitor actors. Counts: 608 Ethereum, 19 Bitcoin, 1 Solana. The FBI list does not include the operator wallet, the sweeper contracts or the first-hop collection address (<code>0x5227…</code>), so it complements rather than replaces the indicators above.</p><p><strong>Bitcoin (19):</strong> these correspond to the peel-chain outputs described above.</p><ul><li><p><code>bc1qxrxujwxfnvz040jw76d26zhjdg5jura7hs968s</code></p></li><li><p><code>bc1qepc70u3u476vgvg3hfcwjgu4mecxe2uchs4lag</code></p></li><li><p><code>bc1qdfhmlrdvg4tm87zjl0vyf0xflp5ql50q3g88gw</code></p></li><li><p><code>bc1qnq6jj9jmlf3945m3l8s0kxnqehrsga300k8t3s</code></p></li><li><p><code>bc1q42flhayrzy3zh8lkyevw8qcjduurt9a35wlsyx</code></p></li><li><p><code>bc1qz8hdwv8gmml0u96dsvnzsagz6krjyzxmgxupdp</code></p></li><li><p><code>bc1qm2j6v3247khlwzxl7p9vqnfkghcllyhv9wjaat</code></p></li><li><p><code>bc1q0ts8gaf9ht0rr4u02hr56f8thndqsc4kmkmfv3</code></p></li><li><p><code>bc1q2wvz0kcsn4hqmajwtey30ud27fl25w8pveznn6</code></p></li><li><p><code>bc1qalwnl7dtaa73fsq5tyn0ghfy3fgfpqkt69tca8</code></p></li><li><p><code>bc1qjwdw6vrzq4vf6hckutvx4ucj86awwv99mxnz7w</code></p></li><li><p><code>bc1qs3aej5tmcdz0vctz8y9rjcxtxg8v5385577s56</code></p></li><li><p><code>bc1q63qrfrpsg5hh0zzn3kp2xx9vljl7dq7tatsjxp</code></p></li><li><p><code>bc1qs6xnmhar38z44g2za93pv8ygdcwurrh8l87w3v</code></p></li><li><p><code>bc1qg3nrzpuvq2pxqx74tcrywr09dc208ze96n3t53</code></p></li><li><p><code>bc1qf5cyvv9w50tx9xx9s3xwsne0z87wvjj9l8a35u</code></p></li><li><p><code>bc1qm8v88m5fy6kuq9myva2eemwycxqd3e0zcrs2l8</code></p></li><li><p><code>bc1qrg025e2pgx0rwya2kpgtj30972p64jt0hn6zyt</code></p></li><li><p><code>bc1qxg0l4p6xc50zuv9cl5f0l0wmaxjpg8wcy7s9ra</code></p></li></ul><p><strong>Solana (1):</strong></p><ul><li><p><code>AffzFDKZbyMiU11zmVBoAqD25ugpr7xoWWyRyGigBEaU</code></p></li></ul><h2>Confidence Assessment</h2><p>The findings were summarised with associated confidence levels as follows.</p><ul><li><p>Security incident and exchange response — reported by the exchange and media; high confidence pending primary-source review.</p></li></ul><ul><li><p>Large transfers from Binance-labeled wallets — reported via on-chain analysis; high confidence for the transfers themselves, medium for malicious intent.</p></li></ul><ul><li><p>Total losses of approximately USD 6.3–6.4 billion across ten blockchains — reported consistently by Binance, TRM Labs and Chainalysis; moderate-to-high confidence (exact figures differ by source; initial 3.3–5.8 billion estimates are superseded).</p></li></ul><ul><li><p>EIP-7702 authorization activity — reported in Ethereum transaction analyses; moderate-to-high confidence.</p></li></ul><ul><li><p>Initial access via a compromised engineer’s endpoint and abuse of the exchange’s signing pipeline — stated by Binance, with no private-key leakage reported; moderate confidence (delivery method unpublished).</p></li></ul><ul><li><p>Threat actor attribution — TraderTraitor / Lazarus; with high confidence.</p></li></ul><h2>Intelligence Gaps</h2><p>Key intelligence gaps remained open at the time of assessment:</p><ul><li><p>The initial access method and how control of signing authority was obtained.</p></li></ul><ul><li><p>Which movements were unauthorized versus legitimate internal operations.</p></li></ul><ul><li><p>Final stolen, frozen, recovered, and unrecoverable asset totals.</p></li></ul><ul><li><p>Actual ownership of the cross-chain addresses and the completeness of transaction clustering.</p></li></ul><ul><li><p>Initial access via a compromised engineer’s endpoint and abuse of the exchange’s signing pipeline — stated by Binance, with no private-key leakage reported; moderate confidence (delivery method unpublished).</p></li></ul><h2>Implications and Recommendations</h2><p>The following defensive and investigative actions were recommended:</p><ul><li><p>Audit EIP-7702 authorizations and delegated code on high-value externally owned accounts.</p></li></ul><ul><li><p>Investigate HSM/KMS systems, wallet signing systems, approval workflows, and privileged administrative actions.</p></li></ul><ul><li><p>Apply transfer caps, destination allowlists, independent approvals, and anomaly monitoring.</p></li></ul><ul><li><p>Monitor for new delegate contracts, unusual token sweeps, stablecoin swaps, and mixer-related flows.</p></li></ul><ul><li><p>Prepare rapid containment and issuer-coordination processes, and reconcile assets against liabilities.</p></li></ul><ul><li><p>Screen and, where appropriate, block transactions with or derived from the addresses in the FBI alert of 31 October 2026 (THORNode and RPC node operators, instant exchanges, DeFi services, VASPs); keep Binance hot wallets exempt.</p></li></ul><ul><li><p>Harden developer and DevOps endpoints against recruitment-themed social engineering and trojanized repositories (including repository git hooks and editor auto-run tasks), and restrict direct access from engineer workstations to production signing services.</p></li></ul><h2>Analytic Conclusion</h2><p>The 29 October 2026 compromise of Binance hot wallets is assessed as a North Korean TraderTraitor operation, as attributed by the FBI on 31 October and corroborated by TRM Labs, Chainalysis and Elliptic. Losses are reported at approximately USD 6.3–6.4 billion across ten blockchains, the largest crypto theft on record, with about USD 2.7–3.0 billion frozen and Bitcoin proceeds unfreezable. The Ethereum drain used 50 pre-signed EIP-7702 authorizations to bind a Binance hot wallet to an attacker-deployed sweeper; the other chains were drained through the compromised signing pipeline. Open questions are the delivery method on the engineer’s device and the final recovery position. This assessment may be revised as new verified information becomes available.</p>",
+ "displayOptions": {
+  "isFavourite": false,
+  "isHidden": false
+ },
+ "evaluation": {
+  "admiraltyCode": "B1",
+  "credibility": 100,
+  "reliability": 80,
+  "severity": "red",
+  "tlp": "green",
+  "ttl": null
+ },
+ "expertise": [
+  "Cryptocurrency",
+  "E-wallet",
+  "Highlight",
+  "Phishing"
+ ],
+ "files": [
+  {
+   "hash": "52a1961b07d40833d38fe68221ce5548d02b3159ac2c73ba5d79b0f47af11049",
+   "mime": "image/png",
+   "name": "52a1961b07d40833d38fe68221ce5548d02b3159ac2c73ba5d79b0f47af11049",
+   "size": 51075
+  },
+  {
+   "hash": "07dac3267388a20f6caed0a59b86f07cb2e936f72359ba74f5c7451e2356514c",
+   "mime": "image/png",
+   "name": "07dac3267388a20f6caed0a59b86f07cb2e936f72359ba74f5c7451e2356514c",
+   "size": 267231
+  },
+  {
+   "hash": "f38fe3a538fe942b6106f349330c1da46a0075bd3feeb735fb59d86c1c9e8d26",
+   "mime": "image/png",
+   "name": "f38fe3a538fe942b6106f349330c1da46a0075bd3feeb735fb59d86c1c9e8d26",
+   "size": 254665
+  },
+  {
+   "hash": "dfaae47f123745e91956a455f185f5d700ef937ed6e2b59fe80c0d770e98a5b9",
+   "mime": "image/jpeg",
+   "name": "dfaae47f123745e91956a455f185f5d700ef937ed6e2b59fe80c0d770e98a5b9",
+   "size": 143546
+  },
+  {
+   "hash": "ce6f8c36d5dbe7e972089f440503e69ca299b7b7149de3df37903688c9940271",
+   "mime": "image/png",
+   "name": "ce6f8c36d5dbe7e972089f440503e69ca299b7b7149de3df37903688c9940271",
+   "size": 307779
+  }
+ ],
+ "forumsAccounts": [],
+ "fraudMatrix": [],
+ "hasIocs": false,
+ "id": "87280fc5dc8c880922f2aa833614728037937a7a",
+ "indicatorMalwareRelationships": [],
+ "indicatorRelationships": [],
+ "indicatorToolRelationships": [],
+ "indicators": [],
+ "indicatorsIds": [],
+ "isAutogen": false,
+ "isPublished": true,
+ "isTailored": false,
+ "labels": [],
+ "langs": [
+  "en"
+ ],
+ "malwareList": [],
+ "mitreMatrix": [
+  {
+   "attackName": "Financial Theft",
+   "attackPatternId": "attack-pattern--851e071f-208d-4c79-adc6-5974c85c78f3",
+   "attackTactic": "impact",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1657",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "Suspected unauthorized transactions transferred substantial amounts of ETH and ERC-20 tokens from Binance-associated hot wallets to external addresses. Blockchain researchers reported billions of dollars in suspicious outflows, although the total stolen amount has not been confirmed"
+    ]
+   }
+  },
+  {
+   "attackName": "Valid Accounts",
+   "attackPatternId": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+   "attackTactic": "defense-evasion",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "The attacker may have obtained unauthorized access to Binance's wallet-signing infrastructure or compromised credentials associated with it, potentially enabling the generation of valid EIP-7702 authorizations for a Binance-controlled Ethereum wallet. The exact method used to obtain signing authority remains unknown"
+    ]
+   }
+  },
+  {
+   "attackName": "Valid Accounts",
+   "attackPatternId": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+   "attackTactic": "persistence",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "The attacker may have obtained unauthorized access to Binance's wallet-signing infrastructure or compromised credentials associated with it, potentially enabling the generation of valid EIP-7702 authorizations for a Binance-controlled Ethereum wallet. The exact method used to obtain signing authority remains unknown"
+    ]
+   }
+  },
+  {
+   "attackName": "Valid Accounts",
+   "attackPatternId": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+   "attackTactic": "privilege-escalation",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "The attacker may have obtained unauthorized access to Binance's wallet-signing infrastructure or compromised credentials associated with it, potentially enabling the generation of valid EIP-7702 authorizations for a Binance-controlled Ethereum wallet. The exact method used to obtain signing authority remains unknown"
+    ]
+   }
+  },
+  {
+   "attackName": "Valid Accounts",
+   "attackPatternId": "attack-pattern--b17a1a56-e99c-403c-8948-561df0cffe81",
+   "attackTactic": "initial-access",
+   "attackType": "enterprise_tactics",
+   "id": null,
+   "mitreId": "T1078",
+   "params": {
+    "data": null,
+    "sampleList": [
+     "The attacker may have obtained unauthorized access to Binance's wallet-signing infrastructure or compromised credentials associated with it, potentially enabling the generation of valid EIP-7702 authorizations for a Binance-controlled Ethereum wallet. The exact method used to obtain signing authority remains unknown"
+    ]
+   }
+  }
+ ],
+ "oldId": null,
+ "regions": [],
+ "relatedThreatActors": [],
+ "reportNumber": "CP-3010-0529",
+ "sectors": [
+  "financial-services",
+  "financial-services:cryptocurrency"
+ ],
+ "seqPublish": "01a18aa5-bf8d-7d5c-96af-6fdc24919abf",
+ "seqUpdate": 17937711684337,
+ "shortDescription": null,
+ "shortTitle": null,
+ "sourceList": [
+  {
+   "id": "https://atlasum.net/blog/binance-hot-wallet-hack-october-2026",
+   "datePublished": "2026-10-29"
+  },
+  {
+   "id": "https://x.com/binance/status/2115918888429133902",
+   "datePublished": "2026-10-30"
+  },
+  {
+   "id": "https://808bits.com/articles/binance-hot-wallet-eip-7702-delegations/",
+   "datePublished": "2026-10-30"
+  },
+  {
+   "id": "https://www.binance.com/en/support/announcement/detail/c5a8729a97ac486d963784d96c5642d7",
+   "datePublished": "2026-10-30"
+  },
+  {
+   "id": "https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history",
+   "datePublished": "2026-10-29"
+  },
+  {
+   "id": "https://www.fbi.gov/investigate/cyber/alerts/2026/north-korea-responsible-for-6-billion-binance-attack",
+   "datePublished": "2026-10-31"
+  },
+  {
+   "id": "https://x.com/binance/status/2117626126214504729",
+   "datePublished": "2026-11-03"
+  },
+  {
+   "id": "http://www.kcna.kp/en/article/detail/873496f71f6ab3e667a4271b5a4cf4c6",
+   "datePublished": "2026-11-03"
+  }
+ ],
+ "sources": [
+  "https://atlasum.net/blog/binance-hot-wallet-hack-october-2026",
+  "https://x.com/binance/status/2115918888429133902",
+  "https://808bits.com/articles/binance-hot-wallet-eip-7702-delegations/",
+  "https://www.binance.com/en/support/announcement/detail/c5a8729a97ac486d963784d96c5642d7",
+  "https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history",
+  "https://www.fbi.gov/investigate/cyber/alerts/2026/north-korea-responsible-for-6-billion-binance-attack",
+  "https://x.com/binance/status/2117626126214504729",
+  "http://www.kcna.kp/en/article/detail/873496f71f6ab3e667a4271b5a4cf4c6"
+ ],
+ "targetDomain": [],
+ "targetedCompany": [
+  "Binance"
+ ],
+ "targetedPartnersAndClients": [],
+ "techSeqUpdate": null,
+ "threatActor": {
+  "country": "KP",
+  "id": "5e9f20fdcf5876b5772b3d09b432f4080711ac5f",
+  "isAPT": true,
+  "name": "Lazarus"
+ },
+ "title": "Lazarus: Suspected Binance Hot-Wallet Compromise and EIP-7702 Delegation Abuse",
+ "toolList": [],
+ "type": "threat",
+ "unreliableIndicators": [],
+ "unreliableIndicatorsRelations": [],
+ "updatedAt": "2026-11-04T08:46:08+03:00"
+}

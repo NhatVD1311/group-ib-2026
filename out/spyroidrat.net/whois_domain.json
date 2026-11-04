@@ -1,0 +1,384 @@
+{
+ "id": "spyroidrat.net",
+ "name": "spyroidrat.net",
+ "created_at": "2023-01-28T12:24:34.455Z",
+ "updated_at": "2026-08-05T03:34:18.575Z",
+ "is_sld": true,
+ "zone": "net",
+ "whois": [
+  {
+   "level": 1,
+   "server": "whois.verisign-grs.com",
+   "parsed": [],
+   "response": "No match for \"SPYROIDRAT.NET\".",
+   "checked_at": "2026-08-05 03:32:34",
+   "checkedAt": true,
+   "values": {}
+  }
+ ],
+ "whois_history": [
+  {
+   "level": 1,
+   "server": "whois.verisign-grs.com",
+   "parsed": [
+    {
+     "field": "domain_name",
+     "value": [
+      "SPYROIDRAT.NET"
+     ]
+    },
+    {
+     "field": "phone",
+     "value": [
+      "+1.6613102107"
+     ]
+    },
+    {
+     "field": "updated_date",
+     "value": []
+    },
+    {
+     "field": "expiration_date",
+     "value": []
+    },
+    {
+     "field": "creation_date",
+     "value": []
+    },
+    {
+     "field": "status",
+     "value": [
+      "clientTransferProhibited https://icann.org/epp#clientTransferProhibited"
+     ]
+    },
+    {
+     "field": "name_servers",
+     "value": [
+      "ASA.NS.CLOUDFLARE.COM",
+      "ED.NS.CLOUDFLARE.COM"
+     ]
+    },
+    {
+     "field": "registrar",
+     "value": [
+      "NameCheap, Inc."
+     ]
+    },
+    {
+     "field": "whois_server",
+     "value": [
+      "whois.namecheap.com"
+     ]
+    }
+   ],
+   "response": "Domain Name: SPYROIDRAT.NET\r\n   Registry Domain ID: 2753888759_DOMAIN_NET-VRSN\r\n   Registrar WHOIS Server: whois.namecheap.com\r\n   Registrar URL: http://www.namecheap.com\r\n   Updated Date: 2023-01-26T14:31:55Z\r\n   Creation Date: 2023-01-26T09:23:21Z\r\n   Registry Expiry Date: 2024-01-26T09:23:21Z\r\n   Registrar: NameCheap, Inc.\r\n   Registrar IANA ID: 1068\r\n   Registrar Abuse Contact Email: abuse@namecheap.com\r\n   Registrar Abuse Contact Phone: +1.6613102107\r\n   Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r\n   Name Server: ASA.NS.CLOUDFLARE.COM\r\n   Name Server: ED.NS.CLOUDFLARE.COM\r\n   DNSSEC: unsigned\r\n   URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/",
+   "checked_at": null,
+   "first_seen": "2023-01-28",
+   "last_seen": "2023-03-21"
+  },
+  {
+   "level": 2,
+   "server": "whois.namecheap.com",
+   "parsed": [
+    {
+     "field": "domain_name",
+     "value": [
+      "spyroidrat.net"
+     ]
+    },
+    {
+     "field": "registrar",
+     "value": [
+      "NAMECHEAP INC"
+     ]
+    },
+    {
+     "field": "expiration_date",
+     "value": []
+    },
+    {
+     "field": "state",
+     "value": [
+      "Capital Region"
+     ]
+    },
+    {
+     "field": "city",
+     "value": [
+      "Reykjavik"
+     ]
+    },
+    {
+     "field": "phone",
+     "value": [
+      "+1.9854014545",
+      "+354.4212434"
+     ]
+    },
+    {
+     "field": "email",
+     "value": [
+      "b5af7f74377b4ed9891df226365976c2.protect@withheldforprivacy.com"
+     ]
+    },
+    {
+     "field": "zipcode",
+     "value": [
+      "101"
+     ]
+    },
+    {
+     "field": "org",
+     "value": [
+      "Privacy service provided by Withheld for Privacy ehf"
+     ]
+    },
+    {
+     "field": "reseller",
+     "value": [
+      "NAMECHEAP INC"
+     ]
+    },
+    {
+     "field": "whois_server",
+     "value": [
+      "whois.namecheap.com"
+     ]
+    },
+    {
+     "field": "updated_date",
+     "value": [
+      "1-01-01T00:00:00+00:00"
+     ]
+    },
+    {
+     "field": "status",
+     "value": [
+      "clientTransferProhibited https://icann.org/epp#clientTransferProhibited"
+     ]
+    },
+    {
+     "field": "name",
+     "value": [
+      "Redacted for Privacy"
+     ]
+    },
+    {
+     "field": "name_servers",
+     "value": [
+      "asa.ns.cloudflare.com",
+      "ed.ns.cloudflare.com"
+     ]
+    },
+    {
+     "field": "address",
+     "value": [
+      "Kalkofnsvegur 2"
+     ]
+    },
+    {
+     "field": "country",
+     "value": [
+      "IS"
+     ]
+    },
+    {
+     "field": "creation_date",
+     "value": []
+    }
+   ],
+   "response": "Domain name: spyroidrat.net\nRegistry Domain ID: 2753888759_DOMAIN_NET-VRSN\nRegistrar WHOIS Server: whois.namecheap.com\nRegistrar URL: http://www.namecheap.com\nUpdated Date: 0001-01-01T00:00:00.00Z\nCreation Date: 2023-01-26T09:23:21.00Z\nRegistrar Registration Expiration Date: 2024-01-26T09:23:21.00Z\nRegistrar: NAMECHEAP INC\nRegistrar IANA ID: 1068\nRegistrar Abuse Contact Email: abuse@namecheap.com\nRegistrar Abuse Contact Phone: +1.9854014545\nReseller: NAMECHEAP INC\nDomain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\nRegistry Registrant ID: \nRegistrant Name: Redacted for Privacy\nRegistrant Organization: Privacy service provided by Withheld for Privacy ehf\nRegistrant Street: Kalkofnsvegur 2 \nRegistrant City: Reykjavik\nRegistrant State/Province: Capital Region\nRegistrant Postal Code: 101\nRegistrant Country: IS\nRegistrant Phone: +354.4212434\nRegistrant Phone Ext: \nRegistrant Fax: \nRegistrant Fax Ext: \nRegistrant Email: b5af7f74377b4ed9891df226365976c2.protect@withheldforprivacy.com\nRegistry Admin ID: \nAdmin Name: Redacted for Privacy\nAdmin Organization: Privacy service provided by Withheld for Privacy ehf\nAdmin Street: Kalkofnsvegur 2 \nAdmin City: Reykjavik\nAdmin State/Province: Capital Region\nAdmin Postal Code: 101\nAdmin Country: IS\nAdmin Phone: +354.4212434\nAdmin Phone Ext: \nAdmin Fax: \nAdmin Fax Ext: \nAdmin Email: b5af7f74377b4ed9891df226365976c2.protect@withheldforprivacy.com\nRegistry Tech ID: \nTech Name: Redacted for Privacy\nTech Organization: Privacy service provided by Withheld for Privacy ehf\nTech Street: Kalkofnsvegur 2 \nTech City: Reykjavik\nTech State/Province: Capital Region\nTech Postal Code: 101\nTech Country: IS\nTech Phone: +354.4212434\nTech Phone Ext: \nTech Fax: \nTech Fax Ext: \nTech Email: b5af7f74377b4ed9891df226365976c2.protect@withheldforprivacy.com\nName Server: asa.ns.cloudflare.com\nName Server: ed.ns.cloudflare.com\nDNSSEC: unsigned\nURL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/",
+   "checked_at": null,
+   "first_seen": "2023-01-28",
+   "last_seen": "2023-03-21"
+  },
+  {
+   "level": 2,
+   "server": "whois.namecheap.com",
+   "parsed": [
+    {
+     "field": "city",
+     "value": [
+      "Reykjavik"
+     ]
+    },
+    {
+     "field": "updated_date",
+     "value": []
+    },
+    {
+     "field": "whois_server",
+     "value": [
+      "whois.namecheap.com"
+     ]
+    },
+    {
+     "field": "reseller",
+     "value": [
+      "NAMECHEAP INC"
+     ]
+    },
+    {
+     "field": "name",
+     "value": [
+      "Redacted for Privacy"
+     ]
+    },
+    {
+     "field": "country",
+     "value": [
+      "IS"
+     ]
+    },
+    {
+     "field": "registrar",
+     "value": [
+      "NAMECHEAP INC"
+     ]
+    },
+    {
+     "field": "phone",
+     "value": [
+      "+1.9854014545",
+      "+354.4212434"
+     ]
+    },
+    {
+     "field": "address",
+     "value": [
+      "Kalkofnsvegur 2"
+     ]
+    },
+    {
+     "field": "domain_name",
+     "value": [
+      "spyroidrat.net"
+     ]
+    },
+    {
+     "field": "zipcode",
+     "value": [
+      "101"
+     ]
+    },
+    {
+     "field": "name_servers",
+     "value": [
+      "asa.ns.cloudflare.com",
+      "ed.ns.cloudflare.com"
+     ]
+    },
+    {
+     "field": "email",
+     "value": [
+      "b5af7f74377b4ed9891df226365976c2.protect@withheldforprivacy.com"
+     ]
+    },
+    {
+     "field": "state",
+     "value": [
+      "Capital Region"
+     ]
+    },
+    {
+     "field": "status",
+     "value": [
+      "clientTransferProhibited https://icann.org/epp#clientTransferProhibited"
+     ]
+    },
+    {
+     "field": "expiration_date",
+     "value": []
+    },
+    {
+     "field": "creation_date",
+     "value": []
+    },
+    {
+     "field": "org",
+     "value": [
+      "Privacy service provided by Withheld for Privacy ehf"
+     ]
+    }
+   ],
+   "response": "Domain name: spyroidrat.net\nRegistry Domain ID: 2753888759_DOMAIN_NET-VRSN\nRegistrar WHOIS Server: whois.namecheap.com\nRegistrar URL: http://www.namecheap.com\nUpdated Date: 2023-10-19T09:29:05.08Z\nCreation Date: 2023-01-26T09:23:21.00Z\nRegistrar Registration Expiration Date: 2026-01-26T09:23:21.00Z\nRegistrar: NAMECHEAP INC\nRegistrar IANA ID: 1068\nRegistrar Abuse Contact Email: abuse@namecheap.com\nRegistrar Abuse Contact Phone: +1.9854014545\nReseller: NAMECHEAP INC\nDomain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\nRegistry Registrant ID: \nRegistrant Name: Redacted for Privacy\nRegistrant Organization: Privacy service provided by Withheld for Privacy ehf\nRegistrant Street: Kalkofnsvegur 2 \nRegistrant City: Reykjavik\nRegistrant State/Province: Capital Region\nRegistrant Postal Code: 101\nRegistrant Country: IS\nRegistrant Phone: +354.4212434\nRegistrant Phone Ext: \nRegistrant Fax: \nRegistrant Fax Ext: \nRegistrant Email: b5af7f74377b4ed9891df226365976c2.protect@withheldforprivacy.com\nRegistry Admin ID: \nAdmin Name: Redacted for Privacy\nAdmin Organization: Privacy service provided by Withheld for Privacy ehf\nAdmin Street: Kalkofnsvegur 2 \nAdmin City: Reykjavik\nAdmin State/Province: Capital Region\nAdmin Postal Code: 101\nAdmin Country: IS\nAdmin Phone: +354.4212434\nAdmin Phone Ext: \nAdmin Fax: \nAdmin Fax Ext: \nAdmin Email: b5af7f74377b4ed9891df226365976c2.protect@withheldforprivacy.com\nRegistry Tech ID: \nTech Name: Redacted for Privacy\nTech Organization: Privacy service provided by Withheld for Privacy ehf\nTech Street: Kalkofnsvegur 2 \nTech City: Reykjavik\nTech State/Province: Capital Region\nTech Postal Code: 101\nTech Country: IS\nTech Phone: +354.4212434\nTech Phone Ext: \nTech Fax: \nTech Fax Ext: \nTech Email: b5af7f74377b4ed9891df226365976c2.protect@withheldforprivacy.com\nName Server: asa.ns.cloudflare.com\nName Server: ed.ns.cloudflare.com\nDNSSEC: unsigned\nURL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/",
+   "checked_at": null,
+   "first_seen": "2024-02-01",
+   "last_seen": "2024-05-10"
+  },
+  {
+   "level": 1,
+   "server": "whois.verisign-grs.com",
+   "parsed": [],
+   "response": "No match for \"SPYROIDRAT.NET\".",
+   "checked_at": null,
+   "first_seen": "2026-08-05",
+   "last_seen": "2026-08-05"
+  },
+  {
+   "level": 1,
+   "server": "whois.verisign-grs.com",
+   "parsed": [
+    {
+     "field": "updated_date",
+     "value": []
+    },
+    {
+     "field": "whois_server",
+     "value": [
+      "whois.namecheap.com"
+     ]
+    },
+    {
+     "field": "status",
+     "value": [
+      "clientTransferProhibited https://icann.org/epp#clientTransferProhibited"
+     ]
+    },
+    {
+     "field": "name_servers",
+     "value": [
+      "ASA.NS.CLOUDFLARE.COM",
+      "ED.NS.CLOUDFLARE.COM"
+     ]
+    },
+    {
+     "field": "creation_date",
+     "value": []
+    },
+    {
+     "field": "expiration_date",
+     "value": []
+    },
+    {
+     "field": "registrar",
+     "value": [
+      "NameCheap, Inc."
+     ]
+    },
+    {
+     "field": "phone",
+     "value": [
+      "+1.6613102107"
+     ]
+    },
+    {
+     "field": "domain_name",
+     "value": [
+      "SPYROIDRAT.NET"
+     ]
+    }
+   ],
+   "response": "Domain Name: SPYROIDRAT.NET\r\n   Registry Domain ID: 2753888759_DOMAIN_NET-VRSN\r\n   Registrar WHOIS Server: whois.namecheap.com\r\n   Registrar URL: http://www.namecheap.com\r\n   Updated Date: 2023-10-19T09:29:05Z\r\n   Creation Date: 2023-01-26T09:23:21Z\r\n   Registry Expiry Date: 2026-01-26T09:23:21Z\r\n   Registrar: NameCheap, Inc.\r\n   Registrar IANA ID: 1068\r\n   Registrar Abuse Contact Email: abuse@namecheap.com\r\n   Registrar Abuse Contact Phone: +1.6613102107\r\n   Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r\n   Name Server: ASA.NS.CLOUDFLARE.COM\r\n   Name Server: ED.NS.CLOUDFLARE.COM\r\n   DNSSEC: unsigned\r\n   URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/",
+   "checked_at": null,
+   "first_seen": "2024-02-01",
+   "last_seen": "2024-05-10"
+  }
+ ],
+ "dns": [],
+ "dns_list": [],
+ "netoscope": [],
+ "createdAt": "2023-01-28T12:24:34.455Z",
+ "updatedAt": "2026-08-05T03:34:18.575Z",
+ "isSld": true
+}

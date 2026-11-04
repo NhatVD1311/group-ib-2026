@@ -1,0 +1,71 @@
+[
+ {
+  "author": {
+   "name": "ThreatCluster",
+   "profileUrl": "https://x.com/threatcluster",
+   "screenName": "threatcluster",
+   "userId": "1942895643464478720",
+   "reposted": false,
+   "originalUserId": "",
+   "originalName": "",
+   "originalScreenName": ""
+  },
+  "createdAt": "2026-08-20T09:01:17+00:00",
+  "dateDetected": "2026-08-20T13:30:30+00:00",
+  "detected": "2026-08-20T13:30:30+00:00",
+  "displayOptions": {
+   "isFavourite": false,
+   "isHidden": false
+  },
+  "evaluation": {
+   "admiraltyCode": "B3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "orange",
+   "tlp": "white",
+   "ttl": 0
+  },
+  "id": "c43802ee0553f404199ec42326efca0d3bb5f853",
+  "link": "https://x.com/threatcluster/status/2090363532218880234",
+  "original": "",
+  "seqUpdate": 1787232630475347,
+  "source": "x.com (formerly twitter.com)",
+  "sourceType": "Social Network",
+  "text": "Campaign: Balonx Sistema PhaaS Targets Mexican Banks with AI and Mobile Malware\n\nIOCs (2):\nspyroid[.]net\n196[.]251[.]84[.]11\n\nContext + full set: https://threatcluster.io/cluster/balonx-sistema-phaas-targets-mexican-banks-with-ai-and-mobil-75a6f966?utm_source=x&utm_medium=tweet&utm_campaign=vt_comment_bot",
+  "threatActors": [],
+  "title": "2090363532218880234",
+  "updatedAt": "2026-08-20T13:30:30+00:00",
+  "data": {
+   "countries": [],
+   "companyTags": [],
+   "cryptoWallets": [],
+   "cve": [],
+   "domains": [
+    {
+     "value": "spyroid.net",
+     "tags": []
+    }
+   ],
+   "emails": [],
+   "files": [],
+   "hashes": [],
+   "malware": [],
+   "pdbPaths": [],
+   "rules": [],
+   "tags": [
+    "Bank",
+    "Domain",
+    "Malware",
+    "Phishing"
+   ],
+   "telegramApiKeys": [],
+   "ip": [
+    {
+     "port": "",
+     "ip": "196.251.84.11",
+     "tags": []
+    }
+   ]
+  }
+ }
+]

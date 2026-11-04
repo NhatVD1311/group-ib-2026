@@ -1,0 +1,39 @@
+[
+ {
+  "bind": null,
+  "categories": [
+   "Email Spam",
+   "Port Scan",
+   "Hacking",
+   "Exploited Host",
+   "Brute-Force",
+   "DDoS Attack"
+  ],
+  "dateFirstSeen": "2025-11-03T00:45:42+00:00",
+  "dateLastSeen": "2025-11-12T01:50:31+00:00",
+  "evaluation": {
+   "admiraltyCode": "C3",
+   "credibility": 50,
+   "reliability": 50,
+   "severity": "green",
+   "tlp": "white",
+   "ttl": 15
+  },
+  "id": "196.251.84.11",
+  "ipv4": {
+   "asn": null,
+   "city": null,
+   "countryCode": "SC",
+   "countryName": null,
+   "ip": "196.251.84.11",
+   "provider": null,
+   "region": null
+  },
+  "ipv6": null,
+  "portalLink": null,
+  "seqUpdate": 1762979911302583,
+  "sources": [
+   "AbuseIPDB"
+  ]
+ }
+]

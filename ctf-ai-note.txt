@@ -1,0 +1,124 @@
+Our duck has a shiny fake banking app, right. 🦆 But rumor has it he didn't build it from scratch. Perhaps he bought the kit from someone rather notorious. Take a closer look at the app and find out who sold our duck those tricks. Apparently, the seller has a taste for good food. 🍽️ Can you find the restaurant where the seller left a review? Flag Format: Flag{Restaurant name}
+prevyn-ai
+
+Finished successfully
+Which fake banking app (name, package/hash, domain or URL) or which "duck" (actor/nickname) do you mean? Please give a concrete indicator so I can search.
+
+shiny fake banking app, right.
+prevyn-ai
+
+Finished successfully
+I can't search "shiny fake banking app" or "duck" as they stand. Please give a concrete identifier, such as the app name, package name, file hash, domain/URL, or the actor's nickname. Is "duck" a threat actor alias, and do you have any sample details for the app?
+
+fake banking app syproid
+prevyn-ai
+
+Finished successfully
+Result: no intelligence found for "syproid", so I can't identify the seller or the restaurant, and I won't guess a flag.
+
+Overview
+I searched four sections for "syproid" and its wildcard variants:
+
+Section	Result
+Malwares	0 malware families found
+Threats	0 threat reports found
+Darkweb	0 messages found, including a search limited to the "banking malware" category
+Graph	1 node, 0 edges, 1 initial node, 0 threat actors, 0 malwares
+Nothing in Group-IB's data links "syproid" to a banking trojan, a kit seller, a forum account, or any review of a restaurant.
+
+Details
+Graph: I built the graph twice, with forum and sample expansion enabled, the second time with a traversal depth of 5. Both times "syproid" appeared only as a bare nickname node with no neighbors. You can open the graph on the platform (an earlier default build is identical). The graph has no forum profiles, emails, domains, IPs, or samples, so there is no chain to a seller.
+Darkweb: Three searches returned nothing. Here are the plain search, the banking malware category search, and the wildcard search.
+What this means and next steps
+"syproid" may be a package name, a spelling variant, or an app label rather than a malware family name. It may also not be indexed under that string. Pivots that could work:
+
+Try a graph around the app's package name, APK hash, or C2 domain/IP. Any of these is more likely to reach the kit's seller than the app label.
+Try the malware family or kit name if the app is known to be a variant of a banking trojan, such as an Android trojan family.
+Try a graph around a nickname or forum handle you suspect sold the kit. A forum profile may connect to emails and social accounts, and possibly to the review.
+If you can give me any of these, I can pursue the seller and the restaurant review.
+
+actor @BalonxSistema
+prevyn-ai
+
+Finished successfully
+Result: BalonxSistema is a Mexican banking phishing-kit seller, but nothing here links the actor to "syproid" or to any restaurant review, so I can't give a flag.
+
+Overview
+Section	Result
+Actors	1 actor card: BalonxSistema (first seen 2025-07-24, last seen 2026-06-16)
+Graph	863 nodes, 1,387 edges, 1 initial node, 1 related threat actor, 0 malwares
+Messenger (Telegram)	11 messages, 2024-01-05 to 2026-06-03
+Darkweb	0 messages across 4 searches
+BalonxSistema (aliases balonx, brandon, Jay; Spanish-speaking) is a Phishing-as-a-Service operator. Its expertise tags are Phishing, Unique_data and Scam. The kit targets bank customers in Mexico, impersonating more than 20 institutions including BBVA, Citibanamex and Banorte. It is sold by weekly subscription, 3,000 MXN for the Individual plan and 6,000 MXN for the Office plan, with crypto payments via the Bitso API. Sales run through Telegram. It uses human-activity scoring (sessions below 50 points are blocked), spoofs geolocation to Mexico City, and sends SMS through the Sofmex API. The C2 domain is a typosquat, aclaracionesditales[.]com.
+
+The profile fits a "kit seller", but no source ties it to an app called "syproid". The earlier "syproid" searches found nothing, so this link is your assumption.
+
+Details
+Actor and contacts. The BalonxSistema actor card lists two Telegram contacts: @BalonxSistema and @panelbalonxbot. Both are marked fake.
+
+Telegram. In a PITCRAICK 2.0 post from 2025-08-24, the account "Jay" (username sistemalatm) advertised a multi-bank scam panel for call centers. The post listed Liverpool, Citibanamex, BanBajío, Bancoppel, Banorte, BBVA, HSBC, Amex, Santander, Scotiabank and others, and pointed to @balonxsistema. A SangMata bot entry from 2025-05-05 shows user 6615027684 changing username from brandonjay19 to BalonxSistema. That ties the "Jay" and "brandon" aliases to the same account. In the "Mexico SMS" group, a user told @BalonxSistema to DM them on 2026-06-03. The same account also joined carding, VoIP and database groups between 2024 and 2026 (the other messages are join notices). I found no review text or restaurant mention in any message.
+
+Graph. A graph on the name BalonxSistema returned 863 nodes and 1,387 edges, with forum and profile expansion on. The graph on the handle @BalonxSistema returned only a bare nickname node with no neighbors. The actor node connects directly to 49 nodes, mostly lookalike bank-support domains (45 domains, 2 emails, 2 IPs).
+
+Infrastructure: The actor has a has_tag edge to panelbalonx[.]xyz, tagged Phishing, and to balonx-panel[.]xyz and aclaracionesdigitalesmx[.]co, also tagged Phishing. It also links to the IP 85[.]31[.]235[.]109 (hosting, Hostinger) and 196[.]251[.]84[.]11 (tagged Scanning IP and hosting). The file 9fe86fe3ac88c28ba73ca5c2c222dbb718945984 connects to that second IP via opens_tcp_connection.
+Persons: BalonxSistema -[has_criminal_contact]-> ferzamorafs19@gmail[.]com (email) -[has_whois_email]-> seguridadmsncorreo[.]online (domain) -[has_whois_name]-> "fernanda zamora" (name). This is WHOIS data, so the name may be fake or stolen. The same domain also carries the phone 525535235075.
+Noise: Most of the 87 tagged nodes are tagged "leak" and are reached through api[.]qrserver[.]com, a public QR-code API, and through shared SSL certificates. Examples are forum nicknames such as s4vv4s and headsortails. They show that the QR service is mentioned by many unrelated forum profiles, not that those people are linked to the actor, so I don't treat them as associates.
+Malwares: The graph links none.
+Darkweb. All four searches (the nickname, "@BalonxSistema", "BalonxSistema" and a wildcard) returned zero messages. See the search with @ for example. Discord also returned nothing.
+
+What this means
+The data confirms BalonxSistema sells a banking phishing kit with a web panel. It does not confirm a mobile app named "syproid", and no review site or restaurant appears anywhere in Group-IB's data for this actor.
+The restaurant review is probably on a public site under one of the actor's handles (balonx, brandon, Jay, or brandonjay19). That is outside what this platform covers.
+Useful next steps are a graph around the C2 domain aclaracionesditales[.]com, the Telegram account ID 6615027684, or the app's package name and APK hash, if you can extract them. Any of these could show whether "syproid" connects to this actor.
+I won't guess a Flag{...} without evidence of the restaurant.
+
+==================================================================================================================
+spyroid.net
+prevyn-ai
+
+Finished successfully
+What would you like to know about spyroid.net: is it an attacker-controlled indicator (infrastructure, linked actors or malware), or a victim domain (leaks, compromised accounts, mentions)? Please also say whether you want a specific time period.
+
+spyroid rat on android
+prevyn-ai
+
+Finished successfully
+Spyroid RAT on Android: what Group-IB data shows
+Overview
+Group-IB's malware catalog has no dedicated profile for Spyroid. Five Malware searches (by name, wildcard, Android platform filter and the domain spyroid.net) all returned 0 results. The family appears only inside threat reports, which show three things:
+
+Commercial Android RAT. Two reports on the Mexican banking PhaaS "Balonx Sistema" identify a malicious APK as a commercial Android RAT based on Spyroid (spyroid.net). A RAT is a remote access trojan, giving an operator persistent control of an infected device.
+Criminal use. The Mexico-based operator BalonxSistema, a phishing-as-a-service (PhaaS) provider, distributes the APK to bank customers. The reports date from 2025-07-24 to 2026-06-16.
+Cracked builds in circulation. A 2024 Telegram post by the hacktivist group Pakistan Cyber Hunters shared a cracked "Spyroid RAT 7.7 VIP" login bypass, so pirated copies exist.
+The sample is attributed to Spyroid as a customized build of a commercial product. The reports do not describe Spyroid's own full feature set.
+
+Item	Detail
+Malware profiles found	0
+Threat reports mentioning Spyroid	3 (2 for Balonx, 1 for Pakistan Cyber Hunters)
+Time range	2024-04-24 to 2026-06-16
+Most active actor	BalonxSistema (MX)
+Targeted sector and region	Banking, Mexico
+Detailed findings
+Balonx Sistema deployment. The Balonx Sistema PhaaS report describes a fake "bank protection" screen that pushes victims to install the APK. Group-IB analysis with the JADX decompiler found:
+
+Package name sacred.explosion, main class bxelllolzxqfmaszk1049.
+Base64-obfuscated, hardcoded C2 settings: IP 196.251.84.11, port 7771, and a connection key.
+A permanent TCP connection (setSoTimeout(0), i.e. no timeout) that sends captured data to the C2 in real time.
+The operator gets full, persistent control of the Android device.
+
+Further APK detail. The Aclaraciones Bancarias PhaaS analysis adds more on the file, named Bankprotet2_1750982122281.apk (also BankProtect.apk):
+
+A CLINAME value of "ban", the campaign identifier for the Spyroid panel.
+A HideType value of "C", which controls icon hiding on the victim's device.
+C2 at 196.251.84.11:7771 in the 196.251.84.0/24 range, AS55154, hosted by cheapy.host. The block is registered with AFRINIC, with a last WHOIS change on 2026-04-09.
+The hosting is low-cost and slow to act on abuse reports, which complicates takedowns.
+The report marks the malware-distribution role as "not confirmed". The kit can upload a custom APK, assign it to specific users and serve it dynamically.
+Wider Balonx context. The kit enables real-time bypass of multi-factor authentication through WebSockets, and its ID-verification module steals ID documents and selfies to defeat KYC (know-your-customer) checks. It also added an AI-driven vishing (voice-phishing) module in May 2026. The reports list MITRE techniques T1566.002 (phishing link), T1056.003 (web portal capture), T1111 (MFA interception), T1071.001 and T1041.
+
+Cracked Spyroid circulation. The Pakistan Cyber Hunters post of 2024-04-24 offered a "Spyroid RAT 7.7 VIP Bypass Login Method", credited to UnknownHat127001, with the advice to use it in a VM/RDP. This report is auto-generated, so treat it as lower confidence. It still shows that cracked panels circulate in hacktivist and criminal circles, so more actors may use this family.
+
+Takeaways
+Block or hunt for: 196.251.84.11:7771, the file names Bankprotet2_1750982122281.apk and BankProtect.apk, and the package name sacred.explosion.
+Mexican banks and their customers: watch for APK sideloading prompts from "bank protection" phishing pages.
+Gap: no hashes were provided for the APKs, and no malware profile exists for Spyroid itself.
+
